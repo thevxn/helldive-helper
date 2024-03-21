@@ -1,0 +1,36 @@
+version: '3.9'
+
+# networks:
+# # network for BE<->FE communication
+# kpu_net_be_fe:
+#   name: kpu_net_be_fe
+
+networks:
+  traefik_savla:
+    name: ${DOCKER_NETWORK_NAME}
+  kpu_net_be_fe:
+    name: kpu_net_be_fe
+
+volumes:
+  kpu-fe-static:
+    name: kpu-fe-static
+
+services:
+  
+  cypress:
+    container_name: cypress
+    build:
+      context: .
+      dockerfile: .docker/Cypress.Dockerfile
+    environment:
+      - CYPRESS_baseUrl=http://kpu-fe-nginx:${DOCKER_INTERNAL_PORT}
+    networks:
+      - ${DOCKER_NETWORK_NAME}
+      - kpu_net_be_fe
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://loki.savla.su:3100/loki/api/v1/push"
+        labels: "kpu,kpu-fe, kpu-fe-cypress"
+    volumes:
+      - ./cypress/e2e:/e2e/cypress/e2e

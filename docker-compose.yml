@@ -1,0 +1,55 @@
+version: '3.9'
+
+networks:
+  traefik_savla:
+    name: ${DOCKER_NETWORK_NAME}
+  kpu_net_be_fe:
+    name: kpu_net_be_fe
+
+volumes:
+  kpu-fe-static:
+    name: kpu-fe-static
+
+services:
+  kpu-fe-nginx:
+    image: ${DOCKER_IMAGE_TAG}
+    container_name: ${DOCKER_CONTAINER_NAME}
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args: 
+        APP_NAME: ${APP_NAME}
+        APP_ROOT: ${APP_ROOT}
+        DOCKER_INTERNAL_PORT: ${DOCKER_INTERNAL_PORT} 
+        VITE_VAPID_KEY: ${VITE_VAPID_KEY}
+    restart: unless-stopped
+    environment:
+      - APP_ENVIRONMENT=${APP_ENVIRONMENT}
+      - APP_NAME=${APP_NAME}
+      - APP_VERSION=${APP_VERSION}
+      - DOCKER_INTERNAL_PORT=${DOCKER_INTERNAL_PORT}
+      - TZ=${TZ}
+    volumes: 
+      - "kpu-fe-static:${APP_ROOT}"
+      - .docker/nginx-default.conf:/etc/nginx/conf.d/default.conf
+    cpus: 0.33
+    dns:
+      - 10.4.5.130
+      - 1.1.1.2
+      - 1.0.0.2
+    mem_reservation: 128m
+    ports:
+      - "${DOCKER_EXTERNAL_PORT}:${DOCKER_INTERNAL_PORT}/tcp"
+    networks:
+      - ${DOCKER_NETWORK_NAME}
+      - kpu_net_be_fe
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://loki.savla.su:3100/loki/api/v1/push"
+        labels: "kpu,kpu-fe, kpu-fe-nginx, kpu-nginx"
+    labels:
+      - "traefik.http.routers.${APP_NAME}.rule=Host(${APP_URLS_TRAEFIK})"
+      - "traefik.http.services.${APP_NAME}.loadbalancer.server.port=${DOCKER_INTERNAL_PORT}"
+      - "traefik.docker.network=${DOCKER_NETWORK_NAME}"
+
