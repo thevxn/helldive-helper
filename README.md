@@ -1,4 +1,4 @@
-# kpu-fe
+# helldivers-fe
 
 ## Stop tracking changes for sw.js (or any other file where you do not want to track/push local changes to it)
 
