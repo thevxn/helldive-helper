@@ -1,6 +1,4 @@
 /* stylelint-disable at-rule-no-unknown */
-@import url("reset.css");
-
 @tailwind base;
 
 @layer base {
@@ -10,6 +8,10 @@
 
   body {
     @apply text-white relative min-h-screen w-full pb-12;
+  }
+
+  a {
+    @apply underline text-yellow-300 hover:text-yellow-500 visited:text-yellow-300;
   }
 
   h1 {

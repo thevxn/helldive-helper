@@ -1,6 +1,6 @@
 <template>
-  <header class="container mx-auto min-w-full flex justify-center">
-    <h1 class="center">Helldivers PoC</h1>
+  <header class="container mx-auto min-w-full flex justify-center pt-4">
+    <h1 class="center">Helldivers 2 Loadouts</h1>
   </header>
 </template>
 
