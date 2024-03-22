@@ -4,16 +4,13 @@
       :class="`w-full sm:w-5/12 xl:w-1/5 min-h-screen mx-auto bg-gray-500 rounded-md p-8`"
       v-for="member in data.memberList"
       :key="member.name">
-      <ul>
-        <li>{{ member.stratagemCodeList }}</li>
-      </ul>
-      <label for="name">Squad Member Name:</label>
+      <!-- <label for="name">Squad Member Name:</label> -->
       <input
         id="name"
         name="squad-member-name"
         type="text"
         :placeholder="member.name"
-        class="bg-slate-700 w-full"
+        class="bg-slate-700 w-full mb-4"
         v-model="member.name" />
       <label for="primary">Primary Weapon:</label>
       <select name="primary" id="primary" class="bg-slate-700 w-full" v-model="member.primaryWeaponCode">
@@ -27,6 +24,12 @@
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
+      <label for="grenade" class="w-full">Grenade:</label>
+      <select name="grenade" id="grenade" class="bg-slate-700 w-full">
+        <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
+          {{ grenades[grenade as keyof typeof grenades].displayName }}
+        </option>
+      </select>
     </div>
   </main>
 </template>
@@ -34,6 +37,7 @@
 <script setup lang="ts">
   import { reactive } from 'vue'
 
+  import { grenadeCodeList, grenades } from '@/utils/grenades'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
   const data = reactive({

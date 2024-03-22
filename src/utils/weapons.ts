@@ -2,7 +2,7 @@ export const weapons = {
   primary: {
     LIBERATOR: {
       displayName: 'AR-23 Liberator',
-      isDefault: true
+      default: true
     },
     LIBERATOR_CONCUSSIVE: {
       displayName: 'AR-23C Liberator Concussive'
@@ -52,7 +52,8 @@ export const weapons = {
   },
   secondary: {
     PEACEMAKER: {
-      displayName: 'P-2 Peacemaker'
+      displayName: 'P-2 Peacemaker',
+      default: true
     },
     REDEEMER: {
       displayName: 'P-19 Redeemer'
