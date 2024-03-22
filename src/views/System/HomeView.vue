@@ -1,7 +1,7 @@
 <template>
-  <main class="container flex flex-col flex-wrap sm:flex-row min-w-full p-8 gap-8 sm:gap-6">
+  <main class="container flex flex-col flex-wrap sm:flex-row min-w-full p-8 gap-8 sm:gap-6 mt-8">
     <div
-      :class="`w-full sm:w-5/12 xl:w-1/5 min-h-screen mx-auto bg-gray-500 rounded-md p-8`"
+      :class="`w-full sm:w-5/12 xl:w-1/5 mx-auto bg-gray-500 rounded-md p-8 h-full`"
       v-for="member in data.memberList"
       :key="member.name">
       <!-- <label for="name">Squad Member Name:</label> -->

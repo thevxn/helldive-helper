@@ -6,12 +6,10 @@
 @layer base {
   html {
     @apply bg-gray-900;
-
   }
 
   body {
-    @apply text-white;
-    @apply w-full;
+    @apply text-white relative min-h-screen w-full pb-12;
   }
 
   h1 {
