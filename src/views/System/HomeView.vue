@@ -19,13 +19,13 @@
         </option>
       </select>
       <label for="secondary" class="w-full">Secondary Weapon:</label>
-      <select name="secondary" id="secondary" class="bg-slate-700 w-full">
+      <select name="secondary" id="secondary" class="bg-slate-700 w-full" v-model="member.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
       <label for="grenade" class="w-full">Grenade:</label>
-      <select name="grenade" id="grenade" class="bg-slate-700 w-full">
+      <select name="grenade" id="grenade" class="bg-slate-700 w-full" v-model="member.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
@@ -46,24 +46,28 @@
         name: 'player1',
         primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
         secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
+        grenadeCode: 'FRAG' as keyof typeof grenades,
         stratagemCodeList: ['STRAT1']
       },
       {
         name: 'player2',
         primaryWeaponCode: 'DILIGENCE' as keyof typeof weapons.primary,
         secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
+        grenadeCode: 'INCENDIARY' as keyof typeof grenades,
         stratagemCodeList: ['STRAT1']
       },
       {
         name: 'player3',
         primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
         secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
+        grenadeCode: 'FRAG' as keyof typeof grenades,
         stratagemCodeList: ['STRAT1']
       },
       {
         name: 'player4',
         primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
         secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
+        grenadeCode: 'FRAG' as keyof typeof grenades,
         stratagemCodeList: ['STRAT1']
       }
     ]
