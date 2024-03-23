@@ -1,5 +1,5 @@
 <template>
-  <header class="container mx-auto min-w-full flex justify-center pt-4">
+  <header class="container mx-auto min-w-full flex justify-center pt-4 text-center">
     <h1 class="center">Helldivers 2 Loadouts Tool</h1>
   </header>
 </template>

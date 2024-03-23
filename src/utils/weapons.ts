@@ -48,6 +48,12 @@ export const weapons = {
     },
     SICKLE: {
       displayName: 'LAS-16 Sickle'
+    },
+    BLITZER: {
+      displayName: 'Arc-12 Blitzer'
+    },
+    PUNISHER_PLASMA: {
+      displayName: 'SG-8P Punisher Plasma'
     }
   },
   secondary: {
@@ -60,6 +66,9 @@ export const weapons = {
     },
     SENATOR: {
       displayName: 'P-4 Senator'
+    },
+    DAGGER: {
+      displayName: 'LAS-7 Dagger'
     }
   }
 }
