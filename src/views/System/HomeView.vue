@@ -2,8 +2,8 @@
   <main class="container flex flex-col flex-wrap sm:flex-row min-w-full p-8 gap-8 sm:gap-6 mt-8">
     <div
       :class="`w-full sm:w-5/12 xl:w-1/5 mx-auto bg-gray-500 rounded-md p-8 h-full`"
-      v-for="player in data.playerList"
-      :key="player.name">
+      v-for="(player, i) in data.playerList"
+      :key="i">
       <!-- <label for="name">Squad Member Name:</label> -->
       <input
         id="name"
@@ -30,49 +30,69 @@
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
+      <div class="mt-4 flex flex-row flex-wrap gap-2">
+        <img
+          class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
+          v-for="(stratagem, j) in player.stratagemCodeList"
+          :key="stratagem"
+          :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
+          @click="toggleStratagemSelect(i, j)" />
+      </div>
+      <RModal
+        :selected-stratagems="data.playerList[i].stratagemCodeList"
+        @stratagem-selected="stratagemSelectionHandler"
+        ref="modalRef"></RModal>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { reactive, ref } from 'vue'
+  import { useRoute } from 'vue-router'
 
+  import RModal from '@/components/reusable/RModal.vue'
+  import { getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
-  const data = reactive({
-    playerList: [
-      {
-        name: 'player1',
-        primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
-        secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
-        grenadeCode: 'FRAG' as keyof typeof grenades,
-        stratagemCodeList: ['STRAT1']
-      },
-      {
-        name: 'player2',
-        primaryWeaponCode: 'DILIGENCE' as keyof typeof weapons.primary,
-        secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
-        grenadeCode: 'INCENDIARY' as keyof typeof grenades,
-        stratagemCodeList: ['STRAT1']
-      },
-      {
-        name: 'player3',
-        primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
-        secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
-        grenadeCode: 'FRAG' as keyof typeof grenades,
-        stratagemCodeList: ['STRAT1']
-      },
-      {
-        name: 'player4',
-        primaryWeaponCode: 'LIBERATOR' as keyof typeof weapons.primary,
-        secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
-        grenadeCode: 'FRAG' as keyof typeof grenades,
-        stratagemCodeList: ['STRAT1']
-      }
-    ]
-  })
-  // const playerCount = data.memberList.length
+  let data: any
+  // reactive<{
+  //   playerList: [
+  //     {
+  //       name: string
+  //       primaryWeaponCode: keyof typeof weapons.primary
+  //       secondaryWeaponCode: keyof typeof weapons.secondary
+  //       grenadeCode: keyof typeof grenades
+  //       stratagemCodeList: keyof (typeof stratagemCodeList)[]
+  //     }
+  //   ]
+  // }>
+  const route = useRoute()
+
+  if (route.query.data) {
+    try {
+      data = reactive(JSON.parse(atob(route.query.data as string)))
+    } catch (e) {
+      console.log(e)
+      data = getDefaultData()
+    }
+  } else {
+    data = getDefaultData()
+  }
+
+  const showStratagemSelectModal = ref([false, false, false, false])
+  const modalRef = ref()
+  const toggleStratagemSelect = (playerIndex: number, position: number) => {
+    console.log(playerIndex, position)
+    showStratagemSelectModal.value[playerIndex] = !showStratagemSelectModal.value[playerIndex]
+    modalRef.value[playerIndex].display = !modalRef.value[playerIndex].display
+    modalRef.value[playerIndex].playerIndex = playerIndex
+    modalRef.value[playerIndex].position = position
+  }
+  const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: string) => {
+    console.log(playerIndex, position, stratagemCode)
+    data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
+  }
 </script>
 
 <style scoped></style>

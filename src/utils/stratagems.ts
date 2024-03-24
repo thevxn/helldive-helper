@@ -38,6 +38,9 @@ export const stratagems = {
   GRENADE_LAUNCHER: {
     displayName: 'GL-21 Grenade Launcher'
   },
+  RAILGUN: {
+    displayName: 'RS-422 Railgun'
+  },
 
   // Backpacks
   JUMP_PACK: {
@@ -152,3 +155,5 @@ export const stratagems = {
     displayName: 'Orbital Smoke Strike'
   }
 }
+
+export const stratagemCodeList = Object.keys(stratagems)
