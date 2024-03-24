@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-row w-full flex-wrap gap-2 mt-4" v-if="display">
+    <div class="flex flex-row w-full flex-wrap justify-center gap-2 mt-4" v-if="display">
       <img
         v-for="stratagem in shownStratagems"
         :key="stratagem"
@@ -25,15 +25,24 @@
       default: () => ['MECH', 'RAILGUN', 'JUMP_PACK', 'EAGLE_AIRSTRIKE']
     }
   })
+  const shownStratagems = ref(
+    stratagemCodeList.filter(e => {
+      if (!props.selectedStratagems.find(el => el === e)) {
+        return e
+      }
+    })
+  )
+  const toggleDisplay = () => {
+    display.value = !display.value
+    shownStratagems.value = stratagemCodeList.filter(e => {
+      if (!props.selectedStratagems.find(el => el === e)) {
+        return e
+      }
+    })
+  }
 
   defineEmits(['stratagem-selected'])
-  defineExpose({ position, display, playerIndex })
-
-  const shownStratagems = stratagemCodeList.filter(e => {
-    if (!props.selectedStratagems.find(el => el === e)) {
-      return e
-    }
-  })
+  defineExpose({ position, toggleDisplay, playerIndex })
 </script>
 
 <style scoped></style>

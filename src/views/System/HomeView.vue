@@ -30,7 +30,7 @@
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
-      <div class="mt-4 flex flex-row flex-wrap gap-2">
+      <div class="mt-4 flex flex-row flex-wrap justify-center gap-2">
         <img
           class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
           v-for="(stratagem, j) in player.stratagemCodeList"
@@ -42,6 +42,13 @@
         :selected-stratagems="data.playerList[i].stratagemCodeList"
         @stratagem-selected="stratagemSelectionHandler"
         ref="modalRef"></RModal>
+    </div>
+    <div class="w-full flex flex-row content-center justify-center">
+      <button
+        class="text-white bg-yellow-500 rounded w-48 h-12 self-center place-self-center"
+        @click="generateDataString">
+        Generate Link
+      </button>
     </div>
   </main>
 </template>
@@ -80,19 +87,21 @@
     data = getDefaultData()
   }
 
-  console.log(JSON.stringify(data))
-
+  const generateDataString = () => {
+    console.log(btoa(JSON.stringify(data)))
+    return btoa(JSON.stringify(data))
+  }
   const showStratagemSelectModal = ref([false, false, false, false])
   const modalRef = ref()
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
-    console.log(playerIndex, position)
+    // console.log(playerIndex, position)
     showStratagemSelectModal.value[playerIndex] = !showStratagemSelectModal.value[playerIndex]
-    modalRef.value[playerIndex].display = !modalRef.value[playerIndex].display
+    modalRef.value[playerIndex].toggleDisplay()
     modalRef.value[playerIndex].playerIndex = playerIndex
     modalRef.value[playerIndex].position = position
   }
   const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: string) => {
-    console.log(playerIndex, position, stratagemCode)
+    // console.log(playerIndex, position, stratagemCode)
     data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
   }
 </script>
