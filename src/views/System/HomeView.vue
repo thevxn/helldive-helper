@@ -80,6 +80,8 @@
     data = getDefaultData()
   }
 
+  console.log(JSON.stringify(data))
+
   const showStratagemSelectModal = ref([false, false, false, false])
   const modalRef = ref()
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
