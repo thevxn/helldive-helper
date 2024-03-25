@@ -18,15 +18,9 @@ services:
       dockerfile: .docker/Dockerfile
       target: build
       args: 
-        APP_NAME: hdlt-fe
-        APP_ROOT: /opt/hdlt-fe
-        DOCKER_INTERNAL_PORT: 3000
         BASE_URL: ${BASE_URL}
     restart: unless-stopped
     environment:
-      - APP_ENVIRONMENT=development
-      - APP_NAME=hdlt-fe
-      - DOCKER_INTERNAL_PORT_DEV=3000
       - BASE_URL
     volumes: 
       - ./:/opt/hdlt-fe

@@ -2,55 +2,31 @@ name: deployment
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-            description: 'Environment'
-            required: true
-            type: choice
-            options:
-              - 'UAT'
-              - 'PROD'
-            default: 'UAT'
+    # inputs:
+    #   environment:
+    #         description: 'Environment'
+    #         required: true
+    #         type: choice
+    #         options:
+    #           - 'UAT'
+    #           - 'PROD'
+    #         default: 'UAT'
 
 jobs:
 
   build:
-    runs-on: ${{ vars[format('{0}_RUNNER_LABEL', inputs.environment)] }}
+    runs-on: ${{ vars.RUNNER_LABEL }}
     steps:
     - uses: actions/checkout@v3
     - name: Build static files for nginx container.
       env:
-        VITE_VAPID_KEY: ${{ secrets.VAPID_KEY }}
+        BASE_URL: ${{ vars.BASE_URL }}
       run: make build
 
   deploy:
-    runs-on: ${{ vars[format('{0}_RUNNER_LABEL', inputs.environment)] }}
+    runs-on: ${{ vars.RUNNER_LABEL }}
     needs: [ build ]
     steps:
-    - name: Deploy UAT Docker Container, recreate Container with fresh image.
-      run: APP_ENVIRONMENT=${{ inputs.environment == 'PROD' && 'production' || 'test '}} make run
+    - name: Deploy Docker Container, recreate Container with fresh image.
+      run: make run
 
-  clear_cf_cache:
-    runs-on: ${{ vars[format('{0}_RUNNER_LABEL', inputs.environment)] }}
-    needs: [ deploy ]
-    steps:
-    - name: Clear Cloudflare cache
-      run: |
-       curl -X POST "https://api.cloudflare.com/client/v4/zones/c6e407076da14ac1b221345a28f13c0d/purge_cache" \
-        -H "Authorization: Bearer ${{ secrets.CF_CACHE_KEY }}" \
-        -H "Content-Type:application/json" \
-        -d '{"purge_everything": true}'
-
-  e2e_tests:
-    runs-on: ${{ vars[format('{0}_RUNNER_LABEL', inputs.environment)] }}
-    needs: [ clear_cf_cache ]
-    steps:
-    - name: Run E2E tests.
-      run: make e2e
-
-  # decompose_e2e_container:
-  #   runs-on: [ self-hosted, kpu ]
-  #   needs: [ e2e_tests ]
-  #   steps:
-  #   - name: Decompose E2E Test container.
-  #     run: make e2e-decompose
