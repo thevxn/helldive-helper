@@ -2,34 +2,35 @@ version: '3.9'
 
 networks:
   # network for BE<->FE communication
-  kpu_net_be_fe:
-    name: kpu_net_be_fe
+  hdlt_net_be_fe:
+    name: hdlt_net_be_fe
 
 # volumes:
-#   kpu-fe-static:
-#     name: kpu-fe-static
+#   hdlt-fe-static:
+#     name: hdlt-fe-static
 
 services:
-  kpu-fe-nginx:
-    image: kpu-fe-dev
-    container_name: kpu-fe
+  hdlt-fe-nginx:
+    image: hdlt-fe-dev
+    container_name: hdlt-fe
     build:
       context: .
       dockerfile: .docker/Dockerfile
       target: build
       args: 
-        APP_NAME: kpu-fe
-        APP_ROOT: /opt/kpu-fe
+        APP_NAME: hdlt-fe
+        APP_ROOT: /opt/hdlt-fe
         DOCKER_INTERNAL_PORT: 3000
-        VITE_VAPID_KEY: ${VITE_VAPID_KEY}
+        BASE_URL: ${BASE_URL}
     restart: unless-stopped
     environment:
       - APP_ENVIRONMENT=development
-      - APP_NAME=kpu-fe
+      - APP_NAME=hdlt-fe
       - DOCKER_INTERNAL_PORT_DEV=3000
+      - BASE_URL
     volumes: 
-      - ./:/opt/kpu-fe
-      - /opt/kpu-fe/node_modules
+      - ./:/opt/hdlt-fe
+      - /opt/hdlt-fe/node_modules
     # cpus: 0.33
     # dns:
     #   - 10.4.5.130
@@ -39,10 +40,10 @@ services:
     ports:
       - 3000:3000
     networks:
-      - kpu_net_be_fe
+      - hdlt_net_be_fe
     # labels:
     #   - "traefik.http.routers.${APP_NAME}.rule=Host(${APP_URLS_TRAEFIK})"
     #   - "traefik.http.services.${APP_NAME}.loadbalancer.server.port=${DOCKER_INTERNAL_PORT}"
     #   - "traefik.docker.network=${DOCKER_NETWORK_NAME}"
-    command: pnpm run dev
+    command: npm run dev
 

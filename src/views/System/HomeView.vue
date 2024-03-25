@@ -46,9 +46,11 @@
     <div class="w-full flex flex-row content-center justify-center">
       <button
         class="text-white bg-yellow-500 rounded w-48 h-12 self-center place-self-center"
+        popovertarget="popover"
         @click="generateDataString">
-        Generate Link
+        Copy Link
       </button>
+      <div popover id="popover">Success!</div>
     </div>
   </main>
 </template>
@@ -87,9 +89,16 @@
     data = getDefaultData()
   }
 
-  const generateDataString = () => {
-    console.log(btoa(JSON.stringify(data)))
-    return btoa(JSON.stringify(data))
+  const generateDataString = async () => {
+    const link = `${BASE_URL}/?data=${btoa(JSON.stringify(data))}`
+
+    try {
+      await navigator.clipboard.writeText(link)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+
+    return
   }
   const showStratagemSelectModal = ref([false, false, false, false])
   const modalRef = ref()
