@@ -18,8 +18,8 @@
   import { stratagemCodeList, stratagems } from '@/utils/stratagems'
 
   const display = ref(false)
-  const playerIndex = ref(0)
-  const position = ref(0)
+  const playerIndex = ref(null)
+  const position = ref(null)
   const props = defineProps({
     selectedStratagems: {
       type: Array,
@@ -33,17 +33,20 @@
       }
     })
   )
-  const toggleDisplay = () => {
-    display.value = !display.value
+  const displayOn = () => {
+    display.value = true
     shownStratagems.value = stratagemCodeList.filter(e => {
       if (!props.selectedStratagems.find(el => el === e)) {
         return e
       }
     })
   }
+  const displayOff = () => {
+    display.value = false
+  }
 
   defineEmits(['stratagem-selected'])
-  defineExpose({ position, toggleDisplay, playerIndex })
+  defineExpose({ position, playerIndex, displayOn, displayOff })
 </script>
 
 <style scoped></style>

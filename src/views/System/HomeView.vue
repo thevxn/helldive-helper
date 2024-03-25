@@ -116,27 +116,34 @@
     // console.log(playerIndex, position)
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
       if (i !== playerIndex) {
-        return activeStratagemSelect.value[i]
+        return player
       } else {
-        return activeStratagemSelect.value[i].map((el, j) => {
+        return player.map((el, j) => {
           if (j === position) {
-            return !activeStratagemSelect.value[i][j]
+            return !player[j]
           } else {
             return false
           }
         })
       }
     })
-    // console.log(activeStratagemSelect.value)
-    // activeStratagemSelect.value[playerIndex][position] = !activeStratagemSelect.value[playerIndex][position]
-    modalRef.value[playerIndex].toggleDisplay()
-    modalRef.value[playerIndex].playerIndex = playerIndex
-    modalRef.value[playerIndex].position = position
+
+    if (modalRef.value[playerIndex].playerIndex === playerIndex && modalRef.value[playerIndex].position === position) {
+      modalRef.value[playerIndex].displayOff()
+      modalRef.value[playerIndex].playerIndex = null
+      modalRef.value[playerIndex].position = null
+    } else {
+      modalRef.value[playerIndex].playerIndex = playerIndex
+      modalRef.value[playerIndex].position = position
+      modalRef.value[playerIndex].displayOn()
+    }
   }
   const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: string) => {
-    // console.log(playerIndex, position, stratagemCode)
     data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
     activeStratagemSelect.value[playerIndex][position] = false
+    modalRef.value[playerIndex].displayOff()
+    modalRef.value[playerIndex].playerIndex = null
+    modalRef.value[playerIndex].position = null
   }
 </script>
 
