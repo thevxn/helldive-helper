@@ -18,25 +18,25 @@
           {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
+      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[108px]" />
       <label for="secondary" class="w-full mt-4">Secondary Weapon:</label>
       <select name="secondary" id="secondary" class="bg-slate-700 w-full" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
+      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 w-[200px] h-[108px]" />
       <label for="grenade" class="w-full mt-4">Grenade:</label>
       <select name="grenade" id="grenade" class="bg-slate-700 w-full" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
-      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
-      <div class="mt-4 flex flex-row flex-wrap justify-center gap-2">
-        <span class="w-full">Stratagems:</span>
+      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 w-[100px] h-[100px]" />
+      <span class="w-full mt-4">Stratagems:</span>
+      <div class="flex flex-row flex-wrap justify-center gap-2">
         <img
-          class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
+          class="w-[50px] h-[50px] border-solid border-4 border-gray-900 hover:border-solid hover:border-4 hover:border-yellow-400 mt-2"
           :class="activeStratagemSelect[i][j] ? 'border-solid border-4 border-yellow-400' : ''"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
