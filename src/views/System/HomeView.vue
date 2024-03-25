@@ -45,7 +45,7 @@
     </div>
     <div class="w-full flex flex-row content-center justify-center">
       <button
-        class="text-white bg-yellow-500 rounded w-48 h-12 self-center place-self-center"
+        class="text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-500 rounded w-48 h-12 self-center place-self-center"
         popovertarget="popover"
         @click="generateDataString">
         Copy Link
