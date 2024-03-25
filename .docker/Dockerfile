@@ -15,7 +15,6 @@ COPY . /opt/hdlt-fe
 RUN npm ci
 RUN npm run build
 
-
 #
 # stage 2 --- nginx container
 #

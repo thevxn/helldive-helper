@@ -21,6 +21,7 @@ jobs:
     - name: Build static files for nginx container.
       env:
         BASE_URL: ${{ vars.BASE_URL }}
+        NODE_ENV: production
       run: make build
 
   deploy:
@@ -28,5 +29,7 @@ jobs:
     needs: [ build ]
     steps:
     - name: Deploy Docker Container, recreate Container with fresh image.
+      env:
+        NODE_ENV: production
       run: make run
 
