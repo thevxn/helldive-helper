@@ -43,27 +43,29 @@
         @stratagem-selected="stratagemSelectionHandler"
         ref="modalRef"></RModal>
     </div>
-    <div class="w-full flex flex-row content-center justify-center">
+    <div class="w-full flex flex-row content-center justify-center" tabindex="0">
       <button
-        class="text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-500 rounded w-48 h-12 self-center place-self-center"
-        popovertarget="popover"
+        class="text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-500 rounded w-48 h-12 self-center place-self-center font-semibold"
+        popovertarget="success-popover"
         @click="generateDataString">
         Copy Link
       </button>
-      <div popover id="popover">Success!</div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
+  import { inject, reactive, ref } from 'vue'
   import { useRoute } from 'vue-router'
+  import type { ToastPluginApi } from 'vue-toast-notification'
 
   import RModal from '@/components/reusable/RModal.vue'
+  import { config } from '@/utils/config'
   import { getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
+  const toast: ToastPluginApi = inject('toast') as ToastPluginApi
   let data: any
   // reactive<{
   //   playerList: [
@@ -94,8 +96,10 @@
 
     try {
       await navigator.clipboard.writeText(link)
+      toast.success('Link copied!', config.toast)
     } catch (err) {
       console.error('Failed to copy: ', err)
+      toast.error('Error while copying link.')
     }
 
     return
