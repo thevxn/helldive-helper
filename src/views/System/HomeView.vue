@@ -33,15 +33,16 @@
       <div class="mt-4 flex flex-row flex-wrap justify-center gap-2">
         <img
           class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
+          :class="activeStratagemSelect[i][j] ? 'border-solid border-4 border-yellow-400' : ''"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
           @click="toggleStratagemSelect(i, j)" />
       </div>
-      <RModal
+      <RSelection
         :selected-stratagems="data.playerList[i].stratagemCodeList"
         @stratagem-selected="stratagemSelectionHandler"
-        ref="modalRef"></RModal>
+        ref="modalRef"></RSelection>
     </div>
     <div class="w-full flex flex-row content-center justify-center" tabindex="0">
       <button
@@ -59,7 +60,7 @@
   import { useRoute } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import RModal from '@/components/reusable/RModal.vue'
+  import RSelection from '@/components/reusable/RSelection.vue'
   import { config } from '@/utils/config'
   import { getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
@@ -104,11 +105,30 @@
 
     return
   }
-  const showStratagemSelectModal = ref([false, false, false, false])
+  const activeStratagemSelect = ref([
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false]
+  ])
   const modalRef = ref()
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
     // console.log(playerIndex, position)
-    showStratagemSelectModal.value[playerIndex] = !showStratagemSelectModal.value[playerIndex]
+    activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
+      if (i !== playerIndex) {
+        return activeStratagemSelect.value[i]
+      } else {
+        return activeStratagemSelect.value[i].map((el, j) => {
+          if (j === position) {
+            return !activeStratagemSelect.value[i][j]
+          } else {
+            return false
+          }
+        })
+      }
+    })
+    // console.log(activeStratagemSelect.value)
+    // activeStratagemSelect.value[playerIndex][position] = !activeStratagemSelect.value[playerIndex][position]
     modalRef.value[playerIndex].toggleDisplay()
     modalRef.value[playerIndex].playerIndex = playerIndex
     modalRef.value[playerIndex].position = position
@@ -116,6 +136,7 @@
   const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: string) => {
     // console.log(playerIndex, position, stratagemCode)
     data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
+    activeStratagemSelect.value[playerIndex][position] = false
   }
 </script>
 

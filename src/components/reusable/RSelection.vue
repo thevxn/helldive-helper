@@ -5,7 +5,8 @@
         v-for="stratagem in shownStratagems"
         :key="stratagem"
         :src="`/icons/stratagems/${stratagem}.webp`"
-        class="w-[40px] h-[40px]"
+        class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
+        :title="stratagems[stratagem as keyof typeof stratagems].displayName"
         @click="$emit('stratagem-selected', playerIndex, position, stratagem), (display = false)" />
     </div>
   </div>
@@ -14,7 +15,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  import { stratagemCodeList } from '@/utils/stratagems'
+  import { stratagemCodeList, stratagems } from '@/utils/stratagems'
 
   const display = ref(false)
   const playerIndex = ref(0)
