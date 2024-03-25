@@ -1,7 +1,7 @@
 <template>
   <main class="container flex flex-col flex-wrap sm:flex-row min-w-full p-8 gap-8 sm:gap-6 mt-8">
     <div
-      :class="`w-full sm:w-5/12 xl:w-1/5 mx-auto bg-gray-500 rounded-md p-8 h-full`"
+      class="w-full sm:w-5/12 xl:w-1/5 mx-auto bg-gray-500 rounded-md p-8 h-full flex flex-col content-center place-items-center"
       v-for="(player, i) in data.playerList"
       :key="i">
       <!-- <label for="name">Squad Member Name:</label> -->
@@ -10,27 +10,31 @@
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        class="bg-slate-700 w-full mb-4"
+        class="bg-slate-700 w-full"
         v-model="player.name" />
-      <label for="primary">Primary Weapon:</label>
+      <label for="primary" class="w-full mt-4">Primary Weapon:</label>
       <select name="primary" id="primary" class="bg-slate-700 w-full" v-model="player.primaryWeaponCode">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
         </option>
       </select>
-      <label for="secondary" class="w-full">Secondary Weapon:</label>
+      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
+      <label for="secondary" class="w-full mt-4">Secondary Weapon:</label>
       <select name="secondary" id="secondary" class="bg-slate-700 w-full" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
-      <label for="grenade" class="w-full">Grenade:</label>
+      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
+      <label for="grenade" class="w-full mt-4">Grenade:</label>
       <select name="grenade" id="grenade" class="bg-slate-700 w-full" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
+      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 w-[250px] h-[100px]" />
       <div class="mt-4 flex flex-row flex-wrap justify-center gap-2">
+        <span class="w-full">Stratagems:</span>
         <img
           class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-solid border-4 border-yellow-400' : ''"
