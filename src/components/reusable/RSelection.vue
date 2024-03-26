@@ -5,7 +5,7 @@
         v-for="stratagem in shownStratagems"
         :key="stratagem"
         :src="`/icons/stratagems/${stratagem}.webp`"
-        class="w-[40px] h-[40px] hover:border-solid hover:border-4 hover:border-yellow-400"
+        class="w-[50px] h-[50px] hover:border-solid hover:border-4 hover:border-yellow-400"
         :title="stratagems[stratagem as keyof typeof stratagems].displayName"
         @click="$emit('stratagem-selected', playerIndex, position, stratagem), (display = false)" />
     </div>
