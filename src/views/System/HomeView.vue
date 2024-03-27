@@ -21,7 +21,7 @@
       </select>
       <img
         :src="`/weapons/${player.primaryWeaponCode}.webp`"
-        class="mt-4"
+        class="mt-4 h-[108px] w-[250px]"
         :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
       <label :for="`secondary-${i}`" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
       <select name="secondary" :id="`secondary-${i}`" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
@@ -31,7 +31,7 @@
       </select>
       <img
         :src="`/weapons/${player.secondaryWeaponCode}.webp`"
-        class="mt-4"
+        class="mt-4 h-[108px] w-[200px]"
         :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
       <label :for="`grenade-${i}`" class="mb-1 mt-4 w-full">Grenade:</label>
       <select name="grenade" :id="`grenade-${i}`" class="w-full bg-slate-700" v-model="player.grenadeCode">
@@ -41,7 +41,7 @@
       </select>
       <img
         :src="`/grenades/${player.grenadeCode}.webp`"
-        class="mt-4"
+        class="mt-4 h-[100px] w-[100px]"
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
