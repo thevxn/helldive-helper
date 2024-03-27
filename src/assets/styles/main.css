@@ -2,10 +2,6 @@
 @tailwind base;
 
 @layer base {
-  html {
-    @apply bg-gradient-to-b from-gray-900 to-blue-900;
-  }
-
   body {
     @apply text-white relative min-h-screen w-full pb-12 min-w-[320px] overflow-x-hidden;
   }
