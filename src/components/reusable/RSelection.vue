@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-row w-full flex-wrap justify-center gap-2 mt-4" v-if="display">
+    <div class="mt-4 flex w-full flex-row flex-wrap justify-center gap-2" v-if="display">
       <img
         v-for="stratagem in shownStratagems"
         :key="stratagem"
         :src="`/icons/stratagems/${stratagem}.webp`"
-        class="w-[50px] h-[50px] hover:border-solid hover:border-4 hover:border-yellow-400"
+        class="h-[50px] w-[50px] hover:border-4 hover:border-solid hover:border-yellow-400"
         :title="stratagems[stratagem as keyof typeof stratagems].displayName"
         @click="$emit('stratagem-selected', playerIndex, position, stratagem), (display = false)" />
     </div>

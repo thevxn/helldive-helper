@@ -1,7 +1,7 @@
 <template>
-  <main class="container flex flex-col flex-wrap sm:flex-row min-w-full p-8 gap-8 sm:gap-6 mt-8">
+  <main class="container mt-8 flex min-w-full flex-col flex-wrap gap-8 p-8 sm:flex-row sm:gap-6">
     <div
-      class="w-full sm:w-5/12 xl:w-1/5 mx-auto bg-gray-500 rounded-md p-8 h-full flex flex-col content-center place-items-center"
+      class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 p-8 sm:w-5/12 xl:w-1/5"
       v-for="(player, i) in data.playerList"
       :key="i">
       <!-- <label for="name">Squad Member Name:</label> -->
@@ -10,34 +10,34 @@
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        class="bg-slate-700 w-full"
+        class="w-full bg-slate-700"
         v-model="player.name" />
-      <label for="primary" class="w-full mt-4">Primary Weapon:</label>
-      <select name="primary" id="primary" class="bg-slate-700 w-full" v-model="player.primaryWeaponCode">
+      <label for="primary" class="mt-4 w-full">Primary Weapon:</label>
+      <select name="primary" id="primary" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 w-[250px] h-[108px]" />
-      <label for="secondary" class="w-full mt-4">Secondary Weapon:</label>
-      <select name="secondary" id="secondary" class="bg-slate-700 w-full" v-model="player.secondaryWeaponCode">
+      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[250px]" />
+      <label for="secondary" class="mt-4 w-full">Secondary Weapon:</label>
+      <select name="secondary" id="secondary" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 w-[200px] h-[108px]" />
-      <label for="grenade" class="w-full mt-4">Grenade:</label>
-      <select name="grenade" id="grenade" class="bg-slate-700 w-full" v-model="player.grenadeCode">
+      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[200px]" />
+      <label for="grenade" class="mt-4 w-full">Grenade:</label>
+      <select name="grenade" id="grenade" class="w-full bg-slate-700" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
-      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 w-[100px] h-[100px]" />
-      <span class="w-full mt-4">Stratagems:</span>
+      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 h-[100px] w-[100px]" />
+      <span class="mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <img
-          class="w-[50px] h-[50px] border-solid border-4 border-gray-900 hover:border-solid hover:border-4 hover:border-yellow-400 mt-2"
-          :class="activeStratagemSelect[i][j] ? 'border-solid border-4 border-yellow-400' : ''"
+          class="mt-2 h-[50px] w-[50px] border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
+          :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
@@ -48,9 +48,9 @@
         @stratagem-selected="stratagemSelectionHandler"
         ref="modalRef"></RSelection>
     </div>
-    <div class="w-full flex flex-row content-center justify-center" tabindex="0">
+    <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-500 rounded w-48 h-12 self-center place-self-center font-semibold"
+        class="h-12 w-48 place-self-center self-center rounded bg-yellow-500 font-semibold text-white hover:bg-yellow-600 active:bg-yellow-500"
         popovertarget="success-popover"
         @click="generateDataString">
         Copy Link

@@ -7,11 +7,10 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier',
     'plugin:vue/strongly-recommended',
     'eslint:recommended',
-    '@vue/typescript/recommended',
     'prettier',
+    '@vue/typescript/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript'
   ],
@@ -74,12 +73,12 @@ module.exports = {
   globals: {
     module: 'writable'
   },
-  overrides: [
-    {
-      files: ['**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}', 'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}'],
-      extends: ['plugin:cypress/recommended']
-    }
-  ],
+  // overrides: [
+  //   {
+  //     files: ['**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}', 'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}'],
+  //     extends: ['plugin:cypress/recommended']
+  //   }
+  // ],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',

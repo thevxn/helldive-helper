@@ -8,5 +8,6 @@
   "endOfLine": "auto",
   "bracketSpacing": true,
   "bracketSameLine": true,
-  "htmlWhitespaceSensitivity": "css"
+  "htmlWhitespaceSensitivity": "css",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

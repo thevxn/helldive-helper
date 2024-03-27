@@ -1,5 +1,5 @@
 <template>
-  <footer class="container mx-auto min-w-full flex justify-center absolute bottom-8 sm:bottom-0 h-12 p-4">
+  <footer class="container absolute bottom-8 mx-auto flex h-12 min-w-full justify-center p-4 sm:bottom-0">
     <small
       >Made by <a href="https://github.com/Tackx">tack</a>@<a href="https://www.savla.dev">savla.dev</a>. This is a fan
       project in no way connected to Arrowhead or the official Helldivers 2 trademark. All imagery provided by the
