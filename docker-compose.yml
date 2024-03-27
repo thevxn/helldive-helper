@@ -24,7 +24,7 @@ services:
     volumes:
       - "hdlt-fe-static:/opt/hdlt-fe"
       - .docker/nginx-default.conf:/etc/nginx/conf.d/default.conf
-    cpus: 0.33
+    cpus: 1.5
     dns:
       - 10.4.5.130
       - 1.1.1.2
