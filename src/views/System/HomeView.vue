@@ -2,7 +2,7 @@
   <main
     class="container mb-4 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 p-4 sm:w-5/12 xl:w-1/5"
+      class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
       v-for="(player, i) in data.playerList"
       :key="i">
       <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" />

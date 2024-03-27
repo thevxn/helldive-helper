@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="mt-4 flex w-full flex-row flex-wrap justify-center gap-2 rounded-md border-4 border-solid border-yellow-400 bg-gray-600 p-4"
+      class="mt-4 flex w-full flex-row flex-wrap justify-center gap-2 rounded-md border-4 border-solid border-yellow-400 p-4"
       v-if="display">
       <img
         v-for="stratagem in shownStratagems"
