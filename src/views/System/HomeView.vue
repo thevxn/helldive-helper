@@ -61,7 +61,7 @@
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="h-12 w-48 place-self-center self-center rounded bg-yellow-500 font-semibold text-white hover:bg-yellow-600 active:bg-yellow-500"
+        class="h-12 w-48 place-self-center self-center rounded bg-yellow-600 font-semibold text-white hover:bg-yellow-700 active:bg-yellow-600"
         @click="generateDataString">
         Copy Link
       </button>
