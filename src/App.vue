@@ -4,7 +4,7 @@
     <template v-if="Component">
       <Suspense>
         <!-- main content -->
-        <component :is="Component"></component>
+        <component :is="Component" />
         <!-- loading state -->
         <template #fallback>
           <main>

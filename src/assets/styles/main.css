@@ -10,6 +10,16 @@
     @apply text-white relative min-h-screen w-full pb-12 min-w-[320px] overflow-x-hidden;
   }
 
+  input,
+  select {
+    @apply rounded p-1;
+  }
+
+  input:hover,
+  input:focus {
+    @apply outline-none outline-yellow-400 outline-2;
+  }
+
   a {
     @apply underline text-yellow-500 hover:text-yellow-600 visited:text-yellow-500;
   }

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="mt-4 flex w-full flex-row flex-wrap justify-center gap-2" v-if="display">
+    <div
+      class="mt-4 flex w-full flex-row flex-wrap justify-center gap-2 border-4 border-solid border-yellow-400 bg-gray-900 p-4"
+      v-if="display">
       <img
         v-for="stratagem in shownStratagems"
         :key="stratagem"

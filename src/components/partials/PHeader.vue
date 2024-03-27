@@ -1,6 +1,9 @@
 <template>
-  <header class="container mx-auto flex min-w-full justify-center pt-4 text-center">
-    <h1 class="center">Helldivers 2 Loadouts Tool</h1>
+  <header class="container mx-auto flex min-w-full flex-col justify-center pt-4 text-center">
+    <h1 class="text-center">Helldivers 2 Loadouts Tool</h1>
+    <h4 class="mt-4 p-4 text-justify sm:text-center">
+      Build up your team composition & share with your friends via the generated link!
+    </h4>
   </header>
 </template>
 

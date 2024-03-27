@@ -1,7 +1,8 @@
 <template>
-  <main class="container mt-8 flex min-w-full flex-col flex-wrap gap-8 p-8 sm:flex-row sm:gap-6">
+  <main
+    class="container mb-4 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 p-8 sm:w-5/12 xl:w-1/5"
+      class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 p-4 sm:w-5/12 xl:w-1/5"
       v-for="(player, i) in data.playerList"
       :key="i">
       <!-- <label for="name">Squad Member Name:</label> -->
@@ -12,28 +13,28 @@
         :placeholder="player.name"
         class="w-full bg-slate-700"
         v-model="player.name" />
-      <label for="primary" class="mt-4 w-full">Primary Weapon:</label>
+      <label for="primary" class="mb-1 mt-4 w-full">Primary Weapon:</label>
       <select name="primary" id="primary" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
         </option>
       </select>
       <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[250px]" />
-      <label for="secondary" class="mt-4 w-full">Secondary Weapon:</label>
+      <label for="secondary" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
       <select name="secondary" id="secondary" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
       <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[200px]" />
-      <label for="grenade" class="mt-4 w-full">Grenade:</label>
+      <label for="grenade" class="mb-1 mt-4 w-full">Grenade:</label>
       <select name="grenade" id="grenade" class="w-full bg-slate-700" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
       <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 h-[100px] w-[100px]" />
-      <span class="mt-4 w-full">Stratagems:</span>
+      <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <img
           class="mt-2 h-[50px] w-[50px] border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
@@ -41,6 +42,7 @@
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
+          :title="stratagems[stratagem as keyof typeof stratagems].displayName"
           @click="toggleStratagemSelect(i, j)" />
       </div>
       <RSelection
@@ -68,6 +70,7 @@
   import { config } from '@/utils/config'
   import { getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
+  import { stratagems } from '@/utils/stratagems'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi

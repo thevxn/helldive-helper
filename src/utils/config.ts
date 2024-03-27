@@ -1,5 +1,5 @@
 export const config = {
   toast: {
-    duration: 700
+    duration: 1200
   }
 }
