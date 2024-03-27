@@ -29,15 +29,15 @@
   }
 
   h2 {
-    @apply text-3xl;
+    @apply text-xl;
   }
 
   h3 {
-    @apply text-2xl;
+    @apply text-lg;
   }
 
   h4 {
-    @apply text-xl;
+    @apply text-lg;
   }
 
   h5 {
