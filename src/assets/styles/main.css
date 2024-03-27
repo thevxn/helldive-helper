@@ -21,7 +21,7 @@
   }
 
   a {
-    @apply underline text-yellow-500 hover:text-yellow-600 visited:text-yellow-500;
+    @apply underline text-orange-500 hover:text-orange-300 visited:text-orange-500;
   }
 
   h1 {
