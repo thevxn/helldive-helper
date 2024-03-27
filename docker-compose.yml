@@ -16,6 +16,7 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
+      target: prod
       args: 
         BASE_URL: ${BASE_URL}
     restart: unless-stopped
