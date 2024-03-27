@@ -46,7 +46,7 @@
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <img
-          class="mt-2 h-[50px] w-[50px] border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
+          class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
@@ -61,7 +61,7 @@
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="h-12 w-48 place-self-center self-center rounded bg-yellow-600 font-semibold text-white hover:bg-yellow-700 active:bg-yellow-600"
+        class="h-12 w-48 place-self-center self-center rounded bg-chocolate-600 font-semibold text-white hover:bg-yellow-600 active:bg-chocolate-600"
         @click="generateDataString">
         Copy Link
       </button>
