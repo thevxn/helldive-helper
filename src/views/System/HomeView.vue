@@ -5,6 +5,7 @@
       class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 p-4 sm:w-5/12 xl:w-1/5"
       v-for="(player, i) in data.playerList"
       :key="i">
+      <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" />
       <!-- <label for="name">Squad Member Name:</label> -->
       <input
         :id="`name-${i}`"
