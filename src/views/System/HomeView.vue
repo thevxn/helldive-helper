@@ -7,33 +7,42 @@
       :key="i">
       <!-- <label for="name">Squad Member Name:</label> -->
       <input
-        id="name"
+        :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
         class="w-full bg-slate-700"
         v-model="player.name" />
-      <label for="primary" class="mb-1 mt-4 w-full">Primary Weapon:</label>
-      <select name="primary" id="primary" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
+      <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
+      <select name="primary" :id="`primary-${i}`" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.primaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[250px]" />
-      <label for="secondary" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
-      <select name="secondary" id="secondary" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
+      <img
+        :src="`/weapons/${player.primaryWeaponCode}.webp`"
+        class="mt-4 h-[108px] w-[250px]"
+        :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
+      <label :for="`secondary-${i}`" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
+      <select name="secondary" :id="`secondary-${i}`" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
         </option>
       </select>
-      <img :src="`/weapons/${player.secondaryWeaponCode}.webp`" class="mt-4 h-[108px] w-[200px]" />
-      <label for="grenade" class="mb-1 mt-4 w-full">Grenade:</label>
-      <select name="grenade" id="grenade" class="w-full bg-slate-700" v-model="player.grenadeCode">
+      <img
+        :src="`/weapons/${player.secondaryWeaponCode}.webp`"
+        class="mt-4 h-[108px] w-[200px]"
+        :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
+      <label :for="`grenade-${i}`" class="mb-1 mt-4 w-full">Grenade:</label>
+      <select name="grenade" :id="`grenade-${i}`" class="w-full bg-slate-700" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade as keyof typeof grenades].displayName }}
         </option>
       </select>
-      <img :src="`/grenades/${player.grenadeCode}.webp`" class="mt-4 h-[100px] w-[100px]" />
+      <img
+        :src="`/grenades/${player.grenadeCode}.webp`"
+        class="mt-4 h-[100px] w-[100px]"
+        :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <img
