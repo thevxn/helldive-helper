@@ -1,5 +1,7 @@
 # helldivers-fe
 
+rounded borders for inputs, yellow border for active input, title when hovering over selected stratagems, semi-bold font?, description under heading, opacity to player cards?, pagespeed insights, prolong notification shown time
+
 ## Stop tracking changes for sw.js (or any other file where you do not want to track/push local changes to it)
 
 ```sh
