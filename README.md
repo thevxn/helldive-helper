@@ -1,6 +1,6 @@
 # helldivers-fe
 
-default loadout update
+default loadout update, change stratagem selection to a real modal?, catchall 404 route, rename to HH
 
 ## Stop tracking changes for sw.js (or any other file where you do not want to track/push local changes to it)
 
