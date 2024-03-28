@@ -73,7 +73,7 @@
 
 <script setup lang="ts">
   import { inject, reactive, ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import RSelection from '@/components/reusable/RSelection.vue'
@@ -107,6 +107,10 @@
   if (route.query.data) {
     try {
       data = reactive(JSON.parse(atob(route.query.data as string)))
+
+      const router = useRouter()
+
+      router.replace({ query: undefined })
     } catch (e) {
       console.log(e)
       data = getDefaultData()
