@@ -47,6 +47,11 @@
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
+        <RSelection
+          :selected-stratagems="data.playerList[i].stratagemCodeList"
+          @stratagem-selected="stratagemSelectionHandler"
+          ref="modalRef"
+          class="z-10 flex h-screen items-center justify-center"></RSelection>
         <img
           class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
@@ -56,10 +61,6 @@
           :title="stratagems[stratagem as keyof typeof stratagems].displayName"
           @click="toggleStratagemSelect(i, j)" />
       </div>
-      <RSelection
-        :selected-stratagems="data.playerList[i].stratagemCodeList"
-        @stratagem-selected="stratagemSelectionHandler"
-        ref="modalRef"></RSelection>
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
