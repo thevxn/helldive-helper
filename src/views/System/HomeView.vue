@@ -6,7 +6,7 @@
       :class="`border-2 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"
       v-for="(player, i) in data.playerList"
       :key="i">
-      <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" />
+      <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" alt="helldiver-helmet" />
       <!-- <label for="name">Squad Member Name:</label> -->
       <input
         :id="`name-${i}`"
