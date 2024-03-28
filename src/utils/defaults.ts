@@ -28,7 +28,7 @@ export const getDefaultData = (): IData => {
         color: 'orange'
       },
       {
-        name: 'Light AT/AC Support',
+        name: 'Light AT/Support',
         primaryWeaponCode: 'BREAKER',
         secondaryWeaponCode: 'REDEEMER',
         grenadeCode: 'STUN',
