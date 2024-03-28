@@ -50,8 +50,7 @@
         <RSelection
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           @stratagem-selected="stratagemSelectionHandler"
-          ref="modalRef"
-          class="z-10 flex h-screen items-center justify-center"></RSelection>
+          ref="modalRef"></RSelection>
         <img
           class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
