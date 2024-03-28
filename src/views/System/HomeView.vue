@@ -3,7 +3,7 @@
     class="container mb-4 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:flex-row sm:gap-6 sm:p-0">
     <div
       class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
-      :class="`border-4 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"
+      :class="`border-2 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"
       v-for="(player, i) in data.playerList"
       :key="i">
       <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" />
@@ -47,10 +47,6 @@
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
-        <RSelection
-          :selected-stratagems="data.playerList[i].stratagemCodeList"
-          @stratagem-selected="stratagemSelectionHandler"
-          ref="modalRef"></RSelection>
         <img
           class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
@@ -59,6 +55,10 @@
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
           :title="stratagems[stratagem as keyof typeof stratagems].displayName"
           @click="toggleStratagemSelect(i, j)" />
+        <RSelection
+          :selected-stratagems="data.playerList[i].stratagemCodeList"
+          @stratagem-selected="stratagemSelectionHandler"
+          ref="modalRef"></RSelection>
       </div>
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
@@ -87,16 +87,15 @@
     orange: 'border-pcorange-900',
     green: 'border-pcgreen-900',
     blue: 'border-pcblue-900',
-    purple: 'border-pcpink-900'
+    pink: 'border-pcpink-900'
   }
   const playerInputOutlines = {
     orange:
-      'hover:outline-none hover:outline-pcorange-900 hover:outline-2 focus:outline-none focus:outline-pcorange-900 focus:outline-4',
+      'hover:outline-none hover:outline-pcorange-900 hover:outline-2 focus:outline-none focus:outline-pcorange-900 focus:outline-2 focus:shadow-pcorange-900 focus:shadow-inner',
     green:
-      'hover:outline-none hover:outline-pcgreen-900 hover:outline-2 focus:outline-none focus:outline-pcgreen-900 focus:outline-4 ',
-    blue: 'hover:outline-none hover:outline-pcblue-900 hover:outline-2 focus:outline-none focus:outline-pcblue-900 focus:outline-4 ',
-    purple:
-      'hover:outline-none hover:outline-pcpink-900 hover:outline-2 focus:outline-none focus:outline-pcpink-900 focus:outline-4'
+      'hover:outline-none hover:outline-pcgreen-900 hover:outline-2 focus:outline-none focus:outline-pcgreen-900 focus:outline-2 focus:shadow-pcgreen-900 focus:shadow-inner',
+    blue: 'hover:outline-none hover:outline-pcblue-900 hover:outline-2 focus:outline-none focus:outline-pcblue-900 focus:outline-2 focus:shadow-pcblue-900 focus:shadow-inner',
+    pink: 'hover:outline-none hover:outline-pcpink-900 hover:outline-2 focus:outline-none focus:outline-pcpink-900 focus:outline-2 focus:shadow-pcpink-900 focus:shadow-inner'
   }
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
   let data: any

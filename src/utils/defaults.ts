@@ -36,7 +36,7 @@ export const getDefaultData = () => {
         secondaryWeaponCode: 'PEACEMAKER' as keyof typeof weapons.secondary,
         grenadeCode: 'FRAG' as keyof typeof grenades,
         stratagemCodeList: ['MECH', 'RAILGUN', 'JUMP_PACK', 'EAGLE_500'],
-        color: 'purple'
+        color: 'pink'
       }
     ]
   })
