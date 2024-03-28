@@ -3,7 +3,7 @@
 
 @layer base {
   html {
-    @apply bg-gradient-to-b from-gray-900 to-blue-900;
+    @apply bg-gradient-to-b from-gray-900 to-gray-700;
   }
 
   body {
@@ -15,10 +15,10 @@
     @apply rounded p-1;
   }
 
-  input:hover,
+  /* input:hover,
   input:focus {
     @apply outline-none outline-yellow-400 outline-2;
-  }
+  } */
 
   a {
     @apply underline text-orange-500 hover:text-orange-300 visited:text-orange-500;

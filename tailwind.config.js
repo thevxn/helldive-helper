@@ -8,16 +8,16 @@ export default {
           600: '#d96c1d'
         },
         pcorange: {
-          900: '#ffa500'
+          900: '#ff8e15'
         },
         pcgreen: {
-          900: '#008000'
+          900: '#40c84f'
         },
         pcblue: {
-          900: '#0000ff'
+          900: '#0ea5ff'
         },
-        pcpurple: {
-          900: '#800080'
+        pcpink: {
+          900: '#e118c2'
         }
       }
     }
