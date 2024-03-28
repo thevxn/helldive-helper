@@ -26,9 +26,6 @@ export const stratagems = {
   RECOILLESS_RIFLE: {
     displayName: 'GR-8 Recoilless Rifle'
   },
-  LASER_CANNON: {
-    displayName: 'LAS-98 Laser Cannon'
-  },
   MACHINE_GUN: {
     displayName: 'MG-43 Machine Gun'
   },
@@ -40,6 +37,12 @@ export const stratagems = {
   },
   RAILGUN: {
     displayName: 'RS-422 Railgun'
+  },
+  HEAVY_MACHINE_GUN: {
+    displayName: 'MG-206 Heavy Machine Gun'
+  },
+  QUASAR_CANNON: {
+    displayName: 'LAS-98 Laser Cannon'
   },
 
   // Backpacks
