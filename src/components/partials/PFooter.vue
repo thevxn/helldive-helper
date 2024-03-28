@@ -6,7 +6,7 @@
       project in no way connected to Arrowhead or the official Helldivers 2 trademark. All imagery provided by the
       <a href="https://helldivers.wiki.gg">Helldivers Wiki</a>.
     </small>
-    <small class="mb-2 ml-auto sm:mb-0">v{{ version }}</small>
+    <small class="mb-2 ml-auto sm:mb-0 sm:ml-0">v{{ version }}</small>
   </footer>
 </template>
 
