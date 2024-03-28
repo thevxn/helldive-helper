@@ -1,6 +1,6 @@
 <template>
   <main
-    class="container mb-4 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:flex-row sm:gap-6 sm:p-0">
+    class="container mb-16 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
       class="mx-auto flex h-full w-full flex-col place-items-center content-center rounded-md bg-gray-500 bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
       :class="`border-2 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"

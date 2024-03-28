@@ -7,7 +7,8 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue()],
   define: {
-    BASE_URL: JSON.stringify(process.env.BASE_URL)
+    BASE_URL: JSON.stringify(process.env.BASE_URL),
+    APP_VERSION: JSON.stringify(process.env.npm_package_version)
   },
   resolve: {
     alias: {
