@@ -13,7 +13,7 @@
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        :class="`w-full bg-slate-700 ${playerInputOutlines[player.color as keyof typeof playerBorders]}`"
+        :class="`w-[200px] bg-slate-700 text-center ${playerInputOutlines[player.color as keyof typeof playerBorders]}`"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
       <select name="primary" :id="`primary-${i}`" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
