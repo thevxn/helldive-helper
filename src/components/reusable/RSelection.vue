@@ -8,7 +8,7 @@
         :key="stratagem"
         :src="`/icons/stratagems/${stratagem}.webp`"
         class="h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-400"
-        :title="stratagems[stratagem as keyof typeof stratagems].displayName"
+        :title="stratagems[stratagem].displayName"
         @click="$emit('stratagem-selected', playerIndex, position, stratagem), (display = false)" />
     </div>
   </div>

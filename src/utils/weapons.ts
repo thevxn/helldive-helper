@@ -73,5 +73,5 @@ export const weapons = {
   }
 }
 
-export const primaryWeaponCodeList = Object.keys(weapons.primary)
-export const secondaryWeaponCodeList = Object.keys(weapons.secondary)
+export const primaryWeaponCodeList = Object.keys(weapons.primary) as (keyof typeof weapons.primary)[]
+export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as (keyof typeof weapons.secondary)[]

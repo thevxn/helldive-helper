@@ -18,7 +18,7 @@
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
       <select name="primary" :id="`primary-${i}`" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
-          {{ (weapons.primary as typeof weapons.primary)[weapon].displayName }}
+          {{ weapons.primary[weapon].displayName }}
         </option>
       </select>
       <img
@@ -28,7 +28,7 @@
       <label :for="`secondary-${i}`" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
       <select name="secondary" :id="`secondary-${i}`" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
-          {{ (weapons.secondary as typeof weapons.secondary)[weapon].displayName }}
+          {{ weapons.secondary[weapon].displayName }}
         </option>
       </select>
       <img
@@ -38,7 +38,7 @@
       <label :for="`grenade-${i}`" class="mb-1 mt-4 w-full">Grenade:</label>
       <select name="grenade" :id="`grenade-${i}`" class="w-full bg-slate-700" v-model="player.grenadeCode">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
-          {{ grenades[grenade as keyof typeof grenades].displayName }}
+          {{ grenades[grenade].displayName }}
         </option>
       </select>
       <img

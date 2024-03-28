@@ -20,4 +20,4 @@ export const grenades = {
   }
 }
 
-export const grenadeCodeList = Object.keys(grenades)
+export const grenadeCodeList = Object.keys(grenades) as (keyof typeof grenades)[]

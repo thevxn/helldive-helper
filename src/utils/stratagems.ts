@@ -156,4 +156,4 @@ export const stratagems = {
   }
 }
 
-export const stratagemCodeList = Object.keys(stratagems)
+export const stratagemCodeList = Object.keys(stratagems) as (keyof typeof stratagems)[]
