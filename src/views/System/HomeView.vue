@@ -65,8 +65,9 @@
         <RSelection
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           :color="player.color"
-          @stratagem-selected="stratagemSelectionHandler"
-          ref="modalRef"></RSelection>
+          @stratagem-selected="handleStratagemSelection"
+          ref="modalRef"
+          :id="`stratagem-select-${i}`"></RSelection>
         <img
           :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid ${playerBordersHover[player.color]} ${activeStratagemSelect[i][j] ? `border-4 border-solid ${playerBorders[player.color]}` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
@@ -87,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-  import { inject, reactive, ref, watch } from 'vue'
+  import { inject, nextTick, reactive, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
@@ -166,6 +167,14 @@
       }
     })
 
+    nextTick(() => {
+      document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
+    })
+
+    // setTimeout(() => {
+    //   document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' }), 0
+    // })
+
     if (modalRef.value[playerIndex].playerIndex === playerIndex && modalRef.value[playerIndex].position === position) {
       modalRef.value[playerIndex].displayOff()
       modalRef.value[playerIndex].playerIndex = null
@@ -176,10 +185,11 @@
       modalRef.value[playerIndex].displayOn()
     }
   }
-  const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: keyof typeof stratagems) => {
+  const handleStratagemSelection = (playerIndex: number, position: number, stratagemCode: keyof typeof stratagems) => {
     data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
     activeStratagemSelect.value[playerIndex][position] = false
     modalRef.value[playerIndex].displayOff()
+    document.querySelector(`#secondary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
     modalRef.value[playerIndex].playerIndex = null
     modalRef.value[playerIndex].position = null
   }
