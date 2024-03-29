@@ -41,11 +41,11 @@ export const stratagems = {
   HEAVY_MACHINE_GUN: {
     displayName: 'MG-206 Heavy Machine Gun'
   },
-  QUASAR_CANNON: {
-    displayName: 'LAS-99 Quasar Cannon'
-  },
   LASER_CANNON: {
     displayName: 'LAS-98 Laser Cannon'
+  },
+  QUASAR_CANNON: {
+    displayName: 'LAS-99 Quasar Cannon'
   },
 
   // Backpacks

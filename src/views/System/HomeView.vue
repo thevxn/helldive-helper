@@ -64,11 +64,11 @@
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <RSelection
           :selected-stratagems="data.playerList[i].stratagemCodeList"
+          :color="player.color"
           @stratagem-selected="stratagemSelectionHandler"
           ref="modalRef"></RSelection>
         <img
-          class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
-          :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
+          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid ${playerBordersHover[player.color]} ${activeStratagemSelect[i][j] ? `border-4 border-solid ${playerBorders[player.color]}` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
@@ -98,23 +98,10 @@
   import { Logger } from '@/utils/logger'
   import { createPlayerDataOutput, parseInput } from '@/utils/playerData'
   import { stratagems } from '@/utils/stratagems'
+  import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
   const logger = Logger()
-  const playerBorders = {
-    orange: 'border-pcorange-900',
-    green: 'border-pcgreen-900',
-    blue: 'border-pcblue-900',
-    pink: 'border-pcpink-900'
-  }
-  const playerInputOutlines = {
-    orange:
-      'hover:outline-none hover:outline-pcorange-900 hover:outline-2 focus:outline-none focus:outline-pcorange-900 focus:outline-2 focus:shadow-pcorange-900 focus:shadow-inner',
-    green:
-      'hover:outline-none hover:outline-pcgreen-900 hover:outline-2 focus:outline-none focus:outline-pcgreen-900 focus:outline-2 focus:shadow-pcgreen-900 focus:shadow-inner',
-    blue: 'hover:outline-none hover:outline-pcblue-900 hover:outline-2 focus:outline-none focus:outline-pcblue-900 focus:outline-2 focus:shadow-pcblue-900 focus:shadow-inner',
-    pink: 'hover:outline-none hover:outline-pcpink-900 hover:outline-2 focus:outline-none focus:outline-pcpink-900 focus:outline-2 focus:shadow-pcpink-900 focus:shadow-inner'
-  }
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
   let data: IData
   const route = useRoute()
