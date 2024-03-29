@@ -1,7 +1,5 @@
 # helldivers-fe
 
-catchall 404 route
-
 ## Stop tracking changes for sw.js (or any other file where you do not want to track/push local changes to it)
 
 ```sh
