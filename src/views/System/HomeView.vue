@@ -122,7 +122,6 @@
   if (route.query.data) {
     try {
       data = reactive(parseInput(JSON.parse(atob(route.query.data as string))))
-      localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
 
       const router = useRouter()
 
@@ -130,13 +129,14 @@
     } catch (e) {
       logger.log(e)
       data = getDefaultData()
-      localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
     }
   } else if (localStorage.getItem('data')) {
     data = reactive(parseInput(JSON.parse(atob(localStorage.getItem('data') as string))))
   } else {
     data = getDefaultData()
   }
+
+  localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
 
   const generateDataString = async () => {
     const link = `${BASE_URL}/?data=${btoa(JSON.stringify(createPlayerDataOutput(data)))}`
