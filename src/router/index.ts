@@ -8,6 +8,10 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/System/HomeView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
     }
   ]
 })
