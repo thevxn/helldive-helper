@@ -65,64 +65,6 @@ export const stratagems = {
     displayName: 'AX/LAS-5 "Guard Dog" Rover'
   },
 
-  // Stationary
-  HMG_EMPLACEMENT: {
-    displayName: 'E/MG-101 HMG Emplacement'
-  },
-  SHIELD_GENERATOR_RELAY: {
-    displayName: 'FX-12 Shield Generator Relay'
-  },
-  TESLA_TOWER: {
-    displayName: 'A/ARC-3 Tesla Tower'
-  },
-  ANTI_PERSONNEL_MINEFIELD: {
-    displayName: 'MD-6 Anti-Personnel Minefield'
-  },
-  INCENDIARY_MINES: {
-    displayName: 'MD-I4 Incendiary Mines'
-  },
-  MACHINE_GUN_SENTRY: {
-    displayName: 'A/MG-43 Machine Gun Sentry'
-  },
-  GATLING_SENTRY: {
-    displayName: 'A/G-16 Gatling Sentry'
-  },
-  MORTAR_SENTRY: {
-    displayName: 'A/M-12 Mortar Sentry'
-  },
-  AUTOCANNON_SENTRY: {
-    displayName: 'A/AC-8 Autocannon Sentry'
-  },
-  ROCKET_SENTRY: {
-    displayName: 'A/MLS-4X Rocket Sentry'
-  },
-  EMS_MORTAR_SENTRY: {
-    displayName: 'A/M-23 EMS Mortar Sentry'
-  },
-
-  // Eagle
-  EAGLE_500: {
-    displayName: 'Eagle 500kg Bomb'
-  },
-  EAGLE_AIRSTRIKE: {
-    displayName: 'Eagle Airstrike'
-  },
-  EAGLE_STRAFING_RUN: {
-    displayName: 'Eagle Strafing Run'
-  },
-  EAGLE_CLUSTER_BOMB: {
-    displayName: 'Eagle Cluster Bomb'
-  },
-  EAGLE_NAPALM_AIRSTRIKE: {
-    displayName: 'Eagle Napalm Airstrike'
-  },
-  EAGLE_SMOKE_STRIKE: {
-    displayName: 'Eagle Smoke Strike'
-  },
-  EAGLE_110_ROCKET_PODS: {
-    displayName: 'Eagle 110MM Rocket Pods'
-  },
-
   // Orbital
   ORBITAL_BARRAGE_380: {
     displayName: 'Orbital 380MM HE Barrage'
@@ -156,6 +98,64 @@ export const stratagems = {
   },
   ORBITAL_SMOKE_STRIKE: {
     displayName: 'Orbital Smoke Strike'
+  },
+
+  // Eagle
+  EAGLE_500: {
+    displayName: 'Eagle 500kg Bomb'
+  },
+  EAGLE_AIRSTRIKE: {
+    displayName: 'Eagle Airstrike'
+  },
+  EAGLE_STRAFING_RUN: {
+    displayName: 'Eagle Strafing Run'
+  },
+  EAGLE_CLUSTER_BOMB: {
+    displayName: 'Eagle Cluster Bomb'
+  },
+  EAGLE_NAPALM_AIRSTRIKE: {
+    displayName: 'Eagle Napalm Airstrike'
+  },
+  EAGLE_SMOKE_STRIKE: {
+    displayName: 'Eagle Smoke Strike'
+  },
+  EAGLE_110_ROCKET_PODS: {
+    displayName: 'Eagle 110MM Rocket Pods'
+  },
+
+  // Stationary
+  HMG_EMPLACEMENT: {
+    displayName: 'E/MG-101 HMG Emplacement'
+  },
+  SHIELD_GENERATOR_RELAY: {
+    displayName: 'FX-12 Shield Generator Relay'
+  },
+  TESLA_TOWER: {
+    displayName: 'A/ARC-3 Tesla Tower'
+  },
+  ANTI_PERSONNEL_MINEFIELD: {
+    displayName: 'MD-6 Anti-Personnel Minefield'
+  },
+  INCENDIARY_MINES: {
+    displayName: 'MD-I4 Incendiary Mines'
+  },
+  MACHINE_GUN_SENTRY: {
+    displayName: 'A/MG-43 Machine Gun Sentry'
+  },
+  GATLING_SENTRY: {
+    displayName: 'A/G-16 Gatling Sentry'
+  },
+  MORTAR_SENTRY: {
+    displayName: 'A/M-12 Mortar Sentry'
+  },
+  AUTOCANNON_SENTRY: {
+    displayName: 'A/AC-8 Autocannon Sentry'
+  },
+  ROCKET_SENTRY: {
+    displayName: 'A/MLS-4X Rocket Sentry'
+  },
+  EMS_MORTAR_SENTRY: {
+    displayName: 'A/M-23 EMS Mortar Sentry'
   }
 }
 
