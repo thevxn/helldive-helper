@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-  import { inject, reactive, ref } from 'vue'
+  import { inject, reactive, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
@@ -130,6 +130,8 @@
       logger.log(e)
       data = getDefaultData()
     }
+  } else if (localStorage.getItem('data')) {
+    data = reactive(parseInput(JSON.parse(atob(localStorage.getItem('data') as string))))
   } else {
     data = getDefaultData()
   }
@@ -138,11 +140,7 @@
     const link = `${BASE_URL}/?data=${btoa(JSON.stringify(createPlayerDataOutput(data)))}`
 
     try {
-      // Workaround for TS saying clipboard doesn't exist on navigator
-      // https://stackoverflow.com/questions/47831741/property-share-does-not-exist-on-type-navigator
-      const myNavigator: any = navigator
-
-      await myNavigator.clipboard.writeText(link)
+      await navigator.clipboard.writeText(link)
       toast.success('Link copied!', config.toast)
     } catch (err) {
       logger.error('Failed to copy: ', err)
@@ -158,6 +156,11 @@
     [false, false, false, false]
   ])
   const modalRef = ref()
+
+  watch(data, () => {
+    localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
+  })
+
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
     logger.debug(playerIndex, position)
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {

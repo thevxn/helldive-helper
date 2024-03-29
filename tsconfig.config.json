@@ -5,7 +5,5 @@
     "composite": true,
     "types": ["node"],
     "typeRoots": ["node_modules/@types", "src/@types"],
-    "lib": ["WebWorker", "ESNext"],
-    "target": "ESNext"
   }
 }
