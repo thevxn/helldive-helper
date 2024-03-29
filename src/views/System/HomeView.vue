@@ -16,7 +16,12 @@
         :class="`w-[200px] bg-slate-700 text-center ${playerInputOutlines[player.color as keyof typeof playerBorders]}`"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
-      <select name="primary" :id="`primary-${i}`" class="w-full bg-slate-700" v-model="player.primaryWeaponCode">
+      <select
+        name="primary"
+        :id="`primary-${i}`"
+        class="w-full bg-slate-700"
+        v-model="player.primaryWeaponCode"
+        :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
         <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ weapons.primary[weapon].displayName }}
         </option>
@@ -26,7 +31,12 @@
         class="mt-4 h-[108px] w-[250px]"
         :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
       <label :for="`secondary-${i}`" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
-      <select name="secondary" :id="`secondary-${i}`" class="w-full bg-slate-700" v-model="player.secondaryWeaponCode">
+      <select
+        name="secondary"
+        :id="`secondary-${i}`"
+        class="w-full bg-slate-700"
+        v-model="player.secondaryWeaponCode"
+        :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
         <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
           {{ weapons.secondary[weapon].displayName }}
         </option>
@@ -36,7 +46,12 @@
         class="mt-4 h-[108px] w-[200px]"
         :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
       <label :for="`grenade-${i}`" class="mb-1 mt-4 w-full">Grenade:</label>
-      <select name="grenade" :id="`grenade-${i}`" class="w-full bg-slate-700" v-model="player.grenadeCode">
+      <select
+        name="grenade"
+        :id="`grenade-${i}`"
+        class="w-full bg-slate-700"
+        v-model="player.grenadeCode"
+        :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
         <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
           {{ grenades[grenade].displayName }}
         </option>
