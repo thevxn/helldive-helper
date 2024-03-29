@@ -159,7 +159,7 @@
   ])
   const modalRef = ref()
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
-    logger.log(playerIndex, position)
+    logger.debug(playerIndex, position)
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
       if (i !== playerIndex) {
         return player
