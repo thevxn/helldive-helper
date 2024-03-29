@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [vue()],
   define: {
     BASE_URL: JSON.stringify(process.env.BASE_URL),
-    APP_VERSION: JSON.stringify(process.env.npm_package_version)
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
   },
   resolve: {
     alias: {

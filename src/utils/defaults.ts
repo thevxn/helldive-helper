@@ -4,17 +4,20 @@ import type { grenades } from '@/utils/grenades'
 import type { stratagems } from '@/utils/stratagems'
 import type { weapons } from '@/utils/weapons'
 
-interface IData {
+export interface IData {
   playerList: IPlayer[]
 }
+
 interface IPlayer {
   name: string
   primaryWeaponCode: keyof typeof weapons.primary
   secondaryWeaponCode: keyof typeof weapons.secondary
   grenadeCode: keyof typeof grenades
   stratagemCodeList: (keyof typeof stratagems)[]
-  color: 'orange' | 'green' | 'blue' | 'pink'
+  color: IPlayerColor
 }
+
+export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
 export const getDefaultData = (): IData => {
   return reactive({

@@ -1,6 +1,6 @@
 {
   "files": [],
-  "lib": ["ESNext", "WebWorker"],
+
   "references": [
     {
       "path": "./tsconfig.config.json"
@@ -8,5 +8,5 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
 }

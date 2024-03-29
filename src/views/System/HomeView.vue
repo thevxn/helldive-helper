@@ -62,6 +62,10 @@
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
+        <RSelection
+          :selected-stratagems="data.playerList[i].stratagemCodeList"
+          @stratagem-selected="stratagemSelectionHandler"
+          ref="modalRef"></RSelection>
         <img
           class="mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-400"
           :class="activeStratagemSelect[i][j] ? 'border-4 border-solid border-yellow-400' : ''"
@@ -70,10 +74,6 @@
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
           :title="stratagems[stratagem as keyof typeof stratagems].displayName"
           @click="toggleStratagemSelect(i, j)" />
-        <RSelection
-          :selected-stratagems="data.playerList[i].stratagemCodeList"
-          @stratagem-selected="stratagemSelectionHandler"
-          ref="modalRef"></RSelection>
       </div>
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
@@ -93,11 +93,14 @@
 
   import RSelection from '@/components/reusable/RSelection.vue'
   import { config } from '@/utils/config'
-  import { getDefaultData } from '@/utils/defaults'
+  import { type IData, getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
+  import { Logger } from '@/utils/logger'
+  import { createPlayerDataOutput, parseInput } from '@/utils/playerData'
   import { stratagems } from '@/utils/stratagems'
   import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
 
+  const logger = Logger()
   const playerBorders = {
     orange: 'border-pcorange-900',
     green: 'border-pcgreen-900',
@@ -113,29 +116,18 @@
     pink: 'hover:outline-none hover:outline-pcpink-900 hover:outline-2 focus:outline-none focus:outline-pcpink-900 focus:outline-2 focus:shadow-pcpink-900 focus:shadow-inner'
   }
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
-  let data: any
-  // reactive<{
-  //   playerList: [
-  //     {
-  //       name: string
-  //       primaryWeaponCode: keyof typeof weapons.primary
-  //       secondaryWeaponCode: keyof typeof weapons.secondary
-  //       grenadeCode: keyof typeof grenades
-  //       stratagemCodeList: keyof (typeof stratagemCodeList)[]
-  //     }
-  //   ]
-  // }>
+  let data: IData
   const route = useRoute()
 
   if (route.query.data) {
     try {
-      data = reactive(JSON.parse(atob(route.query.data as string)))
+      data = reactive(parseInput(JSON.parse(atob(route.query.data as string))))
 
       const router = useRouter()
 
       router.replace({ query: undefined })
     } catch (e) {
-      console.log(e)
+      logger.log(e)
       data = getDefaultData()
     }
   } else {
@@ -143,13 +135,17 @@
   }
 
   const generateDataString = async () => {
-    const link = `${BASE_URL}/?data=${btoa(JSON.stringify(data))}`
+    const link = `${BASE_URL}/?data=${btoa(JSON.stringify(createPlayerDataOutput(data)))}`
 
     try {
-      await navigator.clipboard.writeText(link)
+      // Workaround for TS saying clipboard doesn't exist on navigator
+      // https://stackoverflow.com/questions/47831741/property-share-does-not-exist-on-type-navigator
+      const myNavigator: any = navigator
+
+      await myNavigator.clipboard.writeText(link)
       toast.success('Link copied!', config.toast)
     } catch (err) {
-      console.error('Failed to copy: ', err)
+      logger.error('Failed to copy: ', err)
       toast.error('Error while copying link.')
     }
 
@@ -163,7 +159,7 @@
   ])
   const modalRef = ref()
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
-    // console.log(playerIndex, position)
+    logger.log(playerIndex, position)
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
       if (i !== playerIndex) {
         return player
@@ -188,7 +184,7 @@
       modalRef.value[playerIndex].displayOn()
     }
   }
-  const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: string) => {
+  const stratagemSelectionHandler = (playerIndex: number, position: number, stratagemCode: keyof typeof stratagems) => {
     data.playerList[playerIndex].stratagemCodeList[position] = stratagemCode
     activeStratagemSelect.value[playerIndex][position] = false
     modalRef.value[playerIndex].displayOff()

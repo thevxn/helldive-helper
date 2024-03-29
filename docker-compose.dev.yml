@@ -19,9 +19,11 @@ services:
       target: build
       args: 
         BASE_URL: ${BASE_URL}
+        NODE_ENV: ${NODE_ENV}
     restart: unless-stopped
     environment:
       - BASE_URL
+      - NODE_ENV
     volumes: 
       - ./:/opt/hdlt-fe
       - /opt/hdlt-fe/node_modules

@@ -19,9 +19,11 @@ services:
       target: prod
       args: 
         BASE_URL: ${BASE_URL}
+        NODE_ENV: ${NODE_ENV}
     restart: unless-stopped
     environment:
       - BASE_URL
+      - NODE_ENV
     volumes:
       - "hdlt-fe-static:/opt/hdlt-fe"
       - .docker/nginx-default.conf:/etc/nginx/conf.d/default.conf

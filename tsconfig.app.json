@@ -8,6 +8,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "ignoreDeprecations": "5.0"
+    "ignoreDeprecations": "5.0",
+    "lib": ["WebWorker", "ESNext"],
+    "target": "ESNext"
   }
 }
