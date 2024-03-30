@@ -8,7 +8,7 @@ on:
 jobs:
 
   build:
-    runs-on: ${{ secrets[format('RUNNER_LABEL')] }}
+    runs-on: [citadel]
     steps:
     - uses: actions/checkout@v3
     - name: Build
@@ -19,7 +19,7 @@ jobs:
       run: make build
 
   deploy:
-    runs-on: ${{ secrets[format('RUNNER_LABEL')] }}
+    runs-on: [citadel]
     needs: [ build ]
     steps:
     - name: Deploy
