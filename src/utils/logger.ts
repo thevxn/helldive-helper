@@ -1,13 +1,13 @@
 export const Logger = () => ({
-  log: (...data: any[]) => {
+  log: (...data: unknown[]) => {
     console.log(...data)
   },
-  debug: (...data: any[]) => {
+  debug: (...data: unknown[]) => {
     if (NODE_ENV !== 'production') {
       console.debug(...data)
     }
   },
-  error: (...data: any[]) => {
+  error: (...data: unknown[]) => {
     if (NODE_ENV !== 'production') {
       console.error(...data)
     }

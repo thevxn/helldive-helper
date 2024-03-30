@@ -62,12 +62,12 @@
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
       <div class="flex flex-row flex-wrap justify-center gap-2">
-        <RSelection
+        <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           :color="player.color"
           @stratagem-selected="handleStratagemSelection"
           ref="modalRef"
-          :id="`stratagem-select-${i}`"></RSelection>
+          :id="`stratagem-select-${i}`" />
         <img
           :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid ${playerBordersHover[player.color]} ${activeStratagemSelect[i][j] ? `border-4 border-solid ${playerBorders[player.color]}` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
@@ -92,7 +92,7 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import RSelection from '@/components/reusable/RSelection.vue'
+  import StratagemSelect from '@/components/StratagemSelect.vue'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { grenadeCodeList, grenades } from '@/utils/grenades'
