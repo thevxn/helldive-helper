@@ -7,7 +7,6 @@
       v-for="(player, i) in data.playerList"
       :key="i">
       <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" alt="helldiver-helmet" />
-      <!-- <label for="name">Squad Member Name:</label> -->
       <input
         :id="`name-${i}`"
         name="squad-member-name"
@@ -170,10 +169,6 @@
     nextTick(() => {
       document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
     })
-
-    // setTimeout(() => {
-    //   document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' }), 0
-    // })
 
     if (modalRef.value[playerIndex].playerIndex === playerIndex && modalRef.value[playerIndex].position === position) {
       modalRef.value[playerIndex].displayOff()
