@@ -1,0 +1,8 @@
+node_modules
+coverage
+dist
+Dockerfile
+docker-compose*
+.git
+.gitignore
+*.md

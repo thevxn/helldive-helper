@@ -1,0 +1,48 @@
+version: '3.9'
+
+networks:
+  traefik_savla:
+    name: ${DOCKER_NETWORK_NAME}
+
+volumes:
+  helldive-helper-data:
+    name: helldive-helper-data
+
+services:
+  helldive-helper:
+    container_name: helldive-helper
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      target: prod
+      args: 
+        BASE_URL: ${BASE_URL}
+        NODE_ENV: ${NODE_ENV}
+        APP_NAME: ${APP_NAME}
+    restart: unless-stopped
+    environment:
+      - BASE_URL
+      - NODE_ENV
+    volumes:
+      - "helldive-helper-data:/opt/${APP_NAME}"
+      - .docker/nginx-default.conf:/etc/nginx/conf.d/default.conf
+    cpus: 1.5
+    dns:
+      - 10.4.5.130
+      - 1.1.1.2
+      - 1.0.0.2
+    mem_reservation: 128m
+    ports:
+      - "${DOCKER_EXTERNAL_PORT}:${DOCKER_INTERNAL_PORT}/tcp"
+    networks:
+      - traefik_savla
+    logging:
+      driver: loki
+      options:
+        loki-url: ${LOKI_URL}
+        labels: ${LOKI_LABELS}
+    labels:
+      - "traefik.http.routers.${APP_NAME}.rule=Host(${APP_URLS_TRAEFIK})"
+      - "traefik.http.services.${APP_NAME}.loadbalancer.server.port=${DOCKER_INTERNAL_PORT}"
+      - "traefik.docker.network=${DOCKER_NETWORK_NAME}"
+

@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  helldive-helper:
+    image: helldive-helper-dev
+    container_name: helldive-helper-dev
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      target: build
+      args: 
+        BASE_URL: ${BASE_URL}
+        NODE_ENV: ${NODE_ENV}
+        APP_NAME: ${APP_NAME}
+    restart: unless-stopped
+    environment:
+      - BASE_URL
+      - NODE_ENV
+    volumes: 
+      - ./:/opt/${APP_NAME}
+      - /opt/${APP_NAME}/node_modules
+    ports:
+      - 3000:3000
+    command: npm run dev
+

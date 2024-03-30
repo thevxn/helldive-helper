@@ -1,0 +1,35 @@
+name: deployment
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ${{ secrets.RUNNER_LABEL }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      env:
+        APP_NAME: ${{ secrets.APP_NAME }}
+        BASE_URL: ${{ secrets.BASE_URL }}
+        NODE_ENV: production
+      run: make build
+
+  deploy:
+    runs-on: ${{ secrets.RUNNER_LABEL }}
+    needs: [ build ]
+    steps:
+    - name: Deploy
+      env:
+        NODE_ENV: production
+        DOCKER_NETWORK_NAME: ${{ secrets.DOCKER_NETWORK_NAME }}
+        APP_URLS_TRAEFIK: ${{ secrets.APP_URLS_TRAEFIK }}
+        DOCKER_INTERNAL_PORT: ${{ secrets.DOCKER_INTERNAL_PORT }}
+        DOCKER_EXTERNAL_PORT: ${{ secrets.DOCKER_EXTERNAL_PORT }}
+        LOKI_URL: ${{ secrets.LOKI_URL }}
+        LOKI_LABELS: ${{ secrets.LOKI_LABELS }}
+      run: make run
+
