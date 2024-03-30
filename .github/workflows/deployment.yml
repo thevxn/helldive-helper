@@ -8,7 +8,7 @@ on:
 jobs:
 
   build:
-    runs-on: "${{ secrets.RUNNER_LABEL }}"
+    runs-on: ${{ secrets[format('RUNNER_LABEL')] }}
     steps:
     - uses: actions/checkout@v3
     - name: Build
@@ -19,7 +19,7 @@ jobs:
       run: make build
 
   deploy:
-    runs-on: "${{ secrets.RUNNER_LABEL }}"
+    runs-on: ${{ secrets[format('RUNNER_LABEL')] }}
     needs: [ build ]
     steps:
     - name: Deploy
