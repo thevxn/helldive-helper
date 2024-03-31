@@ -30,6 +30,8 @@ jobs:
     steps:
     - name: Deploy
       env:
+        APP_NAME: ${{ secrets.APP_NAME }}
+        BASE_URL: ${{ secrets.BASE_URL }}
         NODE_ENV: production
         DOCKER_NETWORK_NAME: ${{ secrets.DOCKER_NETWORK_NAME }}
         APP_URLS_TRAEFIK: ${{ secrets.APP_URLS_TRAEFIK }}
