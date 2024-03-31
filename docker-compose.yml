@@ -25,6 +25,7 @@ services:
       - NODE_ENV
     volumes:
       - "helldive-helper-data:/opt/${APP_NAME}"
+      - .docker/nginx.conf:/etc/nginx/nginx.conf
       - .docker/nginx-default.conf:/etc/nginx/conf.d/default.conf
     cpus: 1.5
     dns:
