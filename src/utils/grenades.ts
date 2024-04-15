@@ -17,6 +17,9 @@ export const grenades = {
   },
   STUN: {
     displayName: 'G-23 Stun'
+  },
+  THERMITE: {
+    displayName: 'G-123 Thermite'
   }
 }
 

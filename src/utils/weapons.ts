@@ -54,6 +54,15 @@ export const weapons = {
     },
     PUNISHER_PLASMA: {
       displayName: 'SG-8P Punisher Plasma'
+    },
+    ADJUDICATOR: {
+      displayName: 'BR-14 Adjudicator'
+    },
+    ERUPTOR: {
+      displayName: 'R-36 Eruptor'
+    },
+    EXPLODING_CROSSBOW: {
+      displayName: 'CB-9 Exploding Crossbow'
     }
   },
   secondary: {
@@ -69,6 +78,9 @@ export const weapons = {
     },
     DAGGER: {
       displayName: 'LAS-7 Dagger'
+    },
+    GRENADE_PISTOL: {
+      displayName: 'GP-31 Grenade Pistol'
     }
   }
 }
