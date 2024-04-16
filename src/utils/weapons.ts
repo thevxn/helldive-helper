@@ -1,5 +1,5 @@
 /*
- * Primary Weapons
+ * Primary & Secondary Weapons
  */
 
 export const primaryArchetypes = {
@@ -228,6 +228,9 @@ export const grenadeCodeList = Object.keys(grenades) as (keyof typeof grenades)[
  * Shared Utils
  */
 
+/**
+ * Returns an array of keys which belong to the provided archetype.
+ */
 export const filterArchetype = (
   weaponMap: typeof weapons.primary | typeof weapons.secondary | typeof grenades,
   archetype: keyof typeof primaryArchetypes | keyof typeof secondaryArchetypes | keyof typeof grenadeArchetypes
