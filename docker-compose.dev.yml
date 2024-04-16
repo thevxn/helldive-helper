@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-      target: build
+      target: base
       args: 
         BASE_URL: ${BASE_URL}
         NODE_ENV: ${NODE_ENV}
