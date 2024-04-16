@@ -1,13 +1,12 @@
 import type { IData, IPlayerColor } from '@/utils/defaults'
-import { grenadeCodeList } from '@/utils/grenades'
 import { Logger } from '@/utils/logger'
 import { stratagemCodeList } from '@/utils/stratagems'
-import { primaryWeaponCodeList, secondaryWeaponCodeList } from '@/utils/weapons'
+import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/utils/weapons'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
 const logger = Logger()
 
-export const parseInput = (data: Array<Array<string | number>>): IData => {
+export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData => {
   logger.debug('Received input:')
   logger.debug(data)
 
@@ -67,7 +66,7 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
       playerObject.name,
       primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode),
       secondaryWeaponCodeList.indexOf(playerObject.secondaryWeaponCode),
-      grenadeCodeList.indexOf(playerObject.grenadeCode),
+      grenadeCodeList.indexOf(playerObject.grenadeCode as string | symbol),
       ...playerObject.stratagemCodeList.map(stratagem => {
         return stratagemCodeList.indexOf(stratagem)
       }),

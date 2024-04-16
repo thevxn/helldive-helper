@@ -21,12 +21,17 @@
         class="w-full bg-slate-700"
         v-model="player.primaryWeaponCode"
         :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-        <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
-          {{ weapons.primary[weapon].displayName }}
-        </option>
+        <optgroup
+          v-for="archetype in primaryWeaponArchetypeCodeList"
+          :key="archetype"
+          :label="primaryArchetypes[archetype].displayName">
+          <option v-for="weapon in filterArchetype(weapons.primary, archetype)" :key="weapon" :value="weapon">
+            {{ weapons.primary[weapon].displayName }}
+          </option>
+        </optgroup>
       </select>
       <img
-        :src="`/weapons/${player.primaryWeaponCode}.webp`"
+        :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
         class="mt-4 h-[108px] w-[250px]"
         :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
       <label :for="`secondary-${i}`" class="mb-1 mt-4 w-full">Secondary Weapon:</label>
@@ -36,12 +41,17 @@
         class="w-full bg-slate-700"
         v-model="player.secondaryWeaponCode"
         :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-        <option v-for="weapon in secondaryWeaponCodeList" :key="weapon" :value="weapon">
-          {{ weapons.secondary[weapon].displayName }}
-        </option>
+        <optgroup
+          v-for="archetype in secondaryWeaponArchetypeCodeList"
+          :key="archetype"
+          :label="secondaryArchetypes[archetype].displayName">
+          <option v-for="weapon in filterArchetype(weapons.secondary, archetype)" :key="weapon" :value="weapon">
+            {{ weapons.secondary[weapon].displayName }}
+          </option>
+        </optgroup>
       </select>
       <img
-        :src="`/weapons/${player.secondaryWeaponCode}.webp`"
+        :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
         class="mt-4 h-[108px] w-[200px]"
         :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
       <label :for="`grenade-${i}`" class="mb-1 mt-4 w-full">Grenade:</label>
@@ -51,12 +61,17 @@
         class="w-full bg-slate-700"
         v-model="player.grenadeCode"
         :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-        <option v-for="grenade in grenadeCodeList" :key="grenade" :value="grenade">
-          {{ grenades[grenade].displayName }}
-        </option>
+        <optgroup
+          v-for="archetype in grenadeArchetypeCodeList"
+          :key="archetype"
+          :label="grenadeArchetypes[archetype].displayName">
+          <option v-for="grenade in filterArchetype(grenades, archetype)" :key="grenade" :value="grenade">
+            {{ grenades[grenade].displayName }}
+          </option>
+        </optgroup>
       </select>
       <img
-        :src="`/grenades/${player.grenadeCode}.webp`"
+        :src="`/grenades/${String(player.grenadeCode)}.webp`"
         class="mt-4 h-[100px] w-[100px]"
         :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
       <span class="mb-1 mt-4 w-full">Stratagems:</span>
@@ -94,12 +109,21 @@
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
-  import { grenadeCodeList, grenades } from '@/utils/grenades'
   import { Logger } from '@/utils/logger'
-  import { createPlayerDataOutput, parseInput } from '@/utils/playerData'
+  import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
   import { stratagems } from '@/utils/stratagems'
   import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
-  import { primaryWeaponCodeList, secondaryWeaponCodeList, weapons } from '@/utils/weapons'
+  import {
+    filterArchetype,
+    grenadeArchetypeCodeList,
+    grenadeArchetypes,
+    grenades,
+    primaryArchetypes,
+    primaryWeaponArchetypeCodeList,
+    secondaryArchetypes,
+    secondaryWeaponArchetypeCodeList,
+    weapons
+  } from '@/utils/weapons'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
@@ -108,7 +132,7 @@
 
   if (route.query.data) {
     try {
-      data = reactive(parseInput(JSON.parse(atob(route.query.data as string))))
+      data = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
 
       const router = useRouter()
 
@@ -118,7 +142,7 @@
       data = getDefaultData()
     }
   } else if (localStorage.getItem('data')) {
-    data = reactive(parseInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    data = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
   } else {
     data = getDefaultData()
   }
