@@ -3,7 +3,7 @@
 
 @layer base {
   html {
-    @apply bg-gradient-to-b from-gray-800 to-gray-900;
+    @apply bg-gradient-to-b from-gray-800 to-gray-900 snap-y snap-proximity sm:snap-none;
   }
 
   body {
