@@ -76,7 +76,7 @@
           </select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
-            class="mt-4 h-[100px] w-[100px] self-center"
+            class="mt-[20px] h-[100px] w-[100px] self-center"
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
         </div>
       </div>
