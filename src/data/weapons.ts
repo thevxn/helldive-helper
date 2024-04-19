@@ -1,7 +1,6 @@
 /*
  * Primary & Secondary Weapons
  */
-
 export const primaryArchetypes = {
   AR: {
     displayName: 'Assault Rifle'
@@ -36,24 +35,25 @@ export const secondaryArchetypes = {
 
 export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as (keyof typeof secondaryArchetypes)[]
 
-interface IPrimaryWeapon {
+interface IWeapon {
   displayName: string
   default?: boolean
+}
+
+interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
 }
 
-interface ISecondaryWeapon {
-  displayName: string
-  default?: boolean
+interface ISecondaryWeapon extends IWeapon {
   archetype: (typeof secondaryWeaponArchetypeCodeList)[number]
 }
 
-interface IWeapons {
+interface IWeaponMap {
   primary: Record<string | symbol, IPrimaryWeapon>
   secondary: Record<string | symbol, ISecondaryWeapon>
 }
 
-export const weapons: IWeapons = {
+export const weapons: IWeaponMap = {
   primary: {
     LIBERATOR: {
       displayName: 'AR-23 Liberator',
@@ -172,7 +172,6 @@ export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as (keyof 
 /*
  * Grenades
  */
-
 export const grenadeArchetypes = {
   STANDARD: {
     displayName: 'Standard'
