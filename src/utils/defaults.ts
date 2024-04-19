@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 
-import type { stratagems } from '@/utils/stratagems'
-import type { grenades, weapons } from '@/utils/weapons'
+import type { stratagems } from '@/data/stratagems'
+import type { grenades, weapons } from '@/data/weapons'
 
 export interface IData {
   playerList: IPlayer[]

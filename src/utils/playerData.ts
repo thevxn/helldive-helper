@@ -1,7 +1,7 @@
+import { stratagemCodeList } from '@/data/stratagems'
+import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
 import type { IData, IPlayerColor } from '@/utils/defaults'
 import { Logger } from '@/utils/logger'
-import { stratagemCodeList } from '@/utils/stratagems'
-import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/utils/weapons'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
 const logger = Logger()

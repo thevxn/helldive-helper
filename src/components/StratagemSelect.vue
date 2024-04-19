@@ -16,7 +16,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  import { stratagemCodeList, stratagems } from '@/utils/stratagems'
+  import { stratagemCodeList, stratagems } from '@/data/stratagems'
   import { playerBorders, playerBordersHover } from '@/utils/styles'
 
   const display = ref(false)

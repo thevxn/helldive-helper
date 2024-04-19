@@ -113,12 +113,7 @@
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import StratagemSelect from '@/components/StratagemSelect.vue'
-  import { config } from '@/utils/config'
-  import { type IData, getDefaultData } from '@/utils/defaults'
-  import { Logger } from '@/utils/logger'
-  import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
-  import { stratagems } from '@/utils/stratagems'
-  import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
+  import { stratagems } from '@/data/stratagems'
   import {
     filterArchetype,
     grenadeArchetypeCodeList,
@@ -129,7 +124,12 @@
     secondaryArchetypes,
     secondaryWeaponArchetypeCodeList,
     weapons
-  } from '@/utils/weapons'
+  } from '@/data/weapons'
+  import { config } from '@/utils/config'
+  import { type IData, getDefaultData } from '@/utils/defaults'
+  import { Logger } from '@/utils/logger'
+  import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
+  import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
