@@ -234,11 +234,14 @@ export const filterArchetype = (
   weaponMap: typeof weapons.primary | typeof weapons.secondary | typeof grenades,
   archetype: keyof typeof primaryArchetypes | keyof typeof secondaryArchetypes | keyof typeof grenadeArchetypes
 ) => {
-  return Object.keys(weaponMap)
-    .filter(weapon => {
-      return weaponMap[weapon].archetype === archetype
-    })
-    .sort((weaponA, weaponB) => {
-      return weaponMap[weaponA].displayName.localeCompare(weaponMap[weaponB].displayName)
-    })
+  return (
+    Object.keys(weaponMap)
+      .filter(weapon => {
+        return weaponMap[weapon].archetype === archetype
+      })
+      // Sort alphabetically (desc)
+      .sort((weaponA, weaponB) => {
+        return weaponMap[weaponA].displayName.localeCompare(weaponMap[weaponB].displayName)
+      })
+  )
 }
