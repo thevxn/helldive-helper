@@ -22,10 +22,11 @@
       <select
         name="primary"
         :id="`primary-${i}`"
-        class="w-full bg-yellow-300 text-black"
+        class="w-full bg-yellow-300 font-main font-bold text-black"
         v-model="player.primaryWeaponCode"
         :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
         <optgroup
+          class="w-full bg-yellow-300 font-main font-bold text-black"
           v-for="archetype in primaryWeaponArchetypeCodeList"
           :key="archetype"
           :label="primaryArchetypes[archetype].displayName">

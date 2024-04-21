@@ -7,7 +7,7 @@
       the <a href="https://helldivers.wiki.gg">Helldivers Wiki</a>. Favicon by
       <a href="https://discordapp.com/users/501124448339099658">Ferex</a>.
     </small>
-    <small class="mb-2 ml-auto font-semibold sm:mb-0 sm:ml-0">v{{ version }}</small>
+    <small class="mb-2 ml-auto font-bold sm:mb-0 sm:ml-0">v{{ version }}</small>
   </footer>
 </template>
 
