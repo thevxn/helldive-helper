@@ -35,16 +35,18 @@ export const secondaryArchetypes = {
 
 export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as (keyof typeof secondaryArchetypes)[]
 
-interface IWeapon {
+export interface IWeapon {
   displayName: string
   default?: boolean
+  code?: string
+  isArchetype?: boolean
 }
 
-interface IPrimaryWeapon extends IWeapon {
+export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
 }
 
-interface ISecondaryWeapon extends IWeapon {
+export interface ISecondaryWeapon extends IWeapon {
   archetype: (typeof secondaryWeaponArchetypeCodeList)[number]
 }
 
@@ -183,9 +185,7 @@ export const grenadeArchetypes = {
 
 export const grenadeArchetypeCodeList = Object.keys(grenadeArchetypes) as (keyof typeof grenadeArchetypes)[]
 
-interface IGrenade {
-  displayName: string
-  default?: boolean
+export interface IGrenade extends IWeapon {
   archetype: (typeof grenadeArchetypeCodeList)[number]
 }
 

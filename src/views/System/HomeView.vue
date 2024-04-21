@@ -1,95 +1,95 @@
 <template>
   <main
-    class="container mb-16 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
+    class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-gray-500 bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
-      :class="`border-2 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"
+      class="bg-diagonal mx-auto flex w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:h-auto sm:w-5/12 xl:w-[22%]"
+      :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
-      <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" alt="helldiver-helmet" />
+      <div
+        :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
+        {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
+      </div>
+      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] sm:mb-4" alt="helldiver-helmet" />
+
       <input
         :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        :class="`w-[200px] bg-slate-700 text-center ${playerInputOutlines[player.color as keyof typeof playerBorders]}`"
+        class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
-      <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
-      <select
+      <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
+      <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="w-full bg-slate-700"
+        class="custom-select h-full w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
         v-model="player.primaryWeaponCode"
-        :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-        <optgroup
-          v-for="archetype in primaryWeaponArchetypeCodeList"
-          :key="archetype"
-          :label="primaryArchetypes[archetype].displayName">
-          <option v-for="weapon in filterArchetype(weapons.primary, archetype)" :key="weapon" :value="weapon">
-            {{ weapons.primary[weapon].displayName }}
-          </option>
-        </optgroup>
-      </select>
+        :options="createAndSortWeapons(primaryArchetypes)"
+        label="displayName"
+        :reduce="(weapon: IPrimaryWeapon) => weapon.code"
+        :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
+        :components="{ Deselect: null }"
+        :filter-by="filterOptions"
+        :searchable="config.forms.searchable">
+      </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
-        class="mt-4 h-[108px] w-[250px]"
+        class="mt-2 h-[108px] w-[250px] snap-start sm:mt-4"
         :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
       <div class="flex h-full w-full flex-row gap-2">
         <div class="flex w-1/2 flex-col">
-          <label :for="`secondary-${i}`" class="mb-1 mt-4 whitespace-nowrap">Secondary Weapon:</label>
-          <select
+          <label :for="`secondary-${i}`" class="mb-1 mt-2 snap-start whitespace-nowrap sm:mt-4"
+            >Secondary Weapon:</label
+          >
+          <v-select
             name="secondary"
             :id="`secondary-${i}`"
-            class="w-[100%] bg-slate-700"
+            class="custom-select w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.secondaryWeaponCode"
-            :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-            <optgroup
-              v-for="archetype in secondaryWeaponArchetypeCodeList"
-              :key="archetype"
-              :label="secondaryArchetypes[archetype].displayName">
-              <option v-for="weapon in filterArchetype(weapons.secondary, archetype)" :key="weapon" :value="weapon">
-                {{ weapons.secondary[weapon].displayName }}
-              </option>
-            </optgroup>
-          </select>
+            :options="createAndSortWeapons(secondaryArchetypes)"
+            label="displayName"
+            :reduce="(weapon: ISecondaryWeapon) => weapon.code"
+            :selectable="(option: ISecondaryWeapon) => !option.isArchetype"
+            :components="{ Deselect: null }"
+            :filter-by="filterOptions"
+            :searchable="config.forms.searchable">
+          </v-select>
           <img
             :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
-            class="mt-4 h-[108px] w-[200px] self-center"
+            class="mt-2 h-[108px] w-[200px] snap-start self-center sm:mt-4"
             :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
         </div>
         <div class="flex w-1/2 flex-col">
-          <label :for="`grenade-${i}`" class="mb-1 mt-4">Grenade:</label>
-          <select
+          <label :for="`grenade-${i}`" class="mb-1 mt-2 snap-start sm:mt-4">Grenade:</label>
+          <v-select
             name="grenade"
             :id="`grenade-${i}`"
-            class="w-[100%] bg-slate-700"
+            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.grenadeCode"
-            :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
-            <optgroup
-              v-for="archetype in grenadeArchetypeCodeList"
-              :key="archetype"
-              :label="grenadeArchetypes[archetype].displayName">
-              <option v-for="grenade in filterArchetype(grenades, archetype)" :key="grenade" :value="grenade">
-                {{ grenades[grenade].displayName }}
-              </option>
-            </optgroup>
-          </select>
+            :options="createAndSortWeapons(grenadeArchetypes)"
+            label="displayName"
+            :reduce="(weapon: IGrenade) => weapon.code"
+            :selectable="(option: IWeapon) => !option.isArchetype"
+            :components="{ Deselect: null }"
+            :filter-by="filterOptions"
+            :searchable="config.forms.searchable">
+          </v-select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
-            class="mt-[20px] h-[100px] w-[100px] self-center"
+            class="mt-[12px] h-[100px] w-[100px] self-center sm:mt-[20px]"
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
         </div>
       </div>
-      <span class="mb-1 mt-4 w-full">Stratagems:</span>
-      <div class="flex flex-row flex-wrap justify-center gap-2">
+      <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
+      <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
-          :color="player.color"
           @stratagem-selected="handleStratagemSelection"
           ref="modalRef"
           :id="`stratagem-select-${i}`" />
         <img
-          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid ${playerBordersHover[player.color]} ${activeStratagemSelect[i][j] ? `border-4 border-solid ${playerBorders[player.color]}` : ''}`"
+          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${activeStratagemSelect[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
@@ -99,7 +99,7 @@
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="h-12 w-48 place-self-center self-center rounded bg-chocolate-600 font-semibold text-white hover:bg-yellow-600 active:bg-chocolate-600"
+        class="bg-diagonal-hover h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-bold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
         @click="generateDataString">
         Copy Link
       </button>
@@ -115,21 +115,22 @@
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { stratagems } from '@/data/stratagems'
   import {
-    filterArchetype,
-    grenadeArchetypeCodeList,
+    type IGrenade,
+    type IPrimaryWeapon,
+    type ISecondaryWeapon,
+    type IWeapon,
     grenadeArchetypes,
     grenades,
-    primaryArchetypes,
-    primaryWeaponArchetypeCodeList,
-    secondaryArchetypes,
-    secondaryWeaponArchetypeCodeList,
     weapons
   } from '@/data/weapons'
+  import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
+  import { filterOptions } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
   import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
-  import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
+  import { createAndSortWeapons } from '@/utils/sort'
+  import { playerBorders } from '@/utils/styles'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
@@ -224,4 +225,16 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  * >>> {
+    --vs-dropdown-bg: #fde047;
+    --vs-selected-color: #000000;
+    --vs-controls-color: #000000;
+    /* --vs-font-size: inherit;
+    --vs-line-height: inherit; */
+    --vs-dropdown-option--active-bg: #000000;
+    --vs-dropdown-option--active-color: #fde047;
+    --vs-state-disabled-controls-color: var(--vs-colors--light);
+    --vs-state-disabled-cursor: allowed;
+  }
+</style>

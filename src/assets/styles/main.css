@@ -3,11 +3,11 @@
 
 @layer base {
   html {
-    @apply bg-gradient-to-b from-gray-800 to-gray-900 snap-y snap-proximity sm:snap-none;
+    @apply snap-y snap-proximity bg-black font-main sm:snap-none;
   }
 
   body {
-    @apply text-white relative min-h-screen w-full pb-12 min-w-[320px] overflow-x-hidden;
+    @apply relative min-h-screen w-full min-w-[320px] overflow-x-hidden pb-12 text-yellow-300;
   }
 
   input,
@@ -21,7 +21,7 @@
   } */
 
   a {
-    @apply underline text-orange-500 hover:text-orange-300 visited:text-orange-500;
+    @apply font-bold underline;
   }
 
   h1 {
@@ -43,7 +43,179 @@
   h5 {
     @apply text-lg;
   }
+
+  .custom-select .vs__dropdown-option--disabled {
+    @apply bg-diagonal-solid   text-yellow-300;
+  }
+
+  .custom-select .vs__dropdown-menu {
+    @apply overscroll-contain;
+  }
 }
 
 @tailwind components;
 @tailwind utilities;
+
+/*
+  https://github.com/sagalbot/vue-select/issues/754#issuecomment-654065539
+*/
+.custom-select .vs__selected-options {
+  flex-wrap: nowrap;
+  max-width: calc(100% - 30px);
+}
+
+.custom-select .vs__selected {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.custom-select .vs__dropdown-menu {
+  width: 100%;
+  z-index: 10;
+}
+
+.custom-select .vs--open .vs__search {
+  position: static;
+}
+
+.custom-select .vs__dropdown-option {
+  white-space: normal;
+}
+
+.bg-diagonal {
+  background-color: rgb(255 255 255 / 14.4%);
+  background-image: linear-gradient(
+    45deg,
+    black 5%,
+    transparent 5%,
+    transparent 10%,
+    black 10%,
+    black 15%,
+    transparent 15%,
+    transparent 20%,
+    black 20%,
+    black 25%,
+    transparent 25%,
+    transparent 30%,
+    black 30%,
+    black 35%,
+    transparent 35%,
+    transparent 40%,
+    black 40%,
+    black 45%,
+    transparent 45%,
+    transparent 50%,
+    black 50%,
+    black 55%,
+    transparent 55%,
+    transparent 60%,
+    black 60%,
+    black 65%,
+    transparent 65%,
+    transparent 70%,
+    black 70%,
+    black 75%,
+    transparent 75%,
+    transparent 80%,
+    black 80%,
+    black 85%,
+    transparent 85%,
+    transparent 90%,
+    black 90%,
+    black 95%,
+    transparent 95%
+  );
+}
+
+.bg-diagonal-hover:hover {
+  background-color: rgb(255 255 255 / 14.4%);
+  background-image: linear-gradient(
+    45deg,
+    black 5%,
+    transparent 5%,
+    transparent 10%,
+    black 10%,
+    black 15%,
+    transparent 15%,
+    transparent 20%,
+    black 20%,
+    black 25%,
+    transparent 25%,
+    transparent 30%,
+    black 30%,
+    black 35%,
+    transparent 35%,
+    transparent 40%,
+    black 40%,
+    black 45%,
+    transparent 45%,
+    transparent 50%,
+    black 50%,
+    black 55%,
+    transparent 55%,
+    transparent 60%,
+    black 60%,
+    black 65%,
+    transparent 65%,
+    transparent 70%,
+    black 70%,
+    black 75%,
+    transparent 75%,
+    transparent 80%,
+    black 80%,
+    black 85%,
+    transparent 85%,
+    transparent 90%,
+    black 90%,
+    black 95%,
+    transparent 95%
+  );
+}
+
+.bg-diagonal-solid {
+  background-color: rgb(58 58 58);
+  background-image: linear-gradient(
+    45deg,
+    black 5%,
+    transparent 5%,
+    transparent 10%,
+    black 10%,
+    black 15%,
+    transparent 15%,
+    transparent 20%,
+    black 20%,
+    black 25%,
+    transparent 25%,
+    transparent 30%,
+    black 30%,
+    black 35%,
+    transparent 35%,
+    transparent 40%,
+    black 40%,
+    black 45%,
+    transparent 45%,
+    transparent 50%,
+    black 50%,
+    black 55%,
+    transparent 55%,
+    transparent 60%,
+    black 60%,
+    black 65%,
+    transparent 65%,
+    transparent 70%,
+    black 70%,
+    black 75%,
+    transparent 75%,
+    transparent 80%,
+    black 80%,
+    black 85%,
+    transparent 85%,
+    transparent 90%,
+    black 90%,
+    black 95%,
+    transparent 95%
+  );
+}
