@@ -2,7 +2,7 @@
   <main
     class="container mb-16 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="bg-diagonal mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
+      class="bg-diagonal mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:w-5/12 xl:w-1/5"
       :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
@@ -19,22 +19,46 @@
         :class="`w-[200px] bg-yellow-300 text-center text-black  caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
-      <select
+      <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="w-full bg-yellow-300 font-main font-bold text-black"
+        class="w-full rounded bg-yellow-300 font-main text-black"
         v-model="player.primaryWeaponCode"
-        :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
-        <optgroup
+        :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
+        :options="
+          Object.keys(weapons.primary)
+            .map(key => {
+              const obj = weapons.primary[key]
+              obj['code'] = key
+              obj['isArchetype'] = false
+              return obj
+            })
+            .concat(
+              Object.keys(primaryArchetypes).map(key => {
+                const obj = primaryArchetypes[key]
+                obj['isArchetype'] = true
+                return obj
+              })
+            )
+            .sort((a, b) => {
+              if (a.isArchetype) {
+                return 1
+              }
+            })
+        "
+        label="displayName"
+        :reduce="(weapon: IWeapon) => weapon.code"
+        :selectable="(option: IWeapon) => !option.isArchetype">
+        <!-- <optgroup
           class="w-full bg-yellow-300 font-main font-bold text-black"
           v-for="archetype in primaryWeaponArchetypeCodeList"
           :key="archetype"
-          :label="primaryArchetypes[archetype].displayName">
-          <option v-for="weapon in filterArchetype(weapons.primary, archetype)" :key="weapon" :value="weapon">
-            {{ weapons.primary[weapon].displayName }}
-          </option>
-        </optgroup>
-      </select>
+          :label="primaryArchetypes[archetype].displayName"> -->
+        <!-- <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
+          {{ weapons.primary[weapon].displayName }}
+        </option> -->
+        <!-- </optgroup> -->
+      </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
         class="mt-4 h-[108px] w-[250px]"
@@ -124,16 +148,16 @@
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { stratagems } from '@/data/stratagems'
   import {
+    type IWeapon,
     filterArchetype,
     grenadeArchetypeCodeList,
     grenadeArchetypes,
     grenades,
-    primaryArchetypes,
-    primaryWeaponArchetypeCodeList,
     secondaryArchetypes,
     secondaryWeaponArchetypeCodeList,
     weapons
   } from '@/data/weapons'
+  import { primaryArchetypes } from '@/data/weapons'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { Logger } from '@/utils/logger'
@@ -232,4 +256,14 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  >>> {
+    --vs-dropdown-bg: #fde047;
+    --vs-selected-color: #000000;
+    --vs-controls-color: #000000;
+    /* --vs-font-size: inherit;
+    --vs-line-height: inherit; */
+    --vs-dropdown-option--active-bg: #000000;
+    --vs-dropdown-option--active-color: #fde047;
+  }
+</style>

@@ -35,9 +35,11 @@ export const secondaryArchetypes = {
 
 export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as (keyof typeof secondaryArchetypes)[]
 
-interface IWeapon {
+export interface IWeapon {
   displayName: string
   default?: boolean
+  code?: string
+  isArchetype?: boolean
 }
 
 interface IPrimaryWeapon extends IWeapon {
