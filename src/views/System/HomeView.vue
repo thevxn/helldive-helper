@@ -22,42 +22,14 @@
       <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="w-full rounded bg-yellow-300 font-main text-black"
+        class="custom-select w-full rounded bg-yellow-300 font-main text-black"
         v-model="player.primaryWeaponCode"
         :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
-        :options="
-          Object.keys(weapons.primary)
-            .map(key => {
-              const obj = weapons.primary[key]
-              obj['code'] = key
-              obj['isArchetype'] = false
-              return obj
-            })
-            .concat(
-              Object.keys(primaryArchetypes).map(key => {
-                const obj = primaryArchetypes[key]
-                obj['isArchetype'] = true
-                return obj
-              })
-            )
-            .sort((a, b) => {
-              if (a.isArchetype) {
-                return 1
-              }
-            })
-        "
+        :options="sortPrimaryWeapons()"
         label="displayName"
         :reduce="(weapon: IWeapon) => weapon.code"
-        :selectable="(option: IWeapon) => !option.isArchetype">
-        <!-- <optgroup
-          class="w-full bg-yellow-300 font-main font-bold text-black"
-          v-for="archetype in primaryWeaponArchetypeCodeList"
-          :key="archetype"
-          :label="primaryArchetypes[archetype].displayName"> -->
-        <!-- <option v-for="weapon in primaryWeaponCodeList" :key="weapon" :value="weapon">
-          {{ weapons.primary[weapon].displayName }}
-        </option> -->
-        <!-- </optgroup> -->
+        :selectable="(option: IWeapon) => !option.isArchetype"
+        :components="{ Deselect: null }">
       </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
@@ -126,11 +98,6 @@
       </div>
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
-      <!-- <button
-        class="hover:text-yellow h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-semibold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:bg-black hover:text-yellow-300 active:bg-yellow-300 active:text-black"
-        @click="generateDataString">
-        Copy Link
-      </button> -->
       <button
         class="bg-diagonal-hover h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-semibold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
         @click="generateDataString">
@@ -157,11 +124,11 @@
     secondaryWeaponArchetypeCodeList,
     weapons
   } from '@/data/weapons'
-  import { primaryArchetypes } from '@/data/weapons'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { Logger } from '@/utils/logger'
   import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
+  import { sortPrimaryWeapons } from '@/utils/sort'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
@@ -257,7 +224,7 @@
 </script>
 
 <style scoped>
-  >>> {
+  * >>> {
     --vs-dropdown-bg: #fde047;
     --vs-selected-color: #000000;
     --vs-controls-color: #000000;
@@ -265,5 +232,7 @@
     --vs-line-height: inherit; */
     --vs-dropdown-option--active-bg: #000000;
     --vs-dropdown-option--active-color: #fde047;
+    --vs-state-disabled-controls-color: var(--vs-colors--light);
+    --vs-state-disabled-cursor: allowed;
   }
 </style>
