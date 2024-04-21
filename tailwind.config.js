@@ -2,6 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      main: ['Chakra Petch']
+    },
     extend: {
       colors: {
         chocolate: {

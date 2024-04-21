@@ -2,25 +2,29 @@
   <main
     class="container mb-16 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-gray-500 bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
-      :class="`border-2 border-solid ${playerBorders[player.color as keyof typeof playerBorders]}`"
+      class="bg-diagonal mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 sm:w-5/12 xl:w-1/5"
+      :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
-      <img src="/helmet.png" class="mb-4 h-[189px] w-[191px]" alt="helldiver-helmet" />
+      <div class="flex h-full w-full flex-row justify-start">
+        <span class="ml-0 mr-auto block">Test</span>
+        <img src="/helmet.png" class="mb-4 block h-[189px] w-[191px]" alt="helldiver-helmet" />
+        <span class="ml-auto mr-0 block">Test</span>
+      </div>
       <input
         :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        :class="`w-[200px] bg-slate-700 text-center ${playerInputOutlines[player.color as keyof typeof playerBorders]}`"
+        :class="`w-[200px] bg-yellow-300 text-center text-black  caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
       <select
         name="primary"
         :id="`primary-${i}`"
-        class="w-full bg-slate-700"
+        class="w-full bg-yellow-300 text-black"
         v-model="player.primaryWeaponCode"
-        :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
+        :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
         <optgroup
           v-for="archetype in primaryWeaponArchetypeCodeList"
           :key="archetype"
@@ -40,9 +44,9 @@
           <select
             name="secondary"
             :id="`secondary-${i}`"
-            class="w-[100%] bg-slate-700"
+            class="w-[100%] bg-yellow-300 text-black"
             v-model="player.secondaryWeaponCode"
-            :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
+            :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
             <optgroup
               v-for="archetype in secondaryWeaponArchetypeCodeList"
               :key="archetype"
@@ -62,9 +66,9 @@
           <select
             name="grenade"
             :id="`grenade-${i}`"
-            class="w-[100%] bg-slate-700"
+            class="w-[100%] bg-yellow-300 text-black"
             v-model="player.grenadeCode"
-            :class="`${playerInputOutlines[player.color as keyof typeof playerBorders]}`">
+            :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
             <optgroup
               v-for="archetype in grenadeArchetypeCodeList"
               :key="archetype"
@@ -84,12 +88,11 @@
       <div class="flex flex-row flex-wrap justify-center gap-2">
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
-          :color="player.color"
           @stratagem-selected="handleStratagemSelection"
           ref="modalRef"
           :id="`stratagem-select-${i}`" />
         <img
-          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid ${playerBordersHover[player.color]} ${activeStratagemSelect[i][j] ? `border-4 border-solid ${playerBorders[player.color]}` : ''}`"
+          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${activeStratagemSelect[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
@@ -98,8 +101,13 @@
       </div>
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
+      <!-- <button
+        class="hover:text-yellow h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-semibold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:bg-black hover:text-yellow-300 active:bg-yellow-300 active:text-black"
+        @click="generateDataString">
+        Copy Link
+      </button> -->
       <button
-        class="h-12 w-48 place-self-center self-center rounded bg-chocolate-600 font-semibold text-white hover:bg-yellow-600 active:bg-chocolate-600"
+        class="bg-diagonal-hover h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-semibold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
         @click="generateDataString">
         Copy Link
       </button>
@@ -129,7 +137,6 @@
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { Logger } from '@/utils/logger'
   import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
-  import { playerBorders, playerBordersHover, playerInputOutlines } from '@/utils/styles'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
