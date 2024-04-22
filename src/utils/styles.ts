@@ -1,8 +1,8 @@
 export const playerBorders = {
-  orange: 'border-pcorange-900',
-  green: 'border-pcgreen-900',
-  blue: 'border-pcblue-900',
-  pink: 'border-pcpink-900'
+  orange: 'border-pcorange-900 border-2 border-solid text-pcorange-900',
+  green: 'border-pcgreen-900 border-2 border-solid text-pcgreen-900',
+  blue: 'border-pcblue-900 border-2 border-solid text-pcblue-900',
+  pink: 'border-pcpink-900 border-2 border-solid text-pcpink-900'
 }
 
 export const playerBordersHover = {

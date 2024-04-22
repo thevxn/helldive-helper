@@ -6,30 +6,31 @@
       :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
-      <div class="flex h-full w-full flex-row justify-start">
-        <span class="ml-0 mr-auto block">Test</span>
-        <img src="/helmet.png" class="mb-4 block h-[189px] w-[191px]" alt="helldiver-helmet" />
-        <span class="ml-auto mr-0 block">Test</span>
+      <div
+        :class="`${playerBorders[player.color]} center mb-4  ml-auto  mr-0 inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center`">
+        {{ player.name[0] + (i + 1) }}
       </div>
+      <img src="/helmet.png" class="mb-4 block h-[189px] w-[191px]" alt="helldiver-helmet" />
+
       <input
         :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        :class="`w-[200px] bg-yellow-300 text-center text-black  caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
+        class="`w-[200px] focus:outline-yellow-300` bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-4 w-full">Primary Weapon:</label>
       <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="custom-select w-full rounded bg-yellow-300 font-main text-black"
+        class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
         v-model="player.primaryWeaponCode"
-        :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`"
-        :options="sortPrimaryWeapons()"
+        :options="createAndSortWeapons(primaryArchetypes)"
         label="displayName"
-        :reduce="(weapon: IWeapon) => weapon.code"
-        :selectable="(option: IWeapon) => !option.isArchetype"
-        :components="{ Deselect: null }">
+        :reduce="(weapon: IPrimaryWeapon) => weapon.code"
+        :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
+        :components="{ Deselect: null }"
+        :filter-by="filterOptions">
       </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
@@ -38,21 +39,18 @@
       <div class="flex h-full w-full flex-row gap-2">
         <div class="flex w-1/2 flex-col">
           <label :for="`secondary-${i}`" class="mb-1 mt-4 whitespace-nowrap">Secondary Weapon:</label>
-          <select
+          <v-select
             name="secondary"
             :id="`secondary-${i}`"
-            class="w-[100%] bg-yellow-300 text-black"
+            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.secondaryWeaponCode"
-            :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
-            <optgroup
-              v-for="archetype in secondaryWeaponArchetypeCodeList"
-              :key="archetype"
-              :label="secondaryArchetypes[archetype].displayName">
-              <option v-for="weapon in filterArchetype(weapons.secondary, archetype)" :key="weapon" :value="weapon">
-                {{ weapons.secondary[weapon].displayName }}
-              </option>
-            </optgroup>
-          </select>
+            :options="createAndSortWeapons(secondaryArchetypes)"
+            label="displayName"
+            :reduce="(weapon: ISecondaryWeapon) => weapon.code"
+            :selectable="(option: ISecondaryWeapon) => !option.isArchetype"
+            :components="{ Deselect: null }"
+            :filter-by="filterOptions">
+          </v-select>
           <img
             :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
             class="mt-4 h-[108px] w-[200px] self-center"
@@ -60,21 +58,18 @@
         </div>
         <div class="flex w-1/2 flex-col">
           <label :for="`grenade-${i}`" class="mb-1 mt-4">Grenade:</label>
-          <select
+          <v-select
             name="grenade"
             :id="`grenade-${i}`"
-            class="w-[100%] bg-yellow-300 text-black"
+            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.grenadeCode"
-            :class="`caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300`">
-            <optgroup
-              v-for="archetype in grenadeArchetypeCodeList"
-              :key="archetype"
-              :label="grenadeArchetypes[archetype].displayName">
-              <option v-for="grenade in filterArchetype(grenades, archetype)" :key="grenade" :value="grenade">
-                {{ grenades[grenade].displayName }}
-              </option>
-            </optgroup>
-          </select>
+            :options="createAndSortWeapons(grenadeArchetypes)"
+            label="displayName"
+            :reduce="(weapon: IGrenade) => weapon.code"
+            :selectable="(option: IWeapon) => !option.isArchetype"
+            :components="{ Deselect: null }"
+            :filter-by="filterOptions">
+          </v-select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
             class="mt-[20px] h-[100px] w-[100px] self-center"
@@ -99,7 +94,7 @@
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="bg-diagonal-hover h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-semibold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+        class="bg-diagonal-hover h-12 w-48 place-self-center self-center rounded bg-yellow-300 font-bold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
         @click="generateDataString">
         Copy Link
       </button>
@@ -115,20 +110,22 @@
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { stratagems } from '@/data/stratagems'
   import {
+    type IGrenade,
+    type IPrimaryWeapon,
+    type ISecondaryWeapon,
     type IWeapon,
-    filterArchetype,
-    grenadeArchetypeCodeList,
     grenadeArchetypes,
     grenades,
-    secondaryArchetypes,
-    secondaryWeaponArchetypeCodeList,
     weapons
   } from '@/data/weapons'
+  import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
+  import { filterOptions } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
   import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
-  import { sortPrimaryWeapons } from '@/utils/sort'
+  import { createAndSortWeapons } from '@/utils/sort'
+  import { playerBorders } from '@/utils/styles'
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
