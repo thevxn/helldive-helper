@@ -10,14 +10,14 @@
         :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
-      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] snap-start sm:mb-4" alt="helldiver-helmet" />
+      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] sm:mb-4" alt="helldiver-helmet" />
 
       <input
         :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        class="`snap-start focus:outline-yellow-300` w-[200px] snap-start bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
+        class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
       <v-select
