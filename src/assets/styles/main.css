@@ -77,9 +77,6 @@
   z-index: 10;
 }
 
-.custom-select .vs__search {
-  position: absolute;
-}
 
 .custom-select .vs--open .vs__search {
   position: static;
