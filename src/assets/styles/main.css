@@ -61,7 +61,7 @@
 */
 .custom-select .vs__selected-options {
   flex-wrap: nowrap;
-  max-width: calc(100% - 41px);
+  max-width: calc(100% - 30px);
 }
 
 .custom-select .vs__selected {
@@ -70,6 +70,11 @@
   text-overflow: ellipsis;
   max-width: 100%;
   overflow: hidden;
+}
+
+.custom-select .vs__dropdown-menu {
+  width: 100%;
+  z-index: 10;
 }
 
 .custom-select .vs__search {

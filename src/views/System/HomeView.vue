@@ -2,7 +2,7 @@
   <main
     class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
-      class="bg-diagonal mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:w-5/12 xl:w-[22%]"
+      class="bg-diagonal mx-auto flex w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:h-auto sm:w-5/12 xl:w-[22%]"
       :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
@@ -23,7 +23,7 @@
       <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+        class="custom-select h-full w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
         v-model="player.primaryWeaponCode"
         :options="createAndSortWeapons(primaryArchetypes)"
         label="displayName"
@@ -43,7 +43,7 @@
           <v-select
             name="secondary"
             :id="`secondary-${i}`"
-            class="custom-select rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.secondaryWeaponCode"
             :options="createAndSortWeapons(secondaryArchetypes)"
             label="displayName"
