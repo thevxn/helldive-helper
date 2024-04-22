@@ -17,13 +17,13 @@
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        class="`w-[200px] focus:outline-yellow-300` snap-start bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
+        class="`snap-start focus:outline-yellow-300` w-[200px] snap-start bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
-      <label :for="`primary-${i}`" class="mb-1 mt-2 w-full sm:mt-4">Primary Weapon:</label>
+      <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
       <v-select
         name="primary"
         :id="`primary-${i}`"
-        class="custom-select h-full w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+        class="custom-select h-full w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
         v-model="player.primaryWeaponCode"
         :options="createAndSortWeapons(primaryArchetypes)"
         label="displayName"
@@ -31,19 +31,21 @@
         :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
         :components="{ Deselect: null }"
         :filter-by="filterOptions"
-        :searchable="false">
+        :searchable="config.forms.searchable">
       </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
-        class="mt-2 h-[108px] w-[250px] sm:mt-4"
+        class="mt-2 h-[108px] w-[250px] snap-start sm:mt-4"
         :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" />
       <div class="flex h-full w-full flex-row gap-2">
         <div class="flex w-1/2 flex-col">
-          <label :for="`secondary-${i}`" class="mb-1 mt-2 whitespace-nowrap sm:mt-4">Secondary Weapon:</label>
+          <label :for="`secondary-${i}`" class="mb-1 mt-2 snap-start whitespace-nowrap sm:mt-4"
+            >Secondary Weapon:</label
+          >
           <v-select
             name="secondary"
             :id="`secondary-${i}`"
-            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.secondaryWeaponCode"
             :options="createAndSortWeapons(secondaryArchetypes)"
             label="displayName"
@@ -51,15 +53,15 @@
             :selectable="(option: ISecondaryWeapon) => !option.isArchetype"
             :components="{ Deselect: null }"
             :filter-by="filterOptions"
-            :searchable="false">
+            :searchable="config.forms.searchable">
           </v-select>
           <img
             :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
-            class="mt-2 h-[108px] w-[200px] self-center sm:mt-4"
+            class="mt-2 h-[108px] w-[200px] snap-start self-center sm:mt-4"
             :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" />
         </div>
         <div class="flex w-1/2 flex-col">
-          <label :for="`grenade-${i}`" class="mb-1 mt-2 sm:mt-4">Grenade:</label>
+          <label :for="`grenade-${i}`" class="mb-1 mt-2 snap-start sm:mt-4">Grenade:</label>
           <v-select
             name="grenade"
             :id="`grenade-${i}`"
@@ -71,7 +73,7 @@
             :selectable="(option: IWeapon) => !option.isArchetype"
             :components="{ Deselect: null }"
             :filter-by="filterOptions"
-            :searchable="false">
+            :searchable="config.forms.searchable">
           </v-select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
@@ -79,8 +81,8 @@
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
         </div>
       </div>
-      <span class="mb-1 mt-2 w-full sm:mt-4">Stratagems:</span>
-      <div class="flex flex-row flex-wrap justify-center gap-2">
+      <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
+      <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           @stratagem-selected="handleStratagemSelection"
