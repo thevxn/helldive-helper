@@ -59,12 +59,12 @@
 /*
   https://github.com/sagalbot/vue-select/issues/754#issuecomment-654065539
 */
-.vs__selected-options {
+.custom-select .vs__selected-options {
   flex-wrap: nowrap;
   max-width: calc(100% - 41px);
 }
 
-.vs__selected {
+.custom-select .vs__selected {
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -72,15 +72,15 @@
   overflow: hidden;
 }
 
-.vs__search {
+.custom-select .vs__search {
   position: absolute;
 }
 
-.vs--open .vs__search {
+.custom-select .vs--open .vs__search {
   position: static;
 }
 
-.vs__dropdown-option {
+.custom-select .vs__dropdown-option {
   white-space: normal;
 }
 

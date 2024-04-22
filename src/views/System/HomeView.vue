@@ -1,6 +1,6 @@
 <template>
   <main
-    class="container mb-16 mt-4 flex min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
+    class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
       class="bg-diagonal mx-auto flex h-full w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:w-5/12 xl:w-[22%]"
       :class="`border-4 border-solid border-yellow-300`"
@@ -8,16 +8,16 @@
       :key="i">
       <div
         :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
-        {{ player.name[0] + (i + 1) }}
+        {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
-      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] sm:mb-4" alt="helldiver-helmet" />
+      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] snap-start sm:mb-4" alt="helldiver-helmet" />
 
       <input
         :id="`name-${i}`"
         name="squad-member-name"
         type="text"
         :placeholder="player.name"
-        class="`w-[200px] focus:outline-yellow-300` bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
+        class="`w-[200px] focus:outline-yellow-300` snap-start bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full sm:mt-4">Primary Weapon:</label>
       <v-select
@@ -75,7 +75,7 @@
           </v-select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
-            class="mt-[12px] h-[100px] w-[100px] self-center"
+            class="mt-[12px] h-[100px] w-[100px] self-center sm:mt-[20px]"
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
         </div>
       </div>
