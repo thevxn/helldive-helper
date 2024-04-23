@@ -99,7 +99,7 @@
     </div>
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
-        class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded bg-yellow-300 font-bold text-black hover:border-2 hover:border-solid hover:border-yellow-300 hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+        class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
         @click="generateDataString">
         Copy Link
       </button>
