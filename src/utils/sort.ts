@@ -65,8 +65,8 @@ export const createAndSortWeapons = (
     })
   }
 
-  sortedList.sort((a: IWeapon, b: IWeapon) => {
-    if (!(a.isArchetype || b.isArchetype)) {
+  sortedList.sort((a, b) => {
+    if (!(a.isArchetype || b.isArchetype) && a.archetype === b.archetype) {
       return a.displayName.localeCompare(b.displayName)
     }
 

@@ -47,6 +47,9 @@ export const stratagems = {
   QUASAR_CANNON: {
     displayName: 'LAS-99 Quasar Cannon'
   },
+  AIRBURST_LAUNCHER: {
+    displayName: 'RL-77 Airburst Rocket Launcher'
+  },
 
   // Backpacks
   JUMP_PACK: {

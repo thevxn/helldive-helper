@@ -40,6 +40,7 @@ export interface IWeapon {
   default?: boolean
   code?: string
   isArchetype?: boolean
+  archetype?: unknown
 }
 
 export interface IPrimaryWeapon extends IWeapon {
@@ -68,6 +69,10 @@ export const weapons: IWeaponMap = {
     },
     LIBERATOR_PENETRATOR: {
       displayName: 'AR-23P Liberator Penetrator',
+      archetype: 'AR'
+    },
+    ADJUDICATOR: {
+      displayName: 'BR-14 Adjudicator',
       archetype: 'AR'
     },
     DILIGENCE: {
@@ -106,10 +111,6 @@ export const weapons: IWeaponMap = {
       displayName: 'SG-225IE Breaker Incendiary',
       archetype: 'SHOTGUN'
     },
-    DOMINATOR: {
-      displayName: 'JAR-5 Dominator',
-      archetype: 'EXPLOSIVE'
-    },
     SCYTHE: {
       displayName: 'LAS-5 Scythe',
       archetype: 'ENERGY'
@@ -118,21 +119,17 @@ export const weapons: IWeaponMap = {
       displayName: 'PLAS-1 Scorcher',
       archetype: 'ENERGY'
     },
+    BLITZER: {
+      displayName: 'Arc-12 Blitzer',
+      archetype: 'ENERGY'
+    },
     SICKLE: {
       displayName: 'LAS-16 Sickle',
       archetype: 'ENERGY'
     },
-    BLITZER: {
-      displayName: 'Arc-12 Blitzer',
-      archetype: 'SHOTGUN'
-    },
     PUNISHER_PLASMA: {
       displayName: 'SG-8P Punisher Plasma',
-      archetype: 'SHOTGUN'
-    },
-    ADJUDICATOR: {
-      displayName: 'BR-14 Adjudicator',
-      archetype: 'MR'
+      archetype: 'ENERGY'
     },
     ERUPTOR: {
       displayName: 'R-36 Eruptor',
@@ -140,6 +137,10 @@ export const weapons: IWeaponMap = {
     },
     EXPLODING_CROSSBOW: {
       displayName: 'CB-9 Exploding Crossbow',
+      archetype: 'EXPLOSIVE'
+    },
+    DOMINATOR: {
+      displayName: 'JAR-5 Dominator',
       archetype: 'EXPLOSIVE'
     }
   },
