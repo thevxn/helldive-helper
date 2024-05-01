@@ -93,7 +93,8 @@
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
-          :title="stratagems[stratagem as keyof typeof stratagems].displayName"
+          :title="stratagems[stratagem].displayName"
+          :alt="stratagems[stratagem].displayName"
           @click="toggleStratagemSelect(i, j)" />
       </div>
     </div>
@@ -187,7 +188,7 @@
       if (i !== playerIndex) {
         return player
       } else {
-        return player.map((el, j) => {
+        return player.map((_el, j) => {
           if (j === position) {
             return !player[j]
           } else {
