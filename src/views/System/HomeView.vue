@@ -227,7 +227,7 @@
 </script>
 
 <style scoped>
-  * >>> {
+  * :deep() {
     --vs-dropdown-bg: #fde047;
     --vs-selected-color: #000000;
     --vs-controls-color: #000000;
