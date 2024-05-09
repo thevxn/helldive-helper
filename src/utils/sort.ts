@@ -1,4 +1,14 @@
-import { type IWeapon, grenadeArchetypes, primaryArchetypes, secondaryArchetypes, weapons } from '@/data/weapons'
+import {
+  type IGrenade,
+  type IPrimaryWeapon,
+  type ISecondaryWeapon,
+  type IWeapon,
+  grenadeArchetypes,
+  grenades,
+  primaryArchetypes,
+  secondaryArchetypes,
+  weapons
+} from '@/data/weapons'
 
 export const createAndSortWeapons = (
   archetypes: typeof primaryArchetypes | typeof secondaryArchetypes | typeof grenadeArchetypes
@@ -9,11 +19,22 @@ export const createAndSortWeapons = (
     sortedList.push(archetypes[archetype as keyof typeof archetypes])
     sortedList[sortedList.indexOf(archetypes[archetype as keyof typeof archetypes])]['code'] = archetype
     sortedList[sortedList.indexOf(archetypes[archetype as keyof typeof archetypes])]['isArchetype'] = true
-    Object.keys(weapons.primary).map(weapon => {
-      if (weapons.primary[weapon].archetype === archetype) {
-        sortedList.push(weapons.primary[weapon])
-        sortedList[sortedList.indexOf(weapons.primary[weapon])]['code'] = weapon
-        sortedList[sortedList.indexOf(weapons.primary[weapon])]['isArchetype'] = false
+
+    let weaponSource: Record<string, IPrimaryWeapon> | Record<string, ISecondaryWeapon> | Record<string, IGrenade>
+
+    if (archetypes === primaryArchetypes) {
+      weaponSource = weapons.primary
+    } else if (archetypes === secondaryArchetypes) {
+      weaponSource = weapons.secondary
+    } else {
+      weaponSource = grenades
+    }
+
+    Object.keys(weaponSource).map(weapon => {
+      if (weaponSource[weapon].archetype === archetype) {
+        sortedList.push(weaponSource[weapon])
+        sortedList[sortedList.indexOf(weaponSource[weapon])]['code'] = weapon
+        sortedList[sortedList.indexOf(weaponSource[weapon])]['isArchetype'] = false
       }
     })
   })

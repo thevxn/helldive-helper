@@ -190,7 +190,7 @@ export interface IGrenade extends IWeapon {
   archetype: (typeof grenadeArchetypeCodeList)[number]
 }
 
-export const grenades: Record<string | symbol, IGrenade> = {
+export const grenades: Record<string, IGrenade> = {
   FRAG: {
     displayName: 'G-6 Frag',
     default: true,
