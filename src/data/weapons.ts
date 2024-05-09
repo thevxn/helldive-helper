@@ -75,6 +75,10 @@ export const weapons: IWeaponMap = {
       displayName: 'BR-14 Adjudicator',
       archetype: 'AR'
     },
+    TENDERIZER: {
+      displayName: 'AR-61 Tenderizer',
+      archetype: 'AR'
+    },
     DILIGENCE: {
       displayName: 'R-63 Diligence',
       archetype: 'MR'
@@ -89,6 +93,10 @@ export const weapons: IWeaponMap = {
     },
     DEFENDER: {
       displayName: 'SMG-37 Defender',
+      archetype: 'SMG'
+    },
+    PUMMELER: {
+      displayName: 'SMG-72 Pummeler',
       archetype: 'SMG'
     },
     PUNISHER: {
@@ -206,6 +214,10 @@ export const grenades: Record<string, IGrenade> = {
   },
   IMPACT: {
     displayName: 'G-16 Impact',
+    archetype: 'SPECIAL'
+  },
+  INCENDIARY_IMPACT: {
+    displayName: 'G-13 Incendiary Impact',
     archetype: 'SPECIAL'
   },
   SMOKE: {
