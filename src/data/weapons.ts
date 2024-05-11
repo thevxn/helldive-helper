@@ -150,6 +150,10 @@ export const weapons: IWeaponMap = {
     DOMINATOR: {
       displayName: 'JAR-5 Dominator',
       archetype: 'EXPLOSIVE'
+    },
+    PURIFIER: {
+      displayName: 'PLAS-101 Purifier',
+      archetype: 'ENERGY'
     }
   },
   secondary: {
@@ -172,6 +176,10 @@ export const weapons: IWeaponMap = {
     },
     GRENADE_PISTOL: {
       displayName: 'GP-31 Grenade Pistol',
+      archetype: 'AMMO'
+    },
+    VERDICT: {
+      displayName: 'P-113 Verdict',
       archetype: 'AMMO'
     }
   }
