@@ -71,6 +71,10 @@ export const weapons: IWeaponMap = {
       displayName: 'AR-23P Liberator Penetrator',
       archetype: 'AR'
     },
+    LIBERATOR_CARBINE: {
+      archetype: 'AR',
+      displayName: 'AR-23A Liberator Carbine'
+    },
     ADJUDICATOR: {
       displayName: 'BR-14 Adjudicator',
       archetype: 'AR'
