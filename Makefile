@@ -14,7 +14,6 @@ IMAGE_NAME=helldive-helper
 PACKAGE_VERSION=$(shell jq -r .version package.json) 
 
 APP_ENVIRONMENT?=development
-PROJECT_NAME?=${APP_NAME}
 DOCKER_COMPOSE_FILE?=./docker-compose.yml
 DOCKER_COMPOSE_FILE_DEV?=./docker-compose.dev.yml
 DOCKER_COMPOSE_FILE_E2E?=./docker-compose.test.yml
@@ -53,18 +52,18 @@ export
 .PHONY: build
 build: 
 	@echo -e "\n${YELLOW} Building project (docker compose build)... ${RESET}\n"
-	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) docker compose --file $(DOCKER_COMPOSE_FILE) build
+	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) APP_NAME=$(appName) docker compose --file $(DOCKER_COMPOSE_FILE) build
 
 .PHONY: push-image
 push-image:
 	@echo -e "\n${YELLOW} Pushing to image registry... ${RESET}\n"
-	@docker push $(registryUrl)/${IMAGE_NAME}:${PACKAGE_VERSION}
+	@docker push $(registryUrl)/$(appName)/${IMAGE_NAME}:${PACKAGE_VERSION}
 
 .PHONY: run
 run:
 	@echo -e "\n${YELLOW} Starting project (docker compose up)... ${RESET}\n"
 	@docker login -u $(login) -p $(password) $(registryUrl)
-	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) docker compose --file $(DOCKER_COMPOSE_FILE) up $(services) --force-recreate --remove-orphans --detach
+	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) APP_NAME=$(appName) docker compose --file $(DOCKER_COMPOSE_FILE) up $(services) --force-recreate --remove-orphans --detach
 
 .PHONY: dev
 dev:
