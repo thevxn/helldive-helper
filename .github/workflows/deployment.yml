@@ -8,7 +8,7 @@ on:
 jobs:
 
   build:
-    runs-on: [ citadel ]
+    runs-on: ${{ secrets['BUILD_RUNNER_LABEL'] }}
     steps:
     - uses: actions/checkout@v4
     - name: Build
@@ -22,11 +22,18 @@ jobs:
         DOCKER_EXTERNAL_PORT: ${{ secrets.DOCKER_EXTERNAL_PORT }}
         LOKI_URL: ${{ secrets.LOKI_URL }}
         LOKI_LABELS: ${{ secrets.LOKI_LABELS }}
-      run: make build
+      run: make build registryUrl=${{ secrets.REGISTRY_URL }} 
+
+  push_image:
+    runs-on: ${{ secrets['BUILD_RUNNER_LABEL'] }}
+    needs: [ build ]
+    steps:
+    - name: Push the image to the image registry
+      run: make push-image login=${{ secrets.REGISTRY_LOGIN }} password=${{ secrets.REGISTRY_PASSWORD }} registryUrl=${{ secrets.REGISTRY_URL }}
 
   deploy:
-    runs-on: [ citadel ]
-    needs: [ build ]
+    runs-on: ${{ secrets['PROD_RUNNER_LABEL'] }}
+    needs: [ push_image ]
     steps:
     - name: Deploy
       env:
@@ -39,7 +46,7 @@ jobs:
         DOCKER_EXTERNAL_PORT: ${{ secrets.DOCKER_EXTERNAL_PORT }}
         LOKI_URL: ${{ secrets.LOKI_URL }}
         LOKI_LABELS: ${{ secrets.LOKI_LABELS }}
-      run: make run
+      run: make run login=${{ secrets.REGISTRY_LOGIN }} password=${{ secrets.REGISTRY_PASSWORD }} registryUrl=${{ secrets.REGISTRY_URL }}
 
   clear_cf_cache:
     runs-on: [ citadel ]

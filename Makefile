@@ -10,6 +10,9 @@
 # include .env.example
 # -include .env
 
+IMAGE_NAME=helldive-helper
+PACKAGE_VERSION=$(shell jq -r .version package.json) 
+
 APP_ENVIRONMENT?=development
 PROJECT_NAME?=${APP_NAME}
 DOCKER_COMPOSE_FILE?=./docker-compose.yml
@@ -50,12 +53,18 @@ export
 .PHONY: build
 build: 
 	@echo -e "\n${YELLOW} Building project (docker compose build)... ${RESET}\n"
-	@docker compose --file $(DOCKER_COMPOSE_FILE) build
+	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) docker compose --file $(DOCKER_COMPOSE_FILE) build
+
+.PHONY: push-image
+push-image:
+	@echo -e "\n${YELLOW} Pushing to image registry... ${RESET}\n"
+	@docker push $(registryUrl)/${IMAGE_NAME}:${PACKAGE_VERSION}
 
 .PHONY: run
 run:
 	@echo -e "\n${YELLOW} Starting project (docker compose up)... ${RESET}\n"
-	@docker compose --file $(DOCKER_COMPOSE_FILE) up --force-recreate --remove-orphans --detach
+	@docker login -u $(login) -p $(password) $(registryUrl)
+	@IMAGE_NAME=${IMAGE_NAME} PACKAGE_VERSION=${PACKAGE_VERSION} REGISTRY_URL=$(registryUrl) docker compose --file $(DOCKER_COMPOSE_FILE) up $(services) --force-recreate --remove-orphans --detach
 
 .PHONY: dev
 dev:
