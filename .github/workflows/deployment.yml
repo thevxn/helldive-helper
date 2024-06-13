@@ -8,7 +8,7 @@ on:
 jobs:
 
   build:
-    runs-on: ${{ secrets['BUILD_RUNNER_LABEL'] }}
+    runs-on: ${{ vars['BUILD_RUNNER_LABEL'] }}
     steps:
     - uses: actions/checkout@v4
     - name: Build
@@ -25,14 +25,14 @@ jobs:
       run: make build registryUrl=${{ secrets.REGISTRY_URL }} 
 
   push_image:
-    runs-on: ${{ secrets['BUILD_RUNNER_LABEL'] }}
+    runs-on: ${{ vars['BUILD_RUNNER_LABEL'] }}
     needs: [ build ]
     steps:
     - name: Push the image to the image registry
       run: make push-image login=${{ secrets.REGISTRY_LOGIN }} password=${{ secrets.REGISTRY_PASSWORD }} registryUrl=${{ secrets.REGISTRY_URL }}
 
   deploy:
-    runs-on: ${{ secrets['PROD_RUNNER_LABEL'] }}
+    runs-on: ${{ vars['PROD_RUNNER_LABEL'] }}
     needs: [ push_image ]
     steps:
     - name: Deploy
@@ -49,7 +49,7 @@ jobs:
       run: make run login=${{ secrets.REGISTRY_LOGIN }} password=${{ secrets.REGISTRY_PASSWORD }} registryUrl=${{ secrets.REGISTRY_URL }}
 
   clear_cf_cache:
-    runs-on: [ citadel ]
+    runs-on: ${{ vars['PROD_RUNNER_LABEL'] }}
     needs: [ deploy ]
     steps:
     - name: Clear Cloudflare cache
