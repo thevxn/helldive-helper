@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: [ citadel ]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build
       env:
         APP_NAME: ${{ secrets.APP_NAME }}
