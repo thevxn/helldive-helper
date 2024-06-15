@@ -185,6 +185,10 @@ export const weapons: IWeaponMap = {
     VERDICT: {
       displayName: 'P-113 Verdict',
       archetype: 'AMMO'
+    },
+    BUSHWHACKER: {
+      displayName: 'SG-22 Bushwhacker',
+      archetype: 'AMMO'
     }
   }
 }
@@ -242,6 +246,10 @@ export const grenades: Record<string, IGrenade> = {
   },
   THERMITE: {
     displayName: 'G-123 Thermite',
+    archetype: 'SPECIAL'
+  },
+  THROWING_KNIFE: {
+    displayName: 'K-2 Throwing Knife',
     archetype: 'SPECIAL'
   }
 }
