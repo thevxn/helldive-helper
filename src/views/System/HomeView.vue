@@ -10,7 +10,7 @@
         :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
-      <img src="/helmet.png" class="mb-2 block h-[189px] w-[191px] sm:mb-4" alt="helldiver-helmet" />
+      <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
 
       <input
         :id="`name-${i}`"
@@ -32,6 +32,15 @@
         :components="{ Deselect: null }"
         :filter-by="filterOptions"
         :searchable="config.forms.searchable">
+        <template #option="option">
+          <div class="flex flex-row items-center justify-start gap-2">
+            <img
+              class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px]"
+              :src="`/weapons/${option.code}.webp`"
+              v-if="!option.isArchetype" />
+            <span class="">{{ option.displayName }}</span>
+          </div>
+        </template>
       </v-select>
       <img
         :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
@@ -45,7 +54,7 @@
           <v-select
             name="secondary"
             :id="`secondary-${i}`"
-            class="custom-select w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select secondary snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.secondaryWeaponCode"
             :options="createAndSortWeapons(secondaryArchetypes)"
             label="displayName"
@@ -54,6 +63,15 @@
             :components="{ Deselect: null }"
             :filter-by="filterOptions"
             :searchable="config.forms.searchable">
+            <template #option="option">
+              <div class="flex flex-row items-center justify-start gap-2">
+                <img
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
+                  :src="`/weapons/${option.code}.webp`"
+                  v-if="!option.isArchetype" />
+                <span class="">{{ option.displayName }}</span>
+              </div>
+            </template>
           </v-select>
           <img
             :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
@@ -65,7 +83,7 @@
           <v-select
             name="grenade"
             :id="`grenade-${i}`"
-            class="custom-select w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select grenade w-full rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.grenadeCode"
             :options="createAndSortWeapons(grenadeArchetypes)"
             label="displayName"
@@ -74,6 +92,15 @@
             :components="{ Deselect: null }"
             :filter-by="filterOptions"
             :searchable="config.forms.searchable">
+            <template #option="option">
+              <div class="flex flex-row items-center justify-start gap-2">
+                <img
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px]"
+                  :src="`/grenades/${option.code}.webp`"
+                  v-if="!option.isArchetype" />
+                <span class="">{{ option.displayName }}</span>
+              </div>
+            </template>
           </v-select>
           <img
             :src="`/grenades/${String(player.grenadeCode)}.webp`"
