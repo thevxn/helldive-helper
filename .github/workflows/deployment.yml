@@ -35,6 +35,7 @@ jobs:
     runs-on: ${{ vars['PROD_RUNNER_LABEL'] }}
     needs: [ push_image ]
     steps:
+    - uses: actions/checkout@v4
     - name: Deploy
       env:
         APP_NAME: ${{ secrets.APP_NAME }}
@@ -49,7 +50,7 @@ jobs:
       run: make run login=${{ secrets.REGISTRY_LOGIN }} password=${{ secrets.REGISTRY_PASSWORD }} registryUrl=${{ secrets.REGISTRY_URL }} appName=${{ secrets.APP_NAME }}
 
   clear_cf_cache:
-    runs-on: ${{ vars['PROD_RUNNER_LABEL'] }}
+    runs-on: ${{ vars['BUILD_RUNNER_LABEL'] }}
     needs: [ deploy ]
     steps:
     - name: Clear Cloudflare cache
