@@ -72,19 +72,26 @@
   overflow: hidden;
 }
 
+.grenade.custom-select .vs__selected {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .custom-select .vs__dropdown-menu {
   width: 100%;
   z-index: 10;
 }
 
 .secondary.custom-select .vs__dropdown-menu {
-  width: 200% !important;
   z-index: 10;
 }
 
 .grenade.custom-select .vs__dropdown-menu {
   width: 200% !important;
-  left: -100%;
+  z-index: 20;
 }
 
 .custom-select .vs--open .vs__search {
