@@ -102,7 +102,7 @@
           <v-select
             name="grenade"
             :id="`grenade-${i}`"
-            class="custom-select grenade w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select grenade max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.grenadeCode"
             :options="createAndSortWeapons(grenadeArchetypes)"
             label="displayName"
@@ -122,13 +122,13 @@
               </div>
             </template>
             <template #selected-option="option">
-              <div class="flex flex-col items-start justify-start gap-2">
+              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
                 <img
-                  class="h-[50px] max-h-[50px] min-h-[50px] w-[50px] min-w-[50px] max-w-[50px]"
+                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] pl-[15px]"
                   :src="`/grenades/${option.code}.webp`"
                   v-if="!option.isArchetype"
                   :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
-                <span class="text-wrap">{{ option.displayName }}</span>
+                <span class="text-wrap pl-[15px]">{{ option.displayName }}</span>
               </div>
             </template>
           </v-select>
@@ -138,7 +138,6 @@
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" /> -->
         </div>
       </div>
-
       <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
       <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
         <StratagemSelect

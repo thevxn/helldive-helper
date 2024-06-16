@@ -72,13 +72,22 @@
   overflow: hidden;
 }
 
-.grenade.custom-select .vs__selected {
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.grenade .vs__dropdown-toggle .vs__actions {
+  visibility: hidden;
+  padding: 0;
   max-width: 100%;
-  overflow: hidden;
 }
+
+.grenade .vs__dropdown-toggle .vs__selected-options {
+  min-width: 100%;
+}
+
+/* .grenade .vs__dropdown-toggle .vs__search {
+  padding: 0;
+  width: 0;
+  max-width: 0;
+  visibility: hidden;
+} */
 
 .custom-select .vs__dropdown-menu {
   width: 100%;
@@ -87,6 +96,30 @@
 
 .secondary.custom-select .vs__dropdown-menu {
   z-index: 10;
+}
+
+.grenade .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
+  padding: 0;
+}
+
+.grenade.vs--open .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
+  padding: 0;
+}
+
+.grenade .vs__dropdown-toggle .vs__selected-options span {
+  width: 100%;
+}
+
+.grenade .vs__dropdown-toggle .vs__selected-options input {
+  padding: 0 !important;
+  width: 0 !important;
+  margin: 0;
+}
+
+.grenade .vs__dropdown-toggle,
+.grenade .vs__dropdown-toggle .vs__selected-options,
+.grenade .vs__dropdown-toggle .vs__selected-options input {
+  padding: 0;
 }
 
 .grenade.custom-select .vs__dropdown-menu {
