@@ -122,9 +122,9 @@
               </div>
             </template>
             <template #selected-option="option">
-              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
+              <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
-                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] pl-[15px]"
+                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] pl-[15px]"
                   :src="`/grenades/${option.code}.webp`"
                   v-if="!option.isArchetype"
                   :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
@@ -132,10 +132,6 @@
               </div>
             </template>
           </v-select>
-          <!-- <img
-            :src="`/grenades/${String(player.grenadeCode)}.webp`"
-            class="mt-[12px] h-[100px] w-[100px] self-center sm:mt-[20px]"
-            :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" /> -->
         </div>
         <div class="flex w-1/3 flex-col">
           <label :for="`perk-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Perk:</label>
@@ -159,9 +155,9 @@
               </div>
             </template>
             <template #selected-option="option">
-              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
+              <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
-                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black pl-[15px]"
+                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black pl-[15px]"
                   :src="`/perks/${option.code}.webp`"
                   :alt="`${perks[player.perk as keyof typeof perks].displayName}`" />
                 <span class="text-wrap pl-[15px]">{{ option.displayName }}</span>
@@ -174,7 +170,7 @@
           <v-select
             name="booster"
             :id="`booster-${i}`"
-            class="custom-select grenade max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            class="custom-select grenade booster max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.booster"
             :options="boosterList"
             label="displayName"
@@ -184,16 +180,16 @@
             <template #option="option">
               <div class="flex flex-row items-center justify-start gap-2">
                 <img
-                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black"
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black bg-black"
                   :src="`/boosters/${option.code}.webp`"
                   :alt="``" />
                 <span class="">{{ option.displayName }}</span>
               </div>
             </template>
             <template #selected-option="option">
-              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
+              <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
-                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black pl-[15px]"
+                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black pl-[15px]"
                   :src="`/boosters/${option.code}.webp`"
                   :alt="`${boosters[player.booster as keyof typeof boosters].displayName}`" />
                 <span class="text-wrap pl-[15px]">{{ option.displayName }}</span>
