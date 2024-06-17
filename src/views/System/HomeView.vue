@@ -137,6 +137,70 @@
             class="mt-[12px] h-[100px] w-[100px] self-center sm:mt-[20px]"
             :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" /> -->
         </div>
+        <div class="flex w-1/3 flex-col">
+          <label :for="`perk-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Perk:</label>
+          <v-select
+            name="perk"
+            :id="`perk-${i}`"
+            class="custom-select grenade max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            v-model="player.perk"
+            :options="perkList"
+            label="displayName"
+            :reduce="(perk: (typeof perkList)[number]) => perk.code"
+            :components="{ Deselect: null }"
+            :searchable="config.forms.searchable">
+            <template #option="option">
+              <div class="flex flex-row items-center justify-start gap-2">
+                <img
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black"
+                  :src="`/perks/${option.code}.webp`"
+                  :alt="``" />
+                <span class="">{{ option.displayName }}</span>
+              </div>
+            </template>
+            <template #selected-option="option">
+              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
+                <img
+                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black pl-[15px]"
+                  :src="`/perks/${option.code}.webp`"
+                  :alt="`${perks[player.perk as keyof typeof perks].displayName}`" />
+                <span class="text-wrap pl-[15px]">{{ option.displayName }}</span>
+              </div>
+            </template>
+          </v-select>
+        </div>
+        <div class="flex w-1/3 flex-col">
+          <label :for="`booster-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Booster:</label>
+          <v-select
+            name="booster"
+            :id="`booster-${i}`"
+            class="custom-select grenade max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
+            v-model="player.booster"
+            :options="boosterList"
+            label="displayName"
+            :reduce="(booster: (typeof boosterList)[number]) => booster.code"
+            :components="{ Deselect: null }"
+            :searchable="config.forms.searchable">
+            <template #option="option">
+              <div class="flex flex-row items-center justify-start gap-2">
+                <img
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black"
+                  :src="`/boosters/${option.code}.webp`"
+                  :alt="``" />
+                <span class="">{{ option.displayName }}</span>
+              </div>
+            </template>
+            <template #selected-option="option">
+              <div class="flex min-h-[162px] flex-col items-center justify-center gap-2 text-center">
+                <img
+                  class="h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black pl-[15px]"
+                  :src="`/boosters/${option.code}.webp`"
+                  :alt="`${boosters[player.booster as keyof typeof boosters].displayName}`" />
+                <span class="text-wrap pl-[15px]">{{ option.displayName }}</span>
+              </div>
+            </template>
+          </v-select>
+        </div>
       </div>
       <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
       <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
@@ -171,6 +235,8 @@
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import StratagemSelect from '@/components/StratagemSelect.vue'
+  import { boosterList, boosters } from '@/data/boosters'
+  import { perkList, perks } from '@/data/perks'
   import { stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
@@ -198,6 +264,16 @@
   if (route.query.data) {
     try {
       data = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
+      // Backwards compatibility for data strings generated before perks and boosters were introduced
+      data.playerList.forEach((player, i) => {
+        if (!player.perk) {
+          data.playerList[i].perk = 'FORTIFIED'
+        }
+
+        if (!player.booster) {
+          data.playerList[i].booster = 'HELLPOD_SPACE_OPTIMIZATION'
+        }
+      })
 
       const router = useRouter()
 
@@ -208,6 +284,16 @@
     }
   } else if (localStorage.getItem('data')) {
     data = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    // Backwards compatibility for data strings generated before perks and boosters were introduced
+    data.playerList.forEach((player, i) => {
+      if (!player.perk) {
+        data.playerList[i].perk = 'FORTIFIED'
+      }
+
+      if (!player.booster) {
+        data.playerList[i].booster = 'HELLPOD_SPACE_OPTIMIZATION'
+      }
+    })
   } else {
     data = getDefaultData()
   }

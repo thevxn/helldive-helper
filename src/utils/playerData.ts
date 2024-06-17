@@ -1,3 +1,5 @@
+import { boosterCodeList } from '@/data/boosters'
+import { perkCodeList } from '@/data/perks'
 import { stratagemCodeList } from '@/data/stratagems'
 import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
 import type { IData, IPlayerColor } from '@/utils/defaults'
@@ -15,11 +17,11 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
   } as IData
 
   // const inputDataMock = [
-  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2],
-  //  ['player4', , 0, 0, 0, 0, 0, 0, 3]
+  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster
+  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0]
   // ]
 
   data.map(playerArray => {
@@ -29,9 +31,11 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       secondaryWeaponCode: secondaryWeaponCodeList[playerArray[2] as number],
       grenadeCode: grenadeCodeList[playerArray[3] as number],
       stratagemCodeList: createStratagemCodeList(playerArray.slice(4, 8) as number[]),
-      color: playerColorsList[playerArray[8] as number] as IPlayerColor
+      color: playerColorsList[playerArray[8] as number] as IPlayerColor,
+      perk: perkCodeList[playerArray[9] as number],
+      booster: boosterCodeList[playerArray[10] as number]
     })
-    logger.debug(playerArray[8])
+    logger.debug(playerArray[9])
   })
 
   logger.debug(`Parsed input: `)
@@ -52,11 +56,11 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
 
 export const createPlayerDataOutput = (inputData: IData): Array<Array<string | number>> => {
   // const outputDataMock = [
-  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2],
-  //  ['player4', , 0, 0, 0, 0, 0, 0, 3]
+  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster
+  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+  //  ['player4', , 0, 0, 0, 0, 0, 0, 3, 0, 0]
   // ]
 
   const output: Array<Array<string | number>> = []
@@ -70,7 +74,9 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
       ...playerObject.stratagemCodeList.map(stratagem => {
         return stratagemCodeList.indexOf(stratagem)
       }),
-      playerColorsList.indexOf(playerObject.color)
+      playerColorsList.indexOf(playerObject.color),
+      perkCodeList.indexOf(playerObject.perk),
+      boosterCodeList.indexOf(playerObject.booster)
     ])
   })
 
