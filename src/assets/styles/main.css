@@ -45,7 +45,7 @@
   }
 
   .custom-select .vs__dropdown-option--disabled {
-    @apply bg-diagonal-solid   text-yellow-300;
+    @apply bg-diagonal-solid text-yellow-300;
   }
 
   .custom-select .vs__dropdown-menu {
@@ -88,6 +88,11 @@
   max-width: 0;
   visibility: hidden;
 } */
+.grenade .vs__dropdown-toggle,
+.grenade .vs__dropdown-toggle .vs__selected-options,
+.grenade .vs__dropdown-toggle .vs__selected-options input {
+  padding: 0;
+}
 
 .custom-select .vs__dropdown-menu {
   width: 100%;
@@ -98,12 +103,28 @@
   z-index: 10;
 }
 
-.grenade .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
-  padding: 0;
+.grenade .vs__dropdown-toggle,
+.grenade.vs--open .vs__dropdown-toggle {
+  border: 0;
+  width: 100%;
 }
 
-.grenade.vs--open .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
+
+
+.grenade .vs__dropdown-toggle .vs__selected-options span,
+.grenade .vs__dropdown-toggle .vs__selected-options .vs__selected,
+.grenade .vs__dropdown-toggle .vs__selected-options .vs__selected div {
   padding: 0;
+  min-width: 100%;
+  border: none;
+  right: 0;
+  left: 0;
+  margin: 0;
+}
+
+.grenade .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
+  padding: 0;
+  width: 100%;
 }
 
 .grenade .vs__dropdown-toggle .vs__selected-options span {
@@ -111,15 +132,17 @@
 }
 
 .grenade .vs__dropdown-toggle .vs__selected-options input {
-  padding: 0 !important;
-  width: 0 !important;
+  padding: 0;
+  width: 0;
   margin: 0;
 }
 
-.grenade .vs__dropdown-toggle,
-.grenade .vs__dropdown-toggle .vs__selected-options,
-.grenade .vs__dropdown-toggle .vs__selected-options input {
+
+
+.grenade.vs--open .vs__dropdown-toggle .vs__selected-options .vs__selected div * {
   padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .grenade.custom-select .vs__dropdown-menu {
@@ -137,135 +160,129 @@
 
 .bg-diagonal {
   background-color: rgb(255 255 255 / 14.4%);
-  background-image: linear-gradient(
-    45deg,
-    black 5%,
-    transparent 5%,
-    transparent 10%,
-    black 10%,
-    black 15%,
-    transparent 15%,
-    transparent 20%,
-    black 20%,
-    black 25%,
-    transparent 25%,
-    transparent 30%,
-    black 30%,
-    black 35%,
-    transparent 35%,
-    transparent 40%,
-    black 40%,
-    black 45%,
-    transparent 45%,
-    transparent 50%,
-    black 50%,
-    black 55%,
-    transparent 55%,
-    transparent 60%,
-    black 60%,
-    black 65%,
-    transparent 65%,
-    transparent 70%,
-    black 70%,
-    black 75%,
-    transparent 75%,
-    transparent 80%,
-    black 80%,
-    black 85%,
-    transparent 85%,
-    transparent 90%,
-    black 90%,
-    black 95%,
-    transparent 95%
-  );
+  background-image: linear-gradient(45deg,
+      black 5%,
+      transparent 5%,
+      transparent 10%,
+      black 10%,
+      black 15%,
+      transparent 15%,
+      transparent 20%,
+      black 20%,
+      black 25%,
+      transparent 25%,
+      transparent 30%,
+      black 30%,
+      black 35%,
+      transparent 35%,
+      transparent 40%,
+      black 40%,
+      black 45%,
+      transparent 45%,
+      transparent 50%,
+      black 50%,
+      black 55%,
+      transparent 55%,
+      transparent 60%,
+      black 60%,
+      black 65%,
+      transparent 65%,
+      transparent 70%,
+      black 70%,
+      black 75%,
+      transparent 75%,
+      transparent 80%,
+      black 80%,
+      black 85%,
+      transparent 85%,
+      transparent 90%,
+      black 90%,
+      black 95%,
+      transparent 95%);
 }
 
 .bg-diagonal-hover:hover {
   background-color: rgb(255 255 255 / 14.4%);
-  background-image: linear-gradient(
-    45deg,
-    black 5%,
-    transparent 5%,
-    transparent 10%,
-    black 10%,
-    black 15%,
-    transparent 15%,
-    transparent 20%,
-    black 20%,
-    black 25%,
-    transparent 25%,
-    transparent 30%,
-    black 30%,
-    black 35%,
-    transparent 35%,
-    transparent 40%,
-    black 40%,
-    black 45%,
-    transparent 45%,
-    transparent 50%,
-    black 50%,
-    black 55%,
-    transparent 55%,
-    transparent 60%,
-    black 60%,
-    black 65%,
-    transparent 65%,
-    transparent 70%,
-    black 70%,
-    black 75%,
-    transparent 75%,
-    transparent 80%,
-    black 80%,
-    black 85%,
-    transparent 85%,
-    transparent 90%,
-    black 90%,
-    black 95%,
-    transparent 95%
-  );
+  background-image: linear-gradient(45deg,
+      black 5%,
+      transparent 5%,
+      transparent 10%,
+      black 10%,
+      black 15%,
+      transparent 15%,
+      transparent 20%,
+      black 20%,
+      black 25%,
+      transparent 25%,
+      transparent 30%,
+      black 30%,
+      black 35%,
+      transparent 35%,
+      transparent 40%,
+      black 40%,
+      black 45%,
+      transparent 45%,
+      transparent 50%,
+      black 50%,
+      black 55%,
+      transparent 55%,
+      transparent 60%,
+      black 60%,
+      black 65%,
+      transparent 65%,
+      transparent 70%,
+      black 70%,
+      black 75%,
+      transparent 75%,
+      transparent 80%,
+      black 80%,
+      black 85%,
+      transparent 85%,
+      transparent 90%,
+      black 90%,
+      black 95%,
+      transparent 95%);
 }
 
 .bg-diagonal-solid {
   background-color: rgb(58 58 58);
-  background-image: linear-gradient(
-    45deg,
-    black 5%,
-    transparent 5%,
-    transparent 10%,
-    black 10%,
-    black 15%,
-    transparent 15%,
-    transparent 20%,
-    black 20%,
-    black 25%,
-    transparent 25%,
-    transparent 30%,
-    black 30%,
-    black 35%,
-    transparent 35%,
-    transparent 40%,
-    black 40%,
-    black 45%,
-    transparent 45%,
-    transparent 50%,
-    black 50%,
-    black 55%,
-    transparent 55%,
-    transparent 60%,
-    black 60%,
-    black 65%,
-    transparent 65%,
-    transparent 70%,
-    black 70%,
-    black 75%,
-    transparent 75%,
-    transparent 80%,
-    black 80%,
-    black 85%,
-    transparent 85%,
-    transparent 90%,
-    black 90%,
-    black 95%,
-    transparent 95%
-  );
+  background-image: linear-gradient(45deg,
+      black 5%,
+      transparent 5%,
+      transparent 10%,
+      black 10%,
+      black 15%,
+      transparent 15%,
+      transparent 20%,
+      black 20%,
+      black 25%,
+      transparent 25%,
+      transparent 30%,
+      black 30%,
+      black 35%,
+      transparent 35%,
+      transparent 40%,
+      black 40%,
+      black 45%,
+      transparent 45%,
+      transparent 50%,
+      black 50%,
+      black 55%,
+      transparent 55%,
+      transparent 60%,
+      black 60%,
+      black 65%,
+      transparent 65%,
+      transparent 70%,
+      black 70%,
+      black 75%,
+      transparent 75%,
+      transparent 80%,
+      black 80%,
+      black 85%,
+      transparent 85%,
+      transparent 90%,
+      black 90%,
+      black 95%,
+      transparent 95%);
 }
