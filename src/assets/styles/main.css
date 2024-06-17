@@ -142,11 +142,15 @@
 }
 
 .grenade.custom-select .vs__dropdown-menu {
-  width: 200% !important;
-  top: -50%;
+  width: 300% !important;
+  top: -250%;
 }
 
 .booster.custom-select .vs__dropdown-menu {
+  left: -200%;
+}
+
+.perk.custom-select .vs__dropdown-menu {
   left: -100%;
 }
 
