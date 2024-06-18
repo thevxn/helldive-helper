@@ -32,8 +32,8 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       grenadeCode: grenadeCodeList[playerArray[3] as number],
       stratagemCodeList: createStratagemCodeList(playerArray.slice(4, 8) as number[]),
       color: playerColorsList[playerArray[8] as number] as IPlayerColor,
-      perk: perkCodeList[playerArray[9] as number],
-      booster: boosterCodeList[playerArray[10] as number]
+      perkCode: perkCodeList[playerArray[9] as number],
+      boosterCode: boosterCodeList[playerArray[10] as number]
     })
     logger.debug(playerArray[9])
   })
@@ -75,8 +75,8 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
         return stratagemCodeList.indexOf(stratagem)
       }),
       playerColorsList.indexOf(playerObject.color),
-      perkCodeList.indexOf(playerObject.perk),
-      boosterCodeList.indexOf(playerObject.booster)
+      perkCodeList.indexOf(playerObject.perkCode),
+      boosterCodeList.indexOf(playerObject.boosterCode)
     ])
   })
 

@@ -140,7 +140,7 @@
             name="perk"
             :id="`perk-${i}`"
             class="custom-select perk grenade max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
-            v-model="player.perk"
+            v-model="player.perkCode"
             :options="perkList"
             label="displayName"
             :reduce="(perk: (typeof perkList)[number]) => perk.code"
@@ -152,7 +152,7 @@
                 <img
                   class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black"
                   :src="`/perks/${option.code}.webp`"
-                  :alt="`${perks[player.perk as keyof typeof perks].displayName}`" />
+                  :alt="`${perks[player.perkCode as keyof typeof perks].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -161,7 +161,7 @@
                 <img
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black"
                   :src="`/perks/${option.code}.webp`"
-                  :alt="`${perks[player.perk as keyof typeof perks].displayName}`" />
+                  :alt="`${perks[player.perkCode as keyof typeof perks].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -173,7 +173,7 @@
             name="booster"
             :id="`booster-${i}`"
             class="custom-select grenade booster max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
-            v-model="player.booster"
+            v-model="player.boosterCode"
             :options="boosterList"
             label="displayName"
             :reduce="(booster: (typeof boosterList)[number]) => booster.code"
@@ -194,7 +194,7 @@
                 <img
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black"
                   :src="`/boosters/${option.code}.webp`"
-                  :alt="`${boosters[player.booster as keyof typeof boosters].displayName}`" />
+                  :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -265,12 +265,12 @@
       data = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
       // Backwards compatibility for data strings generated before perks and boosters were introduced
       data.playerList.forEach((player, i) => {
-        if (!player.perk) {
-          data.playerList[i].perk = 'EXTRA_PADDING'
+        if (!player.perkCode) {
+          data.playerList[i].perkCode = 'EXTRA_PADDING'
         }
 
-        if (!player.booster) {
-          data.playerList[i].booster = 'HELLPOD_SPACE_OPTIMIZATION'
+        if (!player.boosterCode) {
+          data.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
         }
       })
 
@@ -285,12 +285,12 @@
     data = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
     // Backwards compatibility for data strings generated before perks and boosters were introduced
     data.playerList.forEach((player, i) => {
-      if (!player.perk) {
-        data.playerList[i].perk = 'EXTRA_PADDING'
+      if (!player.perkCode) {
+        data.playerList[i].perkCode = 'EXTRA_PADDING'
       }
 
-      if (!player.booster) {
-        data.playerList[i].booster = 'HELLPOD_SPACE_OPTIMIZATION'
+      if (!player.boosterCode) {
+        data.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
       }
     })
   } else {
