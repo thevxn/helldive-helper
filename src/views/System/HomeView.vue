@@ -241,7 +241,7 @@
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { filterOptions } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
-  import { createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
+  import { createBase64DataString, createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
 
@@ -287,10 +287,10 @@
     data = getDefaultData()
   }
 
-  localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
+  localStorage.setItem('data', createBase64DataString(data))
 
   const generateDataString = async () => {
-    const link = `${BASE_URL}/?data=${btoa(JSON.stringify(createPlayerDataOutput(data)))}`
+    const link = `${BASE_URL}/?data=${createBase64DataString(data)}`
 
     try {
       await navigator.clipboard.writeText(link)

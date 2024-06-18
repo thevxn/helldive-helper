@@ -85,3 +85,9 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
 
   return output
 }
+
+export const createBase64DataString = (playerData: IData): string => {
+  const outputData = createPlayerDataOutput(playerData)
+
+  return btoa(JSON.stringify(outputData))
+}
