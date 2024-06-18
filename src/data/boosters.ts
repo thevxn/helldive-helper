@@ -1,4 +1,4 @@
-interface IBooster {
+export interface IBooster {
   displayName: string
   code?: string
 }

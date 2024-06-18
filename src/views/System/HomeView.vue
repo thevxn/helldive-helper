@@ -164,7 +164,7 @@
             :id="`booster-${i}`"
             class="custom-select grenade booster max-h-[162px] min-h-[162px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
             v-model="player.boosterCode"
-            :options="boosterList"
+            :options="filterSelectedBoosters(data)"
             label="displayName"
             :reduce="(booster: (typeof boosterList)[number]) => booster.code"
             :components="{ Deselect: null }"
@@ -175,7 +175,7 @@
                 <img
                   class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black bg-black"
                   :src="`/boosters/${option.code}.webp`"
-                  :alt="``" />
+                  :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -183,9 +183,9 @@
               <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black"
-                  :src="`/boosters/${option.code}.webp`"
+                  :src="`/boosters/${boosters[option.displayName].code}.webp`"
                   :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
-                <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
+                <span class="hyphens-auto text-wrap break-words">{{ boosters[option.displayName].displayName }}</span>
               </div>
             </template>
           </v-select>
@@ -219,7 +219,7 @@
 </template>
 
 <script setup lang="ts">
-  import { inject, nextTick, reactive, ref, watch } from 'vue'
+  import { type Ref, inject, nextTick, reactive, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
@@ -239,7 +239,7 @@
   import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
-  import { filterOptions } from '@/utils/filter'
+  import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
   import { createBase64DataString, createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
   import { createAndSortWeapons } from '@/utils/sort'
@@ -247,20 +247,20 @@
 
   const logger = Logger()
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
-  let data: IData
+  const data = ref() as Ref<IData>
   const route = useRoute()
 
   if (route.query.data) {
     try {
-      data = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
+      data.value = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
       // Backwards compatibility for data strings generated before perks and boosters were introduced
-      data.playerList.forEach((player, i) => {
+      data.value.playerList.forEach((player, i) => {
         if (!player.perkCode) {
-          data.playerList[i].perkCode = 'EXTRA_PADDING'
+          data.value.playerList[i].perkCode = 'EXTRA_PADDING'
         }
 
         if (!player.boosterCode) {
-          data.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
+          data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code as string
         }
       })
 
@@ -269,28 +269,28 @@
       router.replace({ query: undefined })
     } catch (e) {
       logger.log(e)
-      data = getDefaultData()
+      data.value = getDefaultData()
     }
   } else if (localStorage.getItem('data')) {
-    data = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    data.value = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
     // Backwards compatibility for data strings generated before perks and boosters were introduced
-    data.playerList.forEach((player, i) => {
+    data.value.playerList.forEach((player, i) => {
       if (!player.perkCode) {
-        data.playerList[i].perkCode = 'EXTRA_PADDING'
+        data.value.playerList[i].perkCode = 'EXTRA_PADDING'
       }
 
       if (!player.boosterCode) {
-        data.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
+        data.value.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
       }
     })
   } else {
-    data = getDefaultData()
+    data.value = getDefaultData()
   }
 
-  localStorage.setItem('data', createBase64DataString(data))
+  localStorage.setItem('data', createBase64DataString(data.value))
 
   const generateDataString = async () => {
-    const link = `${BASE_URL}/?data=${createBase64DataString(data)}`
+    const link = `${BASE_URL}/?data=${createBase64DataString(data.value)}`
 
     try {
       await navigator.clipboard.writeText(link)
@@ -310,8 +310,8 @@
   ])
   const modalRef = ref()
 
-  watch(data, () => {
-    localStorage.setItem('data', btoa(JSON.stringify(createPlayerDataOutput(data))))
+  watch(data.value, () => {
+    localStorage.setItem('data', createBase64DataString(data.value))
   })
 
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
@@ -349,7 +349,7 @@
     stratagemPosition: number,
     stratagemCode: keyof typeof stratagems
   ) => {
-    data.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
+    data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     activeStratagemSelect.value[playerIndex][stratagemPosition] = false
     modalRef.value[playerIndex].displayOff()
     document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })

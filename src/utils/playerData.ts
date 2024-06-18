@@ -55,6 +55,7 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
 }
 
 export const createPlayerDataOutput = (inputData: IData): Array<Array<string | number>> => {
+  console.log(inputData)
   // const outputDataMock = [
   //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster
   //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
