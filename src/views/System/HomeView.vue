@@ -11,7 +11,6 @@
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
       <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
-
       <input
         :id="`name-${i}`"
         name="squad-member-name"
@@ -53,11 +52,6 @@
           </div>
         </template>
       </v-select>
-      <!-- <img
-        :src="`/weapons/${String(player.primaryWeaponCode)}.webp`"
-        class="mt-2 h-[108px] w-[250px] snap-start sm:mt-4"
-        :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`" /> -->
-
       <label :for="`secondary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Secondary Weapon:</label>
       <v-select
         name="secondary"
@@ -92,10 +86,6 @@
           </div>
         </template>
       </v-select>
-      <!-- <img
-            :src="`/weapons/${String(player.secondaryWeaponCode)}.webp`"
-            class="mt-2 h-[108px] w-[200px] snap-start self-center sm:mt-4"
-            :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`" /> -->
       <div class="flex w-full flex-row justify-center gap-2">
         <div class="flex w-[33%] flex-col">
           <label :for="`grenade-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Grenade:</label>
