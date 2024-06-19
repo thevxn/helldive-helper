@@ -33,8 +33,10 @@ export const boosters: Record<string, IBooster> = {
   },
   MOTIVATIONAL_SHOCKS: {
     displayName: 'Motivational Shocks'
+  },
+  EXPERIMENTAL_INFUSION: {
+    displayName: 'Experimental Infusion'
   }
-  // TODO - add Experimental Infusion
 }
 
 export const boosterCodeList = Object.keys(boosters) as (keyof typeof boosters)[]
