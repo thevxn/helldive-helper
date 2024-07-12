@@ -162,6 +162,9 @@ export const stratagems = {
   },
   EMS_MORTAR_SENTRY: {
     displayName: 'A/M-23 EMS Mortar Sentry'
+  },
+  COMMANDO: {
+    displayName: 'MLS-4X Commando'
   }
 }
 
