@@ -1,3 +1,4 @@
+import { stratagemCategories, stratagemCodeList, stratagems } from '@/data/stratagems'
 import {
   type IGrenade,
   type IPrimaryWeapon,
@@ -48,3 +49,20 @@ export const createAndSortWeapons = (
   })
   return sortedList
 }
+
+// Sorts stratagems based on their category so that all stratagems of the same category are next to each other in the select
+export const sortStratagems = (stratagemList: typeof stratagemCodeList) => {
+  const sortedStratagemList: (keyof typeof stratagems)[] = [] as (keyof typeof stratagems)[]
+
+  stratagemCategories.map(category => {
+    stratagemList.map(stratagem => {
+      if (stratagems[stratagem].category === category) {
+        sortedStratagemList.push(stratagem)
+      }
+    })
+  })
+
+  return sortedStratagemList
+}
+
+sortStratagems(stratagemCodeList)

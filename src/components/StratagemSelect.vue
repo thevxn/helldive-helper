@@ -17,7 +17,9 @@
   import { ref } from 'vue'
 
   import { stratagemCodeList, stratagems } from '@/data/stratagems'
+  import { sortStratagems } from '@/utils/sort'
 
+  const sortedStratagemCodeList = sortStratagems(stratagemCodeList)
   const display = ref(false)
   const playerIndex = ref(null)
   const position = ref(null)
@@ -28,7 +30,7 @@
     }
   })
   const shownStratagems = ref(
-    stratagemCodeList.filter(e => {
+    sortedStratagemCodeList.filter(e => {
       if (!props.selectedStratagems.find(el => el === e)) {
         return e
       }
@@ -36,7 +38,7 @@
   )
   const displayOn = () => {
     display.value = true
-    shownStratagems.value = stratagemCodeList.filter(e => {
+    shownStratagems.value = sortedStratagemCodeList.filter(e => {
       if (!props.selectedStratagems.find(el => el === e)) {
         return e
       }
