@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`bg-diagonal-solid  absolute mt-4 flex -translate-y-[108%] translate-x-[0%] snap-start flex-row flex-wrap justify-center gap-2 rounded-md border-4  border-solid  border-yellow-300 p-4 sm:w-[45%] md:w-[45%] lg:w-[45%] xl:w-[22%]`"
+    :class="`bg-diagonal-solid  absolute z-10 mt-4 flex -translate-y-[108%] translate-x-[0%] snap-start flex-row flex-wrap justify-center gap-2 rounded-md  border-4  border-solid border-yellow-300 p-4 sm:w-[45%] md:w-[45%] lg:w-[45%] xl:w-[22%]`"
     @click.stop
     v-if="display">
     <img
