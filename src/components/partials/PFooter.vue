@@ -10,8 +10,7 @@
     </small>
 
     <small class="mb-2 ml-auto mr-auto font-bold sm:mb-0">
-      Made by <a href="https://discordapp.com/users/79292034447314944">tack</a>@<a href="https://www.savla.dev"
-        >savla.dev</a
+      Made by <a href="https://discordapp.com/users/79292034447314944">tack</a>@<a href="https://www.vxn.dev">vxn.dev</a
       >. This is a fan project in no way connected to Arrowhead or the official Helldivers 2 trademark. All imagery
       kindly provided by the <a href="https://helldivers.wiki.gg">Helldivers Wiki</a>. Favicon by
       <a href="https://discordapp.com/users/501124448339099658">Ferex</a>.
