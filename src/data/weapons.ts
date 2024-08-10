@@ -19,6 +19,9 @@ export const primaryArchetypes = {
   },
   ENERGY: {
     displayName: 'Energy Based'
+  },
+  SPECIAL: {
+    displayName: 'Special'
   }
 }
 
@@ -158,6 +161,14 @@ export const weapons: IWeaponMap = {
     PURIFIER: {
       displayName: 'PLAS-101 Purifier',
       archetype: 'ENERGY'
+    },
+    COOKOUT: {
+      displayName: 'SG-451 Cookout',
+      archetype: 'SHOTGUN'
+    },
+    TORCHER: {
+      displayName: 'FLAM-66 Torcher',
+      archetype: 'SPECIAL'
     }
   },
   secondary: {
