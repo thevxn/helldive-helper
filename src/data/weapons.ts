@@ -33,6 +33,9 @@ export const secondaryArchetypes = {
   },
   LASER: {
     displayName: 'Laser-Based'
+  },
+  SPECIAL: {
+    displayName: 'Special'
   }
 }
 
@@ -200,6 +203,10 @@ export const weapons: IWeaponMap = {
     BUSHWHACKER: {
       displayName: 'SG-22 Bushwhacker',
       archetype: 'AMMO'
+    },
+    CRISPER: {
+      displayName: 'P-72 Crisper',
+      archetype: 'SPECIAL'
     }
   }
 }
