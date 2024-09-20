@@ -218,6 +218,10 @@ export const stratagems: Record<string, IStratagem> = {
   EMANCIPATOR_MECH: {
     displayName: 'EXO-49 Emancipator Exosuit',
     category: 'VEHICLE'
+  },
+  STERILIZER: {
+    displayName: 'TX-41 Sterilizer',
+    category: 'WEAPON'
   }
 }
 

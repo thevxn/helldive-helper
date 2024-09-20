@@ -269,6 +269,10 @@ export const grenades: Record<string, IGrenade> = {
   THROWING_KNIFE: {
     displayName: 'K-2 Throwing Knife',
     archetype: 'SPECIAL'
+  },
+  GAS: {
+    displayName: 'G-4 Gas',
+    archetype: 'SPECIAL'
   }
 }
 
