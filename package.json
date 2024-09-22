@@ -1,6 +1,6 @@
 {
   "name": "helldive-helper",
-  "version": "1.4.19",
+  "version": "1.4.20",
   "type": "module",
   "scripts": {
     "prepare": "husky install",
