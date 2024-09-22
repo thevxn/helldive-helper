@@ -1,4 +1,4 @@
-export const stratagemCategories = ['VEHICLE', 'WEAPON', 'BACKPACK', 'ORBITAL', 'EAGLE', 'STATIONARY']
+export const stratagemCategories = ['VEHICLE', 'WEAPON', 'BACKPACK', 'ORBITAL', 'EAGLE', 'STATIONARY'] as const
 
 export interface IStratagem {
   displayName: string
@@ -222,6 +222,10 @@ export const stratagems: Record<string, IStratagem> = {
   STERILIZER: {
     displayName: 'TX-41 Sterilizer',
     category: 'WEAPON'
+  },
+  DOG_BREATH: {
+    displayName: 'AX/TX-13 "Guard Dog" Dog Breath',
+    category: 'BACKPACK'
   }
 }
 
