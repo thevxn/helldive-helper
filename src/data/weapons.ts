@@ -207,6 +207,10 @@ export const weapons: IWeaponMap = {
     CRISPER: {
       displayName: 'P-72 Crisper',
       archetype: 'SPECIAL'
+    },
+    STIM_PISTOL: {
+      displayName: 'P-11 Stim Pistol',
+      archetype: 'SPECIAL'
     }
   }
 }
