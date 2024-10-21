@@ -159,7 +159,7 @@ export const weapons: IWeaponMap = {
     },
     DOMINATOR: {
       displayName: 'JAR-5 Dominator',
-      archetype: 'EXPLOSIVE'
+      archetype: 'SPECIAL'
     },
     PURIFIER: {
       displayName: 'PLAS-101 Purifier',
