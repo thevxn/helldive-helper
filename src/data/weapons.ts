@@ -172,6 +172,10 @@ export const weapons: IWeaponMap = {
     TORCHER: {
       displayName: 'FLAM-66 Torcher',
       archetype: 'SPECIAL'
+    },
+    CONSTITUTION: {
+      archetype: 'MR',
+      displayName: 'R-2124 Constitution'
     }
   },
   secondary: {
