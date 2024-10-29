@@ -7,7 +7,7 @@
       v-for="(player, i) in data.playerList"
       :key="i">
       <div
-        :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
+        :class="`${playerBorders[player.color as keyof typeof playerBorders]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
       <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
