@@ -269,7 +269,7 @@
       router.replace({ query: undefined })
     } catch (e) {
       logger.log(e)
-      data.value = getDefaultData()
+      data.value = getDefaultData(0)
     }
   } else if (localStorage.getItem('data')) {
     data.value = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
@@ -284,7 +284,7 @@
       }
     })
   } else {
-    data.value = getDefaultData()
+    data.value = getDefaultData(0)
   }
 
   localStorage.setItem('data', createBase64DataString(data.value))
@@ -356,6 +356,25 @@
     modalRef.value[playerIndex].playerIndex = null
     modalRef.value[playerIndex].position = null
   }
+  // Add/remove squad members
+  // Min 1, max 4
+  const playerCount = ref(data.value.playerList.length)
+  const addMember = () => {
+    if (data.value.playerList.length < 4) {
+      data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
+    }
+  }
+  const removeMember = () => {
+    if (data.value.playerList.length > 1) {
+      data.value.playerList.length--
+    }
+  }
+
+  defineExpose({
+    addMember,
+    removeMember,
+    playerCount
+  })
 </script>
 
 <style scoped>

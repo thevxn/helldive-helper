@@ -1,28 +1,26 @@
 <template>
-  <Header />
-  <RouterView v-slot="{ Component }">
-    <template v-if="Component">
-      <Suspense>
-        <!-- main content -->
-        <component :is="Component" />
-        <!-- loading state -->
-        <template #fallback>
-          <main>
-            <article>Loading...</article>
-          </main>
-        </template>
-      </Suspense>
-    </template>
-  </RouterView>
-
+  <Header
+    :player-count="playerCount"
+    @add-member="home.addMember(), playerCount < 4 ? playerCount++ : null"
+    @remove-member="home.removeMember(), playerCount > 1 ? playerCount-- : null" />
+  <HomeView ref="home" />
   <Footer />
 </template>
 
 <script setup lang="ts">
-  import { RouterView } from 'vue-router'
+  import { onMounted, ref } from 'vue'
+
+  import HomeView from './views/System/HomeView.vue'
 
   import Footer from '@/components/partials/PFooter.vue'
   import Header from '@/components/partials/PHeader.vue'
+
+  const home = ref()
+  const playerCount = ref(4)
+
+  onMounted(() => {
+    playerCount.value = home.value.playerCount
+  })
 </script>
 
 <style></style>
