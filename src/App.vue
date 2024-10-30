@@ -3,12 +3,14 @@
     :player-count="playerCount"
     @add-member="home.addMember(), playerCount < 4 ? playerCount++ : null"
     @remove-member="home.removeMember(), playerCount > 1 ? playerCount-- : null" />
-  <HomeView ref="home" />
+  <Suspense>
+    <HomeView ref="home" />
+  </Suspense>
   <Footer />
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   import HomeView from './views/System/HomeView.vue'
 
@@ -18,7 +20,8 @@
   const home = ref()
   const playerCount = ref(4)
 
-  onMounted(() => {
+  // https://github.com/vuejs/core/issues/1990
+  watch(home, () => {
     playerCount.value = home.value.playerCount
   })
 </script>

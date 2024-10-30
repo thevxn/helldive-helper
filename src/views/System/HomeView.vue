@@ -237,11 +237,12 @@
     weapons
   } from '@/data/weapons'
   import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
+  import router from '@/router'
   import { config } from '@/utils/config'
   import { type IData, getDefaultData } from '@/utils/defaults'
   import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
-  import { createBase64DataString, createPlayerDataOutput, parsePlayerDataInput } from '@/utils/playerData'
+  import { createBase64DataString, parsePlayerDataInput } from '@/utils/playerData'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
 
@@ -249,10 +250,35 @@
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
   const data = ref() as Ref<IData>
   const route = useRoute()
+  // Add/remove squad members
+  // Min 1, max 4
+  const playerCount = ref(data.value.playerList.length)
+  const addMember = () => {
+    if (data.value.playerList.length < 4) {
+      data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
+    }
+  }
+  const removeMember = () => {
+    if (data.value.playerList.length > 1) {
+      data.value.playerList.pop()
+    }
+  }
+
+  defineExpose({
+    addMember,
+    removeMember,
+    playerCount
+  })
+
+  // Data loading logic
+  // Data is either loaded from URL, local storage or default data is generated as a backup
+  await router.isReady()
 
   if (route.query.data) {
     try {
       data.value = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
+      logger.log('Data loaded from url')
+
       // Backwards compatibility for data strings generated before perks and boosters were introduced
       data.value.playerList.forEach((player, i) => {
         if (!player.perkCode) {
@@ -268,11 +294,13 @@
 
       router.replace({ query: undefined })
     } catch (e) {
-      logger.log(e)
+      logger.error(e)
       data.value = getDefaultData(0)
     }
   } else if (localStorage.getItem('data')) {
     data.value = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    logger.log('Data loaded from local storage')
+
     // Backwards compatibility for data strings generated before perks and boosters were introduced
     data.value.playerList.forEach((player, i) => {
       if (!player.perkCode) {
@@ -284,10 +312,14 @@
       }
     })
   } else {
+    logger.log('Default data generated')
     data.value = getDefaultData(0)
   }
 
   localStorage.setItem('data', createBase64DataString(data.value))
+  watch(data.value, () => {
+    localStorage.setItem('data', createBase64DataString(data.value))
+  })
 
   const generateDataString = async () => {
     const link = `${BASE_URL}/?data=${createBase64DataString(data.value)}`
@@ -309,11 +341,6 @@
     [false, false, false, false]
   ])
   const modalRef = ref()
-
-  watch(data.value, () => {
-    localStorage.setItem('data', createBase64DataString(data.value))
-  })
-
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
     logger.debug(playerIndex, position)
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
@@ -356,25 +383,6 @@
     modalRef.value[playerIndex].playerIndex = null
     modalRef.value[playerIndex].position = null
   }
-  // Add/remove squad members
-  // Min 1, max 4
-  const playerCount = ref(data.value.playerList.length)
-  const addMember = () => {
-    if (data.value.playerList.length < 4) {
-      data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
-    }
-  }
-  const removeMember = () => {
-    if (data.value.playerList.length > 1) {
-      data.value.playerList.length--
-    }
-  }
-
-  defineExpose({
-    addMember,
-    removeMember,
-    playerCount
-  })
 </script>
 
 <style scoped>
