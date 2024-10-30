@@ -252,7 +252,7 @@
   const route = useRoute()
   // Add/remove squad members
   // Min 1, max 4
-  const playerCount = ref(data.value.playerList.length)
+  const playerCount = ref()
   const addMember = () => {
     if (data.value.playerList.length < 4) {
       data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
@@ -315,6 +315,8 @@
     logger.log('Default data generated')
     data.value = getDefaultData(0)
   }
+
+  playerCount.value = data.value.playerList.length
 
   localStorage.setItem('data', createBase64DataString(data.value))
   watch(data.value, () => {
