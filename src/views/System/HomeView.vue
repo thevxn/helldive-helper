@@ -277,7 +277,7 @@
   if (route.query.data) {
     try {
       data.value = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
-      logger.log('Data loaded from url')
+      logger.debug('Data loaded from url')
 
       // Backwards compatibility for data strings generated before perks and boosters were introduced
       data.value.playerList.forEach((player, i) => {
@@ -299,7 +299,7 @@
     }
   } else if (localStorage.getItem('data')) {
     data.value = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
-    logger.log('Data loaded from local storage')
+    logger.debug('Data loaded from local storage')
 
     // Backwards compatibility for data strings generated before perks and boosters were introduced
     data.value.playerList.forEach((player, i) => {
@@ -312,7 +312,7 @@
       }
     })
   } else {
-    logger.log('Default data generated')
+    logger.debug('Default data generated')
     data.value = getDefaultData(0)
   }
 
