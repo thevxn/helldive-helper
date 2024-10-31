@@ -36,6 +36,9 @@ export const boosters: Record<string, IBooster> = {
   },
   EXPERIMENTAL_INFUSION: {
     displayName: 'Experimental Infusion'
+  },
+  FIREBOMB_HELLPODS: {
+    displayName: 'Firebomb Hellpods'
   }
 }
 

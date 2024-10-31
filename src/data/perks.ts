@@ -27,6 +27,15 @@ export const perks: Record<string, IPerk> = {
   },
   SERVO_ASSISTED: {
     displayName: 'Servo-Assisted'
+  },
+  INFLAMMABLE: {
+    displayName: 'Inflammable'
+  },
+  ADVANCED_FILTRATION: {
+    displayName: 'Advanced Filtration'
+  },
+  PEAK_PHYSIQUE: {
+    displayName: 'Peak Physique'
   }
 }
 
