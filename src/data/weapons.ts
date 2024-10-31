@@ -176,6 +176,14 @@ export const weapons: IWeaponMap = {
     CONSTITUTION: {
       archetype: 'MR',
       displayName: 'R-2124 Constitution'
+    },
+    HALT: {
+      archetype: 'SHOTGUN',
+      displayName: 'SG-20 Halt'
+    },
+    REPRIMAND: {
+      archetype: 'SMG',
+      displayName: 'SMG-32 Reprimand'
     }
   },
   secondary: {
@@ -215,6 +223,10 @@ export const weapons: IWeaponMap = {
     STIM_PISTOL: {
       displayName: 'P-11 Stim Pistol',
       archetype: 'SPECIAL'
+    },
+    LOYALIST: {
+      archetype: 'SPECIAL',
+      displayName: 'PLAS-15 Loyalist'
     }
   }
 }
