@@ -39,6 +39,9 @@ export const boosters: Record<string, IBooster> = {
   },
   FIREBOMB_HELLPODS: {
     displayName: 'Firebomb Hellpods'
+  },
+  DEAD_SPRINT: {
+    displayName: 'Dead Sprint'
   }
 }
 
