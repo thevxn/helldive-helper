@@ -36,6 +36,9 @@ export const perks: Record<string, IPerk> = {
   },
   PEAK_PHYSIQUE: {
     displayName: 'Peak Physique'
+  },
+  UNFLINCHING: {
+    displayName: 'Unflinching'
   }
 }
 
