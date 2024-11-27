@@ -226,6 +226,10 @@ export const stratagems: Record<string, IStratagem> = {
   DOG_BREATH: {
     displayName: 'AX/TX-13 "Guard Dog" Dog Breath',
     category: 'BACKPACK'
+  },
+  ORBITAL_NAPALM_BARRAGE: {
+    displayName: 'Orbital Napalm Barrage',
+    category: 'ORBITAL'
   }
 }
 
