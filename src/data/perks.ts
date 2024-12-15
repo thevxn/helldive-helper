@@ -39,6 +39,9 @@ export const perks: Record<string, IPerk> = {
   },
   UNFLINCHING: {
     displayName: 'Unflinching'
+  },
+  SIEGE_READY: {
+    displayName: 'Siege-Ready'
   }
 }
 
