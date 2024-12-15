@@ -230,6 +230,18 @@ export const stratagems: Record<string, IStratagem> = {
   ORBITAL_NAPALM_BARRAGE: {
     displayName: 'Orbital Napalm Barrage',
     category: 'ORBITAL'
+  },
+  DIRECTIONAL_SHIELD: {
+    displayName: 'SH-51 Directional Shield',
+    category: 'BACKPACK'
+  },
+  FLAME_SENTRY: {
+    displayName: 'A/FLAM-40 Flame Sentry',
+    category: 'STATIONARY'
+  },
+  ANTI_TANK_EMPLACEMENT: {
+    displayName: 'E/AT-12 Anti-Tank Emplacement',
+    category: 'STATIONARY'
   }
 }
 
