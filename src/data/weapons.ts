@@ -36,6 +36,9 @@ export const secondaryArchetypes = {
   },
   SPECIAL: {
     displayName: 'Special'
+  },
+  MELEE: {
+    displayName: 'Melee'
   }
 }
 
@@ -184,6 +187,10 @@ export const weapons: IWeaponMap = {
     REPRIMAND: {
       archetype: 'SMG',
       displayName: 'SMG-32 Reprimand'
+    },
+    STA_52: {
+      archetype: 'AR',
+      displayName: 'StA-52 Assault Rifle'
     }
   },
   secondary: {
@@ -227,6 +234,14 @@ export const weapons: IWeaponMap = {
     LOYALIST: {
       archetype: 'SPECIAL',
       displayName: 'PLAS-15 Loyalist'
+    },
+    STUN_LANCE: {
+      archetype: 'MELEE',
+      displayName: 'CQC-19 Stun Lance'
+    },
+    STUN_BATON: {
+      archetype: 'MELEE',
+      displayName: 'CQC-30 Stun Baton'
     }
   }
 }
