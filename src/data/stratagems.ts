@@ -242,6 +242,10 @@ export const stratagems: Record<string, IStratagem> = {
   ANTI_TANK_EMPLACEMENT: {
     displayName: 'E/AT-12 Anti-Tank Emplacement',
     category: 'STATIONARY'
+  },
+  WASP_LAUNCHER: {
+    displayName: 'W.A.S.P. Launcher',
+    category: 'WEAPON'
   }
 }
 

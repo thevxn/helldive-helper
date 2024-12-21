@@ -22,6 +22,9 @@ export const primaryArchetypes = {
   },
   SPECIAL: {
     displayName: 'Special'
+  },
+  SR: {
+    displayName: 'Sniper Rifle'
   }
 }
 
@@ -191,6 +194,14 @@ export const weapons: IWeaponMap = {
     STA_52: {
       archetype: 'AR',
       displayName: 'StA-52 Assault Rifle'
+    },
+    STA_11: {
+      archetype: 'SMG',
+      displayName: 'StA-11 SMG'
+    },
+    ACCELERATOR: {
+      archetype: 'SR',
+      displayName: 'PLAS-39 Accelerator Rifle'
     }
   },
   secondary: {
