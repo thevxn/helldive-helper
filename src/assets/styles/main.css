@@ -3,7 +3,10 @@
 
 @layer base {
   html {
-    @apply snap-y snap-proximity bg-black font-main sm:snap-none;
+    /* @apply snap-y snap-proximity bg-black font-main sm:snap-none; */
+
+    /* Disable snapping as its clunky on some phones */
+    @apply snap-none bg-black font-main;
   }
 
   body {
