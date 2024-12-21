@@ -246,6 +246,10 @@ export const stratagems: Record<string, IStratagem> = {
   WASP_LAUNCHER: {
     displayName: 'W.A.S.P. Launcher',
     category: 'WEAPON'
+  },
+  FRV: {
+    displayName: 'M-102 Fast Reconnaissance Vehicle',
+    category: 'VEHICLE'
   }
 }
 
