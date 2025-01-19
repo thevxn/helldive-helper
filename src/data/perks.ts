@@ -42,6 +42,9 @@ export const perks: Record<string, IPerk> = {
   },
   SIEGE_READY: {
     displayName: 'Siege-Ready'
+  },
+  ACCLIMATED: {
+    displayName: 'Acclimated'
   }
 }
 
