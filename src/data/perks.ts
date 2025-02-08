@@ -45,6 +45,9 @@ export const perks: Record<string, IPerk> = {
   },
   ACCLIMATED: {
     displayName: 'Acclimated'
+  },
+  INTEGRATED_EXPLOSIVES: {
+    displayName: 'Integrated Explosives'
   }
 }
 

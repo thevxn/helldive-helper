@@ -202,6 +202,10 @@ export const weapons: IWeaponMap = {
     ACCELERATOR: {
       archetype: 'SR',
       displayName: 'PLAS-39 Accelerator Rifle'
+    },
+    DOUBLE_EDGE_SICKLE: {
+      archetype: 'ENERGY',
+      displayName: 'LAS-17 Double-Edge Sickle'
     }
   },
   secondary: {
@@ -253,6 +257,14 @@ export const weapons: IWeaponMap = {
     STUN_BATON: {
       archetype: 'MELEE',
       displayName: 'CQC-30 Stun Baton'
+    },
+    ULTIMATUM: {
+      archetype: 'SPECIAL',
+      displayName: 'GP-31 Ultimatum'
+    },
+    HATCHET: {
+      archetype: 'MELEE',
+      displayName: 'CQC-5 Combat Hatchet'
     }
   }
 }
@@ -280,45 +292,49 @@ export interface IGrenade extends IWeapon {
 
 export const grenades: Record<string, IGrenade> = {
   FRAG: {
+    archetype: 'STANDARD',
     displayName: 'G-6 Frag',
-    default: true,
-    archetype: 'STANDARD'
+    default: true
   },
   HIGH_EXPLOSIVE: {
-    displayName: 'G-12 High Explosive',
-    archetype: 'STANDARD'
+    archetype: 'STANDARD',
+    displayName: 'G-12 High Explosive'
   },
   INCENDIARY: {
-    displayName: 'G-10 Incendiary',
-    archetype: 'STANDARD'
+    archetype: 'STANDARD',
+    displayName: 'G-10 Incendiary'
   },
   IMPACT: {
-    displayName: 'G-16 Impact',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-16 Impact'
   },
   INCENDIARY_IMPACT: {
-    displayName: 'G-13 Incendiary Impact',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-13 Incendiary Impact'
   },
   SMOKE: {
-    displayName: 'G-3 Smoke',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-3 Smoke'
   },
   STUN: {
-    displayName: 'G-23 Stun',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-23 Stun'
   },
   THERMITE: {
-    displayName: 'G-123 Thermite',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-123 Thermite'
   },
   THROWING_KNIFE: {
-    displayName: 'K-2 Throwing Knife',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'K-2 Throwing Knife'
   },
   GAS: {
-    displayName: 'G-4 Gas',
-    archetype: 'SPECIAL'
+    archetype: 'SPECIAL',
+    displayName: 'G-4 Gas'
+  },
+  SEEKER: {
+    archetype: 'SPECIAL',
+    displayName: 'G-50 Seeker'
   }
 }
 
