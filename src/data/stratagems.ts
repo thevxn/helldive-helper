@@ -250,6 +250,10 @@ export const stratagems: Record<string, IStratagem> = {
   FRV: {
     displayName: 'M-102 Fast Reconnaissance Vehicle',
     category: 'VEHICLE'
+  },
+  PORTABLE_HELLBOMB: {
+    displayName: 'B-100 Portable Hellbomb',
+    category: 'BACKPACK'
   }
 }
 
