@@ -17,8 +17,9 @@ export const filterSelectedBoosters = (data: IData) => {
   })
 
   const filteredBoosterList = boosterList.filter(booster => {
-    return !selectedBoosterCodeList.includes(booster.code as string)
+    return !selectedBoosterCodeList.includes(booster.code)
   })
 
+  console.log(filteredBoosterList)
   return filteredBoosterList
 }

@@ -68,7 +68,7 @@ interface IWeaponMap {
   secondary: Record<string, ISecondaryWeapon>
 }
 
-export const weapons: IWeaponMap = {
+export const weapons = {
   primary: {
     LIBERATOR: {
       displayName: 'AR-23 Liberator',
@@ -267,7 +267,7 @@ export const weapons: IWeaponMap = {
       displayName: 'CQC-5 Combat Hatchet'
     }
   }
-}
+} as const satisfies Readonly<IWeaponMap>
 
 export const primaryWeaponCodeList = Object.keys(weapons.primary) as (keyof typeof weapons.primary)[]
 export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as (keyof typeof weapons.secondary)[]
@@ -290,7 +290,7 @@ export interface IGrenade extends IWeapon {
   archetype: (typeof grenadeArchetypeCodeList)[number]
 }
 
-export const grenades: Record<string, IGrenade> = {
+export const grenades = {
   FRAG: {
     archetype: 'STANDARD',
     displayName: 'G-6 Frag',
@@ -336,6 +336,6 @@ export const grenades: Record<string, IGrenade> = {
     archetype: 'SPECIAL',
     displayName: 'G-50 Seeker'
   }
-}
+} as const
 
 export const grenadeCodeList = Object.keys(grenades) as (keyof typeof grenades)[]

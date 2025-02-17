@@ -7,7 +7,7 @@
       v-for="(player, i) in data.playerList"
       :key="i">
       <div
-        :class="`${playerBorders[player.color as keyof typeof playerBorders]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
+        :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
       <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
@@ -36,7 +36,7 @@
             <img
               class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px]"
               :src="`/weapons/${option.code}.webp`"
-              :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`"
+              :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
             <span class="">{{ option.displayName }}</span>
           </div>
@@ -46,7 +46,7 @@
             <img
               class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
               :src="`/weapons/${option.code}.webp`"
-              :alt="`${(weapons.primary as typeof weapons.primary)[player.primaryWeaponCode].displayName}`"
+              :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
             <span class="whitespace-break-spaces">{{ option.displayName }}</span>
           </div>
@@ -70,7 +70,7 @@
             <img
               class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
               :src="`/weapons/${option.code}.webp`"
-              :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`"
+              :alt="`${weapons.secondary[player.secondaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
             <span class="">{{ option.displayName }}</span>
           </div>
@@ -80,7 +80,7 @@
             <img
               class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
               :src="`/weapons/${option.code}.webp`"
-              :alt="`${(weapons.secondary as typeof weapons.secondary)[player.secondaryWeaponCode].displayName}`"
+              :alt="`${weapons.secondary[player.secondaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
             <span class="whitespace-break-spaces">{{ option.displayName }}</span>
           </div>
@@ -107,7 +107,7 @@
                 <img
                   class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px]"
                   :src="`/grenades/${option.code}.webp`"
-                  :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`"
+                  :alt="`${grenades[player.grenadeCode].displayName}`"
                   v-if="!option.isArchetype" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
@@ -118,7 +118,7 @@
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px]"
                   :src="`/grenades/${option.code}.webp`"
                   v-if="!option.isArchetype"
-                  :alt="`${grenades[player.grenadeCode as keyof typeof grenades].displayName}`" />
+                  :alt="`${grenades[player.grenadeCode].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -151,7 +151,7 @@
                 <img
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black"
                   :src="`/perks/${option.code}.webp`"
-                  :alt="`${perks[player.perkCode as keyof typeof perks].displayName}`" />
+                  :alt="`${perks[player.perkCode].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -175,7 +175,7 @@
                 <img
                   class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black bg-black"
                   :src="`/boosters/${option.code}.webp`"
-                  :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
+                  :alt="`${boosters[player.boosterCode].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
@@ -183,9 +183,11 @@
               <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
                   class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black"
-                  :src="`/boosters/${boosters[option.displayName].code}.webp`"
+                  :src="`/boosters/${option.displayName}.webp`"
                   :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
-                <span class="hyphens-auto text-wrap break-words">{{ boosters[option.displayName].displayName }}</span>
+                <span class="hyphens-auto text-wrap break-words">{{
+                  boosters[option.displayName as keyof typeof boosters].displayName
+                }}</span>
               </div>
             </template>
           </v-select>
@@ -224,7 +226,7 @@
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import StratagemSelect from '@/components/StratagemSelect.vue'
-  import { boosterList, boosters } from '@/data/boosters'
+  import { boosterCodeList, boosterList, boosters } from '@/data/boosters'
   import { perkList, perks } from '@/data/perks'
   import { stratagems } from '@/data/stratagems'
   import {
@@ -286,7 +288,7 @@
         }
 
         if (!player.boosterCode) {
-          data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code as string
+          data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
         }
       })
 

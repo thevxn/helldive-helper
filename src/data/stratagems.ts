@@ -6,7 +6,7 @@ export interface IStratagem {
 }
 
 // New stratagems must be placed at the bottom to keep the index of the existing keys in order to ensure backwards compatibility with existing generated codes
-export const stratagems: Record<string, IStratagem> = {
+export const stratagems = {
   MECH: {
     displayName: 'EXO-45 Patriot Exosuit',
     category: 'VEHICLE'
@@ -255,6 +255,6 @@ export const stratagems: Record<string, IStratagem> = {
     displayName: 'B-100 Portable Hellbomb',
     category: 'BACKPACK'
   }
-}
+} as const
 
 export const stratagemCodeList = Object.keys(stratagems) as (keyof typeof stratagems)[]

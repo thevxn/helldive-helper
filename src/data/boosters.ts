@@ -3,7 +3,7 @@ export interface IBooster {
   code?: string
 }
 
-export const boosters: Record<string, IBooster> = {
+export const boosters = {
   FLEXIBLE_REINFORCEMENT_BUDGET: {
     displayName: 'Flexible Reinforcement Budget'
   },
@@ -43,15 +43,20 @@ export const boosters: Record<string, IBooster> = {
   DEAD_SPRINT: {
     displayName: 'Dead Sprint'
   }
-}
+} as const
 
 export const boosterCodeList = Object.keys(boosters) as (keyof typeof boosters)[]
 
-export const boosterList: (typeof boosters)[keyof typeof boosters][] = []
+export type BoosterWithCode = IBooster & { code: keyof typeof boosters }
+
+// Codes are required due to how inputs work with data, therefore we dynamically create a boosterList which contains boosters + the additional code property for each of them
+export const boosterList: BoosterWithCode[] = []
 
 for (const booster in boosters) {
-  const modifiedBooster = boosters[booster as keyof typeof boosters]
+  const modifiedBooster = {
+    ...boosters[booster as keyof typeof boosters],
+    code: booster as keyof typeof boosters
+  }
 
-  modifiedBooster['code'] = booster
-  boosterList.push(boosters[booster as keyof typeof boosters])
+  boosterList.push(modifiedBooster)
 }
