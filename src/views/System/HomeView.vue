@@ -142,7 +142,7 @@
                 <img
                   class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] rounded border-2 border-solid border-black"
                   :src="`/perks/${option.code}.webp`"
-                  :alt="`${perks[player.perkCode as keyof typeof perks].displayName}`" />
+                  :alt="`${perks[player.perkCode].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{ option.displayName }}</span>
               </div>
             </template>
