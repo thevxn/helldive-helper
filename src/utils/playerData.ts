@@ -70,7 +70,7 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
       playerObject.name,
       primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode),
       secondaryWeaponCodeList.indexOf(playerObject.secondaryWeaponCode),
-      grenadeCodeList.indexOf(playerObject.grenadeCode),
+      grenadeCodeList.indexOf(playerObject.grenadeCode as string),
       ...playerObject.stratagemCodeList.map(stratagem => {
         return stratagemCodeList.indexOf(stratagem)
       }),
