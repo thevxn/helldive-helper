@@ -20,6 +20,5 @@ export const filterSelectedBoosters = (data: IData) => {
     return !selectedBoosterCodeList.includes(booster.code)
   })
 
-  console.log(filteredBoosterList)
   return filteredBoosterList
 }
