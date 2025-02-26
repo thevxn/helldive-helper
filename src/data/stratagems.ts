@@ -258,6 +258,10 @@ export const stratagems = {
   ANTI_TANK_MINES: {
     displayName: 'MD-17 Anti-Tank Mines',
     category: 'STATIONARY'
+  },
+  GAS_MINES: {
+    displayName: 'MD-8 Gas Mines',
+    category: 'STATIONARY'
   }
 } as const
 
