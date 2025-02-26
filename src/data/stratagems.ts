@@ -254,6 +254,10 @@ export const stratagems = {
   PORTABLE_HELLBOMB: {
     displayName: 'B-100 Portable Hellbomb',
     category: 'BACKPACK'
+  },
+  ANTI_TANK_MINES: {
+    displayName: 'MD-17 Anti-Tank Mines',
+    category: 'STATIONARY'
   }
 } as const
 
