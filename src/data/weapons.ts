@@ -336,6 +336,6 @@ export const grenades = {
     archetype: 'SPECIAL',
     displayName: 'G-50 Seeker'
   }
-} as const
+} as const satisfies Readonly<Record<string, IGrenade>>
 
 export const grenadeCodeList = Object.keys(grenades) as (keyof typeof grenades)[]

@@ -263,6 +263,6 @@ export const stratagems = {
     displayName: 'MD-8 Gas Mines',
     category: 'STATIONARY'
   }
-} as const
+} as const satisfies Readonly<Record<string, IStratagem>>
 
 export const stratagemCodeList = Object.keys(stratagems) as (keyof typeof stratagems)[]

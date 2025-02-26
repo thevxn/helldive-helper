@@ -231,7 +231,7 @@
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import StratagemSelect from '@/components/StratagemSelect.vue'
-  import { boosterCodeList, boosterList, boosters } from '@/data/boosters'
+  import { boosterList, boosters } from '@/data/boosters'
   import { perkList, perks } from '@/data/perks'
   import { stratagems } from '@/data/stratagems'
   import {
