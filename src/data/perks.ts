@@ -48,8 +48,12 @@ export const perks = {
   },
   INTEGRATED_EXPLOSIVES: {
     displayName: 'Integrated Explosives'
+  },
+  GUNSLINGER: {
+    // TODO: update placeholder icon
+    displayName: 'Gunslinger'
   }
-} as const
+} as const satisfies Readonly<Record<string, IPerk>>
 
 export const perkCodeList = Object.keys(perks) as (keyof typeof perks)[]
 

@@ -42,8 +42,12 @@ export const boosters = {
   },
   DEAD_SPRINT: {
     displayName: 'Dead Sprint'
+  },
+  SAMPLE_EXTRICATOR: {
+    // TODO: update placeholder icon
+    displayName: 'Sample Extricator'
   }
-} as const
+} as const satisfies Readonly<Record<string, IBooster>>
 
 export const boosterCodeList = Object.keys(boosters) as (keyof typeof boosters)[]
 

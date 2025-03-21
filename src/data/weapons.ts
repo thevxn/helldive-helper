@@ -206,6 +206,10 @@ export const weapons = {
     DOUBLE_EDGE_SICKLE: {
       archetype: 'ENERGY',
       displayName: 'LAS-17 Double-Edge Sickle'
+    },
+    DEADEYE: {
+      archetype: 'MR',
+      displayName: 'R-6 Deadeye'
     }
   },
   secondary: {
@@ -265,6 +269,10 @@ export const weapons = {
     HATCHET: {
       archetype: 'MELEE',
       displayName: 'CQC-5 Combat Hatchet'
+    },
+    TALON: {
+      archetype: 'SPECIAL',
+      displayName: 'LAS-58 Talon'
     }
   }
 } as const satisfies Readonly<IWeaponMap>
@@ -335,6 +343,10 @@ export const grenades = {
   SEEKER: {
     archetype: 'SPECIAL',
     displayName: 'G-50 Seeker'
+  },
+  DYNAMITE: {
+    archetype: 'SPECIAL',
+    displayName: 'TED-63 Dynamite'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
