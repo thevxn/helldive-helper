@@ -52,7 +52,7 @@ export const createAndSortWeapons = (
 
 // Sorts stratagems based on their category so that all stratagems of the same category are next to each other in the select
 export const sortStratagems = (stratagemList: typeof stratagemCodeList) => {
-  const sortedStratagemList: (keyof typeof stratagems)[] = [] as (keyof typeof stratagems)[]
+  const sortedStratagemList: (keyof typeof stratagems)[] = []
 
   stratagemCategories.map(category => {
     stratagemList.map(stratagem => {

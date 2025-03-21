@@ -1,4 +1,4 @@
-export const stratagemCategories = ['VEHICLE', 'WEAPON', 'BACKPACK', 'ORBITAL', 'EAGLE', 'STATIONARY'] as const
+export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const
 
 export interface IStratagem {
   displayName: string
@@ -262,6 +262,10 @@ export const stratagems = {
   GAS_MINES: {
     displayName: 'MD-8 Gas Mines',
     category: 'STATIONARY'
+  },
+  HOVER_PACK: {
+    displayName: 'B-100 LIFT-860 Hover Pack',
+    category: 'BACKPACK'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 
