@@ -44,7 +44,6 @@ export const boosters = {
     displayName: 'Dead Sprint'
   },
   SAMPLE_EXTRICATOR: {
-    // TODO: update placeholder icon
     displayName: 'Sample Extricator'
   }
 } as const satisfies Readonly<Record<string, IBooster>>

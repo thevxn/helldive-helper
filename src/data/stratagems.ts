@@ -264,7 +264,6 @@ export const stratagems = {
     category: 'STATIONARY'
   },
   HOVER_PACK: {
-    // TODO: update placeholder icon
     displayName: 'B-100 LIFT-860 Hover Pack',
     category: 'BACKPACK'
   }
