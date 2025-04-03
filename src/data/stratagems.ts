@@ -1,3 +1,4 @@
+import { boosterCodeList } from './boosters'
 export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const
 
 export interface IStratagem {
@@ -266,6 +267,10 @@ export const stratagems = {
   HOVER_PACK: {
     displayName: 'B-100 LIFT-860 Hover Pack',
     category: 'BACKPACK'
+  },
+  GRENADIER_BATTLEMENT: {
+    displayName: 'E/GL-21 Grenadier Battlement',
+    category: 'STATIONARY'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 
