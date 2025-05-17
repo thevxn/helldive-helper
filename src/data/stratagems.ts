@@ -271,6 +271,10 @@ export const stratagems = {
   GRENADIER_BATTLEMENT: {
     displayName: 'E/GL-21 Grenadier Battlement',
     category: 'STATIONARY'
+  },
+  ONE_TRUE_FLAG: {
+    displayName: 'CQC-1 One True Flag',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 

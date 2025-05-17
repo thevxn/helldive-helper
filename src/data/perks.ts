@@ -52,6 +52,10 @@ export const perks = {
   GUNSLINGER: {
     // TODO: update placeholder icon
     displayName: 'Gunslinger'
+  },
+  REINFORCED_EPAULETTES: {
+    // TODO: update placeholder icon
+    displayName: 'Reinforced Epaulettes'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 

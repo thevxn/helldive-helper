@@ -45,6 +45,9 @@ export const boosters = {
   },
   SAMPLE_EXTRICATOR: {
     displayName: 'Sample Extricator'
+  },
+  SAMPLE_SCANNER: {
+    displayName: 'Sample Scanner'
   }
 } as const satisfies Readonly<Record<string, IBooster>>
 
