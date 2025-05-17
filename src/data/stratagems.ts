@@ -1,4 +1,3 @@
-import { boosterCodeList } from './boosters'
 export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const
 
 export interface IStratagem {
