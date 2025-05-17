@@ -210,6 +210,10 @@ export const weapons = {
     DEADEYE: {
       archetype: 'MR',
       displayName: 'R-6 Deadeye'
+    },
+    AMENDMENT: {
+      archetype: 'MR',
+      displayName: 'R-2 Amendment'
     }
   },
   secondary: {
@@ -273,6 +277,10 @@ export const weapons = {
     TALON: {
       archetype: 'SPECIAL',
       displayName: 'LAS-58 Talon'
+    },
+    SABER: {
+      archetype: 'MELEE',
+      displayName: 'CQC-2 Saber'
     }
   }
 } as const satisfies Readonly<IWeaponMap>
@@ -347,6 +355,10 @@ export const grenades = {
   DYNAMITE: {
     archetype: 'SPECIAL',
     displayName: 'TED-63 Dynamite'
+  },
+  PYROTECH: {
+    archetype: 'SPECIAL',
+    displayName: 'G-142 Pyrotech'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
