@@ -35,7 +35,6 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       perkCode: perkCodeList[playerArray[9] as number],
       boosterCode: boosterCodeList[playerArray[10] as number]
     })
-    logger.debug(playerArray[9])
   })
 
   logger.debug(`Parsed input: `)

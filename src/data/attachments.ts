@@ -1,4 +1,4 @@
-const attachmentCategories = ['OPTICS', 'UNDERBARREL', 'MAGAZINE', 'MUZZLE'] as const
+export const attachmentCategories = ['OPTICS', 'MUZZLE', 'UNDERBARREL', 'MAGAZINE'] as const
 
 export interface IAttachment {
   code?: string
@@ -8,7 +8,7 @@ export interface IAttachment {
   //   default?: boolean
 }
 
-const attachments = {
+export const attachments = {
   REFLEX_SIGHT: {
     displayName: 'Reflex Sight',
     category: 'OPTICS'

@@ -1,3 +1,5 @@
+import type { IAttachment, attachmentCategories, attachments } from '@/data/attachments'
+
 /*
  * Primary & Secondary Weapons
  */
@@ -58,14 +60,7 @@ export interface IWeapon {
 export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
   // TODO: Make required when done
-  attachments?: {
-    MUZZLE: [
-      {
-        code: 'F'
-        default: true
-      }
-    ]
-  }
+  attachments?: Record<(typeof attachmentCategories)[number], Record<keyof typeof attachments, { default?: boolean }>>
 }
 
 export interface ISecondaryWeapon extends IWeapon {
@@ -82,8 +77,23 @@ export const weapons = {
     LIBERATOR: {
       displayName: 'AR-23 Liberator',
       default: true,
-      archetype: 'AR'
-      // attachments: []
+      archetype: 'AR',
+      attachments: {
+        OPTICS: {
+          REFLEX_SIGHT: {}
+        },
+        MUZZLE: {
+          MUZZLE_BRAKE: {
+            default: true
+          }
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {}
+        },
+        MAGAZINE: {
+          DRUM_MAGAZINE: {}
+        }
+      }
     },
     LIBERATOR_CONCUSSIVE: {
       displayName: 'AR-23C Liberator Concussive',
