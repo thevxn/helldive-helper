@@ -67,6 +67,11 @@
   max-width: calc(100% - 30px);
 }
 
+.vs__selected,
+.vs__dropdown-toggle {
+  border: none !important;
+}
+
 .custom-select .vs__selected {
   display: block;
   white-space: nowrap;

@@ -57,6 +57,15 @@ export interface IWeapon {
 
 export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
+  // TODO: Make required when done
+  attachments?: {
+    MUZZLE: [
+      {
+        code: 'F'
+        default: true
+      }
+    ]
+  }
 }
 
 export interface ISecondaryWeapon extends IWeapon {
@@ -74,6 +83,7 @@ export const weapons = {
       displayName: 'AR-23 Liberator',
       default: true,
       archetype: 'AR'
+      // attachments: []
     },
     LIBERATOR_CONCUSSIVE: {
       displayName: 'AR-23C Liberator Concussive',

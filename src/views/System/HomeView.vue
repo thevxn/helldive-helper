@@ -18,40 +18,45 @@
         :placeholder="player.name"
         class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
+
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
-      <v-select
-        name="primary"
-        :id="`primary-${i}`"
-        class="custom-select h-[82px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300"
-        v-model="player.primaryWeaponCode"
-        :options="createAndSortWeapons(primaryArchetypes)"
-        label="displayName"
-        :reduce="(weapon: IPrimaryWeapon) => weapon.code"
-        :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
-        :components="{ Deselect: null }"
-        :filter-by="filterOptions"
-        :searchable="config.forms.searchable">
-        <template #option="option">
-          <div class="flex flex-row items-center justify-start gap-2">
-            <img
-              class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px]"
-              :src="`/weapons/${option.code}.webp`"
-              :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
-              v-if="!option.isArchetype" />
-            <span class="">{{ option.displayName }}</span>
-          </div>
-        </template>
-        <template #selected-option="option">
-          <div class="flex flex-row items-center justify-start gap-2">
-            <img
-              class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
-              :src="`/weapons/${option.code}.webp`"
-              :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
-              v-if="!option.isArchetype" />
-            <span class="whitespace-break-spaces">{{ option.displayName }}</span>
-          </div>
-        </template>
-      </v-select>
+      <div class="flex w-full flex-col gap-4 sm:flex-row">
+        <v-select
+          name="primary"
+          :id="`primary-${i}`"
+          class="custom-select min-h-[135px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300 sm:w-2/3"
+          v-model="player.primaryWeaponCode"
+          :options="createAndSortWeapons(primaryArchetypes)"
+          label="displayName"
+          :reduce="(weapon: IPrimaryWeapon) => weapon.code"
+          :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
+          :components="{ Deselect: null }"
+          :filter-by="filterOptions"
+          :searchable="config.forms.searchable">
+          <template #option="option">
+            <div class="flex flex-col items-center justify-center gap-2 sm:justify-start">
+              <img
+                class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px]"
+                :src="`/weapons/${option.code}.webp`"
+                :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
+                v-if="!option.isArchetype" />
+              <span class="">{{ option.displayName }}</span>
+            </div>
+          </template>
+          <template #selected-option="option">
+            <div class="flex flex-col justify-center gap-2">
+              <img
+                class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
+                :src="`/weapons/${option.code}.webp`"
+                :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
+                v-if="!option.isArchetype" />
+              <span class="whitespace-break-spaces">{{ option.displayName }}</span>
+            </div>
+          </template>
+        </v-select>
+        <div class="w-full sm:w-1/3">Attachments</div>
+      </div>
+
       <label :for="`secondary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Secondary Weapon:</label>
       <v-select
         name="secondary"
