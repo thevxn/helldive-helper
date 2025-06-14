@@ -285,6 +285,10 @@ export const weapons = {
     SABER: {
       archetype: 'MELEE',
       displayName: 'CQC-2 Saber'
+    },
+    WARRANT: {
+      displayName: 'P-92 Warrant',
+      archetype: 'AMMO'
     }
   }
 } as const satisfies Readonly<IWeaponMap>
