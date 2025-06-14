@@ -214,6 +214,10 @@ export const weapons = {
     AMENDMENT: {
       archetype: 'MR',
       displayName: 'R-2 Amendment'
+    },
+    PACIFIER: {
+      archetype: 'AR',
+      displayName: 'AR-32 Pacifier'
     }
   },
   secondary: {
@@ -359,6 +363,10 @@ export const grenades = {
   PYROTECH: {
     archetype: 'SPECIAL',
     displayName: 'G-142 Pyrotech'
+  },
+  URCHIN: {
+    archetype: 'SPECIAL',
+    displayName: 'G-109 Urchin'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 

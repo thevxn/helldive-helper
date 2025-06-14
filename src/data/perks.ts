@@ -54,6 +54,9 @@ export const perks = {
   },
   REINFORCED_EPAULETTES: {
     displayName: 'Reinforced Epaulettes'
+  },
+  BALLISTIC_PADDING: {
+    displayName: 'Ballistic Padding'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 
