@@ -48,6 +48,9 @@ export const boosters = {
   },
   SAMPLE_SCANNER: {
     displayName: 'Sample Scanner'
+  },
+  STUN_PODS: {
+    displayName: 'Stun Pods'
   }
 } as const satisfies Readonly<Record<string, IBooster>>
 

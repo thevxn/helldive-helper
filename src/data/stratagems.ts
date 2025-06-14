@@ -274,6 +274,15 @@ export const stratagems = {
   ONE_TRUE_FLAG: {
     displayName: 'CQC-1 One True Flag',
     category: 'WEAPON'
+  },
+  // TODO: Fix name?
+  DEESCALATOR: {
+    displayName: 'GL-52 De-Escalator',
+    category: 'WEAPON'
+  },
+  GUARD_DOG_K9: {
+    displayName: 'AX/ARC-3 "Guard Dog" K-9',
+    category: 'BACKPACK'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 
