@@ -1,3 +1,9 @@
+import {
+  magazineAttachmentList,
+  muzzleAttachmentList,
+  opticsAttachmentList,
+  underbarrelAttachmentList
+} from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import { perkCodeList } from '@/data/perks'
 import { stratagemCodeList } from '@/data/stratagems'
@@ -17,11 +23,11 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
   } as IData
 
   // const inputDataMock = [
-  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0]
+  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
+  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]
   // ]
 
   data.map(playerArray => {
@@ -33,7 +39,13 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       stratagemCodeList: createStratagemCodeList(playerArray.slice(4, 8) as number[]),
       color: playerColorsList[playerArray[8] as number] as IPlayerColor,
       perkCode: perkCodeList[playerArray[9] as number],
-      boosterCode: boosterCodeList[playerArray[10] as number]
+      boosterCode: boosterCodeList[playerArray[10] as number],
+      primaryWeaponAttachments: {
+        OPTICS: playerArray[11] !== -1 ? opticsAttachmentList[playerArray[11] as number] : undefined,
+        MUZZLE: playerArray[12] !== -1 ? muzzleAttachmentList[playerArray[12] as number] : undefined,
+        UNDERBARREL: playerArray[13] !== -1 ? underbarrelAttachmentList[playerArray[13] as number] : undefined,
+        MAGAZINE: playerArray[14] !== -1 ? magazineAttachmentList[playerArray[14] as number] : undefined
+      }
     })
   })
 
@@ -55,11 +67,11 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
 
 export const createPlayerDataOutput = (inputData: IData): Array<Array<string | number>> => {
   // const outputDataMock = [
-  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-  //  ['player4', , 0, 0, 0, 0, 0, 0, 3, 0, 0]
+  //   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
+  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]
   // ]
 
   const output: Array<Array<string | number>> = []
@@ -75,7 +87,19 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
       }),
       playerColorsList.indexOf(playerObject.color),
       perkCodeList.indexOf(playerObject.perkCode),
-      boosterCodeList.indexOf(playerObject.boosterCode)
+      boosterCodeList.indexOf(playerObject.boosterCode),
+      playerObject.primaryWeaponAttachments.OPTICS
+        ? opticsAttachmentList.indexOf(playerObject.primaryWeaponAttachments.OPTICS)
+        : -1,
+      playerObject.primaryWeaponAttachments.MUZZLE
+        ? muzzleAttachmentList.indexOf(playerObject.primaryWeaponAttachments.MUZZLE)
+        : -1,
+      playerObject.primaryWeaponAttachments.UNDERBARREL
+        ? underbarrelAttachmentList.indexOf(playerObject.primaryWeaponAttachments.UNDERBARREL)
+        : -1,
+      playerObject.primaryWeaponAttachments.MAGAZINE
+        ? magazineAttachmentList.indexOf(playerObject.primaryWeaponAttachments.MAGAZINE)
+        : -1
     ])
   })
 

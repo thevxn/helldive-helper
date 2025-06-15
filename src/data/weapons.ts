@@ -1,4 +1,4 @@
-import type { IAttachment, attachmentCategories, attachments } from '@/data/attachments'
+import type { AttachmentCategory, attachments } from '@/data/attachments'
 
 /*
  * Primary & Secondary Weapons
@@ -57,17 +57,13 @@ export interface IWeapon {
   archetype?: unknown
 }
 
-// For a given category, get all attachment keys with that category
-type AttachmentKeysForCategory<C extends (typeof attachmentCategories)[number]> = {
-  [K in keyof typeof attachments]: (typeof attachments)[K]['category'] extends C ? K : never
-}[keyof typeof attachments]
-
 export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
-  // TODO: Make required when done
-  attachments?: {
-    [C in (typeof attachmentCategories)[number]]?: {
-      [K in AttachmentKeysForCategory<C>]?: { default?: boolean }
+  attachments: {
+    [C in AttachmentCategory]?: {
+      [A in keyof (typeof attachments)[C]]?: {
+        default?: boolean
+      }
     }
   }
 }
@@ -121,143 +117,178 @@ export const weapons = {
     },
     LIBERATOR_CONCUSSIVE: {
       displayName: 'AR-23C Liberator Concussive',
-      archetype: 'AR'
+      archetype: 'AR',
+      attachments: {}
     },
     LIBERATOR_PENETRATOR: {
       displayName: 'AR-23P Liberator Penetrator',
-      archetype: 'AR'
+      archetype: 'AR',
+      attachments: {}
     },
     LIBERATOR_CARBINE: {
       archetype: 'AR',
-      displayName: 'AR-23A Liberator Carbine'
+      displayName: 'AR-23A Liberator Carbine',
+      attachments: {}
     },
     ADJUDICATOR: {
       displayName: 'BR-14 Adjudicator',
-      archetype: 'AR'
+      archetype: 'AR',
+      attachments: {}
     },
     TENDERIZER: {
       displayName: 'AR-61 Tenderizer',
-      archetype: 'AR'
+      archetype: 'AR',
+      attachments: {}
     },
     DILIGENCE: {
       displayName: 'R-63 Diligence',
-      archetype: 'MR'
+      archetype: 'MR',
+      attachments: {}
     },
     DILIGENCE_COUNTER_SNIPER: {
       displayName: 'R-63CS Diligence Counter Sniper',
-      archetype: 'MR'
+      archetype: 'MR',
+      attachments: {}
     },
     KNIGHT: {
       displayName: 'MP-98 Knight',
-      archetype: 'SMG'
+      archetype: 'SMG',
+      attachments: {}
     },
     DEFENDER: {
       displayName: 'SMG-37 Defender',
-      archetype: 'SMG'
+      archetype: 'SMG',
+      attachments: {}
     },
     PUMMELER: {
       displayName: 'SMG-72 Pummeler',
-      archetype: 'SMG'
+      archetype: 'SMG',
+      attachments: {}
     },
     PUNISHER: {
       displayName: 'SG-8 Punisher',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     BREAKER: {
       displayName: 'SG-225 Breaker',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     SLUGGER: {
       displayName: 'SG-8S Slugger',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     BREAKER_SPRAY_AND_PRAY: {
       displayName: 'SG-225SP Breaker Spray&Pray',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     BREAKER_INCENDIARY: {
       displayName: 'SG-225IE Breaker Incendiary',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     SCYTHE: {
       displayName: 'LAS-5 Scythe',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     SCORCHER: {
       displayName: 'PLAS-1 Scorcher',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     BLITZER: {
       displayName: 'Arc-12 Blitzer',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     SICKLE: {
       displayName: 'LAS-16 Sickle',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     PUNISHER_PLASMA: {
       displayName: 'SG-8P Punisher Plasma',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     ERUPTOR: {
       displayName: 'R-36 Eruptor',
-      archetype: 'EXPLOSIVE'
+      archetype: 'EXPLOSIVE',
+      attachments: {}
     },
     EXPLODING_CROSSBOW: {
       displayName: 'CB-9 Exploding Crossbow',
-      archetype: 'EXPLOSIVE'
+      archetype: 'EXPLOSIVE',
+      attachments: {}
     },
     DOMINATOR: {
       displayName: 'JAR-5 Dominator',
-      archetype: 'SPECIAL'
+      archetype: 'SPECIAL',
+      attachments: {}
     },
     PURIFIER: {
       displayName: 'PLAS-101 Purifier',
-      archetype: 'ENERGY'
+      archetype: 'ENERGY',
+      attachments: {}
     },
     COOKOUT: {
       displayName: 'SG-451 Cookout',
-      archetype: 'SHOTGUN'
+      archetype: 'SHOTGUN',
+      attachments: {}
     },
     TORCHER: {
       displayName: 'FLAM-66 Torcher',
-      archetype: 'SPECIAL'
+      archetype: 'SPECIAL',
+      attachments: {}
     },
     CONSTITUTION: {
       archetype: 'MR',
-      displayName: 'R-2124 Constitution'
+      displayName: 'R-2124 Constitution',
+      attachments: {}
     },
     HALT: {
       archetype: 'SHOTGUN',
-      displayName: 'SG-20 Halt'
+      displayName: 'SG-20 Halt',
+      attachments: {}
     },
     REPRIMAND: {
       archetype: 'SMG',
-      displayName: 'SMG-32 Reprimand'
+      displayName: 'SMG-32 Reprimand',
+      attachments: {}
     },
     STA_52: {
       archetype: 'AR',
-      displayName: 'StA-52 Assault Rifle'
+      displayName: 'StA-52 Assault Rifle',
+      attachments: {}
     },
     STA_11: {
       archetype: 'SMG',
-      displayName: 'StA-11 SMG'
+      displayName: 'StA-11 SMG',
+      attachments: {}
     },
     ACCELERATOR: {
       archetype: 'SR',
-      displayName: 'PLAS-39 Accelerator Rifle'
+      displayName: 'PLAS-39 Accelerator Rifle',
+      attachments: {}
     },
     DOUBLE_EDGE_SICKLE: {
       archetype: 'ENERGY',
-      displayName: 'LAS-17 Double-Edge Sickle'
+      displayName: 'LAS-17 Double-Edge Sickle',
+      attachments: {}
     },
     DEADEYE: {
       archetype: 'MR',
-      displayName: 'R-6 Deadeye'
+      displayName: 'R-6 Deadeye',
+      attachments: {}
     },
     AMENDMENT: {
       archetype: 'MR',
-      displayName: 'R-2 Amendment'
+      displayName: 'R-2 Amendment',
+      attachments: {}
     }
   },
   secondary: {
