@@ -24,6 +24,7 @@ interface IPlayer {
 
 export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
+// TODO: Add default attachments
 const defaultPlayerList: IPlayer[] = [
   {
     name: 'Squad Leader',
@@ -40,37 +41,40 @@ const defaultPlayerList: IPlayer[] = [
       UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
       MAGAZINE: 'EXTENDED_MAGAZINE'
     }
+  },
+  {
+    name: 'Light AT/Support',
+    primaryWeaponCode: 'BREAKER',
+    secondaryWeaponCode: 'REDEEMER',
+    grenadeCode: 'STUN',
+    stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'SUPPLY_PACK', 'EAT'],
+    perkCode: 'EXTRA_PADDING',
+    boosterCode: 'VITALITY_ENHANCEMENT',
+    color: 'green',
+    primaryWeaponAttachments: {}
+  },
+  {
+    name: 'Grenadier',
+    primaryWeaponCode: 'DEFENDER',
+    secondaryWeaponCode: 'REDEEMER',
+    grenadeCode: 'IMPACT',
+    stratagemCodeList: ['EAGLE_CLUSTER_BOMB', 'ORBITAL_AIRBURST_STRIKE', 'SHIELD_GENERATOR_PACK', 'GRENADE_LAUNCHER'],
+    perkCode: 'EXTRA_PADDING',
+    boosterCode: 'STAMINA_ENHANCEMENT',
+    color: 'blue',
+    primaryWeaponAttachments: {}
+  },
+  {
+    name: 'Autocannon Operator',
+    primaryWeaponCode: 'BREAKER',
+    secondaryWeaponCode: 'REDEEMER',
+    grenadeCode: 'HIGH_EXPLOSIVE',
+    stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'AUTOCANNON_SENTRY', 'AUTOCANNON'],
+    perkCode: 'EXTRA_PADDING',
+    boosterCode: 'LOCALIZATION_CONFUSION',
+    color: 'pink',
+    primaryWeaponAttachments: {}
   }
-  // {
-  //   name: 'Light AT/Support',
-  //   primaryWeaponCode: 'BREAKER',
-  //   secondaryWeaponCode: 'REDEEMER',
-  //   grenadeCode: 'STUN',
-  //   stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'SUPPLY_PACK', 'EAT'],
-  //   perkCode: 'EXTRA_PADDING',
-  //   boosterCode: 'VITALITY_ENHANCEMENT',
-  //   color: 'green'
-  // },
-  // {
-  //   name: 'Grenadier',
-  //   primaryWeaponCode: 'DEFENDER',
-  //   secondaryWeaponCode: 'REDEEMER',
-  //   grenadeCode: 'IMPACT',
-  //   stratagemCodeList: ['EAGLE_CLUSTER_BOMB', 'ORBITAL_AIRBURST_STRIKE', 'SHIELD_GENERATOR_PACK', 'GRENADE_LAUNCHER'],
-  //   perkCode: 'EXTRA_PADDING',
-  //   boosterCode: 'STAMINA_ENHANCEMENT',
-  //   color: 'blue'
-  // },
-  // {
-  //   name: 'Autocannon Operator',
-  //   primaryWeaponCode: 'BREAKER',
-  //   secondaryWeaponCode: 'REDEEMER',
-  //   grenadeCode: 'HIGH_EXPLOSIVE',
-  //   stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'AUTOCANNON_SENTRY', 'AUTOCANNON'],
-  //   perkCode: 'EXTRA_PADDING',
-  //   boosterCode: 'LOCALIZATION_CONFUSION',
-  //   color: 'pink'
-  // }
 ]
 
 export const getDefaultData = (existingPlayerListLength: number): IData => {
