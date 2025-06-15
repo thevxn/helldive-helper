@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 
+import type { PrimaryWeaponAttachments } from '@/data/attachments'
 import type { boosterCodeList } from '@/data/boosters'
 import type { perks } from '@/data/perks'
 import type { stratagems } from '@/data/stratagems'
@@ -18,6 +19,7 @@ interface IPlayer {
   grenadeCode: keyof typeof grenades
   stratagemCodeList: (keyof typeof stratagems)[]
   color: IPlayerColor
+  primaryWeaponAttachments: PrimaryWeaponAttachments
 }
 
 export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'

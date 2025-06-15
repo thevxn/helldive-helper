@@ -57,10 +57,19 @@ export interface IWeapon {
   archetype?: unknown
 }
 
+// For a given category, get all attachment keys with that category
+type AttachmentKeysForCategory<C extends (typeof attachmentCategories)[number]> = {
+  [K in keyof typeof attachments]: (typeof attachments)[K]['category'] extends C ? K : never
+}[keyof typeof attachments]
+
 export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
   // TODO: Make required when done
-  attachments?: Record<(typeof attachmentCategories)[number], Record<keyof typeof attachments, { default?: boolean }>>
+  attachments?: {
+    [C in (typeof attachmentCategories)[number]]?: {
+      [K in AttachmentKeysForCategory<C>]?: { default?: boolean }
+    }
+  }
 }
 
 export interface ISecondaryWeapon extends IWeapon {
@@ -80,17 +89,32 @@ export const weapons = {
       archetype: 'AR',
       attachments: {
         OPTICS: {
-          REFLEX_SIGHT: {}
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
         },
         MUZZLE: {
-          MUZZLE_BRAKE: {
-            default: true
-          }
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
         },
         UNDERBARREL: {
-          NO_UNDERBARREL: {}
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {
+            default: true
+          },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
           DRUM_MAGAZINE: {}
         }
       }
