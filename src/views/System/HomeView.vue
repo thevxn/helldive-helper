@@ -11,8 +11,10 @@
         :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
+
       <!-- Helldiver helmet image -->
       <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
+
       <!-- Player name input -->
       <input
         :id="`name-${i}`"
@@ -70,6 +72,7 @@
         </div>
       </div>
 
+      <!-- Secondary weapon select -->
       <label :for="`secondary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Secondary Weapon:</label>
       <v-select
         name="secondary"
@@ -104,8 +107,11 @@
           </div>
         </template>
       </v-select>
+
+      <!-- Row with Grenade, Perk and Booster selects -->
       <div class="flex w-full flex-row justify-center gap-2">
         <div class="flex w-[33%] flex-col">
+          <!-- Grenade select -->
           <label :for="`grenade-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Grenade:</label>
           <v-select
             name="grenade"
@@ -142,7 +148,9 @@
             </template>
           </v-select>
         </div>
+
         <div class="flex w-[33%] flex-col">
+          <!-- Perk select -->
           <label :for="`perk-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Perk:</label>
           <v-select
             name="perk"
@@ -175,7 +183,9 @@
             </template>
           </v-select>
         </div>
+
         <div class="flex w-[33%] flex-col">
+          <!-- Booster select -->
           <label :for="`booster-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Booster:</label>
           <v-select
             name="booster"
@@ -216,6 +226,8 @@
           </v-select>
         </div>
       </div>
+
+      <!-- Stratagem icon tray -->
       <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
       <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
         <StratagemSelect
@@ -233,6 +245,8 @@
           @click="toggleStratagemSelect(i, j)" />
       </div>
     </div>
+
+    <!-- Copy Link button -->
     <div class="flex w-full flex-row content-center justify-center" tabindex="0">
       <button
         class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
@@ -311,6 +325,7 @@
         }
 
         if (!player.boosterCode) {
+          // Returns the first booster which is not in use yet to be used as the default one for the given player
           data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
         }
       })
