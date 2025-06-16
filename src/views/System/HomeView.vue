@@ -303,6 +303,7 @@
     }
   }
 
+  // Expose the playerCount variable along with functions to modify it in the parent component
   defineExpose({
     addMember,
     removeMember,
@@ -332,6 +333,7 @@
 
       const router = useRouter()
 
+      // Remove the data string from the url once it is parsed successfully
       router.replace({ query: undefined })
     } catch (e) {
       logger.error(e)
@@ -348,7 +350,8 @@
       }
 
       if (!player.boosterCode) {
-        data.value.playerList[i].boosterCode = 'HELLPOD_SPACE_OPTIMIZATION'
+        // Returns the first booster which is not in use yet to be used as the default one for the given player
+        data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
       }
     })
   } else {
