@@ -1,4 +1,4 @@
-import type { IData } from './defaults'
+import type { IData } from '../data/defaults'
 
 import { boosterList, type boosters } from '@/data/boosters'
 import type { IWeapon } from '@/data/weapons'

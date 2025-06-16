@@ -6,11 +6,14 @@
       :class="`border-4 border-solid border-yellow-300`"
       v-for="(player, i) in data.playerList"
       :key="i">
+      <!-- Colored label -->
       <div
         :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
+      <!-- Helldiver helmet image -->
       <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
+      <!-- Player name input -->
       <input
         :id="`name-${i}`"
         name="squad-member-name"
@@ -19,6 +22,7 @@
         class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
 
+      <!-- Primary weapon select -->
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
       <div class="flex w-full flex-col gap-4 sm:flex-row">
         <v-select
@@ -54,7 +58,16 @@
             </div>
           </template>
         </v-select>
-        <div class="w-full sm:w-1/3">Attachments</div>
+        <!-- Primary attachments -->
+        <div
+          class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
+          <div
+            class="flex h-[48%] max-h-[44px] w-[48%] max-w-[64px] flex-row items-center justify-center rounded border-2 border-yellow-300 sm:max-h-[64px]"
+            v-for="attachment in player.primaryWeaponAttachments"
+            :key="attachment">
+            <img :src="`/attachments/primary/${attachment}.webp`" class="h-full w-full" />
+          </div>
+        </div>
       </div>
 
       <label :for="`secondary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Secondary Weapon:</label>
@@ -237,7 +250,9 @@
 
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { boosterList, boosters } from '@/data/boosters'
+  import { type IData, getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
+  import { createBase64DataString, parsePlayerDataInput } from '@/data/playerData'
   import { stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
@@ -251,10 +266,8 @@
   import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import router from '@/router'
   import { config } from '@/utils/config'
-  import { type IData, getDefaultData } from '@/utils/defaults'
   import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
-  import { createBase64DataString, parsePlayerDataInput } from '@/utils/playerData'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
 

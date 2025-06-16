@@ -5,10 +5,10 @@ import {
   underbarrelAttachmentList
 } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
+import type { IData, IPlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
 import { stratagemCodeList } from '@/data/stratagems'
 import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
-import type { IData, IPlayerColor } from '@/utils/defaults'
 import { Logger } from '@/utils/logger'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
