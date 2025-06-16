@@ -50,12 +50,13 @@ export const perks = {
     displayName: 'Integrated Explosives'
   },
   GUNSLINGER: {
-    // TODO: update placeholder icon
     displayName: 'Gunslinger'
   },
   REINFORCED_EPAULETTES: {
-    // TODO: update placeholder icon
     displayName: 'Reinforced Epaulettes'
+  },
+  BALLISTIC_PADDING: {
+    displayName: 'Ballistic Padding'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 
