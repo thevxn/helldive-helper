@@ -233,7 +233,7 @@
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           @stratagem-selected="handleStratagemSelection"
-          ref="modalRef"
+          ref="modalsRef"
           :id="`stratagem-select-${i}`" />
         <img
           :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${activeStratagemSelect[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
@@ -286,17 +286,23 @@
   import { playerBorders } from '@/utils/styles'
 
   const logger = Logger()
+
   const toast: ToastPluginApi = inject('toast') as ToastPluginApi
+
   const data = ref() as Ref<IData>
+
   const route = useRoute()
+
   // Add/remove squad members
   // Min 1, max 4
   const playerCount = ref()
+
   const addMember = () => {
     if (data.value.playerList.length < 4) {
       data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
     }
   }
+
   const removeMember = () => {
     if (data.value.playerList.length > 1) {
       data.value.playerList.pop()
@@ -379,23 +385,62 @@
 
     return
   }
+
+  /**
+   * Stores information on which stratagem select modals are currently active.
+   * There can be at most 1 modal active per player.
+   * Each player can be actively choosing only 1 stratagem at a time out of the 4 stratagems total.
+   * At most, 4 modals can be open at the same time (with 4 players present).
+   * Currently it's only used to highlight the stratagem being chosen with a yellow border.
+   */
   const activeStratagemSelect = ref([
+    // Player 1, Stratagems 1 - 4
     [false, false, false, false],
+    // Player 2, Stratagems 1 - 4
     [false, false, false, false],
+    // Player 3, Stratagems 1 - 4
     [false, false, false, false],
+    // Player 4, Stratagems 1 - 4
     [false, false, false, false]
   ])
-  const modalRef = ref()
+
+  /**
+   * Refers to the active modal window instances
+   */
+  const modalsRef = ref() as Ref<Array<InstanceType<typeof StratagemSelect>>>
+
+  /**
+   * Toggles the stratagem select modal for a given player and slot.
+   *
+   * This function is triggered when a user clicks a stratagem icon to either open the select modal
+   * or choose a stratagem from it.
+   *
+   * First, it maps over the `activeStratagemSelect` 2D array, setting false in every position not matching the `position` for the correct `playerIndex` and toggling the value
+   * in the matching  position. This controls the yellow highlight of the stratagem position being selected. Then it toggles the modal window for the corresponding
+   * `playerIndex` and `position`, either opening or closing the modal based on the current state.
+   *
+   * @param playerIndex - Index of the player for whom the stratagem select modal should be opened.
+   * @param position - Index of the stratagem slot being toggled.
+   */
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
     logger.debug(playerIndex, position)
+
+    // Toggle the yellow highlight border, hiding it from stratagems whose select is being closed
+    // and displaying it for the stratagem whose select is being opened.
     activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
+      // If the current player array does not belong to the player whose stratagem select was triggered,
+      // just copy their current array to the new resulting state.
       if (i !== playerIndex) {
         return player
       } else {
+        // Otherwise, iterate through all the stratagem positions (1 - 4, indexes 0 - 3), creating the new state.
         return player.map((_el, j) => {
+          // If the position equals to the stratagem which was just selected or opened, toggle its state.
           if (j === position) {
             return !player[j]
           } else {
+            // If the position does not equal to the stratagem which was just selected or opened, set its state to closed,
+            // making sure the previous modal's highlight border (if present) gets hidden.
             return false
           }
         })
@@ -406,16 +451,35 @@
       document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
     })
 
-    if (modalRef.value[playerIndex].playerIndex === playerIndex && modalRef.value[playerIndex].position === position) {
-      modalRef.value[playerIndex].displayOff()
-      modalRef.value[playerIndex].playerIndex = null
-      modalRef.value[playerIndex].position = null
+    // If the playerIndex and position in the ref equal to the playerIndex and position clicked are null,
+    // it means the modal should be opened and the playerIndex and position will be set accordingly.
+    //
+    // If the `playerIndex` fits but not the `position`, the modal technically does not get closed, only its `playerIndex` and `position` props get updated. The modal does not
+    // get re-rendered, but the state reflects that now instead of e.g. stratagem 1 we are choosing stratagem 2 for the same player instead.
+    //
+    // If the playerIndex and position in the ref have values equal to the received `playerIndex` and `position`, it means the modal should be closed
+    // and the playerIndex and position will be set to null.
+    if (
+      modalsRef.value[playerIndex].playerIndex === playerIndex &&
+      modalsRef.value[playerIndex].position === position
+    ) {
+      modalsRef.value[playerIndex].displayOff()
+      modalsRef.value[playerIndex].playerIndex = null
+      modalsRef.value[playerIndex].position = null
     } else {
-      modalRef.value[playerIndex].playerIndex = playerIndex
-      modalRef.value[playerIndex].position = position
-      modalRef.value[playerIndex].displayOn()
+      modalsRef.value[playerIndex].playerIndex = playerIndex
+      modalsRef.value[playerIndex].position = position
+      modalsRef.value[playerIndex].displayOn()
     }
   }
+
+  /**
+   * Handles the user selecting a stratagem, closing the modal window and updating the state data with the selected stratagem.
+   *
+   * @param playerIndex - Index of the player whose stratagem was updated.
+   * @param stratagemPosition - Index of the stratagem which was updated.
+   * @param stratagemCode - Code of the selected stratagem.
+   */
   const handleStratagemSelection = (
     playerIndex: number,
     stratagemPosition: number,
@@ -423,10 +487,10 @@
   ) => {
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     activeStratagemSelect.value[playerIndex][stratagemPosition] = false
-    modalRef.value[playerIndex].displayOff()
+    modalsRef.value[playerIndex].displayOff()
     document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
-    modalRef.value[playerIndex].playerIndex = null
-    modalRef.value[playerIndex].position = null
+    modalsRef.value[playerIndex].playerIndex = null
+    modalsRef.value[playerIndex].position = null
   }
 </script>
 

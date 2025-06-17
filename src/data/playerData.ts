@@ -12,6 +12,7 @@ import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from 
 import { Logger } from '@/utils/logger'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
+
 const logger = Logger()
 
 export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData => {

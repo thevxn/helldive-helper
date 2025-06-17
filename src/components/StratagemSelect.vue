@@ -20,15 +20,20 @@
   import { sortStratagems } from '@/utils/sort'
 
   const sortedStratagemCodeList = sortStratagems(stratagemCodeList)
+
   const display = ref(false)
+
   const playerIndex = ref(null)
+
   const position = ref(null)
+
   const props = defineProps({
     selectedStratagems: {
       type: Array,
       default: () => ['MECH', 'RAILGUN', 'JUMP_PACK', 'EAGLE_AIRSTRIKE']
     }
   })
+
   const shownStratagems = ref(
     sortedStratagemCodeList.filter(e => {
       if (!props.selectedStratagems.find(el => el === e)) {
@@ -36,6 +41,7 @@
       }
     })
   )
+
   const displayOn = () => {
     display.value = true
     shownStratagems.value = sortedStratagemCodeList.filter(e => {
@@ -44,12 +50,18 @@
       }
     })
   }
+
   const displayOff = () => {
     display.value = false
   }
 
   defineEmits(['stratagem-selected'])
-  defineExpose({ position, playerIndex, displayOn, displayOff })
+  defineExpose<{
+    position: number | null
+    playerIndex: number | null
+    displayOn: typeof displayOn
+    displayOff: typeof displayOff
+  }>()
 </script>
 
 <style scoped></style>
