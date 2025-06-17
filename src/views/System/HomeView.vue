@@ -485,6 +485,7 @@
     stratagemPosition: number,
     stratagemCode: keyof typeof stratagems
   ) => {
+    logger.debug(modalsRef.value, playerIndex)
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     activeStratagemSelect.value[playerIndex][stratagemPosition] = false
     modalsRef.value[playerIndex].displayOff()

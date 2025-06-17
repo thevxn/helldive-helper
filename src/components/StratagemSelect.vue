@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { Ref, ref } from 'vue'
 
   import { stratagemCodeList, stratagems } from '@/data/stratagems'
   import { sortStratagems } from '@/utils/sort'
@@ -23,9 +23,9 @@
 
   const display = ref(false)
 
-  const playerIndex = ref(null)
+  const playerIndex = ref(null) as Ref<number | null>
 
-  const position = ref(null)
+  const position = ref(null) as Ref<number | null>
 
   const props = defineProps({
     selectedStratagems: {
@@ -56,12 +56,7 @@
   }
 
   defineEmits(['stratagem-selected'])
-  defineExpose<{
-    position: number | null
-    playerIndex: number | null
-    displayOn: typeof displayOn
-    displayOff: typeof displayOff
-  }>()
+  defineExpose({ position, playerIndex, displayOn, displayOff })
 </script>
 
 <style scoped></style>
