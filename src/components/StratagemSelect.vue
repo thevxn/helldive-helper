@@ -35,9 +35,9 @@
   })
 
   const shownStratagems = ref(
-    sortedStratagemCodeList.filter(e => {
-      if (!props.selectedStratagems.find(el => el === e)) {
-        return e
+    sortedStratagemCodeList.filter(stratagem => {
+      if (!props.selectedStratagems.find(selectedStratagem => selectedStratagem === stratagem)) {
+        return stratagem
       }
     })
   )
