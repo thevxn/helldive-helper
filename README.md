@@ -91,7 +91,8 @@ export const weapons = {
 ```
 
 Calling `Object.keys()` on the `weapons.primary` map would therefore return the `LIBERATOR` as the first key. We know that this player has selected `LIBERATOR` as their primary weapon.
-Note: As per [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), `Object.keys()` **should** return the keys of an object literal in the order they were added as long as they are string-like keys.
+
+Note: As per [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), `Object.keys()` returns the keys of an object literal in the order they were added as long as they are string-like keys.
 
 ## Run Locally
 
