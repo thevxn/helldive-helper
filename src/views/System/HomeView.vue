@@ -209,15 +209,15 @@
             </template>
             <template #selected-option="option">
               <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
-                <img
-                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black"
-                  :src="`/boosters/${option.displayName}.webp`"
-                  :alt="`${boosters[player.boosterCode as keyof typeof boosters].displayName}`" />
                 <!-- 
                     The src refers to displayName, even though the code is the actual value of that property.
                     Unfortunate caveat of https://vue-select.org/guide/values.html#caveats-with-reduce.
                     This is only present when the selected option is not in the options array, which is the case for boosters as players cannot select a booster that is already selected.
                    -->
+                <img
+                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] rounded border-2 border-solid border-black bg-black"
+                  :src="`/boosters/${option.displayName}.webp`"
+                  :alt="`${boosters[player.boosterCode].displayName}`" />
                 <span class="hyphens-auto text-wrap break-words">{{
                   boosters[option.displayName as keyof typeof boosters].displayName
                 }}</span>
