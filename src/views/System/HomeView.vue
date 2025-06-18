@@ -64,10 +64,17 @@
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
           <div
-            class="flex h-[48%] max-h-[44px] w-[48%] max-w-[64px] flex-row items-center justify-center rounded border-2 border-yellow-300 sm:max-h-[64px]"
-            v-for="attachment in player.primaryWeaponAttachments"
+            class="flex h-[48%] max-h-[44px] w-[48%] max-w-[64px] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 sm:max-h-[64px]"
+            v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment">
-            <img :src="`/attachments/primary/${attachment}.webp`" class="h-full w-full" />
+            <!-- TODO: On click, call a function, providing playerIndex and attachment position to toggle.. -->
+            <img
+              :src="`/attachments/primary/${attachment}.webp`"
+              class="h-full w-full"
+              @click="
+                activeAttachmentSelect[i][AttachmentCategoryEnum[category]] =
+                  !activeAttachmentSelect[i][AttachmentCategoryEnum[category]]
+              " />
           </div>
         </div>
       </div>
@@ -230,11 +237,25 @@
       <!-- Stratagem icon tray -->
       <span class="mb-1 mt-2 w-full snap-start sm:mt-4">Stratagems:</span>
       <div class="flex snap-start flex-row flex-wrap justify-center gap-2">
+        <!-- Stratagem select modal -->
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           @stratagem-selected="handleStratagemSelection"
           ref="modalsRef"
           :id="`stratagem-select-${i}`" />
+        <!-- Attachment select modal -->
+        <AttachmentSelect
+          :primary-weapon-code="data.playerList[i].primaryWeaponCode"
+          :attachment-category="category"
+          :selected-attachment="attachment"
+          :player-index="i"
+          :position="AttachmentCategoryEnum[category]"
+          :display="activeAttachmentSelect[i][AttachmentCategoryEnum[category]]"
+          :id="`attachment-select-${i}`"
+          ref="attachmentModalsRef"
+          @attachment-selected="handleAttachmentSelection"
+          v-for="(attachment, category) in data.playerList[i].primaryWeaponAttachments"
+          :key="category" />
         <img
           :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${activeStratagemSelect[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
@@ -262,6 +283,9 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
+  import { AttachmentCategoryEnum } from '../../data/attachments'
+
+  import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import { boosterList, boosters } from '@/data/boosters'
   import { type IData, getDefaultData } from '@/data/defaults'
@@ -492,6 +516,28 @@
     document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
     modalsRef.value[playerIndex].playerIndex = null
     modalsRef.value[playerIndex].position = null
+  }
+
+  // Attachment select modal related refs/functions
+
+  const activeAttachmentModalPlayer = ref<number | null>(null)
+
+  const activeAttachmentModalPosition = ref<number | null>(null)
+
+  const isAttachmentModalActive = ref(false)
+
+  const activeAttachmentSelect = ref([
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false]
+  ])
+
+  /**
+   * Handles attachment selection.
+   */
+  const handleAttachmentSelection = () => {
+    logger.debug('Attachment selection handler called.')
   }
 </script>
 

@@ -2,11 +2,18 @@ export const attachmentCategories = ['OPTICS', 'MUZZLE', 'UNDERBARREL', 'MAGAZIN
 
 export type AttachmentCategory = (typeof attachmentCategories)[number]
 
+export enum AttachmentCategoryEnum {
+  OPTICS,
+  MUZZLE,
+  UNDERBARREL,
+  MAGAZINE
+}
+
 export type PrimaryWeaponAttachments = {
   [C in keyof typeof attachments]?: keyof (typeof attachments)[C]
 }
 
-interface IAttachment {
+export interface IAttachment {
   code?: string
   displayName: string
 }
