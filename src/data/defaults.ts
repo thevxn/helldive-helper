@@ -78,7 +78,7 @@ const defaultPlayerList: IPlayer[] = [
 ]
 
 export const getDefaultData = (existingPlayerListLength: number): IData => {
-  return reactive({
+  return reactive<IData>({
     playerList: defaultPlayerList.slice(existingPlayerListLength) as IPlayer[]
   })
 }

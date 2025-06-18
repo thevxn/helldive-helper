@@ -92,3 +92,7 @@ export const underbarrelAttachmentList = Object.keys(
   attachments.UNDERBARREL
 ) as (keyof typeof attachments.UNDERBARREL)[]
 export const magazineAttachmentList = Object.keys(attachments.MAGAZINE) as (keyof typeof attachments.MAGAZINE)[]
+
+export const getAttachmentsForCategory = (category: AttachmentCategory) => {
+  return Object.keys(attachments[category]) as PrimaryWeaponAttachments[AttachmentCategory][]
+}
