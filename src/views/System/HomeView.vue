@@ -71,8 +71,8 @@
               :src="`/attachments/primary/${attachment}.webp`"
               class="h-full w-full"
               @click="
-                activeAttachmentSelect[i][AttachmentCategoryEnum[category]] =
-                  !activeAttachmentSelect[i][AttachmentCategoryEnum[category]]
+                attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
+                  !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]]
               " />
           </div>
         </div>
@@ -249,14 +249,14 @@
           :selected-attachment="attachment"
           :player-index="i"
           :position="AttachmentCategoryEnum[category]"
-          :display="activeAttachmentSelect[i][AttachmentCategoryEnum[category]]"
+          :display="attachmentSelectMatrix[i][AttachmentCategoryEnum[category]]"
           :id="`attachment-select-${i}`"
           ref="attachmentModalsRef"
           @attachment-selected="handleAttachmentSelection"
           v-for="(attachment, category) in data.playerList[i].primaryWeaponAttachments"
           :key="category" />
         <img
-          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${activeStratagemSelect[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
+          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
@@ -418,7 +418,7 @@
    * At most, 4 modals can be open at the same time (with 4 players present).
    * Currently it's only used to highlight the stratagem being chosen with a yellow border.
    */
-  const activeStratagemSelect = ref([
+  const stratagemSelectMatrix = ref([
     // Player 1, Stratagems 1 - 4
     [false, false, false, false],
     // Player 2, Stratagems 1 - 4
@@ -452,7 +452,7 @@
 
     // Toggle the yellow highlight border, hiding it from stratagems whose select is being closed
     // and displaying it for the stratagem whose select is being opened.
-    activeStratagemSelect.value = activeStratagemSelect.value.map((player, i) => {
+    stratagemSelectMatrix.value = stratagemSelectMatrix.value.map((player, i) => {
       // If the current player array does not belong to the player whose stratagem select was triggered,
       // just copy their current array to the new resulting state.
       if (i !== playerIndex) {
@@ -512,7 +512,7 @@
   ) => {
     logger.debug(modalsRef.value, playerIndex)
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
-    activeStratagemSelect.value[playerIndex][stratagemPosition] = false
+    stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false
     modalsRef.value[playerIndex].displayOff()
     document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
     modalsRef.value[playerIndex].playerIndex = null
@@ -520,14 +520,9 @@
   }
 
   // Attachment select modal related refs/functions
+  // TODO: Clean up, move to different file?
 
-  // const activeAttachmentModalPlayer = ref<number | null>(null)
-
-  // const activeAttachmentModalPosition = ref<number | null>(null)
-
-  // const isAttachmentModalActive = ref(false)
-
-  const activeAttachmentSelect = ref([
+  const attachmentSelectMatrix = ref([
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
@@ -545,8 +540,6 @@
     position: number,
     selectedAttachment: SelectedAttachment | null
   ) => {
-    logger.debug('Attachment selection handler called.')
-
     // If a new attachment was selected, reflect it in the state
     // If not, it means the close button was clicked, so no updates are needed
     if (selectedAttachment) {
@@ -556,7 +549,7 @@
     }
 
     // Close the modal
-    activeAttachmentSelect.value[playerIndex][position] = false
+    attachmentSelectMatrix.value[playerIndex][position] = false
   }
 </script>
 

@@ -64,8 +64,6 @@
     display: false
   })
 
-  // TODO: Get attachment code, its category and use a function to sort & filter out the currently selected attachment
-
   const shownAttachments = ref<PrimaryWeaponAttachments[AttachmentCategory][]>()
 
   if (props.selectedAttachment !== null && props.attachmentCategory !== null) {
