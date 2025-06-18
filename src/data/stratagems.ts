@@ -275,7 +275,6 @@ export const stratagems = {
     displayName: 'CQC-1 One True Flag',
     category: 'WEAPON'
   },
-  // TODO: Fix name?
   DEESCALATOR: {
     displayName: 'GL-52 De-Escalator',
     category: 'WEAPON'

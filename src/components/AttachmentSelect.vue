@@ -30,20 +30,15 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  import { getAttachmentsForCategory } from '../data/attachments'
-
-  import { AttachmentCategory, IAttachment, PrimaryWeaponAttachments, attachments } from '@/data/attachments'
+  import {
+    AttachmentCategory,
+    IAttachment,
+    PrimaryWeaponAttachments,
+    attachments,
+    getAttachmentsForCategory
+  } from '@/data/attachments'
   import { weapons } from '@/data/weapons'
   import { SelectedAttachment } from '@/utils/filter'
-
-  // TODO: Summary:
-  // This component should receive information about:
-  // - Weapon for which attachments should be displayed
-  // - The category of the attachments to be displayed (will be used for all 4 categories so it needs to be generic)
-  // - Currently selected attachment to filter it out of the selection
-  // - Position (copied from strat. select, could be turned into an enum??)
-  // - Player Index
-  // - Display (whether to display the modal or not)
 
   interface IProps {
     primaryWeaponCode: keyof typeof weapons.primary | null
@@ -55,6 +50,7 @@
   }
 
   // TODO: Make a function to dynamically retrieve default attachments for a given weapon code
+  // Update: will be done in the parent component, not needed here I guess
   const props = withDefaults(defineProps<IProps>(), {
     primaryWeaponCode: null,
     attachmentCategory: null,
