@@ -67,7 +67,6 @@
             class="flex h-[48%] max-h-[44px] w-[48%] max-w-[64px] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 sm:max-h-[64px]"
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment">
-            <!-- TODO: On click, call a function, providing playerIndex and attachment position to toggle.. -->
             <img
               :src="`/attachments/primary/${attachment}.webp`"
               class="h-full w-full"
@@ -283,10 +282,12 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import { AttachmentCategoryEnum } from '../../data/attachments'
+  import { AttachmentCategoryEnum, PrimaryWeaponAttachments } from '../../data/attachments'
+  import { SelectedAttachment } from '../../utils/filter'
 
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
+  import { AttachmentCategory } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'
   import { type IData, getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
@@ -346,7 +347,7 @@
 
   if (route.query.data) {
     try {
-      data.value = reactive(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
+      data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
       logger.debug('Data loaded from url')
 
       // Backwards compatibility for data strings generated before perks and boosters were introduced
@@ -370,7 +371,7 @@
       data.value = getDefaultData(0)
     }
   } else if (localStorage.getItem('data')) {
-    data.value = reactive(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
     logger.debug('Data loaded from local storage')
 
     // Backwards compatibility for data strings generated before perks and boosters were introduced
@@ -520,11 +521,11 @@
 
   // Attachment select modal related refs/functions
 
-  const activeAttachmentModalPlayer = ref<number | null>(null)
+  // const activeAttachmentModalPlayer = ref<number | null>(null)
 
-  const activeAttachmentModalPosition = ref<number | null>(null)
+  // const activeAttachmentModalPosition = ref<number | null>(null)
 
-  const isAttachmentModalActive = ref(false)
+  // const isAttachmentModalActive = ref(false)
 
   const activeAttachmentSelect = ref([
     [false, false, false, false],
@@ -534,10 +535,28 @@
   ])
 
   /**
-   * Handles attachment selection.
+   * Handles attachment selection and attachment select modal closing.
+   * @param playerIndex - Index of the player
+   * @param position - Position of the attachment in the player data array, see `AttachmentCategoryEnum`
+   * @param [selectedAttachment] - Code of the selected attachment, optional
    */
-  const handleAttachmentSelection = () => {
+  const handleAttachmentSelection = (
+    playerIndex: number,
+    position: number,
+    selectedAttachment: SelectedAttachment | null
+  ) => {
     logger.debug('Attachment selection handler called.')
+
+    // If a new attachment was selected, reflect it in the state
+    // If not, it means the close button was clicked, so no updates are needed
+    if (selectedAttachment) {
+      data.value.playerList[playerIndex].primaryWeaponAttachments[
+        AttachmentCategoryEnum[position] as keyof PrimaryWeaponAttachments[AttachmentCategory]
+      ] = selectedAttachment as keyof PrimaryWeaponAttachments[AttachmentCategory]
+    }
+
+    // Close the modal
+    activeAttachmentSelect.value[playerIndex][position] = false
   }
 </script>
 
