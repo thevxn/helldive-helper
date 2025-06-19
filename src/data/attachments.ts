@@ -97,9 +97,14 @@ export const underbarrelAttachmentList = Object.keys(
 ) as (keyof typeof attachments.UNDERBARREL)[]
 export const magazineAttachmentList = Object.keys(attachments.MAGAZINE) as (keyof typeof attachments.MAGAZINE)[]
 
-export const getAttachmentsForCategory = (category: AttachmentCategory) => {
-  return Object.keys(attachments[category]) as AttachmentKey[]
+type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
+
+export const getAttachmentsForCategory = <C extends AttachmentCategory>(category: C) => {
+  return Object.keys(attachments[category]) as AttachmentKeysForCategory<C>
 }
+
+// TODO: Map out all data and types to find out if there's anything that should be pruned or refactored
+// E.g. the attachments map, attachments added to weapons, all associated types, ...?
 
 // TODO: Don't forget to add an image for a non-existent attachment (shown when the weapon cannot have an attachment in the given category). Name it INVALID_ATTACHMENT.webp or something
 // Will be returned by the function to generate default attachments for a given weapon
