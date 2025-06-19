@@ -1,4 +1,4 @@
-import type { AttachmentCategory, attachments } from '@/data/attachments'
+import type { AttachmentCategory, AttachmentKey } from '@/data/attachments'
 
 /*
  * Primary & Secondary Weapons
@@ -57,13 +57,15 @@ export interface IWeapon {
   archetype?: unknown
 }
 
+interface IWeaponAttachment {
+  default?: boolean
+}
+
 export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
   attachments: {
     [C in AttachmentCategory]?: {
-      [A in keyof (typeof attachments)[C]]?: {
-        default?: boolean
-      }
+      [A in AttachmentKey]?: IWeaponAttachment
     }
   }
 }
@@ -368,6 +370,8 @@ export const weapons = {
     }
   }
 } as const satisfies Readonly<IWeaponMap>
+
+export type PrimaryWeaponKey = keyof typeof weapons.primary
 
 export const primaryWeaponCodeList = Object.keys(weapons.primary) as (keyof typeof weapons.primary)[]
 export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as (keyof typeof weapons.secondary)[]

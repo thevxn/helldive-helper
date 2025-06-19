@@ -61,6 +61,8 @@
           </template>
         </v-select>
         <!-- Primary attachments -->
+        <!-- TODO: When Primary weapon is changed, a function which returns default attachments for a given weapon needs to be called 
+         This function can also be re-used for backwards compatibility with data strings without attachments -->
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
           <div
@@ -282,7 +284,11 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import { AttachmentCategoryEnum, PrimaryWeaponAttachments } from '../../data/attachments'
+  import {
+    AttachmentCategoryEnum,
+    PrimaryWeaponAttachments,
+    getDefaultAttachmentsForPrimaryWeapon
+  } from '../../data/attachments'
   import { SelectedAttachment } from '../../utils/filter'
 
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
@@ -393,7 +399,9 @@
   playerCount.value = data.value.playerList.length
 
   localStorage.setItem('data', createBase64DataString(data.value))
-  watch(data.value, () => {
+
+  // Any time the state changes, save the new state to local storage
+  watch(data.value.playerList[0], () => {
     localStorage.setItem('data', createBase64DataString(data.value))
   })
 
@@ -521,6 +529,15 @@
 
   // Attachment select modal related refs/functions
   // TODO: Clean up, move to different file?
+
+  watch(
+    () => data.value.playerList[0].primaryWeaponCode,
+    newVal => {
+      // TODO: Call the function to generate default attachments here
+
+      data.value.playerList[0].primaryWeaponAttachments = getDefaultAttachmentsForPrimaryWeapon(newVal)
+    }
+  )
 
   const attachmentSelectMatrix = ref([
     [false, false, false, false],

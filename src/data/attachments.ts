@@ -1,3 +1,5 @@
+import { type IPrimaryWeapon, type PrimaryWeaponKey, weapons } from '@/data/weapons'
+
 export const attachmentCategories = ['OPTICS', 'MUZZLE', 'UNDERBARREL', 'MAGAZINE'] as const
 
 export type AttachmentCategory = (typeof attachmentCategories)[number]
@@ -86,6 +88,8 @@ export const attachments = {
   }
 } as const satisfies Record<AttachmentCategory, Record<string, IAttachment>>
 
+// TODO: Reorganize?
+
 export const opticsAttachmentList = Object.keys(attachments.OPTICS) as (keyof typeof attachments.OPTICS)[]
 export const muzzleAttachmentList = Object.keys(attachments.MUZZLE) as (keyof typeof attachments.MUZZLE)[]
 export const underbarrelAttachmentList = Object.keys(
@@ -94,5 +98,34 @@ export const underbarrelAttachmentList = Object.keys(
 export const magazineAttachmentList = Object.keys(attachments.MAGAZINE) as (keyof typeof attachments.MAGAZINE)[]
 
 export const getAttachmentsForCategory = (category: AttachmentCategory) => {
-  return Object.keys(attachments[category]) as PrimaryWeaponAttachments[AttachmentCategory][]
+  return Object.keys(attachments[category]) as AttachmentKey[]
+}
+
+// TODO: Don't forget to add an image for a non-existent attachment (shown when the weapon cannot have an attachment in the given category). Name it INVALID_ATTACHMENT.webp or something
+// Will be returned by the function to generate default attachments for a given weapon
+
+export type AttachmentKey = {
+  [C in keyof typeof attachments]: keyof (typeof attachments)[C]
+}[keyof typeof attachments]
+
+export function getDefaultAttachmentsForPrimaryWeapon(weapon: PrimaryWeaponKey) {
+  const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments']
+
+  const defaults: Partial<Record<AttachmentCategory, AttachmentKey>> = {}
+
+  for (const category of attachmentCategories) {
+    const attachments = attachmentsPerCategoryForWeapon[category]
+
+    if (attachments) {
+      for (const attachmentKey of Object.keys(attachments) as AttachmentKey[]) {
+        const attachment = attachments[attachmentKey]
+
+        if (attachment?.default) {
+          defaults[category] = attachmentKey
+        }
+      }
+    }
+  }
+
+  return defaults
 }
