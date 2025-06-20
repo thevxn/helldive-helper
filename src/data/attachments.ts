@@ -11,7 +11,7 @@ export enum AttachmentCategoryEnum {
   MAGAZINE
 }
 
-export type PrimaryWeaponAttachments = {
+export type WeaponAttachments = {
   [C in keyof typeof attachments]?: keyof (typeof attachments)[C]
 }
 
@@ -90,26 +90,25 @@ export const attachments = {
 
 // TODO: Reorganize?
 
+export type AttachmentKey = {
+  [C in keyof typeof attachments]: keyof (typeof attachments)[C]
+}[keyof typeof attachments]
+
 export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
 
 export const getAttachmentsForCategory = <C extends AttachmentCategory>(category: C) => {
   return Object.keys(attachments[category]) as AttachmentKeysForCategory<C>
 }
 
-// TODO: Map out all data and types to find out if there's anything that should be pruned or refactored
-// E.g. the attachments map, attachments added to weapons, all associated types, ...?
-
 // TODO: Don't forget to add an image for a non-existent attachment (shown when the weapon cannot have an attachment in the given category). Name it INVALID_ATTACHMENT.webp or something
 // Will be returned by the function to generate default attachments for a given weapon
-
-export type AttachmentKey = {
-  [C in keyof typeof attachments]: keyof (typeof attachments)[C]
-}[keyof typeof attachments]
 
 export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
   const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments']
 
-  const defaults: Partial<Record<AttachmentCategory, AttachmentKey>> = {}
+  const defaults: Partial<{
+    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
+  }> = {}
 
   for (const category of attachmentCategories) {
     const attachments = attachmentsPerCategoryForWeapon[category]
@@ -119,7 +118,7 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
         const attachment = attachments[attachmentKey]
 
         if (attachment?.default) {
-          defaults[category] = attachmentKey
+          defaults[category] = attachmentKey as AttachmentKeysForCategory<typeof category>[number]
         }
       }
     }

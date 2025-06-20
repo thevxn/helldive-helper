@@ -33,15 +33,15 @@
   import {
     AttachmentCategory,
     IAttachment,
-    PrimaryWeaponAttachments,
+    WeaponAttachments,
     attachments,
     getAttachmentsForCategory
   } from '@/data/attachments'
-  import { weapons } from '@/data/weapons'
+  import { PrimaryWeaponKey } from '@/data/weapons'
   import { SelectedAttachment } from '@/utils/filter'
 
   interface IProps {
-    primaryWeaponCode: keyof typeof weapons.primary | null
+    primaryWeaponCode: PrimaryWeaponKey | null
     attachmentCategory: AttachmentCategory | null
     selectedAttachment: SelectedAttachment | null
     playerIndex: number | null
@@ -60,9 +60,9 @@
     display: false
   })
 
-  const shownAttachments = ref<PrimaryWeaponAttachments[AttachmentCategory][]>()
+  const shownAttachments = ref<WeaponAttachments[AttachmentCategory][]>()
 
-  if (props.selectedAttachment !== null && props.attachmentCategory !== null) {
+  if (props.selectedAttachment && props.attachmentCategory) {
     shownAttachments.value = getAttachmentsForCategory(props.attachmentCategory)
   }
 

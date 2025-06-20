@@ -284,16 +284,14 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import {
-    AttachmentCategoryEnum,
-    PrimaryWeaponAttachments,
-    getDefaultAttachmentsForPrimaryWeapon
-  } from '../../data/attachments'
-  import { SelectedAttachment } from '../../utils/filter'
-
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
-  import { AttachmentCategory } from '@/data/attachments'
+  import {
+    AttachmentCategory,
+    AttachmentCategoryEnum,
+    WeaponAttachments,
+    getDefaultAttachments
+  } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'
   import { type IData, getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
@@ -311,7 +309,7 @@
   import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import router from '@/router'
   import { config } from '@/utils/config'
-  import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
+  import { SelectedAttachment, filterOptions, filterSelectedBoosters } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
@@ -529,15 +527,14 @@
 
   // Attachment select modal related refs/functions
   // TODO: Clean up, move to different file?
-
-  watch(
-    () => data.value.playerList[0].primaryWeaponCode,
-    newVal => {
-      // TODO: Call the function to generate default attachments here
-
-      data.value.playerList[0].primaryWeaponAttachments = getDefaultAttachmentsForPrimaryWeapon(newVal)
-    }
-  )
+  data.value.playerList.map(player => {
+    watch(
+      () => player.primaryWeaponCode,
+      newVal => {
+        player.primaryWeaponAttachments = getDefaultAttachments(newVal)
+      }
+    )
+  })
 
   const attachmentSelectMatrix = ref([
     [false, false, false, false],
@@ -561,8 +558,8 @@
     // If not, it means the close button was clicked, so no updates are needed
     if (selectedAttachment) {
       data.value.playerList[playerIndex].primaryWeaponAttachments[
-        AttachmentCategoryEnum[position] as keyof PrimaryWeaponAttachments[AttachmentCategory]
-      ] = selectedAttachment as keyof PrimaryWeaponAttachments[AttachmentCategory]
+        AttachmentCategoryEnum[position] as keyof WeaponAttachments[AttachmentCategory]
+      ] = selectedAttachment as keyof WeaponAttachments[AttachmentCategory]
     }
 
     // Close the modal

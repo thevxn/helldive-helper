@@ -4,18 +4,19 @@ import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attac
 import type { boosterCodeList } from '@/data/boosters'
 import type { perks } from '@/data/perks'
 import type { stratagems } from '@/data/stratagems'
-import type { grenades, weapons } from '@/data/weapons'
+import type { PrimaryWeaponKey, SecondaryWeaponKey, grenades } from '@/data/weapons'
 
 export interface IData {
   playerList: IPlayer[]
 }
 
+// TODO: Add type aliases
 interface IPlayer {
   perkCode: keyof typeof perks
   boosterCode: (typeof boosterCodeList)[number]
   name: string
-  primaryWeaponCode: keyof typeof weapons.primary
-  secondaryWeaponCode: keyof typeof weapons.secondary
+  primaryWeaponCode: PrimaryWeaponKey
+  secondaryWeaponCode: SecondaryWeaponKey
   grenadeCode: keyof typeof grenades
   stratagemCodeList: (keyof typeof stratagems)[]
   color: IPlayerColor

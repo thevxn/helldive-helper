@@ -372,9 +372,11 @@ export const weapons = {
 } as const satisfies Readonly<IWeaponMap>
 
 export type PrimaryWeaponKey = keyof typeof weapons.primary
+export type SecondaryWeaponKey = keyof typeof weapons.secondary
 
-export const primaryWeaponCodeList = Object.keys(weapons.primary) as (keyof typeof weapons.primary)[]
-export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as (keyof typeof weapons.secondary)[]
+export const primaryWeaponCodeList = Object.keys(weapons.primary) as PrimaryWeaponKey[]
+// TODO: create type alias
+export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as SecondaryWeaponKey[]
 
 /*
  * Grenades
