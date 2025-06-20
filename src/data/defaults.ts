@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-import type { AttachmentCategory, AttachmentKey } from '@/data/attachments'
+import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
 import type { boosterCodeList } from '@/data/boosters'
 import type { perks } from '@/data/perks'
 import type { stratagems } from '@/data/stratagems'
@@ -19,7 +19,9 @@ interface IPlayer {
   grenadeCode: keyof typeof grenades
   stratagemCodeList: (keyof typeof stratagems)[]
   color: IPlayerColor
-  primaryWeaponAttachments: Partial<Record<AttachmentCategory, AttachmentKey>>
+  primaryWeaponAttachments: Partial<{
+    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
+  }>
 }
 
 export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'

@@ -90,14 +90,7 @@ export const attachments = {
 
 // TODO: Reorganize?
 
-export const opticsAttachmentList = Object.keys(attachments.OPTICS) as (keyof typeof attachments.OPTICS)[]
-export const muzzleAttachmentList = Object.keys(attachments.MUZZLE) as (keyof typeof attachments.MUZZLE)[]
-export const underbarrelAttachmentList = Object.keys(
-  attachments.UNDERBARREL
-) as (keyof typeof attachments.UNDERBARREL)[]
-export const magazineAttachmentList = Object.keys(attachments.MAGAZINE) as (keyof typeof attachments.MAGAZINE)[]
-
-type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
+export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
 
 export const getAttachmentsForCategory = <C extends AttachmentCategory>(category: C) => {
   return Object.keys(attachments[category]) as AttachmentKeysForCategory<C>
@@ -113,7 +106,7 @@ export type AttachmentKey = {
   [C in keyof typeof attachments]: keyof (typeof attachments)[C]
 }[keyof typeof attachments]
 
-export function getDefaultAttachmentsForPrimaryWeapon(weapon: PrimaryWeaponKey) {
+export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
   const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments']
 
   const defaults: Partial<Record<AttachmentCategory, AttachmentKey>> = {}

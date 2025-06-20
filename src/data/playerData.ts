@@ -1,9 +1,5 @@
-import {
-  magazineAttachmentList,
-  muzzleAttachmentList,
-  opticsAttachmentList,
-  underbarrelAttachmentList
-} from '@/data/attachments'
+import { getAttachmentsForCategory } from './attachments'
+
 import { boosterCodeList } from '@/data/boosters'
 import type { IData, IPlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
@@ -42,16 +38,20 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       perkCode: perkCodeList[playerArray[9] as number],
       boosterCode: boosterCodeList[playerArray[10] as number],
       primaryWeaponAttachments: {
-        OPTICS: playerArray[11] !== -1 ? opticsAttachmentList[playerArray[11] as number] : undefined,
-        MUZZLE: playerArray[12] !== -1 ? muzzleAttachmentList[playerArray[12] as number] : undefined,
-        UNDERBARREL: playerArray[13] !== -1 ? underbarrelAttachmentList[playerArray[13] as number] : undefined,
-        MAGAZINE: playerArray[14] !== -1 ? magazineAttachmentList[playerArray[14] as number] : undefined
+        OPTICS: playerArray[11] !== -1 ? getAttachmentsForCategory('OPTICS')[playerArray[11] as number] : undefined,
+
+        MUZZLE: playerArray[12] !== -1 ? getAttachmentsForCategory('MUZZLE')[playerArray[12] as number] : undefined,
+
+        UNDERBARREL:
+          playerArray[13] !== -1 ? getAttachmentsForCategory('UNDERBARREL')[playerArray[13] as number] : undefined,
+
+        MAGAZINE: playerArray[14] !== -1 ? getAttachmentsForCategory('MAGAZINE')[playerArray[14] as number] : undefined
       }
     })
   })
 
-  logger.debug(`Parsed input: `)
-  logger.debug(playerData)
+  logger.debug(`Parsed input: `, playerData)
+
   return playerData
 }
 
@@ -90,16 +90,16 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
       perkCodeList.indexOf(playerObject.perkCode),
       boosterCodeList.indexOf(playerObject.boosterCode),
       playerObject.primaryWeaponAttachments.OPTICS
-        ? opticsAttachmentList.indexOf(playerObject.primaryWeaponAttachments.OPTICS)
+        ? getAttachmentsForCategory('OPTICS').indexOf(playerObject.primaryWeaponAttachments.OPTICS)
         : -1,
       playerObject.primaryWeaponAttachments.MUZZLE
-        ? muzzleAttachmentList.indexOf(playerObject.primaryWeaponAttachments.MUZZLE)
+        ? getAttachmentsForCategory('MUZZLE').indexOf(playerObject.primaryWeaponAttachments.MUZZLE)
         : -1,
       playerObject.primaryWeaponAttachments.UNDERBARREL
-        ? underbarrelAttachmentList.indexOf(playerObject.primaryWeaponAttachments.UNDERBARREL)
+        ? getAttachmentsForCategory('UNDERBARREL').indexOf(playerObject.primaryWeaponAttachments.UNDERBARREL)
         : -1,
       playerObject.primaryWeaponAttachments.MAGAZINE
-        ? magazineAttachmentList.indexOf(playerObject.primaryWeaponAttachments.MAGAZINE)
+        ? getAttachmentsForCategory('MAGAZINE').indexOf(playerObject.primaryWeaponAttachments.MAGAZINE)
         : -1
     ])
   })
