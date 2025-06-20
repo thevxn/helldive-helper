@@ -61,8 +61,8 @@
           </template>
         </v-select>
         <!-- Primary attachments -->
-        <!-- TODO: When Primary weapon is changed, a function which returns default attachments for a given weapon needs to be called 
-         This function can also be re-used for backwards compatibility with data strings without attachments -->
+        <!-- When Primary weapon is changed, a function which returns default attachments for a given weapon needs to be called (done)
+         TODO: This function can also be re-used for backwards compatibility with data strings without attachments -->
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
           <div
@@ -70,7 +70,16 @@
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment">
             <img
-              :src="`/attachments/primary/${attachment}.webp`"
+              :src="`/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`"
+              :title="
+                attachment
+                  ? (
+                      attachments[category][
+                        attachment as AttachmentKeysForCategory<typeof category>[number]
+                      ] as IAttachment
+                    ).displayName
+                  : 'Locked Category'
+              "
               class="h-full w-full"
               @click="
                 attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
@@ -242,7 +251,7 @@
         <StratagemSelect
           :selected-stratagems="data.playerList[i].stratagemCodeList"
           @stratagem-selected="handleStratagemSelection"
-          ref="modalsRef"
+          ref="stratagemModalsRef"
           :id="`stratagem-select-${i}`" />
         <!-- Attachment select modal -->
         <AttachmentSelect
@@ -284,14 +293,16 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import { AttachmentKey } from '../../data/attachments'
+  import { AttachmentKeysForCategory, IAttachment } from '../../data/attachments'
 
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import {
     AttachmentCategory,
     AttachmentCategoryEnum,
+    AttachmentKey,
     WeaponAttachments,
+    attachments,
     getDefaultAttachments
   } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'
@@ -426,6 +437,10 @@
   }
 
   /**
+   * Stratagem select modal related refs/functions
+   */
+
+  /**
    * Stores information on which stratagem select modals are currently active.
    * There can be at most 1 modal active per player.
    * Each player can be actively choosing only 1 stratagem at a time out of the 4 stratagems total.
@@ -444,9 +459,9 @@
   ])
 
   /**
-   * Refers to the active modal window instances
+   * Refers to the active stratagem modal window instances
    */
-  const modalsRef = ref() as Ref<Array<InstanceType<typeof StratagemSelect>>>
+  const stratagemModalsRef = ref() as Ref<Array<InstanceType<typeof StratagemSelect>>>
 
   /**
    * Toggles the stratagem select modal for a given player and slot.
@@ -499,16 +514,16 @@
     // If the playerIndex and position in the ref have values equal to the received `playerIndex` and `position`, it means the modal should be closed
     // and the playerIndex and position will be set to null.
     if (
-      modalsRef.value[playerIndex].playerIndex === playerIndex &&
-      modalsRef.value[playerIndex].position === position
+      stratagemModalsRef.value[playerIndex].playerIndex === playerIndex &&
+      stratagemModalsRef.value[playerIndex].position === position
     ) {
-      modalsRef.value[playerIndex].displayOff()
-      modalsRef.value[playerIndex].playerIndex = null
-      modalsRef.value[playerIndex].position = null
+      stratagemModalsRef.value[playerIndex].displayOff()
+      stratagemModalsRef.value[playerIndex].playerIndex = null
+      stratagemModalsRef.value[playerIndex].position = null
     } else {
-      modalsRef.value[playerIndex].playerIndex = playerIndex
-      modalsRef.value[playerIndex].position = position
-      modalsRef.value[playerIndex].displayOn()
+      stratagemModalsRef.value[playerIndex].playerIndex = playerIndex
+      stratagemModalsRef.value[playerIndex].position = position
+      stratagemModalsRef.value[playerIndex].displayOn()
     }
   }
 
@@ -524,17 +539,19 @@
     stratagemPosition: number,
     stratagemCode: keyof typeof stratagems
   ) => {
-    logger.debug(modalsRef.value, playerIndex)
+    logger.debug(stratagemModalsRef.value, playerIndex)
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false
-    modalsRef.value[playerIndex].displayOff()
+    stratagemModalsRef.value[playerIndex].displayOff()
     document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
-    modalsRef.value[playerIndex].playerIndex = null
-    modalsRef.value[playerIndex].position = null
+    stratagemModalsRef.value[playerIndex].playerIndex = null
+    stratagemModalsRef.value[playerIndex].position = null
   }
 
-  // Attachment select modal related refs/functions
-  // TODO: Clean up, move to different file?
+  /**
+   * Attachment select modal related refs/functions
+   */
+
   data.value.playerList.map(player => {
     watch(
       () => player.primaryWeaponCode,

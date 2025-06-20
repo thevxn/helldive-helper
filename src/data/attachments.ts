@@ -108,7 +108,12 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
 
   const defaults: Partial<{
     [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
-  }> = {}
+  }> = {
+    OPTICS: undefined,
+    MUZZLE: undefined,
+    UNDERBARREL: undefined,
+    MAGAZINE: undefined
+  }
 
   for (const category of attachmentCategories) {
     const attachments = attachmentsPerCategoryForWeapon[category]
@@ -119,6 +124,7 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
 
         if (attachment?.default) {
           defaults[category] = attachmentKey as AttachmentKeysForCategory<typeof category>[number]
+          break
         }
       }
     }
