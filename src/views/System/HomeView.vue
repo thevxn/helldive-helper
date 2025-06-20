@@ -284,6 +284,8 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
+  import { AttachmentKey } from '../../data/attachments'
+
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import {
@@ -309,7 +311,7 @@
   import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
   import router from '@/router'
   import { config } from '@/utils/config'
-  import { SelectedAttachment, filterOptions, filterSelectedBoosters } from '@/utils/filter'
+  import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
   import { Logger } from '@/utils/logger'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
@@ -349,6 +351,7 @@
   // Data is either loaded from URL, local storage or default data is generated as a backup
   await router.isReady()
 
+  // If provided, try to load data from query string
   if (route.query.data) {
     try {
       data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
@@ -374,7 +377,9 @@
       logger.error(e)
       data.value = getDefaultData(0)
     }
-  } else if (localStorage.getItem('data')) {
+  }
+  // If no query string provided, try to load data from local storage
+  else if (localStorage.getItem('data')) {
     data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
     logger.debug('Data loaded from local storage')
 
@@ -389,7 +394,10 @@
         data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
       }
     })
-  } else {
+  }
+  // If no query string provided and data are not available in local storage,
+  // generate default data
+  else {
     logger.debug('Default data generated')
     data.value = getDefaultData(0)
   }
@@ -399,7 +407,7 @@
   localStorage.setItem('data', createBase64DataString(data.value))
 
   // Any time the state changes, save the new state to local storage
-  watch(data.value.playerList[0], () => {
+  watch(data.value.playerList, () => {
     localStorage.setItem('data', createBase64DataString(data.value))
   })
 
@@ -552,7 +560,7 @@
   const handleAttachmentSelection = (
     playerIndex: number,
     position: number,
-    selectedAttachment: SelectedAttachment | null
+    selectedAttachment: AttachmentKey | null
   ) => {
     // If a new attachment was selected, reflect it in the state
     // If not, it means the close button was clicked, so no updates are needed

@@ -32,25 +32,23 @@
 
   import {
     AttachmentCategory,
+    AttachmentKey,
     IAttachment,
     WeaponAttachments,
     attachments,
     getAttachmentsForCategory
   } from '@/data/attachments'
   import { PrimaryWeaponKey } from '@/data/weapons'
-  import { SelectedAttachment } from '@/utils/filter'
 
   interface IProps {
     primaryWeaponCode: PrimaryWeaponKey | null
     attachmentCategory: AttachmentCategory | null
-    selectedAttachment: SelectedAttachment | null
+    selectedAttachment: AttachmentKey | null
     playerIndex: number | null
     position: number | null
     display: boolean
   }
 
-  // TODO: Make a function to dynamically retrieve default attachments for a given weapon code
-  // Update: will be done in the parent component, not needed here I guess
   const props = withDefaults(defineProps<IProps>(), {
     primaryWeaponCode: null,
     attachmentCategory: null,

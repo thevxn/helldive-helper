@@ -27,7 +27,7 @@ interface IPlayer {
 
 export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
-// TODO: Add default attachments
+// TODO: Update weapons once attachments are added for all weapons
 const defaultPlayerList: IPlayer[] = [
   {
     name: 'Squad Leader',
@@ -47,36 +47,51 @@ const defaultPlayerList: IPlayer[] = [
   },
   {
     name: 'Light AT/Support',
-    primaryWeaponCode: 'BREAKER',
+    primaryWeaponCode: 'LIBERATOR',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'STUN',
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'SUPPLY_PACK', 'EAT'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'VITALITY_ENHANCEMENT',
     color: 'green',
-    primaryWeaponAttachments: {}
+    primaryWeaponAttachments: {
+      OPTICS: 'TUBE_RED_DOT_X2',
+      MUZZLE: 'NO_MUZZLE',
+      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
+      MAGAZINE: 'EXTENDED_MAGAZINE'
+    }
   },
   {
     name: 'Grenadier',
-    primaryWeaponCode: 'DEFENDER',
+    primaryWeaponCode: 'LIBERATOR',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'IMPACT',
     stratagemCodeList: ['EAGLE_CLUSTER_BOMB', 'ORBITAL_AIRBURST_STRIKE', 'SHIELD_GENERATOR_PACK', 'GRENADE_LAUNCHER'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'STAMINA_ENHANCEMENT',
     color: 'blue',
-    primaryWeaponAttachments: {}
+    primaryWeaponAttachments: {
+      OPTICS: 'TUBE_RED_DOT_X2',
+      MUZZLE: 'NO_MUZZLE',
+      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
+      MAGAZINE: 'EXTENDED_MAGAZINE'
+    }
   },
   {
     name: 'Autocannon Operator',
-    primaryWeaponCode: 'BREAKER',
+    primaryWeaponCode: 'LIBERATOR',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'HIGH_EXPLOSIVE',
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'AUTOCANNON_SENTRY', 'AUTOCANNON'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'LOCALIZATION_CONFUSION',
     color: 'pink',
-    primaryWeaponAttachments: {}
+    primaryWeaponAttachments: {
+      OPTICS: 'TUBE_RED_DOT_X2',
+      MUZZLE: 'NO_MUZZLE',
+      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
+      MAGAZINE: 'EXTENDED_MAGAZINE'
+    }
   }
 ]
 

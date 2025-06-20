@@ -1,11 +1,5 @@
 import type { IData } from '../data/defaults'
 
-import type {
-  magazineAttachmentList,
-  muzzleAttachmentList,
-  opticsAttachmentList,
-  underbarrelAttachmentList
-} from '@/data/attachments'
 import { boosterList, type boosters } from '@/data/boosters'
 import type { IWeapon } from '@/data/weapons'
 
@@ -28,9 +22,3 @@ export const filterSelectedBoosters = (data: IData) => {
 
   return filteredBoosterList
 }
-
-export type SelectedAttachment =
-  | (typeof opticsAttachmentList)[number]
-  | (typeof muzzleAttachmentList)[number]
-  | (typeof underbarrelAttachmentList)[number]
-  | (typeof magazineAttachmentList)[number]
