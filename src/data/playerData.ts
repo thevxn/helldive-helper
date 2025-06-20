@@ -1,7 +1,7 @@
 import { getAttachmentsForCategory } from './attachments'
 
 import { boosterCodeList } from '@/data/boosters'
-import type { IData, IPlayerColor } from '@/data/defaults'
+import type { IData, PlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
 import { stratagemCodeList } from '@/data/stratagems'
 import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
@@ -34,7 +34,7 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       secondaryWeaponCode: secondaryWeaponCodeList[playerArray[2] as number],
       grenadeCode: grenadeCodeList[playerArray[3] as number],
       stratagemCodeList: createStratagemCodeList(playerArray.slice(4, 8) as number[]),
-      color: playerColorsList[playerArray[8] as number] as IPlayerColor,
+      color: playerColorsList[playerArray[8] as number] as PlayerColor,
       perkCode: perkCodeList[playerArray[9] as number],
       boosterCode: boosterCodeList[playerArray[10] as number],
       primaryWeaponAttachments: {

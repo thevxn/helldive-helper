@@ -19,13 +19,13 @@ interface IPlayer {
   secondaryWeaponCode: SecondaryWeaponKey
   grenadeCode: keyof typeof grenades
   stratagemCodeList: (keyof typeof stratagems)[]
-  color: IPlayerColor
+  color: PlayerColor
   primaryWeaponAttachments: Partial<{
     [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
   }>
 }
 
-export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'
+export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
 // TODO: Add default attachments
 const defaultPlayerList: IPlayer[] = [
