@@ -293,14 +293,14 @@
   import { useRoute, useRouter } from 'vue-router'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
-  import { AttachmentKeysForCategory, IAttachment } from '../../data/attachments'
-
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
   import {
     AttachmentCategory,
     AttachmentCategoryEnum,
     AttachmentKey,
+    AttachmentKeysForCategory,
+    IAttachment,
     WeaponAttachments,
     attachments,
     getDefaultAttachments

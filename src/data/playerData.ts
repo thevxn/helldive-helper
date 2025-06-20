@@ -1,5 +1,4 @@
-import { getAttachmentsForCategory } from './attachments'
-
+import { getAttachmentsForCategory } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import type { IData, PlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
