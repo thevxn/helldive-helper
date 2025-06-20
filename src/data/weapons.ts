@@ -1,4 +1,4 @@
-import type { AttachmentCategory, AttachmentKey } from '@/data/attachments'
+import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
 
 /*
  * Primary & Secondary Weapons
@@ -65,7 +65,7 @@ export interface IPrimaryWeapon extends IWeapon {
   archetype: (typeof primaryWeaponArchetypeCodeList)[number]
   attachments: {
     [C in AttachmentCategory]?: {
-      [A in AttachmentKey]?: IWeaponAttachment
+      [A in AttachmentKeysForCategory<C>[number]]?: IWeaponAttachment
     }
   }
 }

@@ -119,10 +119,10 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
     const attachments = attachmentsPerCategoryForWeapon[category]
 
     if (attachments) {
-      for (const attachmentKey of Object.keys(attachments) as AttachmentKey[]) {
-        const attachment = attachments[attachmentKey]
+      for (const attachmentKey of Object.keys(attachments)) {
+        const attachment = attachments[attachmentKey as keyof typeof attachments]
 
-        if (attachment?.default) {
+        if (attachment && 'default' in attachment) {
           defaults[category] = attachmentKey as AttachmentKeysForCategory<typeof category>[number]
           break
         }
