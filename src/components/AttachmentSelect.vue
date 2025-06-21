@@ -1,6 +1,9 @@
 <template>
   <div
-    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[70vh] w-[88%] -translate-y-[107%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 sm:h-[75vh] sm:w-[40%] xl:w-[21%]"
+    tabindex="0"
+    ref="attachmentSelect"
+    @keydown.esc="$emit('attachment-selected', playerIndex, position)"
+    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[70vh] w-[88%] -translate-y-[107%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 focus:outline-none sm:h-[75vh] sm:w-[40%] xl:w-[21%]"
     @click.stop
     v-if="display">
     <div class="flex h-fit w-full flex-row">
@@ -28,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { nextTick, ref, watch } from 'vue'
 
   import {
     AttachmentCategory,
@@ -77,6 +80,20 @@
           props.primaryWeaponCode,
           props.attachmentCategory
         )
+      }
+    }
+  )
+
+  // Autofocus the modal when opened, so it can be closed with the ESC key immediately
+  const attachmentSelect = ref<HTMLElement | null>(null)
+
+  watch(
+    () => props.display,
+    newVal => {
+      if (newVal) {
+        nextTick(() => {
+          attachmentSelect.value?.focus()
+        })
       }
     }
   )
