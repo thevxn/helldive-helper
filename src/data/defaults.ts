@@ -37,7 +37,10 @@ const defaultPlayerList: IPlayer[] = [
     boosterCode: 'HELLPOD_SPACE_OPTIMIZATION',
     color: 'orange',
     primaryWeaponAttachments: {
-      OPTICS: 'TUBE_RED_DOT_X2'
+      OPTICS: 'TUBE_RED_DOT_X2',
+      MUZZLE: undefined,
+      UNDERBARREL: undefined,
+      MAGAZINE: undefined
     }
   },
   {
