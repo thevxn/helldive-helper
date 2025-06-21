@@ -70,8 +70,8 @@ export const perkList: PerkWithCode[] = []
 
 for (const perk in perks) {
   const modifiedPerk: PerkWithCode = {
-    ...perks[perk as keyof typeof perks],
-    code: perk as keyof typeof perks
+    ...perks[perk as PerkKey],
+    code: perk as PerkKey
   }
 
   perkList.push(modifiedPerk)

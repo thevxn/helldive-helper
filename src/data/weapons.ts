@@ -3,6 +3,11 @@ import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attac
 /*
  * Primary & Secondary Weapons
  */
+export interface IArchetype {
+  displayName: string
+  code?: string
+  isArchetype?: boolean
+}
 export const primaryArchetypes = {
   AR: {
     displayName: 'Assault Rifle'
@@ -28,7 +33,7 @@ export const primaryArchetypes = {
   SR: {
     displayName: 'Sniper Rifle'
   }
-}
+} as const satisfies Record<string, IArchetype>
 
 export type PrimaryWeaponArchetypeKey = keyof typeof primaryArchetypes
 
@@ -47,7 +52,7 @@ export const secondaryArchetypes = {
   MELEE: {
     displayName: 'Melee'
   }
-}
+} as const satisfies Record<string, IArchetype>
 
 export type SecondaryWeaponArchetypeKey = keyof typeof secondaryArchetypes
 
@@ -83,7 +88,6 @@ interface IWeaponMap {
   secondary: Record<string, ISecondaryWeapon>
 }
 
-// TODO: Icon for the no underbarrel option
 export const weapons = {
   primary: {
     LIBERATOR: {
@@ -974,8 +978,9 @@ export const grenadeArchetypes = {
     displayName: 'Special'
   }
 }
+export type GrenadeArchetypeKey = keyof typeof grenadeArchetypes
 
-export const grenadeArchetypeCodeList = Object.keys(grenadeArchetypes) as (keyof typeof grenadeArchetypes)[]
+export const grenadeArchetypeCodeList = Object.keys(grenadeArchetypes) as GrenadeArchetypeKey[]
 
 export interface IGrenade extends IWeapon {
   archetype: (typeof grenadeArchetypeCodeList)[number]

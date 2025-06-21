@@ -10,7 +10,6 @@ export interface IData {
   playerList: IPlayer[]
 }
 
-// TODO: Find occurences of keyof typeof ... and replace with the aliases across the codebase
 interface IPlayer {
   perkCode: PerkKey
   boosterCode: BoosterKey
