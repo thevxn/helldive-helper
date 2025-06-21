@@ -41,7 +41,6 @@
     getAttachmentsForWeaponForCategory
   } from '@/data/attachments'
   import { PrimaryWeaponKey } from '@/data/weapons'
-  import { Logger } from '@/utils/logger'
 
   interface IProps {
     primaryWeaponCode: PrimaryWeaponKey | null

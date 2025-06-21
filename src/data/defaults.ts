@@ -1,24 +1,24 @@
 import { reactive } from 'vue'
 
 import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
-import type { boosters } from '@/data/boosters'
-import type { perks } from '@/data/perks'
-import type { stratagems } from '@/data/stratagems'
-import type { PrimaryWeaponKey, SecondaryWeaponKey, grenades } from '@/data/weapons'
+import type { BoosterKey } from '@/data/boosters'
+import type { PerkKey } from '@/data/perks'
+import type { StratagemKey } from '@/data/stratagems'
+import type { GrenadeKey, PrimaryWeaponKey, SecondaryWeaponKey } from '@/data/weapons'
 
 export interface IData {
   playerList: IPlayer[]
 }
 
-// TODO: Add type aliases
+// TODO: Find occurences of keyof typeof ... and replace with the aliases across the codebase
 interface IPlayer {
-  perkCode: keyof typeof perks
-  boosterCode: keyof typeof boosters
+  perkCode: PerkKey
+  boosterCode: BoosterKey
   name: string
   primaryWeaponCode: PrimaryWeaponKey
   secondaryWeaponCode: SecondaryWeaponKey
-  grenadeCode: keyof typeof grenades
-  stratagemCodeList: (keyof typeof stratagems)[]
+  grenadeCode: GrenadeKey
+  stratagemCodeList: StratagemKey[]
   color: PlayerColor
   primaryWeaponAttachments: Partial<{
     [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
@@ -27,11 +27,10 @@ interface IPlayer {
 
 export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
-// TODO: Update weapons once attachments are added for all weapons
 const defaultPlayerList: IPlayer[] = [
   {
     name: 'Squad Leader',
-    primaryWeaponCode: 'LIBERATOR',
+    primaryWeaponCode: 'SICKLE',
     secondaryWeaponCode: 'SENATOR',
     grenadeCode: 'HIGH_EXPLOSIVE',
     stratagemCodeList: ['EAGLE_AIRSTRIKE', 'ORBITAL_LASER', 'SHIELD_GENERATOR_PACK', 'MORTAR_SENTRY'],
@@ -39,15 +38,12 @@ const defaultPlayerList: IPlayer[] = [
     boosterCode: 'HELLPOD_SPACE_OPTIMIZATION',
     color: 'orange',
     primaryWeaponAttachments: {
-      OPTICS: 'TUBE_RED_DOT_X2',
-      MUZZLE: 'NO_MUZZLE',
-      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
-      MAGAZINE: 'EXTENDED_MAGAZINE'
+      OPTICS: 'TUBE_RED_DOT_X2'
     }
   },
   {
     name: 'Light AT/Support',
-    primaryWeaponCode: 'LIBERATOR',
+    primaryWeaponCode: 'BREAKER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'STUN',
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'SUPPLY_PACK', 'EAT'],
@@ -55,15 +51,15 @@ const defaultPlayerList: IPlayer[] = [
     boosterCode: 'VITALITY_ENHANCEMENT',
     color: 'green',
     primaryWeaponAttachments: {
-      OPTICS: 'TUBE_RED_DOT_X2',
-      MUZZLE: 'NO_MUZZLE',
-      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
-      MAGAZINE: 'EXTENDED_MAGAZINE'
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FULL_CHOKE',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
     }
   },
   {
     name: 'Grenadier',
-    primaryWeaponCode: 'LIBERATOR',
+    primaryWeaponCode: 'DEFENDER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'IMPACT',
     stratagemCodeList: ['EAGLE_CLUSTER_BOMB', 'ORBITAL_AIRBURST_STRIKE', 'SHIELD_GENERATOR_PACK', 'GRENADE_LAUNCHER'],
@@ -71,15 +67,15 @@ const defaultPlayerList: IPlayer[] = [
     boosterCode: 'STAMINA_ENHANCEMENT',
     color: 'blue',
     primaryWeaponAttachments: {
-      OPTICS: 'TUBE_RED_DOT_X2',
-      MUZZLE: 'NO_MUZZLE',
-      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
-      MAGAZINE: 'EXTENDED_MAGAZINE'
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FLASH_HIDER',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
     }
   },
   {
     name: 'Autocannon Operator',
-    primaryWeaponCode: 'LIBERATOR',
+    primaryWeaponCode: 'BREAKER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'HIGH_EXPLOSIVE',
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'AUTOCANNON_SENTRY', 'AUTOCANNON'],
@@ -87,10 +83,10 @@ const defaultPlayerList: IPlayer[] = [
     boosterCode: 'LOCALIZATION_CONFUSION',
     color: 'pink',
     primaryWeaponAttachments: {
-      OPTICS: 'TUBE_RED_DOT_X2',
-      MUZZLE: 'NO_MUZZLE',
-      UNDERBARREL: 'LASER_SIGHT_WITH_FLASHLIGHT',
-      MAGAZINE: 'EXTENDED_MAGAZINE'
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FULL_CHOKE',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
     }
   }
 ]

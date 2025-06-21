@@ -30,7 +30,9 @@ export const primaryArchetypes = {
   }
 }
 
-export const primaryWeaponArchetypeCodeList = Object.keys(primaryArchetypes) as (keyof typeof primaryArchetypes)[]
+export type PrimaryWeaponArchetypeKey = keyof typeof primaryArchetypes
+
+export const primaryWeaponArchetypeCodeList = Object.keys(primaryArchetypes) as PrimaryWeaponArchetypeKey[]
 
 export const secondaryArchetypes = {
   AMMO: {
@@ -47,7 +49,9 @@ export const secondaryArchetypes = {
   }
 }
 
-export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as (keyof typeof secondaryArchetypes)[]
+export type SecondaryWeaponArchetypeKey = keyof typeof secondaryArchetypes
+
+export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as SecondaryWeaponArchetypeKey[]
 
 export interface IWeapon {
   displayName: string
@@ -455,15 +459,15 @@ export const weapons = {
           LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MUZZLE: {
-          NO_MUZZLE: {},
+          NO_MUZZLE: { default: true },
           HALF_CHOKE: {},
           FULL_CHOKE: {},
-          DUCKBILL: { default: true }
+          DUCKBILL: {}
         },
         MAGAZINE: {
-          DRUM_MAGAZINE: { default: true },
+          DRUM_MAGAZINE: {},
           SHORT_MAGAZINE: {},
-          EXTENDED_MAGAZINE: {}
+          EXTENDED_MAGAZINE: { default: true }
         }
       }
     },
@@ -1037,4 +1041,5 @@ export const grenades = {
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
-export const grenadeCodeList = Object.keys(grenades) as (keyof typeof grenades)[]
+export type GrenadeKey = keyof typeof grenades
+export const grenadeCodeList = Object.keys(grenades) as GrenadeKey[]

@@ -61,8 +61,6 @@
           </template>
         </v-select>
         <!-- Primary attachments -->
-        <!-- When Primary weapon is changed, a function which returns default attachments for a given weapon needs to be called (done)
-         TODO: This function can also be re-used for backwards compatibility with data strings without attachments -->
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
           <div
@@ -74,6 +72,7 @@
             "
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment">
+            <!-- TODO: Differentiate between drum mags for different categories (and in the modal as well) -->
             <img
               :src="`/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`"
               :title="

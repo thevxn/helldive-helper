@@ -54,7 +54,8 @@ export const boosters = {
   }
 } as const satisfies Readonly<Record<string, IBooster>>
 
-export const boosterCodeList = Object.keys(boosters) as (keyof typeof boosters)[]
+export type BoosterKey = keyof typeof boosters
+export const boosterCodeList = Object.keys(boosters) as BoosterKey[]
 
 export type BoosterWithCode = IBooster & { code: keyof typeof boosters }
 
@@ -63,8 +64,8 @@ export const boosterList: BoosterWithCode[] = []
 
 for (const booster in boosters) {
   const modifiedBooster = {
-    ...boosters[booster as keyof typeof boosters],
-    code: booster as keyof typeof boosters
+    ...boosters[booster as BoosterKey],
+    code: booster as BoosterKey
   }
 
   boosterList.push(modifiedBooster)
