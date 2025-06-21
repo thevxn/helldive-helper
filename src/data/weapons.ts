@@ -95,21 +95,19 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {
           NO_MUZZLE: { default: true },
           FLASH_HIDER: {},
           MUZZLE_BRAKE: {},
           COMPENSATOR: {}
-        },
-        UNDERBARREL: {
-          NO_UNDERBARREL: {},
-          LASER_SIGHT_WITH_FLASHLIGHT: {
-            default: true
-          },
-          VERTICAL_FOREGRIP: {},
-          ANGLED_FOREGRIP: {},
-          FLASHLIGHT_VERTICAL_FOREGRIP: {},
-          LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MAGAZINE: {
           EXTENDED_MAGAZINE: { default: true },
@@ -130,17 +128,15 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
-        MUZZLE: {},
         UNDERBARREL: {
           NO_UNDERBARREL: {},
-          LASER_SIGHT_WITH_FLASHLIGHT: {
-            default: true
-          },
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
           VERTICAL_FOREGRIP: {},
           ANGLED_FOREGRIP: {},
           FLASHLIGHT_VERTICAL_FOREGRIP: {},
           LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
+        MUZZLE: {},
         MAGAZINE: {
           EXTENDED_MAGAZINE: {},
           SHORT_MAGAZINE: {},
@@ -160,21 +156,19 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: { default: true }
         },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {
           NO_MUZZLE: {},
           FLASH_HIDER: {},
           MUZZLE_BRAKE: { default: true },
           COMPENSATOR: {}
-        },
-        UNDERBARREL: {
-          NO_UNDERBARREL: {},
-          LASER_SIGHT_WITH_FLASHLIGHT: {
-            default: true
-          },
-          VERTICAL_FOREGRIP: {},
-          ANGLED_FOREGRIP: {},
-          FLASHLIGHT_VERTICAL_FOREGRIP: {},
-          LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MAGAZINE: {
           EXTENDED_MAGAZINE: { default: true },
@@ -195,21 +189,19 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {
           NO_MUZZLE: { default: true },
           FLASH_HIDER: {},
           MUZZLE_BRAKE: {},
           COMPENSATOR: {}
-        },
-        UNDERBARREL: {
-          NO_UNDERBARREL: {},
-          LASER_SIGHT_WITH_FLASHLIGHT: {
-            default: true
-          },
-          VERTICAL_FOREGRIP: {},
-          ANGLED_FOREGRIP: {},
-          FLASHLIGHT_VERTICAL_FOREGRIP: {},
-          LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MAGAZINE: {
           EXTENDED_MAGAZINE: { default: true },
@@ -230,12 +222,6 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
-        MUZZLE: {
-          NO_MUZZLE: {},
-          FLASH_HIDER: {},
-          MUZZLE_BRAKE: { default: true },
-          COMPENSATOR: {}
-        },
         UNDERBARREL: {
           NO_UNDERBARREL: { default: true },
           LASER_SIGHT_WITH_FLASHLIGHT: {},
@@ -243,6 +229,12 @@ export const weapons = {
           ANGLED_FOREGRIP: {},
           FLASHLIGHT_VERTICAL_FOREGRIP: {},
           LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
         },
         MAGAZINE: {}
       }
@@ -259,21 +251,19 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {
           NO_MUZZLE: {},
           FLASH_HIDER: {},
           MUZZLE_BRAKE: { default: true },
           COMPENSATOR: {}
-        },
-        UNDERBARREL: {
-          NO_UNDERBARREL: {},
-          LASER_SIGHT_WITH_FLASHLIGHT: {
-            default: true
-          },
-          VERTICAL_FOREGRIP: {},
-          ANGLED_FOREGRIP: {},
-          FLASHLIGHT_VERTICAL_FOREGRIP: {},
-          LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
         MAGAZINE: {}
       }
@@ -290,12 +280,6 @@ export const weapons = {
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: { default: true }
         },
-        MUZZLE: {
-          NO_MUZZLE: { default: true },
-          FLASH_HIDER: {},
-          MUZZLE_BRAKE: {},
-          COMPENSATOR: {}
-        },
         UNDERBARREL: {
           NO_UNDERBARREL: { default: true },
           LASER_SIGHT_WITH_FLASHLIGHT: {},
@@ -303,6 +287,12 @@ export const weapons = {
           ANGLED_FOREGRIP: {},
           FLASHLIGHT_VERTICAL_FOREGRIP: {},
           LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
         },
         MAGAZINE: {}
       }
@@ -319,11 +309,354 @@ export const weapons = {
           SNIPER_SCOPE_X10: {},
           COMBAT_SCOPE_X4: { default: true }
         },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {
           NO_MUZZLE: {},
           FLASH_HIDER: {},
           MUZZLE_BRAKE: { default: true },
           COMPENSATOR: {}
+        },
+        MAGAZINE: {}
+      }
+    },
+    KNIGHT: {
+      displayName: 'MP-98 Knight',
+      archetype: 'SMG',
+      attachments: {
+        OPTICS: {
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: {},
+          SHORT_MAGAZINE: { default: true }
+        }
+      }
+    },
+    DEFENDER: {
+      displayName: 'SMG-37 Defender',
+      archetype: 'SMG',
+      attachments: {
+        OPTICS: {
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
+    },
+    PUMMELER: {
+      displayName: 'SMG-72 Pummeler',
+      archetype: 'SMG',
+      attachments: {
+        OPTICS: {
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true }
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
+    },
+    PUNISHER: {
+      displayName: 'SG-8 Punisher',
+      archetype: 'SHOTGUN',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          NO_MUZZLE: {},
+          HALF_CHOKE: {},
+          FULL_CHOKE: {},
+          DUCKBILL: { default: true }
+        },
+        MAGAZINE: {}
+      }
+    },
+    BREAKER: {
+      displayName: 'SG-225 Breaker',
+      archetype: 'SHOTGUN',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          HALF_CHOKE: {},
+          FULL_CHOKE: {},
+          DUCKBILL: { default: true }
+        },
+        MAGAZINE: {
+          DRUM_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          EXTENDED_MAGAZINE: {}
+        }
+      }
+    },
+    SLUGGER: {
+      displayName: 'SG-8S Slugger',
+      archetype: 'SHOTGUN',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true }
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    BREAKER_SPRAY_AND_PRAY: {
+      displayName: 'SG-225SP Breaker Spray&Pray',
+      archetype: 'SHOTGUN',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: { default: true },
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          HALF_CHOKE: {},
+          FULL_CHOKE: {},
+          DUCKBILL: { default: true }
+        },
+        MAGAZINE: {
+          DRUM_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          EXTENDED_MAGAZINE: {}
+        }
+      }
+    },
+    BREAKER_INCENDIARY: {
+      displayName: 'SG-225IE Breaker Incendiary',
+      archetype: 'SHOTGUN',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          HALF_CHOKE: {},
+          FULL_CHOKE: {},
+          DUCKBILL: {}
+        },
+        MAGAZINE: {
+          DRUM_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          EXTENDED_MAGAZINE: {}
+        }
+      }
+    },
+    SCYTHE: {
+      displayName: 'LAS-5 Scythe',
+      archetype: 'ENERGY',
+      attachments: {
+        OPTICS: {
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: { default: true }
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {
+          STANDARD_HEATSINK: { default: true },
+          HIGH_CAPACITY_HEATSINK: {},
+          HIGH_DISSIPATION_HEATSINK: {}
+        }
+      }
+    },
+    SCORCHER: {
+      displayName: 'PLAS-1 Scorcher',
+      archetype: 'ENERGY',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true }
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    BLITZER: {
+      displayName: 'Arc-12 Blitzer',
+      archetype: 'ENERGY',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    SICKLE: {
+      displayName: 'LAS-16 Sickle',
+      archetype: 'ENERGY',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: { default: true },
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    PUNISHER_PLASMA: {
+      displayName: 'SG-8P Punisher Plasma',
+      archetype: 'ENERGY',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    ERUPTOR: {
+      displayName: 'R-36 Eruptor',
+      archetype: 'EXPLOSIVE',
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X2: {},
+          COMBAT_SCOPE_X4: {},
+          SNIPER_SCOPE_X10: { default: true }
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    EXPLODING_CROSSBOW: {
+      displayName: 'CB-9 Exploding Crossbow',
+      archetype: 'EXPLOSIVE',
+      attachments: {
+        OPTICS: {
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true }
         },
         UNDERBARREL: {
           NO_UNDERBARREL: { default: true },
@@ -333,98 +666,72 @@ export const weapons = {
           FLASHLIGHT_VERTICAL_FOREGRIP: {},
           LASER_SIGHT_ANGLED_FOREGRIP: {}
         },
+        MUZZLE: {},
         MAGAZINE: {}
       }
-    },
-    KNIGHT: {
-      displayName: 'MP-98 Knight',
-      archetype: 'SMG',
-      attachments: {}
-    },
-    DEFENDER: {
-      displayName: 'SMG-37 Defender',
-      archetype: 'SMG',
-      attachments: {}
-    },
-    PUMMELER: {
-      displayName: 'SMG-72 Pummeler',
-      archetype: 'SMG',
-      attachments: {}
-    },
-    PUNISHER: {
-      displayName: 'SG-8 Punisher',
-      archetype: 'SHOTGUN',
-      attachments: {}
-    },
-    BREAKER: {
-      displayName: 'SG-225 Breaker',
-      archetype: 'SHOTGUN',
-      attachments: {}
-    },
-    SLUGGER: {
-      displayName: 'SG-8S Slugger',
-      archetype: 'SHOTGUN',
-      attachments: {}
-    },
-    BREAKER_SPRAY_AND_PRAY: {
-      displayName: 'SG-225SP Breaker Spray&Pray',
-      archetype: 'SHOTGUN',
-      attachments: {}
-    },
-    BREAKER_INCENDIARY: {
-      displayName: 'SG-225IE Breaker Incendiary',
-      archetype: 'SHOTGUN',
-      attachments: {}
-    },
-    SCYTHE: {
-      displayName: 'LAS-5 Scythe',
-      archetype: 'ENERGY',
-      attachments: {}
-    },
-    SCORCHER: {
-      displayName: 'PLAS-1 Scorcher',
-      archetype: 'ENERGY',
-      attachments: {}
-    },
-    BLITZER: {
-      displayName: 'Arc-12 Blitzer',
-      archetype: 'ENERGY',
-      attachments: {}
-    },
-    SICKLE: {
-      displayName: 'LAS-16 Sickle',
-      archetype: 'ENERGY',
-      attachments: {}
-    },
-    PUNISHER_PLASMA: {
-      displayName: 'SG-8P Punisher Plasma',
-      archetype: 'ENERGY',
-      attachments: {}
-    },
-    ERUPTOR: {
-      displayName: 'R-36 Eruptor',
-      archetype: 'EXPLOSIVE',
-      attachments: {}
-    },
-    EXPLODING_CROSSBOW: {
-      displayName: 'CB-9 Exploding Crossbow',
-      archetype: 'EXPLOSIVE',
-      attachments: {}
     },
     DOMINATOR: {
       displayName: 'JAR-5 Dominator',
       archetype: 'SPECIAL',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true },
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     PURIFIER: {
       displayName: 'PLAS-101 Purifier',
       archetype: 'ENERGY',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true }
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     COOKOUT: {
       displayName: 'SG-451 Cookout',
       archetype: 'SHOTGUN',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: { default: true },
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     TORCHER: {
       displayName: 'FLAM-66 Torcher',
@@ -439,12 +746,44 @@ export const weapons = {
     HALT: {
       archetype: 'SHOTGUN',
       displayName: 'SG-20 Halt',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: { default: true }
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     REPRIMAND: {
       archetype: 'SMG',
       displayName: 'SMG-32 Reprimand',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          VERTICAL_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {}
+      }
     },
     STA_52: {
       archetype: 'AR',
@@ -464,22 +803,81 @@ export const weapons = {
     DOUBLE_EDGE_SICKLE: {
       archetype: 'ENERGY',
       displayName: 'LAS-17 Double-Edge Sickle',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: { default: true },
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     DEADEYE: {
       archetype: 'MR',
       displayName: 'R-6 Deadeye',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          IRON_SIGHT: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          COMBAT_SCOPE_X4: { default: true },
+          SNIPER_SCOPE_X10: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     AMENDMENT: {
       archetype: 'MR',
       displayName: 'R-2 Amendment',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          COMBAT_SCOPE_X4: { default: true },
+          SNIPER_SCOPE_X10: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     },
     PACIFIER: {
       archetype: 'AR',
       displayName: 'AR-32 Pacifier',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: {},
+          REFLEX_SIGHT: { default: true },
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {

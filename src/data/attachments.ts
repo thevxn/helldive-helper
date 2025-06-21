@@ -58,6 +58,15 @@ export const attachments = {
     },
     COMPENSATOR: {
       displayName: 'Compensator'
+    },
+    HALF_CHOKE: {
+      displayName: 'Half Choke'
+    },
+    FULL_CHOKE: {
+      displayName: 'Full Choke'
+    },
+    DUCKBILL: {
+      displayName: 'Duckbill'
     }
   },
   UNDERBARREL: {
@@ -89,6 +98,15 @@ export const attachments = {
     },
     SHORT_MAGAZINE: {
       displayName: 'Short Magazine'
+    },
+    STANDARD_HEATSINK: {
+      displayName: 'Standard Heatsink'
+    },
+    HIGH_CAPACITY_HEATSINK: {
+      displayName: 'High Capacity Heatsink'
+    },
+    HIGH_DISSIPATION_HEATSINK: {
+      displayName: 'High Dissipation Heatsink'
     }
   }
 } as const satisfies Record<AttachmentCategory, Record<string, IAttachment>>
