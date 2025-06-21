@@ -23,6 +23,7 @@
         :placeholder="player.name"
         class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
+
       <!-- Attachment select modal -->
       <AttachmentSelect
         :primary-weapon-code="data.playerList[i].primaryWeaponCode"
@@ -36,6 +37,7 @@
         @attachment-selected="handleAttachmentSelection"
         v-for="(attachment, category) in data.playerList[i].primaryWeaponAttachments"
         :key="category" />
+
       <!-- Primary weapon select -->
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
       <div class="flex w-full flex-col gap-4 sm:flex-row">
@@ -87,10 +89,11 @@
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment"
             @click="
-              attachment
-                ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
-                    !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]])
-                : null
+              attachment ? openAttachmentSelectModal(i, AttachmentCategoryEnum[category]) : null
+              // attachment
+              //   ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
+              //       !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]])
+              //   : null
             ">
             <img
               :src="getAttachmentImageSource(attachment, player.primaryWeaponCode)"
@@ -573,13 +576,27 @@
     )
   })
 
-  // TODO: When opening a modal for a category, close all other categories for the player
+  /**
+   * Holds the state of each attachment select modal (opened/closed).
+   */
   const attachmentSelectMatrix = ref([
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false]
   ])
+
+  /**
+   * Handles opening of a new attachment select modal. It is needed to close any previously opened modal for the same player
+   * to prevent multiple modals overlapping.
+   *
+   * @param playerIndex - Index of the player
+   * @param position - Position of the attachment in the player data array, see `AttachmentCategoryEnum`
+   */
+  const openAttachmentSelectModal = (playerIndex: number, position: number) => {
+    // Close all modals for this player, then open the one at the provided position
+    attachmentSelectMatrix.value[playerIndex] = attachmentSelectMatrix.value[playerIndex].map((_, i) => i === position)
+  }
 
   /**
    * Handles attachment selection and attachment select modal closing.

@@ -1,10 +1,9 @@
 <template>
-  <!-- TODO: Fix img and modal sizes -->
   <div
     tabindex="0"
     ref="attachmentSelect"
     @keydown.esc="$emit('attachment-selected', playerIndex, position)"
-    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[180px] w-[88%] -translate-y-[-110%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 focus:outline-none sm:h-[20vh] sm:w-[40%] sm:-translate-y-[-25%] xl:w-[21%]"
+    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[230px] w-[88%] -translate-y-[-65%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 focus:outline-none sm:w-[40%] sm:-translate-y-[-5%] xl:w-[21%]"
     @click.stop
     v-if="display">
     <div class="flex h-fit w-full flex-row">
@@ -12,20 +11,23 @@
         <button @click="$emit('attachment-selected', playerIndex, position)">X</button>
       </div>
     </div>
-    <div :class="'flex flex-row flex-wrap items-start justify-center gap-2'">
-      <img
+    <div class="flex-roow ml-auto mr-auto flex h-full w-full flex-wrap gap-2">
+      <div
+        class="flex h-[80px] w-[20%] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 bg-black bg-opacity-70 hover:cursor-pointer hover:border-yellow-300"
         v-for="attachment in availableAttachments"
         :key="attachment"
-        :src="props.primaryWeaponCode ? getAttachmentImageSource(attachment, props.primaryWeaponCode) : ''"
-        class="h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-300"
-        :title="
-          (
-            attachments[attachmentCategory as AttachmentCategory][
-              attachment as keyof (typeof attachments)[AttachmentCategory]
-            ] as IAttachment
-          ).displayName
-        "
-        @click="$emit('attachment-selected', playerIndex, position, attachment)" />
+        @click="$emit('attachment-selected', playerIndex, position, attachment)">
+        <img
+          class="max-h-[64px]"
+          :src="props.primaryWeaponCode ? getAttachmentImageSource(attachment, props.primaryWeaponCode) : ''"
+          :title="
+            (
+              attachments[attachmentCategory as AttachmentCategory][
+                attachment as keyof (typeof attachments)[AttachmentCategory]
+              ] as IAttachment
+            ).displayName
+          " />
+      </div>
     </div>
   </div>
 </template>
