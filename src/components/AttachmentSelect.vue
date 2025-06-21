@@ -4,7 +4,7 @@
     tabindex="0"
     ref="attachmentSelect"
     @keydown.esc="$emit('attachment-selected', playerIndex, position)"
-    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[70vh] w-[88%] -translate-y-[107%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 focus:outline-none sm:h-[75vh] sm:w-[40%] xl:w-[21%]"
+    class="bg-diagonal-solid absolute z-10 mt-4 flex h-[180px] w-[88%] -translate-y-[-110%] translate-x-[0%] snap-start flex-col overflow-y-auto rounded-md border-4 border-solid border-yellow-300 p-4 focus:outline-none sm:h-[20vh] sm:w-[40%] sm:-translate-y-[-25%] xl:w-[21%]"
     @click.stop
     v-if="display">
     <div class="flex h-fit w-full flex-row">

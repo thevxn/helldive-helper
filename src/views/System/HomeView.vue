@@ -23,7 +23,19 @@
         :placeholder="player.name"
         class="` focus:outline-yellow-300` w-[200px] bg-yellow-300 text-center text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2"
         v-model="player.name" />
-
+      <!-- Attachment select modal -->
+      <AttachmentSelect
+        :primary-weapon-code="data.playerList[i].primaryWeaponCode"
+        :attachment-category="category"
+        :selected-attachment="attachment"
+        :player-index="i"
+        :position="AttachmentCategoryEnum[category]"
+        :display="attachmentSelectMatrix[i][AttachmentCategoryEnum[category]]"
+        :id="`attachment-select-${i}`"
+        ref="attachmentModalsRef"
+        @attachment-selected="handleAttachmentSelection"
+        v-for="(attachment, category) in data.playerList[i].primaryWeaponAttachments"
+        :key="category" />
       <!-- Primary weapon select -->
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
       <div class="flex w-full flex-col gap-4 sm:flex-row">
@@ -61,6 +73,7 @@
             </div>
           </template>
         </v-select>
+
         <!-- Primary attachments -->
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
@@ -72,7 +85,13 @@
                 : 'cursor-not-allowed bg-yellow-300'
             "
             v-for="(attachment, category) in player.primaryWeaponAttachments"
-            :key="attachment">
+            :key="attachment"
+            @click="
+              attachment
+                ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
+                    !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]])
+                : null
+            ">
             <img
               :src="getAttachmentImageSource(attachment, player.primaryWeaponCode)"
               :title="
@@ -84,13 +103,7 @@
                     ).displayName
                   : 'Locked Category'
               "
-              class="max-h-[64px]"
-              @click="
-                attachment
-                  ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
-                      !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]])
-                  : null
-              " />
+              class="max-h-[64px]" />
           </div>
         </div>
       </div>
@@ -263,19 +276,7 @@
           @stratagem-selected="handleStratagemSelection"
           ref="stratagemModalsRef"
           :id="`stratagem-select-${i}`" />
-        <!-- Attachment select modal -->
-        <AttachmentSelect
-          :primary-weapon-code="data.playerList[i].primaryWeaponCode"
-          :attachment-category="category"
-          :selected-attachment="attachment"
-          :player-index="i"
-          :position="AttachmentCategoryEnum[category]"
-          :display="attachmentSelectMatrix[i][AttachmentCategoryEnum[category]]"
-          :id="`attachment-select-${i}`"
-          ref="attachmentModalsRef"
-          @attachment-selected="handleAttachmentSelection"
-          v-for="(attachment, category) in data.playerList[i].primaryWeaponAttachments"
-          :key="category" />
+
         <img
           :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
@@ -572,6 +573,7 @@
     )
   })
 
+  // TODO: When opening a modal for a category, close all other categories for the player
   const attachmentSelectMatrix = ref([
     [false, false, false, false],
     [false, false, false, false],
