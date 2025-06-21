@@ -72,9 +72,8 @@
             "
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment">
-            <!-- TODO: Differentiate between drum mags for different categories (and in the modal as well) -->
             <img
-              :src="`/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`"
+              :src="getAttachmentImageSource(attachment, player.primaryWeaponCode)"
               :title="
                 attachment
                   ? (
@@ -309,6 +308,7 @@
     IAttachment,
     WeaponAttachments,
     attachments,
+    getAttachmentImageSource,
     getDefaultAttachments
   } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'

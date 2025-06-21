@@ -15,7 +15,7 @@
       <img
         v-for="attachment in availableAttachments"
         :key="attachment"
-        :src="`/attachments/primary/${attachment}.webp`"
+        :src="props.primaryWeaponCode ? getAttachmentImageSource(attachment, props.primaryWeaponCode) : ''"
         :class="`h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-300`"
         :title="
           (
@@ -38,6 +38,7 @@
     AttachmentKeysForWeaponForCategory,
     IAttachment,
     attachments,
+    getAttachmentImageSource,
     getAttachmentsForWeaponForCategory
   } from '@/data/attachments'
   import { PrimaryWeaponKey } from '@/data/weapons'

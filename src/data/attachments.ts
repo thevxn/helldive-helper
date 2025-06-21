@@ -167,3 +167,12 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
 
   return defaults
 }
+
+export const getAttachmentImageSource = (attachment: AttachmentKey | undefined, weapon: PrimaryWeaponKey) => {
+  // Drums look different depending on the weapon's archetype
+  if (attachment === 'DRUM_MAGAZINE') {
+    return `/attachments/primary/DRUM_MAGAZINE_${weapons.primary[weapon].archetype}.webp`
+  }
+
+  return `/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`
+}
