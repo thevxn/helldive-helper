@@ -1,5 +1,6 @@
 import { stratagemCategories, stratagemCodeList, stratagems } from '@/data/stratagems'
 import {
+  type IArchetype,
   type IGrenade,
   type IPrimaryWeapon,
   type ISecondaryWeapon,
@@ -11,15 +12,18 @@ import {
   weapons
 } from '@/data/weapons'
 
-export const createAndSortWeapons = (
-  archetypes: typeof primaryArchetypes | typeof secondaryArchetypes | typeof grenadeArchetypes
-) => {
-  const sortedList: IWeapon[] = []
+export function createAndSortWeapons<
+  T extends typeof primaryArchetypes | typeof secondaryArchetypes | typeof grenadeArchetypes
+>(archetypes: T) {
+  const sortedList: Array<IArchetype | IWeapon> = []
 
-  Object.keys(archetypes).map((archetype: string) => {
-    sortedList.push(archetypes[archetype as keyof typeof archetypes])
-    sortedList[sortedList.indexOf(archetypes[archetype as keyof typeof archetypes])]['code'] = archetype
-    sortedList[sortedList.indexOf(archetypes[archetype as keyof typeof archetypes])]['isArchetype'] = true
+  ;(Object.keys(archetypes) as Array<Extract<keyof T, string>>).map(archetype => {
+    const archetypeObj = archetypes[archetype] as IArchetype
+
+    sortedList.push(archetypeObj)
+
+    sortedList[sortedList.indexOf(archetypeObj)]['code'] = archetype
+    sortedList[sortedList.indexOf(archetypeObj)]['isArchetype'] = true
 
     let weaponSource: Record<string, IPrimaryWeapon> | Record<string, ISecondaryWeapon> | Record<string, IGrenade>
 
@@ -41,7 +45,7 @@ export const createAndSortWeapons = (
   })
 
   sortedList.sort((a, b) => {
-    if (!(a.isArchetype || b.isArchetype) && a.archetype === b.archetype) {
+    if (!(a.isArchetype || b.isArchetype) && 'archetype' in a && 'archetype' in b && a.archetype === b.archetype) {
       return a.displayName.localeCompare(b.displayName)
     }
 

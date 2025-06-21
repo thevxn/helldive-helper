@@ -27,13 +27,23 @@
         <span class="font-bold">Squad members: {{ playerCount }}</span>
         <button
           :disabled="playerCount === 4"
-          class="bg-diagonal-hover h-8 w-8 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+          class="h-8 w-8 snap-center place-self-center rounded border-2 border-solid font-bold"
+          :class="
+            playerCount === 4
+              ? 'text-yellow  border-gray-800 bg-black opacity-70 hover:cursor-not-allowed'
+              : 'bg-diagonal-hover border-yellow-300 bg-yellow-300 text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black'
+          "
           @click="$emit('addMember')">
           +
         </button>
         <button
           :disabled="playerCount === 1"
-          class="bg-diagonal-hover h-8 w-8 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+          class="h-8 w-8 snap-center place-self-center rounded border-2 border-solid font-bold"
+          :class="
+            playerCount === 1
+              ? 'text-yellow  border-gray-800 bg-black opacity-70 hover:cursor-not-allowed'
+              : 'bg-diagonal-hover border-yellow-300 bg-yellow-300 text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black'
+          "
           @click="$emit('removeMember')">
           -
         </button>
@@ -44,7 +54,7 @@
 
 <script setup lang="ts">
   defineEmits(['addMember', 'removeMember'])
-  defineProps(['playerCount'])
+  defineProps<{ playerCount: number }>()
 </script>
 
 <style scoped></style>

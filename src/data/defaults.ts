@@ -1,28 +1,32 @@
 import { reactive } from 'vue'
 
-import type { boosterCodeList } from '@/data/boosters'
-import type { perks } from '@/data/perks'
-import type { stratagems } from '@/data/stratagems'
-import type { grenades, weapons } from '@/data/weapons'
+import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
+import type { BoosterKey } from '@/data/boosters'
+import type { PerkKey } from '@/data/perks'
+import type { StratagemKey } from '@/data/stratagems'
+import type { GrenadeKey, PrimaryWeaponKey, SecondaryWeaponKey } from '@/data/weapons'
 
 export interface IData {
   playerList: IPlayer[]
 }
 
 interface IPlayer {
-  perkCode: keyof typeof perks
-  boosterCode: (typeof boosterCodeList)[number]
+  perkCode: PerkKey
+  boosterCode: BoosterKey
   name: string
-  primaryWeaponCode: keyof typeof weapons.primary
-  secondaryWeaponCode: keyof typeof weapons.secondary
-  grenadeCode: keyof typeof grenades
-  stratagemCodeList: (keyof typeof stratagems)[]
-  color: IPlayerColor
+  primaryWeaponCode: PrimaryWeaponKey
+  secondaryWeaponCode: SecondaryWeaponKey
+  grenadeCode: GrenadeKey
+  stratagemCodeList: StratagemKey[]
+  color: PlayerColor
+  primaryWeaponAttachments: Partial<{
+    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
+  }>
 }
 
-export type IPlayerColor = 'orange' | 'green' | 'blue' | 'pink'
+export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
-const defaultPlayerList = [
+const defaultPlayerList: IPlayer[] = [
   {
     name: 'Squad Leader',
     primaryWeaponCode: 'SICKLE',
@@ -31,7 +35,13 @@ const defaultPlayerList = [
     stratagemCodeList: ['EAGLE_AIRSTRIKE', 'ORBITAL_LASER', 'SHIELD_GENERATOR_PACK', 'MORTAR_SENTRY'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'HELLPOD_SPACE_OPTIMIZATION',
-    color: 'orange'
+    color: 'orange',
+    primaryWeaponAttachments: {
+      OPTICS: 'TUBE_RED_DOT_X2',
+      MUZZLE: undefined,
+      UNDERBARREL: undefined,
+      MAGAZINE: undefined
+    }
   },
   {
     name: 'Light AT/Support',
@@ -41,7 +51,13 @@ const defaultPlayerList = [
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'SUPPLY_PACK', 'EAT'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'VITALITY_ENHANCEMENT',
-    color: 'green'
+    color: 'green',
+    primaryWeaponAttachments: {
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FULL_CHOKE',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
+    }
   },
   {
     name: 'Grenadier',
@@ -51,7 +67,13 @@ const defaultPlayerList = [
     stratagemCodeList: ['EAGLE_CLUSTER_BOMB', 'ORBITAL_AIRBURST_STRIKE', 'SHIELD_GENERATOR_PACK', 'GRENADE_LAUNCHER'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'STAMINA_ENHANCEMENT',
-    color: 'blue'
+    color: 'blue',
+    primaryWeaponAttachments: {
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FLASH_HIDER',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
+    }
   },
   {
     name: 'Autocannon Operator',
@@ -61,12 +83,18 @@ const defaultPlayerList = [
     stratagemCodeList: ['EAGLE_500', 'ORBITAL_RAILCANNON_STRIKE', 'AUTOCANNON_SENTRY', 'AUTOCANNON'],
     perkCode: 'EXTRA_PADDING',
     boosterCode: 'LOCALIZATION_CONFUSION',
-    color: 'pink'
+    color: 'pink',
+    primaryWeaponAttachments: {
+      OPTICS: 'REFLEX_SIGHT',
+      MUZZLE: 'FULL_CHOKE',
+      UNDERBARREL: 'VERTICAL_FOREGRIP',
+      MAGAZINE: 'DRUM_MAGAZINE'
+    }
   }
 ]
 
 export const getDefaultData = (existingPlayerListLength: number): IData => {
-  return reactive({
+  return reactive<IData>({
     playerList: defaultPlayerList.slice(existingPlayerListLength) as IPlayer[]
   })
 }

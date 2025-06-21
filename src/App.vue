@@ -18,6 +18,7 @@
   import Header from '@/components/partials/PHeader.vue'
 
   const home = ref()
+
   const playerCount = ref(4)
 
   // https://github.com/vuejs/core/issues/1990

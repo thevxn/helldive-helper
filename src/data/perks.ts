@@ -60,7 +60,8 @@ export const perks = {
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 
-export const perkCodeList = Object.keys(perks) as (keyof typeof perks)[]
+export type PerkKey = keyof typeof perks
+export const perkCodeList = Object.keys(perks) as PerkKey[]
 
 export type PerkWithCode = IPerk & { code: keyof typeof perks }
 
@@ -69,8 +70,8 @@ export const perkList: PerkWithCode[] = []
 
 for (const perk in perks) {
   const modifiedPerk: PerkWithCode = {
-    ...perks[perk as keyof typeof perks],
-    code: perk as keyof typeof perks
+    ...perks[perk as PerkKey],
+    code: perk as PerkKey
   }
 
   perkList.push(modifiedPerk)

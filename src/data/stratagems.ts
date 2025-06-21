@@ -275,7 +275,6 @@ export const stratagems = {
     displayName: 'CQC-1 One True Flag',
     category: 'WEAPON'
   },
-  // TODO: Fix name?
   DEESCALATOR: {
     displayName: 'GL-52 De-Escalator',
     category: 'WEAPON'
@@ -286,4 +285,5 @@ export const stratagems = {
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 
-export const stratagemCodeList = Object.keys(stratagems) as (keyof typeof stratagems)[]
+export type StratagemKey = keyof typeof stratagems
+export const stratagemCodeList = Object.keys(stratagems) as StratagemKey[]

@@ -3,6 +3,7 @@ export const config = {
     duration: 1200
   },
   forms: {
-    searchable: true
+    searchable: true,
+    clearable: false
   }
 }

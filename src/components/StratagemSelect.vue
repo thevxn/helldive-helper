@@ -14,28 +14,34 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { Ref, ref } from 'vue'
 
   import { stratagemCodeList, stratagems } from '@/data/stratagems'
   import { sortStratagems } from '@/utils/sort'
 
   const sortedStratagemCodeList = sortStratagems(stratagemCodeList)
+
   const display = ref(false)
-  const playerIndex = ref(null)
-  const position = ref(null)
+
+  const playerIndex = ref(null) as Ref<number | null>
+
+  const position = ref(null) as Ref<number | null>
+
   const props = defineProps({
     selectedStratagems: {
       type: Array,
       default: () => ['MECH', 'RAILGUN', 'JUMP_PACK', 'EAGLE_AIRSTRIKE']
     }
   })
+
   const shownStratagems = ref(
-    sortedStratagemCodeList.filter(e => {
-      if (!props.selectedStratagems.find(el => el === e)) {
-        return e
+    sortedStratagemCodeList.filter(stratagem => {
+      if (!props.selectedStratagems.find(selectedStratagem => selectedStratagem === stratagem)) {
+        return stratagem
       }
     })
   )
+
   const displayOn = () => {
     display.value = true
     shownStratagems.value = sortedStratagemCodeList.filter(e => {
@@ -44,6 +50,7 @@
       }
     })
   }
+
   const displayOff = () => {
     display.value = false
   }

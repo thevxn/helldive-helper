@@ -31,11 +31,11 @@ module.exports = {
         prev: ['block', 'block-like', 'cjs-export', 'class', 'const', 'export', 'import', 'let', 'var'],
         next: '*'
       },
-      {
-        blankLine: 'never',
-        prev: ['const', 'let', 'var'],
-        next: ['const', 'let', 'var']
-      },
+      // {
+      //   blankLine: 'never',
+      //   prev: ['const', 'let', 'var'],
+      //   next: ['const', 'let', 'var']
+      // },
       { blankLine: 'any', prev: ['export', 'import'], next: ['export', 'import'] }
     ],
     'sort-imports': [
