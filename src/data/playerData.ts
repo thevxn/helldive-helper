@@ -1,4 +1,4 @@
-import { getAttachmentsForWeaponForCategory } from '@/data/attachments'
+import { getAttachmentsForWeaponForCategory, getDefaultAttachments } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import type { IData, PlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
@@ -54,24 +54,32 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
       boosterCode,
       primaryWeaponAttachments: {
         OPTICS:
-          playerArray[11] !== -1
+          typeof playerArray[11] === 'number' && playerArray[11] !== -1
             ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'OPTICS')[playerArray[11] as number]
-            : undefined,
+            : typeof playerArray[11] === 'number' && playerArray[11] === -1
+              ? undefined
+              : getDefaultAttachments(primaryWeaponCode).OPTICS,
 
         MUZZLE:
-          playerArray[12] !== -1
+          typeof playerArray[12] === 'number' && playerArray[12] !== -1
             ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MUZZLE')[playerArray[12] as number]
-            : undefined,
+            : typeof playerArray[12] === 'number' && playerArray[12] === -1
+              ? undefined
+              : getDefaultAttachments(primaryWeaponCode).MUZZLE,
 
         UNDERBARREL:
-          playerArray[13] !== -1
+          typeof playerArray[13] === 'number' && playerArray[13] !== -1
             ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'UNDERBARREL')[playerArray[13] as number]
-            : undefined,
+            : typeof playerArray[13] === 'number' && playerArray[13] === -1
+              ? undefined
+              : getDefaultAttachments(primaryWeaponCode).UNDERBARREL,
 
         MAGAZINE:
-          playerArray[14] !== -1
+          typeof playerArray[14] === 'number' && playerArray[14] !== -1
             ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MAGAZINE')[playerArray[14] as number]
-            : undefined
+            : typeof playerArray[14] === 'number' && playerArray[14] === -1
+              ? undefined
+              : getDefaultAttachments(primaryWeaponCode).MAGAZINE
       }
     })
   })
