@@ -17,7 +17,7 @@
         v-for="attachment in availableAttachments"
         :key="attachment"
         :src="props.primaryWeaponCode ? getAttachmentImageSource(attachment, props.primaryWeaponCode) : ''"
-        :class="`h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-300`"
+        class="h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-300"
         :title="
           (
             attachments[attachmentCategory as AttachmentCategory][
