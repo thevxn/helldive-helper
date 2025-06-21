@@ -123,18 +123,13 @@ export const weapons = {
       attachments: {
         OPTICS: {
           TUBE_RED_DOT_X2: { default: true },
+          TUBE_RED_DOT_X1_5: {},
           REFLEX_SIGHT: {},
-          HOLOGRAPHIC_SIGHT: {},
           REFLEX_SIGHT_MK_2: {},
           IRON_SIGHT: {},
           COMBAT_SCOPE_X4: {}
         },
-        MUZZLE: {
-          NO_MUZZLE: { default: true },
-          FLASH_HIDER: {},
-          MUZZLE_BRAKE: {},
-          COMPENSATOR: {}
-        },
+        MUZZLE: {},
         UNDERBARREL: {
           NO_UNDERBARREL: {},
           LASER_SIGHT_WITH_FLASHLIGHT: {
@@ -155,7 +150,37 @@ export const weapons = {
     LIBERATOR_PENETRATOR: {
       displayName: 'AR-23P Liberator Penetrator',
       archetype: 'AR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: { default: true }
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {
+            default: true
+          },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
     },
     LIBERATOR_CARBINE: {
       archetype: 'AR',
@@ -405,7 +430,6 @@ export type PrimaryWeaponKey = keyof typeof weapons.primary
 export type SecondaryWeaponKey = keyof typeof weapons.secondary
 
 export const primaryWeaponCodeList = Object.keys(weapons.primary) as PrimaryWeaponKey[]
-// TODO: create type alias
 export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as SecondaryWeaponKey[]
 
 /*

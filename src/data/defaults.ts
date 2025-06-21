@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 
 import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
-import type { boosterCodeList } from '@/data/boosters'
+import type { boosters } from '@/data/boosters'
 import type { perks } from '@/data/perks'
 import type { stratagems } from '@/data/stratagems'
 import type { PrimaryWeaponKey, SecondaryWeaponKey, grenades } from '@/data/weapons'
@@ -13,7 +13,7 @@ export interface IData {
 // TODO: Add type aliases
 interface IPlayer {
   perkCode: keyof typeof perks
-  boosterCode: (typeof boosterCodeList)[number]
+  boosterCode: keyof typeof boosters
   name: string
   primaryWeaponCode: PrimaryWeaponKey
   secondaryWeaponCode: SecondaryWeaponKey
