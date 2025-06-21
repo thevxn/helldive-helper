@@ -42,7 +42,7 @@
     IAttachment
   } from '@/data/attachments'
   import { attachments, getAttachmentImageSource, getAttachmentsForWeaponForCategory } from '@/data/attachments'
-  import { PrimaryWeaponKey } from '@/data/weapons'
+  import type { PrimaryWeaponKey } from '@/data/weapons'
 
   interface IProps {
     primaryWeaponCode: PrimaryWeaponKey | null
