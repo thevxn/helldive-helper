@@ -30,7 +30,7 @@
         <v-select
           name="primary"
           :id="`primary-${i}`"
-          class="custom-select min-h-[135px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300 sm:w-2/3"
+          class="custom-select h-[130px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300 sm:h-[155px] sm:w-2/3"
           v-model="player.primaryWeaponCode"
           :options="createAndSortWeapons(primaryArchetypes)"
           label="displayName"
@@ -38,7 +38,8 @@
           :selectable="(option: IPrimaryWeapon) => !option.isArchetype"
           :components="{ Deselect: null }"
           :filter-by="filterOptions"
-          :searchable="config.forms.searchable">
+          :searchable="config.forms.searchable"
+          :clearable="config.forms.clearable">
           <template #option="option">
             <div class="flex flex-col items-center justify-center gap-2 sm:justify-start">
               <img
@@ -107,7 +108,8 @@
         :selectable="(option: ISecondaryWeapon) => !option.isArchetype"
         :components="{ Deselect: null }"
         :filter-by="filterOptions"
-        :searchable="config.forms.searchable">
+        :searchable="config.forms.searchable"
+        :clearable="config.forms.clearable">
         <template #option="option">
           <div class="flex flex-row items-center justify-start gap-2">
             <img
@@ -146,7 +148,8 @@
             :selectable="(option: IWeapon) => !option.isArchetype"
             :components="{ Deselect: null }"
             :filter-by="filterOptions"
-            :searchable="false">
+            :searchable="false"
+            :clearable="config.forms.clearable">
             <!-- :searchable="config.forms.searchable"> -->
             <template #option="option">
               <div class="flex flex-row items-center justify-start gap-2">
@@ -183,7 +186,8 @@
             label="displayName"
             :reduce="(perk: (typeof perkList)[number]) => perk.code"
             :components="{ Deselect: null }"
-            :searchable="false">
+            :searchable="false"
+            :clearable="config.forms.clearable">
             <!-- :searchable="config.forms.searchable"> -->
             <template #option="option">
               <div class="flex flex-row items-center justify-start gap-2">
@@ -218,7 +222,8 @@
             label="displayName"
             :reduce="(booster: (typeof boosterList)[number]) => booster.code"
             :components="{ Deselect: null }"
-            :searchable="false">
+            :searchable="false"
+            :clearable="config.forms.clearable">
             <!-- :searchable="config.forms.searchable"> -->
             <template #option="option">
               <div class="flex flex-row items-center justify-start gap-2">

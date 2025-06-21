@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Fix img and modal sizes -->
   <div
     tabindex="0"
     ref="attachmentSelect"
