@@ -12,7 +12,6 @@
       </div>
     </div>
     <div :class="'flex flex-row flex-wrap items-start justify-center gap-2'">
-      <!-- TODO: title could be refactored to be returned by a getDisplayName helper function to be cleaner.. -->
       <img
         v-for="attachment in availableAttachments"
         :key="attachment"
@@ -66,9 +65,6 @@
 
   if (props.selectedAttachment && props.attachmentCategory && props.primaryWeaponCode) {
     availableAttachments.value = getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)
-    Logger().debug(
-      `${props.attachmentCategory} attachments for ${props.primaryWeaponCode}: ${getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)}`
-    )
   }
 
   // Update available attachments each time the selected weapon changes
