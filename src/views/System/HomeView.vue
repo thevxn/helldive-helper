@@ -65,7 +65,7 @@
         <div
           class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
           <div
-            class="flex h-[48%] max-h-[44px] w-[48%] max-w-[64px] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 sm:max-h-[64px]"
+            class="flex h-[80px] w-[24%] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 sm:h-[48%] sm:w-[48%]"
             :class="
               attachment
                 ? 'cursor-pointer hover:border-4 hover:border-solid hover:border-yellow-300'
@@ -84,7 +84,7 @@
                     ).displayName
                   : 'Locked Category'
               "
-              class="h-full w-full"
+              class="max-h-[64px]"
               @click="
                 attachment
                   ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
