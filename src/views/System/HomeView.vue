@@ -595,7 +595,15 @@
    */
   const openAttachmentSelectModal = (playerIndex: number, position: number) => {
     // Close all modals for this player, then open the one at the provided position
-    attachmentSelectMatrix.value[playerIndex] = attachmentSelectMatrix.value[playerIndex].map((_, i) => i === position)
+    attachmentSelectMatrix.value[playerIndex] = attachmentSelectMatrix.value[playerIndex].map((val, i) => {
+      // If the position matches, toggle the value (to enable closing modals by clicking on the attachment slot again)
+      if (i === position) {
+        return !val
+      }
+
+      // Else, close the given modal to ensure all previous ones are closed
+      return false
+    })
   }
 
   /**
