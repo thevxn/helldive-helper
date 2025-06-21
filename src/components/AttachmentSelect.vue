@@ -11,7 +11,7 @@
     <div :class="'flex flex-row flex-wrap items-start justify-center gap-2'">
       <!-- TODO: title could be refactored to be returned by a getDisplayName helper function to be cleaner.. -->
       <img
-        v-for="attachment in shownAttachments"
+        v-for="attachment in availableAttachments"
         :key="attachment"
         :src="`/attachments/primary/${attachment}.webp`"
         :class="`h-[50px] w-[50px] rounded-md hover:border-4 hover:border-solid hover:border-yellow-300`"
@@ -33,12 +33,13 @@
   import {
     AttachmentCategory,
     AttachmentKey,
+    AttachmentKeysForWeaponForCategory,
     IAttachment,
-    WeaponAttachments,
     attachments,
-    getAttachmentsForCategory
+    getAttachmentsForWeaponForCategory
   } from '@/data/attachments'
   import { PrimaryWeaponKey } from '@/data/weapons'
+  import { Logger } from '@/utils/logger'
 
   interface IProps {
     primaryWeaponCode: PrimaryWeaponKey | null
@@ -58,10 +59,13 @@
     display: false
   })
 
-  const shownAttachments = ref<WeaponAttachments[AttachmentCategory][]>()
+  const availableAttachments = ref<AttachmentKeysForWeaponForCategory<PrimaryWeaponKey, AttachmentCategory> | never[]>()
 
-  if (props.selectedAttachment && props.attachmentCategory) {
-    shownAttachments.value = getAttachmentsForCategory(props.attachmentCategory)
+  if (props.selectedAttachment && props.attachmentCategory && props.primaryWeaponCode) {
+    availableAttachments.value = getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)
+    Logger().debug(
+      `${props.attachmentCategory} attachments for ${props.primaryWeaponCode}: ${getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)}`
+    )
   }
 
   defineEmits(['attachment-selected'])

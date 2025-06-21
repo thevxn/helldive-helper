@@ -1,4 +1,4 @@
-import { getAttachmentsForCategory } from '@/data/attachments'
+import { getAttachmentsForWeaponForCategory } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import type { IData, PlayerColor } from '@/data/defaults'
 import { perkCodeList } from '@/data/perks'
@@ -27,24 +27,51 @@ export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData
   // ]
 
   data.map(playerArray => {
-    playerData.playerList.push({
-      name: playerArray[0] as string,
-      primaryWeaponCode: primaryWeaponCodeList[playerArray[1] as number],
-      secondaryWeaponCode: secondaryWeaponCodeList[playerArray[2] as number],
-      grenadeCode: grenadeCodeList[playerArray[3] as number],
-      stratagemCodeList: createStratagemCodeList(playerArray.slice(4, 8) as number[]),
-      color: playerColorsList[playerArray[8] as number] as PlayerColor,
-      perkCode: perkCodeList[playerArray[9] as number],
-      boosterCode: boosterCodeList[playerArray[10] as number],
-      primaryWeaponAttachments: {
-        OPTICS: playerArray[11] !== -1 ? getAttachmentsForCategory('OPTICS')[playerArray[11] as number] : undefined,
+    const name = playerArray[0] as string
 
-        MUZZLE: playerArray[12] !== -1 ? getAttachmentsForCategory('MUZZLE')[playerArray[12] as number] : undefined,
+    const primaryWeaponCode = primaryWeaponCodeList[playerArray[1] as number]
+
+    const secondaryWeaponCode = secondaryWeaponCodeList[playerArray[2] as number]
+
+    const grenadeCode = grenadeCodeList[playerArray[3] as number]
+
+    const stratagemCodeList = createStratagemCodeList(playerArray.slice(4, 8) as number[])
+
+    const color = playerColorsList[playerArray[8] as number] as PlayerColor
+
+    const perkCode = perkCodeList[playerArray[9] as number]
+
+    const boosterCode = boosterCodeList[playerArray[10] as number]
+
+    playerData.playerList.push({
+      name,
+      primaryWeaponCode,
+      secondaryWeaponCode,
+      grenadeCode,
+      stratagemCodeList,
+      color,
+      perkCode,
+      boosterCode,
+      primaryWeaponAttachments: {
+        OPTICS:
+          playerArray[11] !== -1
+            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'OPTICS')[playerArray[11] as number]
+            : undefined,
+
+        MUZZLE:
+          playerArray[12] !== -1
+            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MUZZLE')[playerArray[12] as number]
+            : undefined,
 
         UNDERBARREL:
-          playerArray[13] !== -1 ? getAttachmentsForCategory('UNDERBARREL')[playerArray[13] as number] : undefined,
+          playerArray[13] !== -1
+            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'UNDERBARREL')[playerArray[13] as number]
+            : undefined,
 
-        MAGAZINE: playerArray[14] !== -1 ? getAttachmentsForCategory('MAGAZINE')[playerArray[14] as number] : undefined
+        MAGAZINE:
+          playerArray[14] !== -1
+            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MAGAZINE')[playerArray[14] as number]
+            : undefined
       }
     })
   })
@@ -77,28 +104,54 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
   const output: Array<Array<string | number>> = []
 
   inputData.playerList.map(playerObject => {
-    output.push([
-      playerObject.name,
-      primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode),
-      secondaryWeaponCodeList.indexOf(playerObject.secondaryWeaponCode),
-      grenadeCodeList.indexOf(playerObject.grenadeCode),
+    const name = playerObject.name
+
+    const primaryWeaponIndex = primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode)
+
+    const secondaryWeaponIndex = secondaryWeaponCodeList.indexOf(playerObject.secondaryWeaponCode)
+
+    const grenadeIndex = grenadeCodeList.indexOf(playerObject.grenadeCode)
+
+    const stratagemIndexList = [
       ...playerObject.stratagemCodeList.map(stratagem => {
         return stratagemCodeList.indexOf(stratagem)
-      }),
-      playerColorsList.indexOf(playerObject.color),
-      perkCodeList.indexOf(playerObject.perkCode),
-      boosterCodeList.indexOf(playerObject.boosterCode),
+      })
+    ]
+
+    const playerColorIndex = playerColorsList.indexOf(playerObject.color)
+
+    const perkIndex = perkCodeList.indexOf(playerObject.perkCode)
+
+    const boosterIndex = boosterCodeList.indexOf(playerObject.boosterCode)
+
+    output.push([
+      name,
+      primaryWeaponIndex,
+      secondaryWeaponIndex,
+      grenadeIndex,
+      ...stratagemIndexList,
+      playerColorIndex,
+      perkIndex,
+      boosterIndex,
       playerObject.primaryWeaponAttachments.OPTICS
-        ? getAttachmentsForCategory('OPTICS').indexOf(playerObject.primaryWeaponAttachments.OPTICS)
+        ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'OPTICS').indexOf(
+            playerObject.primaryWeaponAttachments.OPTICS as never
+          )
         : -1,
       playerObject.primaryWeaponAttachments.MUZZLE
-        ? getAttachmentsForCategory('MUZZLE').indexOf(playerObject.primaryWeaponAttachments.MUZZLE)
+        ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'MUZZLE').indexOf(
+            playerObject.primaryWeaponAttachments.MUZZLE as never
+          )
         : -1,
       playerObject.primaryWeaponAttachments.UNDERBARREL
-        ? getAttachmentsForCategory('UNDERBARREL').indexOf(playerObject.primaryWeaponAttachments.UNDERBARREL)
+        ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'UNDERBARREL').indexOf(
+            playerObject.primaryWeaponAttachments.UNDERBARREL as never
+          )
         : -1,
       playerObject.primaryWeaponAttachments.MAGAZINE
-        ? getAttachmentsForCategory('MAGAZINE').indexOf(playerObject.primaryWeaponAttachments.MAGAZINE)
+        ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'MAGAZINE').indexOf(
+            playerObject.primaryWeaponAttachments.MAGAZINE as never
+          )
         : -1
     ])
   })

@@ -16,7 +16,6 @@ export type WeaponAttachments = {
 }
 
 export interface IAttachment {
-  code?: string
   displayName: string
 }
 
@@ -39,6 +38,9 @@ export const attachments = {
     },
     COMBAT_SCOPE_X4: {
       displayName: '4x Combat Scope'
+    },
+    TUBE_RED_DOT_X1_5: {
+      displayName: '1.5x Tube Red Dot'
     }
   },
   MUZZLE: {
@@ -88,20 +90,32 @@ export const attachments = {
   }
 } as const satisfies Record<AttachmentCategory, Record<string, IAttachment>>
 
-// TODO: Reorganize?
-
 export type AttachmentKey = {
   [C in keyof typeof attachments]: keyof (typeof attachments)[C]
 }[keyof typeof attachments]
 
-export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
+export type AttachmentKeysForWeaponForCategory<
+  W extends PrimaryWeaponKey,
+  C extends AttachmentCategory
+> = C extends keyof (typeof weapons.primary)[W]['attachments']
+  ? (keyof (typeof weapons.primary)[W]['attachments'][C])[]
+  : []
 
-export const getAttachmentsForCategory = <C extends AttachmentCategory>(category: C) => {
-  return Object.keys(attachments[category]) as AttachmentKeysForCategory<C>
+export type AttachmentCategoriesForWeapon<W extends PrimaryWeaponKey> = keyof (typeof weapons.primary)[W]['attachments']
+
+export const getAttachmentsForWeaponForCategory = <W extends PrimaryWeaponKey, C extends AttachmentCategory>(
+  weapon: W,
+  category: C
+) => {
+  const attachmentsObj = weapons.primary[weapon].attachments[category as keyof AttachmentCategoriesForWeapon<W>]
+
+  if (attachmentsObj) {
+    return Object.keys(attachmentsObj) as AttachmentKeysForWeaponForCategory<W, C>
+  }
+
+  return []
 }
-
-// TODO: Don't forget to add an image for a non-existent attachment (shown when the weapon cannot have an attachment in the given category). Name it INVALID_ATTACHMENT.webp or something
-// Will be returned by the function to generate default attachments for a given weapon
+export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
 
 export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
   const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments']

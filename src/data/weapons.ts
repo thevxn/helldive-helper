@@ -120,7 +120,37 @@ export const weapons = {
     LIBERATOR_CONCUSSIVE: {
       displayName: 'AR-23C Liberator Concussive',
       archetype: 'AR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {
+            default: true
+          },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: {},
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: { default: true }
+        }
+      }
     },
     LIBERATOR_PENETRATOR: {
       displayName: 'AR-23P Liberator Penetrator',
