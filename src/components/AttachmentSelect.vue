@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   import {
     AttachmentCategory,
@@ -67,6 +67,19 @@
       `${props.attachmentCategory} attachments for ${props.primaryWeaponCode}: ${getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)}`
     )
   }
+
+  // Update available attachments each time the selected weapon changes
+  watch(
+    () => props.primaryWeaponCode,
+    () => {
+      if (props.primaryWeaponCode && props.attachmentCategory) {
+        availableAttachments.value = getAttachmentsForWeaponForCategory(
+          props.primaryWeaponCode,
+          props.attachmentCategory
+        )
+      }
+    }
+  )
 
   defineEmits(['attachment-selected'])
 </script>
