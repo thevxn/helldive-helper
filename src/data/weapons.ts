@@ -79,6 +79,7 @@ interface IWeaponMap {
   secondary: Record<string, ISecondaryWeapon>
 }
 
+// TODO: Icon for the no underbarrel option
 export const weapons = {
   primary: {
     LIBERATOR: {
@@ -160,9 +161,9 @@ export const weapons = {
           COMBAT_SCOPE_X4: { default: true }
         },
         MUZZLE: {
-          NO_MUZZLE: { default: true },
+          NO_MUZZLE: {},
           FLASH_HIDER: {},
-          MUZZLE_BRAKE: {},
+          MUZZLE_BRAKE: { default: true },
           COMPENSATOR: {}
         },
         UNDERBARREL: {
@@ -185,27 +186,155 @@ export const weapons = {
     LIBERATOR_CARBINE: {
       archetype: 'AR',
       displayName: 'AR-23A Liberator Carbine',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: { default: true },
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {
+            default: true
+          },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
     },
     ADJUDICATOR: {
       displayName: 'BR-14 Adjudicator',
       archetype: 'AR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {}
+      }
     },
     TENDERIZER: {
       displayName: 'AR-61 Tenderizer',
       archetype: 'AR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {
+            default: true
+          },
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {}
+      }
     },
     DILIGENCE: {
       displayName: 'R-63 Diligence',
       archetype: 'MR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: { default: true }
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {}
+      }
     },
     DILIGENCE_COUNTER_SNIPER: {
       displayName: 'R-63CS Diligence Counter Sniper',
       archetype: 'MR',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          SNIPER_SCOPE_X10: {},
+          COMBAT_SCOPE_X4: { default: true }
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MAGAZINE: {}
+      }
     },
     KNIGHT: {
       displayName: 'MP-98 Knight',

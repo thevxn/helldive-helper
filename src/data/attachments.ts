@@ -41,6 +41,9 @@ export const attachments = {
     },
     TUBE_RED_DOT_X1_5: {
       displayName: '1.5x Tube Red Dot'
+    },
+    SNIPER_SCOPE_X10: {
+      displayName: '10x Sniper Scope'
     }
   },
   MUZZLE: {
