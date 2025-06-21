@@ -35,15 +35,13 @@
 <script setup lang="ts">
   import { nextTick, ref, watch } from 'vue'
 
-  import {
+  import type {
     AttachmentCategory,
     AttachmentKey,
     AttachmentKeysForWeaponForCategory,
-    IAttachment,
-    attachments,
-    getAttachmentImageSource,
-    getAttachmentsForWeaponForCategory
+    IAttachment
   } from '@/data/attachments'
+  import { attachments, getAttachmentImageSource, getAttachmentsForWeaponForCategory } from '@/data/attachments'
   import { PrimaryWeaponKey } from '@/data/weapons'
 
   interface IProps {

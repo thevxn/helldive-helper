@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Ref, ref } from 'vue'
+  import { type Ref, ref } from 'vue'
 
   import { stratagemCodeList, stratagems } from '@/data/stratagems'
   import { sortStratagems } from '@/utils/sort'

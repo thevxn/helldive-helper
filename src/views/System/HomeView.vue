@@ -309,13 +309,15 @@
 
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
   import StratagemSelect from '@/components/StratagemSelect.vue'
-  import {
+  import type {
     AttachmentCategory,
-    AttachmentCategoryEnum,
     AttachmentKey,
     AttachmentKeysForCategory,
     IAttachment,
-    WeaponAttachments,
+    WeaponAttachments
+  } from '@/data/attachments'
+  import {
+    AttachmentCategoryEnum,
     attachments,
     getAttachmentImageSource,
     getDefaultAttachments
