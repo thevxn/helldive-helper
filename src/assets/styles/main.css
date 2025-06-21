@@ -70,6 +70,7 @@
 .vs__selected,
 .vs__dropdown-toggle {
   border: none !important;
+  height: 100% !important;
 }
 
 .custom-select .vs__selected {
