@@ -13,6 +13,7 @@
     "postversion": "git push --follow-tags"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.5",
     "vue-select": "^4.0.0-beta.6",

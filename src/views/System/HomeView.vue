@@ -1,9 +1,11 @@
 <template>
+  <img src="" />
   <main
     class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
       class="bg-diagonal mx-auto flex w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:h-auto sm:w-5/12 xl:w-[22%]"
       :class="`border-4 border-solid border-yellow-300`"
+      :id="`p-${i + 1}`"
       v-for="(player, i) in data.playerList"
       :key="i">
       <!-- Colored label -->
@@ -290,16 +292,33 @@
           @click="toggleStratagemSelect(i, j)" />
       </div>
     </div>
-
-    <!-- Copy Link button -->
-    <div class="flex w-full flex-row content-center justify-center" tabindex="0">
-      <button
-        class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
-        @click="generateDataString">
-        Copy Link
-      </button>
-    </div>
   </main>
+
+  <!-- Copy Link button -->
+  <div
+    class="mb-40 mt-10 flex w-full flex-col content-center justify-center gap-8 sm:mb-10 sm:flex-row sm:gap-4"
+    tabindex="0">
+    <button
+      class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+      @click="generateDataString">
+      Copy Link
+    </button>
+
+    <!-- Copy Image button -->
+    <button
+      class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+      id="export-button"
+      @click="copyImageToClipboard(data.playerList.length, toast)">
+      Copy Image
+    </button>
+    <!-- Download Image button -->
+    <button
+      class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
+      id="export-button"
+      @click="exportImage(data.playerList.length, toast)">
+      Download Image
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -340,13 +359,14 @@
   import router from '@/router'
   import { config } from '@/utils/config'
   import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
+  import { copyImageToClipboard, exportImage } from '@/utils/imageExport'
   import { Logger } from '@/utils/logger'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
 
   const logger = Logger()
 
-  const toast: ToastPluginApi = inject('toast') as ToastPluginApi
+  const toast = inject('toast') as ToastPluginApi
 
   const data = ref() as Ref<IData>
 
@@ -486,7 +506,7 @@
    * This function is triggered when a user clicks a stratagem icon to either open the select modal
    * or choose a stratagem from it.
    *
-   * First, it maps over the `activeStratagemSelect` 2D array, setting false in every position not matching the `position` for the correct `playerIndex` and toggling the value
+   * First, it maps over the `stratagemSelectMatrix` 2D array, setting false in every position not matching the `position` for the correct `playerIndex` and toggling the value
    * in the matching  position. This controls the yellow highlight of the stratagem position being selected. Then it toggles the modal window for the corresponding
    * `playerIndex` and `position`, either opening or closing the modal based on the current state.
    *

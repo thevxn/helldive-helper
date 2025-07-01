@@ -60,6 +60,19 @@
 @tailwind utilities;
 
 /*
+  https://stackoverflow.com/questions/74980740/html2canvas-shifting-text-downwards
+ */
+@layer base {
+  img {
+    @apply inline-block;
+  }
+}
+
+body {
+  line-height: initial !important;
+}
+
+/*
   https://github.com/sagalbot/vue-select/issues/754#issuecomment-654065539
 */
 .custom-select .vs__selected-options {
