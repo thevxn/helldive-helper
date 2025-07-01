@@ -34,10 +34,10 @@ export const copyImageToClipboard = async (players: number, toast: ToastPluginAp
   try {
     const canvas = await generateCanvas(players)
 
-    canvas.toBlob(blob => {
+    canvas.toBlob(async blob => {
       const item = new ClipboardItem({ 'image/png': blob as Blob })
 
-      navigator.clipboard.write([item])
+      await navigator.clipboard.write([item])
       toast.success('Image copied!')
     })
   } catch (e) {
