@@ -71,7 +71,8 @@ module.exports = {
     ]
   },
   globals: {
-    module: 'writable'
+    module: 'writable',
+    umami: 'readonly'
   },
   // overrides: [
   //   {

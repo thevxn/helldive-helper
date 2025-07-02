@@ -300,7 +300,12 @@
     tabindex="0">
     <button
       class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
-      @click="generateDataString">
+      @click="
+        // eslint-disable-next-line prettier/prettier
+        generateDataString();
+        // eslint-disable-next-line prettier/prettier
+        umami.track('Copy link button');
+      ">
       Copy Link
     </button>
 
@@ -308,14 +313,23 @@
     <button
       class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
       id="export-button"
-      @click="copyImageToClipboard(data.playerList.length, toast)">
+      @click="
+        // eslint-disable-next-line prettier/prettier
+        copyImageToClipboard(data.playerList.length, toast);
+        // eslint-disable-next-line prettier/prettier
+        umami.track('Copy image button');
+      ">
       Copy Image
     </button>
     <!-- Download Image button -->
     <button
       class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
       id="export-button"
-      @click="exportImage(data.playerList.length, toast)">
+      @click="
+        // eslint-disable-next-line prettier/prettier
+        exportImage(data.playerList.length, toast)
+        // eslint-disable-next-line prettier/prettier
+        umami.track('Download image button');">
       Download Image
     </button>
   </div>
@@ -650,6 +664,30 @@
     // Close the modal
     attachmentSelectMatrix.value[playerIndex][position] = false
   }
+
+  // Initialize Umami here to prevent blocking of loading
+  // of the entire app in case Umami server is down
+  // which happens if Umami is imported via a <head> script in index.html
+  const script = document.createElement('script')
+
+  const umami = ref()
+
+  script.src = 'https://umami.vxn.dev/script.js'
+  script.setAttribute('data-website-id', 'efe06373-8ac1-4008-9302-f7e5dd6b3d4e')
+  script.setAttribute('data-auto-track', 'false')
+  script.setAttribute('data-domains', 'localhost')
+  document.head.appendChild(script)
+
+  window.addEventListener('load', function () {
+    umami.value = window.umami
+
+    if (umami.value) {
+      umami.value.track((props: { url: string }) => ({
+        ...props,
+        url: props.url.includes('?') ? props.url.split('?')[0] : props.url
+      }))
+    }
+  })
 </script>
 
 <style scoped>
