@@ -675,7 +675,7 @@
   script.src = 'https://umami.vxn.dev/script.js'
   script.setAttribute('data-website-id', 'efe06373-8ac1-4008-9302-f7e5dd6b3d4e')
   script.setAttribute('data-auto-track', 'false')
-  script.setAttribute('data-domains', 'localhost')
+  script.setAttribute('data-domains', 'helldivehelper.net')
   document.head.appendChild(script)
 
   window.addEventListener('load', function () {
