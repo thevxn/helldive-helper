@@ -7,9 +7,8 @@
     @click.stop
     v-if="display">
     <div class="flex h-fit w-full flex-row">
-      <div class="ml-auto mr-2 mt-2">
+      <div class="ml-auto mr-2 mt-2" @click="$emit('attachment-selected', playerIndex, position)">
         <button
-          @click="$emit('attachment-selected', playerIndex, position)"
           class="h-8 w-8 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:bg-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black">
           X
         </button>
