@@ -18,10 +18,9 @@
       <div
         class="flex max-h-[50%] w-[30%] flex-col rounded border-4 border-solid border-gray-900 bg-black bg-opacity-70 last:pb-4 hover:cursor-pointer hover:border-yellow-300"
         v-for="attachment in availableAttachments"
-        :key="attachment">
-        <div
-          class="flex h-[80px] flex-col items-center justify-center"
-          @click="$emit('attachment-selected', playerIndex, position, attachment)">
+        :key="attachment"
+        @click="$emit('attachment-selected', playerIndex, position, attachment)">
+        <div class="flex h-[80px] flex-col items-center justify-center">
           <img
             class="max-h-[64px]"
             :src="props.primaryWeaponCode ? getAttachmentImageSource(attachment, props.primaryWeaponCode) : ''"
