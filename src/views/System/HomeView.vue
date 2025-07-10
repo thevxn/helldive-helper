@@ -83,11 +83,12 @@
           id="primary-attachments">
           <div
             class="primary-attachment flex h-[80px] w-[24%] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 sm:h-[48%] sm:w-[48%]"
-            :class="
+            :class="[
               attachment
                 ? 'cursor-pointer bg-black bg-opacity-70 hover:border-4 hover:border-solid hover:border-yellow-300'
-                : 'cursor-not-allowed bg-yellow-300'
-            "
+                : 'cursor-not-allowed bg-yellow-300',
+              attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] ? 'border-yellow-300' : ''
+            ]"
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment"
             @click="attachment ? openAttachmentSelectModal(i, AttachmentCategoryEnum[category]) : null">
