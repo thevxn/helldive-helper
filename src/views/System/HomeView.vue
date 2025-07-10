@@ -1,5 +1,4 @@
 <template>
-  <img src="" />
   <main
     class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
@@ -42,11 +41,11 @@
 
       <!-- Primary weapon select -->
       <label :for="`primary-${i}`" class="mb-1 mt-2 w-full snap-start sm:mt-4">Primary Weapon:</label>
-      <div class="flex w-full flex-col gap-4 sm:flex-row">
+      <div class="primary-weapon-select flex w-full flex-col gap-4 sm:flex-row">
         <v-select
           name="primary"
           :id="`primary-${i}`"
-          class="custom-select h-[130px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300 sm:h-[155px] sm:w-2/3"
+          class="custom-select primary-select h-[130px] w-full snap-start rounded bg-yellow-300 font-main text-black caret-black hover:outline-none hover:outline-2 hover:outline-yellow-300 focus:outline-none focus:outline-2 focus:outline-yellow-300 sm:h-[155px] sm:w-2/3"
           v-model="player.primaryWeaponCode"
           :options="createAndSortWeapons(primaryArchetypes)"
           label="displayName"
@@ -67,22 +66,23 @@
             </div>
           </template>
           <template #selected-option="option">
-            <div class="flex flex-col justify-center gap-2">
+            <div class="flex flex-col items-center justify-center gap-2">
               <img
                 class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
                 :src="`/weapons/${option.code}.webp`"
                 :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
                 v-if="!option.isArchetype" />
-              <span class="whitespace-break-spaces">{{ option.displayName }}</span>
+              <span class="whitespace-break-spaces sm:min-h-[45px]">{{ option.displayName }}</span>
             </div>
           </template>
         </v-select>
 
         <!-- Primary attachments -->
         <div
-          class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]">
+          class="flex h-full w-full flex-row flex-wrap items-center justify-center gap-x-[1%] gap-y-[1%] sm:w-1/3 sm:gap-x-[4%] sm:gap-y-[4%]"
+          id="primary-attachments">
           <div
-            class="flex h-[80px] w-[24%] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 sm:h-[48%] sm:w-[48%]"
+            class="primary-attachment flex h-[80px] w-[24%] flex-row items-center justify-center rounded border-4 border-solid border-gray-900 sm:h-[48%] sm:w-[48%]"
             :class="
               attachment
                 ? 'cursor-pointer bg-black bg-opacity-70 hover:border-4 hover:border-solid hover:border-yellow-300'
@@ -90,13 +90,7 @@
             "
             v-for="(attachment, category) in player.primaryWeaponAttachments"
             :key="attachment"
-            @click="
-              attachment ? openAttachmentSelectModal(i, AttachmentCategoryEnum[category]) : null
-              // attachment
-              //   ? (attachmentSelectMatrix[i][AttachmentCategoryEnum[category]] =
-              //       !attachmentSelectMatrix[i][AttachmentCategoryEnum[category]])
-              //   : null
-            ">
+            @click="attachment ? openAttachmentSelectModal(i, AttachmentCategoryEnum[category]) : null">
             <img
               :src="getAttachmentImageSource(attachment, player.primaryWeaponCode)"
               :title="

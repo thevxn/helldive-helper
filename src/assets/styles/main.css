@@ -87,10 +87,42 @@ body {
 }
 
 .custom-select .vs__selected {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+
+.primary-weapon-select .vs__selected,
+.primary-weapon-select .vs__selected-options {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.primary-weapon-select .vs__selected {
+  width: 100%;
+}
+
+.primary-weapon-select .vs__selected div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 
+This is needed to offset the 1px width of the input when its collapsed (yep) 
+*/
+.primary-weapon-select .vs--open .vs__selected {
+  padding-right: 1px !important;
+}
+
+.primary-weapon-select .vs__selected div span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 .grenade .vs__dropdown-toggle .vs__actions {
@@ -326,3 +358,53 @@ body {
     transparent 95%
   );
 }
+
+/*
+ TODO: Remove?
+ These styles manually override phone styles, making it possible to export images in the PC layout even on phones (long vertical screenshots look terrible on mobile).
+
+ In case of any changes to the styles (margins, widths, heights, etc.), this will need to be manually updated. Yes, I am going to regret this.
+ */
+
+/* .force-desktop-snapshot {
+  flex-direction: row !important;
+  padding: 0 !important;
+  gap: 1.5rem !important;
+  width: 1920px !important;
+}
+
+.force-desktop-snapshot > div {
+  width: 44% !important;
+  height: fit-content !important;
+}
+
+.force-desktop-snapshot > div > div {
+  margin-bottom: 1rem !important;
+}
+
+.force-desktop-snapshot > div > img {
+  margin-bottom: 1rem !important;
+}
+
+.force-desktop-snapshot > div > label {
+  margin-top: 1rem !important;
+}
+
+.force-desktop-snapshot .primary-weapon-select {
+  flex-direction: row !important;
+}
+
+.force-desktop-snapshot #primary-attachments {
+  width: 33.333333% !important;
+  column-gap: 4.899599999999992px !important;
+  row-gap: 4.899599999999992px !important;
+}
+
+.force-desktop-snapshot .primary-attachment {
+  height: 74.4px !important;
+  width: 58.6167px !important;
+}
+
+.force-desktop-snapshot .primary-select {
+  height: 155px !important;
+} */
