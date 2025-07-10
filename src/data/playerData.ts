@@ -10,13 +10,29 @@ const playerColorsList = ['orange', 'green', 'blue', 'pink']
 
 const logger = Logger()
 
-export const parsePlayerDataInput = (data: Array<Array<string | number>>): IData => {
+type base64String = string
+
+/**
+ * Takes a base64 string containing the shortened data array and generates the complete IData object representing state from it.
+ *
+ * @param {base64String} dataString
+ * @returns {IData}
+ */
+export const parsePlayerDataInput = (dataString: base64String): IData => {
   logger.debug('Received input:')
-  logger.debug(data)
+  logger.debug(dataString)
 
   const playerData = {
     playerList: []
   } as IData
+
+  const binaryString = atob(dataString)
+
+  const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0))
+
+  const json = new TextDecoder().decode(bytes)
+
+  const data = JSON.parse(json) as Array<Array<string | number>>
 
   // const inputDataMock = [
   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
@@ -100,6 +116,12 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
   return createdStratagemCodeList
 }
 
+/**
+ * Takes in the playerData object and converts it to the shortened array format.
+ *
+ * @param {IData} inputData
+ * @returns {Array<Array<string | number>>}
+ */
 export const createPlayerDataOutput = (inputData: IData): Array<Array<string | number>> => {
   // const outputDataMock = [
   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
@@ -170,8 +192,21 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
   return output
 }
 
+/**
+ * Takes in the playerData object and converts it to a base64 string containing the shortened data array.
+ *
+ * @param {IData} playerData
+ * @returns {string}
+ */
 export const createBase64DataString = (playerData: IData): string => {
   const outputData = createPlayerDataOutput(playerData)
 
-  return btoa(JSON.stringify(outputData))
+  const json = JSON.stringify(outputData)
+
+  // btoa() cannot convert unicode characters larger than 1 byte to base64, therefore the string must first be converted to raw bytes.
+  // This is needed to enable support for player names containing unicode chars.
+  // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
+  const bytes = new TextEncoder().encode(json)
+
+  return btoa(String.fromCharCode(...bytes))
 }

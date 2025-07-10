@@ -411,7 +411,7 @@
   // If provided, try to load data from query string
   if (route.query.data) {
     try {
-      data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(route.query.data as string))))
+      data.value = reactive<IData>(parsePlayerDataInput(route.query.data as string))
       logger.debug('Data loaded from url')
 
       // Backwards compatibility for data strings generated before perks and boosters were introduced
@@ -437,7 +437,7 @@
   }
   // If no query string provided, try to load data from local storage
   else if (localStorage.getItem('data')) {
-    data.value = reactive<IData>(parsePlayerDataInput(JSON.parse(atob(localStorage.getItem('data') as string))))
+    data.value = reactive<IData>(parsePlayerDataInput(localStorage.getItem('data') as string))
     logger.debug('Data loaded from local storage')
 
     // Backwards compatibility for data strings generated before perks and boosters were introduced
