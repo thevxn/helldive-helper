@@ -104,68 +104,73 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
 
   const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0))
 
-  const json = new TextDecoder().decode(bytes)
+  try {
+    const json = new TextDecoder().decode(bytes)
 
-  const data = JSON.parse(json) as PlayerDataArray
+    const data = JSON.parse(json) as PlayerDataArray
 
-  data.map(playerArray => {
-    const name = playerArray[PlayerDataField.PLAYER_NAME]
+    data.map(playerArray => {
+      const name = playerArray[PlayerDataField.PLAYER_NAME]
 
-    const primaryWeaponCode = primaryWeaponCodeList[playerArray[PlayerDataField.PRIMARY_WEAPON]]
+      const primaryWeaponCode = primaryWeaponCodeList[playerArray[PlayerDataField.PRIMARY_WEAPON]]
 
-    const secondaryWeaponCode = secondaryWeaponCodeList[playerArray[PlayerDataField.SECONDARY_WEAPON]]
+      const secondaryWeaponCode = secondaryWeaponCodeList[playerArray[PlayerDataField.SECONDARY_WEAPON]]
 
-    const grenadeCode = grenadeCodeList[playerArray[PlayerDataField.GRENADE]]
+      const grenadeCode = grenadeCodeList[playerArray[PlayerDataField.GRENADE]]
 
-    const stratagemCodeList = createStratagemCodeList([
-      playerArray[PlayerDataField.STRAT1],
-      playerArray[PlayerDataField.STRAT2],
-      playerArray[PlayerDataField.STRAT3],
-      playerArray[PlayerDataField.STRAT4]
-    ])
+      const stratagemCodeList = createStratagemCodeList([
+        playerArray[PlayerDataField.STRAT1],
+        playerArray[PlayerDataField.STRAT2],
+        playerArray[PlayerDataField.STRAT3],
+        playerArray[PlayerDataField.STRAT4]
+      ])
 
-    const color = playerColorsList[playerArray[PlayerDataField.PLAYER_COLOR]]
+      const color = playerColorsList[playerArray[PlayerDataField.PLAYER_COLOR]]
 
-    const perkCode = perkCodeList[playerArray[PlayerDataField.PERK]]
+      const perkCode = perkCodeList[playerArray[PlayerDataField.PERK]]
 
-    const boosterCode = boosterCodeList[playerArray[PlayerDataField.BOOSTER]]
+      const boosterCode = boosterCodeList[playerArray[PlayerDataField.BOOSTER]]
 
-    playerData.playerList.push({
-      name,
-      primaryWeaponCode,
-      secondaryWeaponCode,
-      grenadeCode,
-      stratagemCodeList,
-      color,
-      perkCode,
-      boosterCode,
-      primaryWeaponAttachments: {
-        OPTICS: resolveAttachment(primaryWeaponCode, 'OPTICS', playerArray[PlayerDataField.PRIMARY_OPTICS]),
+      playerData.playerList.push({
+        name,
+        primaryWeaponCode,
+        secondaryWeaponCode,
+        grenadeCode,
+        stratagemCodeList,
+        color,
+        perkCode,
+        boosterCode,
+        primaryWeaponAttachments: {
+          OPTICS: resolveAttachment(primaryWeaponCode, 'OPTICS', playerArray[PlayerDataField.PRIMARY_OPTICS]),
 
-        MUZZLE: resolveAttachment(primaryWeaponCode, 'MUZZLE', playerArray[PlayerDataField.PRIMARY_MUZZLE]),
+          MUZZLE: resolveAttachment(primaryWeaponCode, 'MUZZLE', playerArray[PlayerDataField.PRIMARY_MUZZLE]),
 
-        UNDERBARREL: resolveAttachment(
-          primaryWeaponCode,
-          'UNDERBARREL',
-          playerArray[PlayerDataField.PRIMARY_UNDERBARREL]
-        ),
+          UNDERBARREL: resolveAttachment(
+            primaryWeaponCode,
+            'UNDERBARREL',
+            playerArray[PlayerDataField.PRIMARY_UNDERBARREL]
+          ),
 
-        MAGAZINE: resolveAttachment(primaryWeaponCode, 'MAGAZINE', playerArray[PlayerDataField.PRIMARY_MAGAZINE])
-      }
+          MAGAZINE: resolveAttachment(primaryWeaponCode, 'MAGAZINE', playerArray[PlayerDataField.PRIMARY_MAGAZINE])
+        }
+      })
     })
-  })
+  } catch (e) {
+    logger.error('Invalid base64 input: ', e)
+    throw new Error('Invalid player data')
+  }
 
   logger.debug(`Parsed input: `, playerData)
 
   return playerData
 }
 
-const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCodeList => {
+const createStratagemCodeList = (indexArray: StratagemIndex[]): StratagemKey[] => {
   return indexArray.map(stratagem => stratagemCodeList[stratagem])
 }
 
 /**
- * Takes in the playerData object and converts it to the shortened array format.
+ * Takes in the playerData object and converts it to the shortened array format for encoding.
  *
  * @param {IPlayerData} inputData
  * @returns {playerDataArray}
