@@ -1,5 +1,5 @@
 import { boosterList, type boosters } from '@/data/boosters'
-import type { IData } from '@/data/defaults'
+import type { IData } from '@/data/player'
 import type { IWeapon } from '@/data/weapons'
 
 // Custom filter function prop for Vue Select so that weapon archetypes are not returned as "selectable" options when filtering

@@ -1,14 +1,38 @@
 import { getAttachmentsForWeaponForCategory, getDefaultAttachments } from '@/data/attachments'
+import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
-import type { IData, PlayerColor } from '@/data/defaults'
+import type { BoosterKey } from '@/data/boosters'
 import { perkCodeList } from '@/data/perks'
+import type { PerkKey } from '@/data/perks'
 import { stratagemCodeList } from '@/data/stratagems'
+import type { StratagemKey } from '@/data/stratagems'
 import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
+import type { GrenadeKey, PrimaryWeaponKey, SecondaryWeaponKey } from '@/data/weapons'
 import { Logger } from '@/utils/logger'
 
-const playerColorsList = ['orange', 'green', 'blue', 'pink']
-
 const logger = Logger()
+
+export interface IData {
+  playerList: IPlayer[]
+}
+
+export interface IPlayer {
+  perkCode: PerkKey
+  boosterCode: BoosterKey
+  name: string
+  primaryWeaponCode: PrimaryWeaponKey
+  secondaryWeaponCode: SecondaryWeaponKey
+  grenadeCode: GrenadeKey
+  stratagemCodeList: StratagemKey[]
+  color: PlayerColor
+  primaryWeaponAttachments: Partial<{
+    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
+  }>
+}
+
+export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
+
+const playerColorsList = ['orange', 'green', 'blue', 'pink']
 
 type base64String = string
 

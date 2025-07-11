@@ -1,30 +1,6 @@
 import { reactive } from 'vue'
 
-import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
-import type { BoosterKey } from '@/data/boosters'
-import type { PerkKey } from '@/data/perks'
-import type { StratagemKey } from '@/data/stratagems'
-import type { GrenadeKey, PrimaryWeaponKey, SecondaryWeaponKey } from '@/data/weapons'
-
-export interface IData {
-  playerList: IPlayer[]
-}
-
-interface IPlayer {
-  perkCode: PerkKey
-  boosterCode: BoosterKey
-  name: string
-  primaryWeaponCode: PrimaryWeaponKey
-  secondaryWeaponCode: SecondaryWeaponKey
-  grenadeCode: GrenadeKey
-  stratagemCodeList: StratagemKey[]
-  color: PlayerColor
-  primaryWeaponAttachments: Partial<{
-    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
-  }>
-}
-
-export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
+import type { IData, IPlayer } from '@/data/player'
 
 const defaultPlayerList: IPlayer[] = [
   {

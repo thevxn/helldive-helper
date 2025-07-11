@@ -351,9 +351,9 @@
     getDefaultAttachments
   } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'
-  import { type IData, getDefaultData } from '@/data/defaults'
+  import { getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
-  import { createBase64DataString, parsePlayerDataInput } from '@/data/playerData'
+  import { type IData, createBase64DataString, parsePlayerDataInput } from '@/data/player'
   import { stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
