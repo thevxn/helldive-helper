@@ -1,6 +1,6 @@
 <template>
   <main
-    class="container mb-16 mt-4 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
+    class="container mb-16 flex min-h-full min-w-full flex-col flex-wrap gap-8 p-4 font-semibold sm:mb-4 sm:flex-row sm:gap-6 sm:p-0">
     <div
       class="bg-diagonal mx-auto flex w-full snap-start flex-col place-items-center content-center rounded-md bg-opacity-80 p-4 font-bold sm:h-auto sm:w-5/12 xl:w-[22%]"
       :class="`border-4 border-solid border-yellow-300`"
@@ -9,12 +9,12 @@
       :key="i">
       <!-- Colored label -->
       <div
-        :class="`${playerBorders[player.color]} center mb-2 ml-auto  mr-0  inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center sm:mb-4`">
+        :class="`${playerBorders[player.color]} center  ml-auto  mr-0 inline h-fit w-fit pb-1 pl-4 pr-4 pt-1 text-center`">
         {{ player.name ? player.name[0].toUpperCase() + (i + 1) : 'P' + (i + 1) }}
       </div>
 
       <!-- Helldiver helmet image -->
-      <img src="/helmet.webp" class="mb-2 block sm:mb-4" alt="helldiver-helmet" />
+      <img src="/helmet.webp" class="mb-2 block" alt="helldiver-helmet" />
 
       <!-- Player name input -->
       <input
@@ -278,7 +278,7 @@
           :id="`stratagem-select-${i}`" />
 
         <img
-          :class="`mt-2 h-[50px] w-[50px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
+          :class="`mt-2 h-[60px] w-[60px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
