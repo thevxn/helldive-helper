@@ -1,10 +1,10 @@
 import { reactive } from 'vue'
 
-import type { IPlayer, IPlayerData } from '@/data/player'
+import type { IPlayer, IPlayerData, PlayerName } from '@/data/player'
 
 const defaultPlayerList: IPlayer[] = [
   {
-    name: 'Squad Leader',
+    name: 'Squad Leader' as PlayerName,
     primaryWeaponCode: 'SICKLE',
     secondaryWeaponCode: 'SENATOR',
     grenadeCode: 'HIGH_EXPLOSIVE',
@@ -20,7 +20,7 @@ const defaultPlayerList: IPlayer[] = [
     }
   },
   {
-    name: 'Light AT/Support',
+    name: 'Light AT/Support' as PlayerName,
     primaryWeaponCode: 'BREAKER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'STUN',
@@ -36,7 +36,7 @@ const defaultPlayerList: IPlayer[] = [
     }
   },
   {
-    name: 'Grenadier',
+    name: 'Grenadier' as PlayerName,
     primaryWeaponCode: 'DEFENDER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'IMPACT',
@@ -52,7 +52,7 @@ const defaultPlayerList: IPlayer[] = [
     }
   },
   {
-    name: 'Autocannon Operator',
+    name: 'Autocannon Operator' as PlayerName,
     primaryWeaponCode: 'BREAKER',
     secondaryWeaponCode: 'REDEEMER',
     grenadeCode: 'HIGH_EXPLOSIVE',

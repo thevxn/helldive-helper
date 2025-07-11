@@ -51,18 +51,19 @@ export enum PlayerDataField {
   PRIMARY_MAGAZINE
 }
 
-type PlayerName = string & { [__brand]: 'PlayerName' }
-type PrimaryWeaponIndex = number & { [__brand]: 'PrimaryWeaponIndex' }
-type SecondaryWeaponIndex = number & { [__brand]: 'SecondaryWeaponIndex' }
-type GrenadeIndex = number & { [__brand]: 'GrenadeIndex' }
-type StratagemIndex = number & { [__brand]: 'StratagemIndex' }
-type PlayerColorIndex = number & { [__brand]: 'ColorIndex' }
-type PerkIndex = number & { [__brand]: 'PerkIndex' }
-type BoosterIndex = number & { [__brand]: 'BoosterIndex' }
-type OpticsAttachmentIndex = number & { [__brand]: 'OpticsAttachmentIndex' }
-type MuzzleAttachmentIndex = number & { [__brand]: 'MuzzleAttachmentIndex' }
-type UnderbarrelAttachmentIndex = number & { [__brand]: 'UnderbarrelAttachmentIndex' }
-type MagazineAttachmentIndex = number & { [__brand]: 'MagazineAttachmentIndex' }
+export type PlayerName = Branded<string, 'PlayerName'>
+
+type PrimaryWeaponIndex = Branded<number, 'PrimaryWeaponIndex'>
+type SecondaryWeaponIndex = Branded<number, 'SecondaryWeaponIndex'>
+type GrenadeIndex = Branded<number, 'GrenadeIndex'>
+type StratagemIndex = Branded<number, 'StratagemIndex'>
+type PlayerColorIndex = Branded<number, 'ColorIndex'>
+type PerkIndex = Branded<number, 'PerkIndex'>
+type BoosterIndex = Branded<number, 'BoosterIndex'>
+type OpticsAttachmentIndex = Branded<number, 'OpticsAttachmentIndex'>
+type MuzzleAttachmentIndex = Branded<number, 'MuzzleAttachmentIndex'>
+type UnderbarrelAttachmentIndex = Branded<number, 'UnderbarrelAttachmentIndex'>
+type MagazineAttachmentIndex = Branded<number, 'MagazineAttachmentIndex'>
 
 type PlayerDataRow = [
   PlayerName,

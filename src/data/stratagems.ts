@@ -1,4 +1,5 @@
 export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const
+export type StratagemCategory = keyof typeof stratagemCategories
 
 export interface IStratagem {
   displayName: string
@@ -287,3 +288,21 @@ export const stratagems = {
 
 export type StratagemKey = keyof typeof stratagems
 export const stratagemCodeList = Object.keys(stratagems) as StratagemKey[]
+
+// Sorts stratagems based on their category so that all stratagems of the same category are next to each other in the select
+export const getStratagemMap = () => {
+  const stratagemMap = {} as Record<StratagemCategory, StratagemKey[]>
+
+  // Set up the category keys in the ordered as specified by stratagemCategories
+  for (const category of stratagemCategories) {
+    stratagemMap[category as StratagemCategory] = [] as StratagemKey[]
+  }
+
+  for (const [stratagemCode, stratagemData] of Object.entries(stratagems)) {
+    const category = stratagemData.category as StratagemCategory
+
+    stratagemMap[category].push(stratagemCode as StratagemKey)
+  }
+
+  return stratagemMap
+}

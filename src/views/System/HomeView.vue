@@ -523,7 +523,7 @@
    * @param position - Index of the stratagem slot being toggled.
    */
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
-    logger.debug(playerIndex, position)
+    logger.debug('Stratagem select triggered at position: ', playerIndex, position)
 
     // Toggle the yellow highlight border, hiding it from stratagems whose select is being closed
     // and displaying it for the stratagem whose select is being opened.
@@ -585,7 +585,7 @@
     stratagemPosition: number,
     stratagemCode: keyof typeof stratagems
   ) => {
-    logger.debug(stratagemModalsRef.value, playerIndex)
+    logger.debug('Stratagem modal select triggered at position: ', stratagemModalsRef.value, playerIndex)
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false
     stratagemModalsRef.value[playerIndex].displayOff()
