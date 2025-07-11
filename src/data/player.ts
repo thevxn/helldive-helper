@@ -131,14 +131,7 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
 }
 
 const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCodeList => {
-  const createdStratagemCodeList: typeof stratagemCodeList = []
-
-  // [0, 1, 2, 3]
-  indexArray.map(stratagem => {
-    createdStratagemCodeList.push(stratagemCodeList[stratagem])
-  })
-
-  return createdStratagemCodeList
+  return indexArray.map(stratagem => stratagemCodeList[stratagem])
 }
 
 /**
