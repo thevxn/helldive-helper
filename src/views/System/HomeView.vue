@@ -354,7 +354,7 @@
   import { getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
   import { type IPlayerData, type base64String, createBase64DataString, parsePlayerDataInput } from '@/data/player'
-  import { stratagems } from '@/data/stratagems'
+  import { type StratagemKey, stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
     type IPrimaryWeapon,
@@ -580,11 +580,7 @@
    * @param stratagemPosition - Index of the stratagem which was updated.
    * @param stratagemCode - Code of the selected stratagem.
    */
-  const handleStratagemSelection = (
-    playerIndex: number,
-    stratagemPosition: number,
-    stratagemCode: keyof typeof stratagems
-  ) => {
+  const handleStratagemSelection = (playerIndex: number, stratagemPosition: number, stratagemCode: StratagemKey) => {
     logger.debug('Stratagem modal select triggered at position: ', stratagemModalsRef.value, playerIndex)
     data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
     stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false
