@@ -72,6 +72,14 @@ body {
   line-height: initial !important;
 }
 
+.v-select.vs--single.vs--searchable {
+  cursor: pointer !important;
+}
+
+.vs__dropdown-toggle .vs--searchable {
+  cursor: pointer !important;
+}
+
 /*
   https://github.com/sagalbot/vue-select/issues/754#issuecomment-654065539
 */

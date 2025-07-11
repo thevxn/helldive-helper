@@ -278,7 +278,7 @@
           :id="`stratagem-select-${i}`" />
 
         <img
-          :class="`mt-2 h-[60px] w-[60px] rounded-md border-4 border-solid border-gray-900 hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
+          :class="`mt-2 h-[60px] w-[60px] rounded-md border-4 border-solid border-gray-900 hover:cursor-pointer hover:border-4 hover:border-solid hover:border-yellow-300 ${stratagemSelectMatrix[i][j] ? `border-4 border-solid border-yellow-300` : ''}`"
           v-for="(stratagem, j) in player.stratagemCodeList"
           :key="stratagem"
           :src="`/icons/stratagems/${player.stratagemCodeList[j]}.webp`"
