@@ -12,7 +12,7 @@ import { Logger } from '@/utils/logger'
 
 const logger = Logger()
 
-export interface IData {
+export interface IPlayerData {
   playerList: IPlayer[]
 }
 
@@ -34,21 +34,21 @@ export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
 
-type base64String = string
+export type base64String = string & { [__brand]: 'base64String' }
 
 /**
  * Takes a base64 string containing the shortened data array and generates the complete IData object representing state from it.
  *
  * @param {base64String} dataString
- * @returns {IData}
+ * @returns {IPlayerData}
  */
-export const parsePlayerDataInput = (dataString: base64String): IData => {
+export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
   logger.debug('Received input:')
   logger.debug(dataString)
 
   const playerData = {
     playerList: []
-  } as IData
+  } as IPlayerData
 
   const binaryString = atob(dataString)
 
@@ -143,10 +143,10 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
 /**
  * Takes in the playerData object and converts it to the shortened array format.
  *
- * @param {IData} inputData
+ * @param {IPlayerData} inputData
  * @returns {Array<Array<string | number>>}
  */
-export const createPlayerDataOutput = (inputData: IData): Array<Array<string | number>> => {
+export const createPlayerDataOutput = (inputData: IPlayerData): Array<Array<string | number>> => {
   // const outputDataMock = [
   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
   //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -219,10 +219,10 @@ export const createPlayerDataOutput = (inputData: IData): Array<Array<string | n
 /**
  * Takes in the playerData object and converts it to a base64 string containing the shortened data array.
  *
- * @param {IData} playerData
+ * @param {IPlayerData} playerData
  * @returns {string}
  */
-export const createBase64DataString = (playerData: IData): string => {
+export const createBase64DataString = (playerData: IPlayerData): string => {
   const outputData = createPlayerDataOutput(playerData)
 
   const json = JSON.stringify(outputData)

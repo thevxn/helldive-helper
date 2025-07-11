@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-import type { IData, IPlayer } from '@/data/player'
+import type { IPlayer, IPlayerData } from '@/data/player'
 
 const defaultPlayerList: IPlayer[] = [
   {
@@ -69,8 +69,8 @@ const defaultPlayerList: IPlayer[] = [
   }
 ]
 
-export const getDefaultData = (existingPlayerListLength: number): IData => {
-  return reactive<IData>({
+export const getDefaultData = (existingPlayerListLength: number): IPlayerData => {
+  return reactive<IPlayerData>({
     playerList: defaultPlayerList.slice(existingPlayerListLength) as IPlayer[]
   })
 }

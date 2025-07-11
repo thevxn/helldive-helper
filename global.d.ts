@@ -4,6 +4,7 @@ declare global {
       track: (props: unknown) => { url: string }
     }
   }
+  declare const __brand: unique symbol
 }
 
 export {}

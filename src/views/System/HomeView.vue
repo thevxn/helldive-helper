@@ -353,7 +353,7 @@
   import { boosterList, boosters } from '@/data/boosters'
   import { getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
-  import { type IData, createBase64DataString, parsePlayerDataInput } from '@/data/player'
+  import { type IPlayerData, type base64String, createBase64DataString, parsePlayerDataInput } from '@/data/player'
   import { stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
@@ -377,7 +377,7 @@
 
   const toast = inject('toast') as ToastPluginApi
 
-  const data = ref() as Ref<IData>
+  const data = ref() as Ref<IPlayerData>
 
   const route = useRoute()
 
@@ -411,7 +411,7 @@
   // If provided, try to load data from query string
   if (route.query.data) {
     try {
-      data.value = reactive<IData>(parsePlayerDataInput(route.query.data as string))
+      data.value = reactive<IPlayerData>(parsePlayerDataInput(route.query.data as base64String))
       logger.debug('Data loaded from url')
 
       // Backwards compatibility for data strings generated before perks and boosters were introduced
@@ -437,7 +437,7 @@
   }
   // If no query string provided, try to load data from local storage
   else if (localStorage.getItem('data')) {
-    data.value = reactive<IData>(parsePlayerDataInput(localStorage.getItem('data') as string))
+    data.value = reactive<IPlayerData>(parsePlayerDataInput(localStorage.getItem('data') as base64String))
     logger.debug('Data loaded from local storage')
 
     // Backwards compatibility for data strings generated before perks and boosters were introduced

@@ -1,5 +1,5 @@
 import { boosterList, type boosters } from '@/data/boosters'
-import type { IData } from '@/data/player'
+import type { IPlayerData } from '@/data/player'
 import type { IWeapon } from '@/data/weapons'
 
 // Custom filter function prop for Vue Select so that weapon archetypes are not returned as "selectable" options when filtering
@@ -8,7 +8,7 @@ export const filterOptions = (option: IWeapon, label: any, search: string) => {
   return (label || '').toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1 && !option.isArchetype
 }
 
-export const filterSelectedBoosters = (data: IData) => {
+export const filterSelectedBoosters = (data: IPlayerData) => {
   const selectedBoosterCodeList: (keyof typeof boosters)[] = []
 
   data.playerList.map(player => {
