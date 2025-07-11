@@ -1,4 +1,4 @@
-import { getAttachmentsForWeaponForCategory, getDefaultAttachments } from '@/data/attachments'
+import { getAttachmentsForWeaponForCategory, getDefaultAttachments, resolveAttachment } from '@/data/attachments'
 import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import type { BoosterKey } from '@/data/boosters'
@@ -34,7 +34,27 @@ export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
 
 const playerColorsList = ['orange', 'green', 'blue', 'pink']
 
+type playerDataArray = Array<[string, ...number[]]>
+
 export type base64String = string & { [__brand]: 'base64String' }
+
+export enum PlayerDataField {
+  PLAYER_NAME,
+  PRIMARY_WEAPON,
+  SECONDARY_WEAPON,
+  GRENADE,
+  STRAT1,
+  STRAT2,
+  STRAT3,
+  STRAT4,
+  PLAYER_COLOR,
+  PERK,
+  BOOSTER,
+  PRIMARY_OPTICS,
+  PRIMARY_MUZZLE,
+  PRIMARY_UNDERBARREL,
+  PRIMARY_MAGAZINE
+}
 
 /**
  * Takes a base64 string containing the shortened data array and generates the complete IData object representing state from it.
@@ -56,32 +76,26 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
 
   const json = new TextDecoder().decode(bytes)
 
-  const data = JSON.parse(json) as Array<Array<string | number>>
-
-  // const inputDataMock = [
-  // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]
-  // ]
+  const data = JSON.parse(json) as playerDataArray
 
   data.map(playerArray => {
-    const name = playerArray[0] as string
+    const name = playerArray[PlayerDataField.PLAYER_NAME]
 
-    const primaryWeaponCode = primaryWeaponCodeList[playerArray[1] as number]
+    const primaryWeaponCode = primaryWeaponCodeList[playerArray[PlayerDataField.PRIMARY_WEAPON]]
 
-    const secondaryWeaponCode = secondaryWeaponCodeList[playerArray[2] as number]
+    const secondaryWeaponCode = secondaryWeaponCodeList[playerArray[PlayerDataField.SECONDARY_WEAPON]]
 
-    const grenadeCode = grenadeCodeList[playerArray[3] as number]
+    const grenadeCode = grenadeCodeList[playerArray[PlayerDataField.GRENADE]]
 
-    const stratagemCodeList = createStratagemCodeList(playerArray.slice(4, 8) as number[])
+    const stratagemCodeList = createStratagemCodeList([
+      playerArray[(PlayerDataField.STRAT1, PlayerDataField.STRAT2, PlayerDataField.STRAT3, PlayerDataField.STRAT4)]
+    ])
 
-    const color = playerColorsList[playerArray[8] as number] as PlayerColor
+    const color = playerColorsList[playerArray[PlayerDataField.PLAYER_COLOR]] as PlayerColor
 
-    const perkCode = perkCodeList[playerArray[9] as number]
+    const perkCode = perkCodeList[playerArray[PlayerDataField.PERK]]
 
-    const boosterCode = boosterCodeList[playerArray[10] as number]
+    const boosterCode = boosterCodeList[playerArray[PlayerDataField.BOOSTER]]
 
     playerData.playerList.push({
       name,
@@ -93,33 +107,17 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
       perkCode,
       boosterCode,
       primaryWeaponAttachments: {
-        OPTICS:
-          typeof playerArray[11] === 'number' && playerArray[11] !== -1
-            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'OPTICS')[playerArray[11] as number]
-            : typeof playerArray[11] === 'number' && playerArray[11] === -1
-              ? undefined
-              : getDefaultAttachments(primaryWeaponCode).OPTICS,
+        OPTICS: resolveAttachment(primaryWeaponCode, 'OPTICS', playerArray[PlayerDataField.PRIMARY_OPTICS]),
 
-        MUZZLE:
-          typeof playerArray[12] === 'number' && playerArray[12] !== -1
-            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MUZZLE')[playerArray[12] as number]
-            : typeof playerArray[12] === 'number' && playerArray[12] === -1
-              ? undefined
-              : getDefaultAttachments(primaryWeaponCode).MUZZLE,
+        MUZZLE: resolveAttachment(primaryWeaponCode, 'MUZZLE', playerArray[PlayerDataField.PRIMARY_MUZZLE]),
 
-        UNDERBARREL:
-          typeof playerArray[13] === 'number' && playerArray[13] !== -1
-            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'UNDERBARREL')[playerArray[13] as number]
-            : typeof playerArray[13] === 'number' && playerArray[13] === -1
-              ? undefined
-              : getDefaultAttachments(primaryWeaponCode).UNDERBARREL,
+        UNDERBARREL: resolveAttachment(
+          primaryWeaponCode,
+          'UNDERBARREL',
+          playerArray[PlayerDataField.PRIMARY_UNDERBARREL]
+        ),
 
-        MAGAZINE:
-          typeof playerArray[14] === 'number' && playerArray[14] !== -1
-            ? getAttachmentsForWeaponForCategory(primaryWeaponCode, 'MAGAZINE')[playerArray[14] as number]
-            : typeof playerArray[14] === 'number' && playerArray[14] === -1
-              ? undefined
-              : getDefaultAttachments(primaryWeaponCode).MAGAZINE
+        MAGAZINE: resolveAttachment(primaryWeaponCode, 'MAGAZINE', playerArray[PlayerDataField.PRIMARY_MAGAZINE])
       }
     })
   })
@@ -144,9 +142,9 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
  * Takes in the playerData object and converts it to the shortened array format.
  *
  * @param {IPlayerData} inputData
- * @returns {Array<Array<string | number>>}
+ * @returns {playerDataArray}
  */
-export const createPlayerDataOutput = (inputData: IPlayerData): Array<Array<string | number>> => {
+export const createPlayerDataOutput = (inputData: IPlayerData): playerDataArray => {
   // const outputDataMock = [
   // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
   //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -155,7 +153,7 @@ export const createPlayerDataOutput = (inputData: IPlayerData): Array<Array<stri
   //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]
   // ]
 
-  const output: Array<Array<string | number>> = []
+  const output: playerDataArray = []
 
   inputData.playerList.map(playerObject => {
     const name = playerObject.name

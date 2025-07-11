@@ -168,6 +168,27 @@ export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
   return defaults
 }
 
+export const resolveAttachment = <W extends PrimaryWeaponKey, C extends AttachmentCategory>(
+  primaryWeaponCode: W,
+  attachmentCategory: C,
+  attachmentIndex: unknown
+) => {
+  if (typeof attachmentIndex === 'number') {
+    if (attachmentIndex !== -1) {
+      return getAttachmentsForWeaponForCategory(primaryWeaponCode, attachmentCategory)[
+        attachmentIndex
+      ] as AttachmentKeysForWeaponForCategory<W, C>[number]
+    }
+
+    return undefined
+  }
+
+  return getDefaultAttachments(primaryWeaponCode)[attachmentCategory] as AttachmentKeysForWeaponForCategory<
+    W,
+    C
+  >[number]
+}
+
 export const getAttachmentImageSource = (attachment: AttachmentKey | undefined, weapon: PrimaryWeaponKey) => {
   // Drums look different depending on the weapon's archetype
   if (attachment === 'DRUM_MAGAZINE') {
