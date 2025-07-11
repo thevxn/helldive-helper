@@ -17,14 +17,14 @@ export interface IPlayerData {
 }
 
 export interface IPlayer {
-  perkCode: PerkKey
-  boosterCode: BoosterKey
-  name: string
+  name: PlayerName
   primaryWeaponCode: PrimaryWeaponKey
   secondaryWeaponCode: SecondaryWeaponKey
   grenadeCode: GrenadeKey
   stratagemCodeList: StratagemKey[]
   color: PlayerColor
+  perkCode: PerkKey
+  boosterCode: BoosterKey
   primaryWeaponAttachments: Partial<{
     [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
   }>
@@ -33,11 +33,6 @@ export interface IPlayer {
 const playerColorsList = ['orange', 'green', 'blue', 'pink'] as const
 
 export type PlayerColor = (typeof playerColorsList)[number]
-
-type playerDataArray = Array<[string, ...number[]]>
-
-export type base64String = string & { [__brand]: 'base64String' }
-
 export enum PlayerDataField {
   PLAYER_NAME,
   PRIMARY_WEAPON,
@@ -55,6 +50,41 @@ export enum PlayerDataField {
   PRIMARY_UNDERBARREL,
   PRIMARY_MAGAZINE
 }
+
+type PlayerName = string & { [__brand]: 'PlayerName' }
+type PrimaryWeaponIndex = number & { [__brand]: 'PrimaryWeaponIndex' }
+type SecondaryWeaponIndex = number & { [__brand]: 'SecondaryWeaponIndex' }
+type GrenadeIndex = number & { [__brand]: 'GrenadeIndex' }
+type StratagemIndex = number & { [__brand]: 'StratagemIndex' }
+type PlayerColorIndex = number & { [__brand]: 'ColorIndex' }
+type PerkIndex = number & { [__brand]: 'PerkIndex' }
+type BoosterIndex = number & { [__brand]: 'BoosterIndex' }
+type OpticsAttachmentIndex = number & { [__brand]: 'OpticsAttachmentIndex' }
+type MuzzleAttachmentIndex = number & { [__brand]: 'MuzzleAttachmentIndex' }
+type UnderbarrelAttachmentIndex = number & { [__brand]: 'UnderbarrelAttachmentIndex' }
+type MagazineAttachmentIndex = number & { [__brand]: 'MagazineAttachmentIndex' }
+
+type PlayerDataRow = [
+  PlayerName,
+  PrimaryWeaponIndex,
+  SecondaryWeaponIndex,
+  GrenadeIndex,
+  StratagemIndex,
+  StratagemIndex,
+  StratagemIndex,
+  StratagemIndex,
+  PlayerColorIndex,
+  PerkIndex,
+  BoosterIndex,
+  OpticsAttachmentIndex,
+  MuzzleAttachmentIndex,
+  UnderbarrelAttachmentIndex,
+  MagazineAttachmentIndex
+]
+
+export type PlayerDataArray = PlayerDataRow[]
+
+export type base64String = string & { [__brand]: 'base64String' }
 
 /**
  * Takes a base64 string containing the shortened data array and generates the complete IData object representing state from it.
@@ -76,7 +106,7 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
 
   const json = new TextDecoder().decode(bytes)
 
-  const data = JSON.parse(json) as playerDataArray
+  const data = JSON.parse(json) as PlayerDataArray
 
   data.map(playerArray => {
     const name = playerArray[PlayerDataField.PLAYER_NAME]
@@ -140,39 +170,29 @@ const createStratagemCodeList = (indexArray: Array<number>): typeof stratagemCod
  * @param {IPlayerData} inputData
  * @returns {playerDataArray}
  */
-export const createPlayerDataOutput = (inputData: IPlayerData): playerDataArray => {
-  // const outputDataMock = [
-  // Primary, secondary, grenade, strat1, strat2, strat3, strat4, color, perk, booster, primaryOptics, primaryMuzzle, primaryUnderbarrel, primaryMagazine
-  //  ['player1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //  ['player2', 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-  //  ['player3', 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
-  //  ['player4', 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]
-  // ]
-
-  const output: playerDataArray = []
+export const createPlayerDataOutput = (inputData: IPlayerData): PlayerDataArray => {
+  const output: PlayerDataArray = []
 
   inputData.playerList.map(playerObject => {
-    logger.debug('Received playerObject to convert to output: ', playerObject)
-
     const name = playerObject.name
 
-    const primaryWeaponIndex = primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode)
+    const primaryWeaponIndex = primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode) as PrimaryWeaponIndex
 
-    const secondaryWeaponIndex = secondaryWeaponCodeList.indexOf(playerObject.secondaryWeaponCode)
+    const secondaryWeaponIndex = secondaryWeaponCodeList.indexOf(
+      playerObject.secondaryWeaponCode
+    ) as SecondaryWeaponIndex
 
-    const grenadeIndex = grenadeCodeList.indexOf(playerObject.grenadeCode)
+    const grenadeIndex = grenadeCodeList.indexOf(playerObject.grenadeCode) as GrenadeIndex
 
-    const stratagemIndexList = [
-      ...playerObject.stratagemCodeList.map(stratagem => {
-        return stratagemCodeList.indexOf(stratagem)
-      })
-    ]
+    const stratagemIndexList = playerObject.stratagemCodeList.map(stratagem =>
+      stratagemCodeList.indexOf(stratagem)
+    ) as [StratagemIndex, StratagemIndex, StratagemIndex, StratagemIndex]
 
-    const playerColorIndex = playerColorsList.indexOf(playerObject.color)
+    const playerColorIndex = playerColorsList.indexOf(playerObject.color) as PlayerColorIndex
 
-    const perkIndex = perkCodeList.indexOf(playerObject.perkCode)
+    const perkIndex = perkCodeList.indexOf(playerObject.perkCode) as PerkIndex
 
-    const boosterIndex = boosterCodeList.indexOf(playerObject.boosterCode)
+    const boosterIndex = boosterCodeList.indexOf(playerObject.boosterCode) as BoosterIndex
 
     output.push([
       name,
@@ -183,26 +203,26 @@ export const createPlayerDataOutput = (inputData: IPlayerData): playerDataArray 
       playerColorIndex,
       perkIndex,
       boosterIndex,
-      playerObject.primaryWeaponAttachments.OPTICS
+      (playerObject.primaryWeaponAttachments.OPTICS
         ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'OPTICS').indexOf(
             playerObject.primaryWeaponAttachments.OPTICS as never
           )
-        : -1,
-      playerObject.primaryWeaponAttachments.MUZZLE
+        : -1) as OpticsAttachmentIndex,
+      (playerObject.primaryWeaponAttachments.MUZZLE
         ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'MUZZLE').indexOf(
             playerObject.primaryWeaponAttachments.MUZZLE as never
           )
-        : -1,
-      playerObject.primaryWeaponAttachments.UNDERBARREL
+        : -1) as MuzzleAttachmentIndex,
+      (playerObject.primaryWeaponAttachments.UNDERBARREL
         ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'UNDERBARREL').indexOf(
             playerObject.primaryWeaponAttachments.UNDERBARREL as never
           )
-        : -1,
-      playerObject.primaryWeaponAttachments.MAGAZINE
+        : -1) as UnderbarrelAttachmentIndex,
+      (playerObject.primaryWeaponAttachments.MAGAZINE
         ? getAttachmentsForWeaponForCategory(playerObject.primaryWeaponCode, 'MAGAZINE').indexOf(
             playerObject.primaryWeaponAttachments.MAGAZINE as never
           )
-        : -1
+        : -1) as MagazineAttachmentIndex
     ])
   })
 
