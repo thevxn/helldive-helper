@@ -1,4 +1,4 @@
-import { getAttachmentsForWeaponForCategory, getDefaultAttachments, resolveAttachment } from '@/data/attachments'
+import { getAttachmentsForWeaponForCategory, resolveAttachment } from '@/data/attachments'
 import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
 import { boosterCodeList } from '@/data/boosters'
 import type { BoosterKey } from '@/data/boosters'
@@ -30,9 +30,9 @@ export interface IPlayer {
   }>
 }
 
-export type PlayerColor = 'orange' | 'green' | 'blue' | 'pink'
+const playerColorsList = ['orange', 'green', 'blue', 'pink'] as const
 
-const playerColorsList = ['orange', 'green', 'blue', 'pink']
+export type PlayerColor = (typeof playerColorsList)[number]
 
 type playerDataArray = Array<[string, ...number[]]>
 
@@ -88,10 +88,13 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
     const grenadeCode = grenadeCodeList[playerArray[PlayerDataField.GRENADE]]
 
     const stratagemCodeList = createStratagemCodeList([
-      playerArray[(PlayerDataField.STRAT1, PlayerDataField.STRAT2, PlayerDataField.STRAT3, PlayerDataField.STRAT4)]
+      playerArray[PlayerDataField.STRAT1],
+      playerArray[PlayerDataField.STRAT2],
+      playerArray[PlayerDataField.STRAT3],
+      playerArray[PlayerDataField.STRAT4]
     ])
 
-    const color = playerColorsList[playerArray[PlayerDataField.PLAYER_COLOR]] as PlayerColor
+    const color = playerColorsList[playerArray[PlayerDataField.PLAYER_COLOR]]
 
     const perkCode = perkCodeList[playerArray[PlayerDataField.PERK]]
 
@@ -156,6 +159,8 @@ export const createPlayerDataOutput = (inputData: IPlayerData): playerDataArray 
   const output: playerDataArray = []
 
   inputData.playerList.map(playerObject => {
+    logger.debug('Received playerObject to convert to output: ', playerObject)
+
     const name = playerObject.name
 
     const primaryWeaponIndex = primaryWeaponCodeList.indexOf(playerObject.primaryWeaponCode)
