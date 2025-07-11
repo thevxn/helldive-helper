@@ -16,7 +16,7 @@
     </div>
     <div class="ml-auto mr-auto flex h-full w-full flex-row flex-wrap gap-2 p-3">
       <div
-        class="flex max-h-[50%] w-[30%] flex-col rounded border-4 border-solid border-gray-900 bg-black bg-opacity-70 last:pb-4 hover:cursor-pointer hover:border-yellow-300"
+        class="flex max-h-[50%] w-[30%] flex-col rounded border-4 border-solid border-gray-900 bg-black bg-opacity-70 hover:cursor-pointer hover:border-yellow-300"
         v-for="attachment in availableAttachments"
         :key="attachment"
         @click="$emit('attachment-selected', playerIndex, position, attachment)">
