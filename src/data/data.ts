@@ -1,18 +1,31 @@
-import { getAttachmentsForWeaponForCategory, resolveAttachment } from '@/data/attachments'
-import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
-import { boosterCodeList } from '@/data/boosters'
-import type { BoosterKey } from '@/data/boosters'
-import { perkCodeList } from '@/data/perks'
-import type { PerkKey } from '@/data/perks'
-import { stratagemCodeList } from '@/data/stratagems'
-import type { StratagemKey } from '@/data/stratagems'
-import { grenadeCodeList, primaryWeaponCodeList, secondaryWeaponCodeList } from '@/data/weapons'
-import type { GrenadeKey, PrimaryWeaponKey, SecondaryWeaponKey } from '@/data/weapons'
+import { reactive } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+import {
+  type AttachmentCategory,
+  type AttachmentKeysForCategory,
+  getAttachmentsForWeaponForCategory,
+  resolveAttachment
+} from '@/data/attachments'
+import { type BoosterKey, boosterCodeList } from '@/data/boosters'
+import { getDefaultData } from '@/data/defaults'
+import { type PerkKey, perkCodeList } from '@/data/perks'
+import { type StratagemKey, stratagemCodeList } from '@/data/stratagems'
+import {
+  type GrenadeKey,
+  type PrimaryWeaponKey,
+  type SecondaryWeaponKey,
+  grenadeCodeList,
+  primaryWeaponCodeList,
+  secondaryWeaponCodeList
+} from '@/data/weapons'
+import { config } from '@/utils/config'
+import { filterSelectedBoosters } from '@/utils/filter'
 import { Logger } from '@/utils/logger'
 
 const logger = Logger()
 
-export interface IPlayerData {
+export interface IData {
   playerList: IPlayer[]
 }
 
@@ -33,7 +46,8 @@ export interface IPlayer {
 const playerColorsList = ['orange', 'green', 'blue', 'pink'] as const
 
 export type PlayerColor = (typeof playerColorsList)[number]
-export enum PlayerDataField {
+
+enum PlayerDataField {
   PLAYER_NAME,
   PRIMARY_WEAPON,
   SECONDARY_WEAPON,
@@ -85,21 +99,21 @@ type PlayerDataRow = [
 
 export type PlayerDataArray = PlayerDataRow[]
 
-export type base64String = string & { [__brand]: 'base64String' }
+export type base64String = Branded<string, 'base64String'>
 
 /**
  * Takes a base64 string containing the shortened data array and generates the complete IData object representing state from it.
  *
  * @param {base64String} dataString
- * @returns {IPlayerData}
+ * @returns {IData}
  */
-export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
+export const parseInputData = (dataString: base64String): IData => {
   logger.debug('Received input:')
   logger.debug(dataString)
 
   const playerData = {
     playerList: []
-  } as IPlayerData
+  } as IData
 
   const binaryString = atob(dataString)
 
@@ -166,17 +180,22 @@ export const parsePlayerDataInput = (dataString: base64String): IPlayerData => {
   return playerData
 }
 
-const createStratagemCodeList = (indexArray: StratagemIndex[]): StratagemKey[] => {
-  return indexArray.map(stratagem => stratagemCodeList[stratagem])
-}
+/**
+ * Takes in an array of stratagem indexes and returns an array containing the codes of the concerned stratagems.
+ *
+ * @param {StratagemIndex[]} indexArray
+ * @returns {StratagemKey[]}
+ */
+const createStratagemCodeList = (indexArray: StratagemIndex[]): StratagemKey[] =>
+  indexArray.map(stratagem => stratagemCodeList[stratagem])
 
 /**
  * Takes in the playerData object and converts it to the shortened array format for encoding.
  *
- * @param {IPlayerData} inputData
+ * @param {IData} inputData
  * @returns {playerDataArray}
  */
-export const createPlayerDataOutput = (inputData: IPlayerData): PlayerDataArray => {
+export const createOutputData = (inputData: IData): PlayerDataArray => {
   const output: PlayerDataArray = []
 
   inputData.playerList.map(playerObject => {
@@ -241,11 +260,11 @@ export const createPlayerDataOutput = (inputData: IPlayerData): PlayerDataArray 
 /**
  * Takes in the playerData object and converts it to a base64 string containing the shortened data array.
  *
- * @param {IPlayerData} playerData
+ * @param {IData} playerData
  * @returns {string}
  */
-export const createBase64DataString = (playerData: IPlayerData): string => {
-  const outputData = createPlayerDataOutput(playerData)
+export const createBase64DataString = (playerData: IData): string => {
+  const outputData = createOutputData(playerData)
 
   const json = JSON.stringify(outputData)
 
@@ -255,4 +274,62 @@ export const createBase64DataString = (playerData: IPlayerData): string => {
   const bytes = new TextEncoder().encode(json)
 
   return btoa(String.fromCharCode(...bytes))
+}
+
+/**
+ * Loads existing data if there are any, otherwise generates default data.
+ * Data is either loaded from URL, local storage or default data is generated as a backup with descending priority:
+ * - If provided, tries to load data from query string.
+ * - If no query string provided, tries to load data from local storage.
+ * - If no query string provided and data are not available in local storage, generates default data.
+ *
+ * @export
+ * @returns {IData}
+ */
+export function loadData(): IData {
+  const route = useRoute()
+
+  let data
+
+  if (route.query.data) {
+    data = route.query.data.toString()
+    logger.debug('Data loaded from url')
+  } else if (localStorage.getItem('data')) {
+    data = localStorage.getItem('data')
+    logger.debug('Data loaded from local storage')
+  } else {
+    data = null
+    logger.debug('No data found, default data will be used')
+  }
+
+  try {
+    if (data) {
+      const parsedData = parseInputData(data as base64String)
+
+      // Backwards compatibility for data strings generated before perks and boosters were introduced
+      parsedData.playerList.forEach((player, i) => {
+        if (!player.perkCode) {
+          parsedData.playerList[i].perkCode = config.compatibility.defaultPerk
+        }
+
+        if (!player.boosterCode) {
+          // Returns the first booster which is not in use yet to be used as the default one for the given player
+          parsedData.playerList[i].boosterCode = filterSelectedBoosters(parsedData)[0].code
+        }
+      })
+
+      const router = useRouter()
+
+      // Remove the data string from the url once it's successfully parsed. Yes, this runs even if the data was loaded from the local storage.
+      router.replace({ query: undefined })
+
+      return reactive(parsedData)
+    }
+
+    return reactive(getDefaultData(0))
+  } catch (e) {
+    logger.error(e)
+
+    return reactive(getDefaultData(0))
+  }
 }

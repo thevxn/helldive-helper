@@ -331,8 +331,7 @@
 </template>
 
 <script setup lang="ts">
-  import { type Ref, inject, nextTick, reactive, ref, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { type Ref, inject, nextTick, ref, watch } from 'vue'
   import type { ToastPluginApi } from 'vue-toast-notification'
 
   import AttachmentSelect from '@/components/AttachmentSelect.vue'
@@ -351,9 +350,9 @@
     getDefaultAttachments
   } from '@/data/attachments'
   import { boosterList, boosters } from '@/data/boosters'
+  import { type IData, createBase64DataString, loadData } from '@/data/data'
   import { getDefaultData } from '@/data/defaults'
   import { perkList, perks } from '@/data/perks'
-  import { type IPlayerData, type base64String, createBase64DataString, parsePlayerDataInput } from '@/data/player'
   import { type StratagemKey, stratagems } from '@/data/stratagems'
   import {
     type IGrenade,
@@ -372,14 +371,15 @@
   import { Logger } from '@/utils/logger'
   import { createAndSortWeapons } from '@/utils/sort'
   import { playerBorders } from '@/utils/styles'
+  import { useUmami } from '@/utils/umami'
 
   const logger = Logger()
 
   const toast = inject('toast') as ToastPluginApi
 
-  const data = ref() as Ref<IPlayerData>
+  const data = ref() as Ref<IData>
 
-  const route = useRoute()
+  const umami = useUmami()
 
   // Add/remove squad members
   // Min 1, max 4
@@ -404,60 +404,9 @@
     playerCount
   })
 
-  // Data loading logic
-  // Data is either loaded from URL, local storage or default data is generated as a backup
   await router.isReady()
 
-  // If provided, try to load data from query string
-  if (route.query.data) {
-    try {
-      data.value = reactive<IPlayerData>(parsePlayerDataInput(route.query.data as base64String))
-      logger.debug('Data loaded from url')
-
-      // Backwards compatibility for data strings generated before perks and boosters were introduced
-      data.value.playerList.forEach((player, i) => {
-        if (!player.perkCode) {
-          data.value.playerList[i].perkCode = 'EXTRA_PADDING'
-        }
-
-        if (!player.boosterCode) {
-          // Returns the first booster which is not in use yet to be used as the default one for the given player
-          data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
-        }
-      })
-
-      const router = useRouter()
-
-      // Remove the data string from the url once it is parsed successfully
-      router.replace({ query: undefined })
-    } catch (e) {
-      logger.error(e)
-      data.value = getDefaultData(0)
-    }
-  }
-  // If no query string provided, try to load data from local storage
-  else if (localStorage.getItem('data')) {
-    data.value = reactive<IPlayerData>(parsePlayerDataInput(localStorage.getItem('data') as base64String))
-    logger.debug('Data loaded from local storage')
-
-    // Backwards compatibility for data strings generated before perks and boosters were introduced
-    data.value.playerList.forEach((player, i) => {
-      if (!player.perkCode) {
-        data.value.playerList[i].perkCode = 'EXTRA_PADDING'
-      }
-
-      if (!player.boosterCode) {
-        // Returns the first booster which is not in use yet to be used as the default one for the given player
-        data.value.playerList[i].boosterCode = filterSelectedBoosters(data.value)[0].code
-      }
-    })
-  }
-  // If no query string provided and data are not available in local storage,
-  // generate default data
-  else {
-    logger.debug('Default data generated')
-    data.value = getDefaultData(0)
-  }
+  data.value = loadData()
 
   playerCount.value = data.value.playerList.length
 
@@ -655,30 +604,6 @@
     // Close the modal
     attachmentSelectMatrix.value[playerIndex][position] = false
   }
-
-  // Initialize Umami here to prevent blocking of loading
-  // of the entire app in case Umami server is down
-  // which happens if Umami is imported via a <head> script in index.html
-  const script = document.createElement('script')
-
-  const umami = ref()
-
-  script.src = 'https://umami.vxn.dev/script.js'
-  script.setAttribute('data-website-id', 'efe06373-8ac1-4008-9302-f7e5dd6b3d4e')
-  script.setAttribute('data-auto-track', 'false')
-  script.setAttribute('data-domains', 'helldivehelper.net')
-  document.head.appendChild(script)
-
-  window.addEventListener('load', function () {
-    umami.value = window.umami
-
-    if (umami.value) {
-      umami.value.track((props: { url: string }) => ({
-        ...props,
-        url: props.url.includes('?') ? props.url.split('?')[0] : props.url
-      }))
-    }
-  })
 </script>
 
 <style scoped>
