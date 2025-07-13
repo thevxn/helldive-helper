@@ -387,7 +387,20 @@
 
   const addMember = () => {
     if (data.value.playerList.length < 4) {
-      data.value.playerList.push(getDefaultData(data.value.playerList.length).playerList[0])
+      const playerList = data.value.playerList
+
+      playerList.push(getDefaultData(playerList.length).playerList[0])
+
+      const playerIndex = playerList.length - 1
+
+      // Add a watcher for the newly added player so that when their primary is changed,
+      // the default attachments are loaded for the weapon.
+      watch(
+        () => playerList[playerIndex].primaryWeaponCode,
+        newVal => {
+          playerList[playerIndex].primaryWeaponAttachments = getDefaultAttachments(newVal)
+        }
+      )
     }
   }
 
