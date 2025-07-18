@@ -283,6 +283,18 @@ export const stratagems = {
   GUARD_DOG_K9: {
     displayName: 'AX/ARC-3 "Guard Dog" K-9',
     category: 'BACKPACK'
+  },
+  EPOCH: {
+    category: 'WEAPON',
+    displayName: 'PLAS-45 Epoch'
+  },
+  LASER_SENTRY: {
+    category: 'STATIONARY',
+    displayName: 'A/LAS-98 Laser Sentry'
+  },
+  WARP_PACK: {
+    category: 'BACKPACK',
+    displayName: 'LIFT-182 Warp Pack'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 

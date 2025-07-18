@@ -886,6 +886,11 @@ export const weapons = {
         },
         MAGAZINE: {}
       }
+    },
+    VARIABLE: {
+      archetype: 'SPECIAL',
+      displayName: 'VG-70 Variable',
+      attachments: {}
     }
   },
   secondary: {
@@ -1043,6 +1048,10 @@ export const grenades = {
   URCHIN: {
     archetype: 'SPECIAL',
     displayName: 'G-109 Urchin'
+  },
+  ARC: {
+    archetype: 'SPECIAL',
+    displayName: 'G-31 Arc'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
