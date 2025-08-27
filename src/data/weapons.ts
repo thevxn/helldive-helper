@@ -890,7 +890,49 @@ export const weapons = {
     VARIABLE: {
       archetype: 'SPECIAL',
       displayName: 'VG-70 Variable',
-      attachments: {}
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    M7S_SMG: {
+      archetype: 'SMG',
+      displayName: 'M7S SMG',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    M90A_SHOTGUN: {
+      archetype: 'SHOTGUN',
+      displayName: 'M90A Shotgun',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    MA5C_ASSAULT_RIFLE: {
+      archetype: 'AR',
+      displayName: 'MA5C Assault Rifle',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {
@@ -961,6 +1003,10 @@ export const weapons = {
     },
     WARRANT: {
       displayName: 'P-92 Warrant',
+      archetype: 'AMMO'
+    },
+    M6C_SOCOM_PISTOL: {
+      displayName: 'M6C/SOCOM Pistol',
       archetype: 'AMMO'
     }
   }

@@ -60,6 +60,9 @@ export const perks = {
   },
   ADRENO_DEFIBRILATOR: {
     displayName: 'Adreno-Defibrillator'
+  },
+  FEET_FIRST: {
+    displayName: 'Feet First'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 
