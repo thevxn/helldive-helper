@@ -45,6 +45,7 @@ export const attachments = {
     SNIPER_SCOPE_X10: {
       displayName: '10x Sniper Scope'
     },
+    // TODO: Add proper image once available
     NO_OPTICS: {
       displayName: 'No Optics'
     }
