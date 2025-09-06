@@ -295,6 +295,18 @@ export const stratagems = {
   WARP_PACK: {
     category: 'BACKPACK',
     displayName: 'LIFT-182 Warp Pack'
+  },
+  SPEARGUN: {
+    displayName: 'S-11 Speargun',
+    category: 'WEAPON'
+  },
+  EAT_NAPALM: {
+    displayName: 'EAT-700 Expendable Napalm',
+    category: 'WEAPON'
+  },
+  SOLO_SILO: {
+    displayName: 'MS-11 Solo Silo',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 

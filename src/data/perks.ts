@@ -63,6 +63,9 @@ export const perks = {
   },
   FEET_FIRST: {
     displayName: 'Feet First'
+  },
+  DESERT_STORMER: {
+    displayName: 'Desert Stormer'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 

@@ -933,6 +933,35 @@ export const weapons = {
         MUZZLE: {},
         MAGAZINE: {}
       }
+    },
+    COYOTE: {
+      archetype: 'AR',
+      displayName: 'AR-2 Coyote',
+      attachments: {
+        OPTICS: {
+          NO_OPTICS: { default: true },
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          COMBAT_SCOPE_X4: {},
+          SNIPER_SCOPE_X10: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: { default: true },
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {
@@ -1098,6 +1127,10 @@ export const grenades = {
   ARC: {
     archetype: 'SPECIAL',
     displayName: 'G-31 Arc'
+  },
+  PINEAPPLE: {
+    archetype: 'STANDARD',
+    displayName: 'G-7 Pineapple'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
