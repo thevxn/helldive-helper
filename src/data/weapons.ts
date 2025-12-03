@@ -962,6 +962,28 @@ export const weapons = {
         },
         MAGAZINE: {}
       }
+    },
+    // TODO: Check attachments once added to wiki
+    DOUBLE_FREEDOM: {
+      archetype: 'SHOTGUN',
+      displayName: 'DBS-2 Double Freedom',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    // TODO: Check attachments once added to wiki
+    ONE_TWO: {
+      archetype: 'AR',
+      displayName: 'AR/GL-21 One-Two',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {
