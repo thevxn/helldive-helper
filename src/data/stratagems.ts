@@ -307,6 +307,18 @@ export const stratagems = {
   SOLO_SILO: {
     displayName: 'MS-11 Solo Silo',
     category: 'WEAPON'
+  },
+  HOT_DOG: {
+    category: 'BACKPACK',
+    displayName: 'AX/FLAM-75 "Guard Dog" Hot Dog'
+  },
+  MAXIGUN: {
+    displayName: 'M-1000 Maxigun',
+    category: 'WEAPON'
+  },
+  DEFOLIATION_TOOL: {
+    displayName: 'CQC-9 Defoliation Tool',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 
