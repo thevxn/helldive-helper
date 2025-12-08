@@ -1059,6 +1059,10 @@ export const weapons = {
     M6C_SOCOM_PISTOL: {
       displayName: 'M6C/SOCOM Pistol',
       archetype: 'AMMO'
+    },
+    MACHETE: {
+      displayName: 'CQC-42 Machete',
+      archetype: 'MELEE'
     }
   }
 } as const satisfies Readonly<IWeaponMap>
