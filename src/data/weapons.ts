@@ -979,9 +979,25 @@ export const weapons = {
       archetype: 'AR',
       displayName: 'AR/GL-21 One-Two',
       attachments: {
-        OPTICS: {},
+        OPTICS: {
+          TUBE_RED_DOT_X2: {
+            default: true
+          },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
         UNDERBARREL: {},
-        MUZZLE: {},
+        MUZZLE: {
+          NO_MUZZLE: {
+            default: true
+          },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
         MAGAZINE: {}
       }
     }
