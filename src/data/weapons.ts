@@ -963,26 +963,29 @@ export const weapons = {
         MAGAZINE: {}
       }
     },
-    // TODO: Check attachments once added to wiki
     DOUBLE_FREEDOM: {
       archetype: 'SHOTGUN',
       displayName: 'DBS-2 Double Freedom',
       attachments: {
         OPTICS: {},
-        UNDERBARREL: {},
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {},
         MAGAZINE: {}
       }
     },
-    // TODO: Check attachments once added to wiki
     ONE_TWO: {
       archetype: 'AR',
       displayName: 'AR/GL-21 One-Two',
       attachments: {
         OPTICS: {
-          TUBE_RED_DOT_X2: {
-            default: true
-          },
+          TUBE_RED_DOT_X2: { default: true },
           REFLEX_SIGHT: {},
           HOLOGRAPHIC_SIGHT: {},
           REFLEX_SIGHT_MK_2: {},
@@ -991,14 +994,70 @@ export const weapons = {
         },
         UNDERBARREL: {},
         MUZZLE: {
-          NO_MUZZLE: {
-            default: true
-          },
+          NO_MUZZLE: { default: true },
           FLASH_HIDER: {},
           MUZZLE_BRAKE: {},
           COMPENSATOR: {}
         },
         MAGAZINE: {}
+      }
+    },
+    SUPPRESSOR: {
+      archetype: 'AR',
+      displayName: 'AR-59 Suppressor',
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: { default: true },
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
+    },
+    CENSOR: {
+      archetype: 'MR',
+      displayName: 'R-72 Censor',
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: { default: true },
+          SNIPER_SCOPE_X10: {}
+        },
+        UNDERBARREL: {
+          LASER_SIGHT: { default: true },
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: {},
+          SHORT_MAGAZINE: { default: true }
+        }
       }
     }
   },
@@ -1079,6 +1138,10 @@ export const weapons = {
     MACHETE: {
       displayName: 'CQC-42 Machete',
       archetype: 'MELEE'
+    },
+    RE_EDUCATOR: {
+      archetype: 'SPECIAL',
+      displayName: 'P-35 Re-Educator'
     }
   }
 } as const satisfies Readonly<IWeaponMap>
@@ -1173,6 +1236,15 @@ export const grenades = {
   PINEAPPLE: {
     archetype: 'STANDARD',
     displayName: 'G-7 Pineapple'
+  },
+  LURE_MINE: {
+    archetype: 'SPECIAL',
+    displayName: 'TM-1 Lure Mine'
+  },
+  //TODO: update icon once available
+  SMOKESCREEN: {
+    archetype: 'SPECIAL',
+    displayName: 'G-89 Smokescreen'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
