@@ -319,6 +319,10 @@ export const stratagems = {
   DEFOLIATION_TOOL: {
     displayName: 'CQC-9 Defoliation Tool',
     category: 'WEAPON'
+  },
+  C4_PACK: {
+    category: 'BACKPACK',
+    displayName: 'B/MD C4 Pack'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 

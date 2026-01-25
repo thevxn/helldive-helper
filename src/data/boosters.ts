@@ -51,6 +51,9 @@ export const boosters = {
   },
   STUN_PODS: {
     displayName: 'Stun Pods'
+  },
+  CONCEALED_INSERTION: {
+    displayName: 'Concealed Insertion'
   }
 } as const satisfies Readonly<Record<string, IBooster>>
 

@@ -91,6 +91,10 @@ export const attachments = {
     },
     LASER_SIGHT_ANGLED_FOREGRIP: {
       displayName: 'Laser Sight Angled Foregrip'
+    },
+    // TODO: update icon once available
+    LASER_SIGHT: {
+      displayName: 'Laser Sight'
     }
   },
   MAGAZINE: {

@@ -69,6 +69,9 @@ export const perks = {
   },
   ROCK_SOLID: {
     displayName: 'Rock Solid'
+  },
+  REDUCED_SIGNATURE: {
+    displayName: 'Reduced Signature'
   }
 } as const satisfies Readonly<Record<string, IPerk>>
 
