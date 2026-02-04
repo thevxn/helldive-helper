@@ -323,6 +323,22 @@ export const stratagems = {
   C4_PACK: {
     category: 'BACKPACK',
     displayName: 'B/MD C4 Pack'
+  },
+  BREACHING_HAMMER: {
+    displayName: 'CQC-20 Breaching Hammer',
+    category: 'WEAPON'
+  },
+  LEVELLER: {
+    displayName: 'EAT-411 Leveller',
+    category: 'WEAPON'
+  },
+  BELT_FED_GL: {
+    displayName: 'GL-28 Belt-Fed Grenade Launcher',
+    category: 'WEAPON'
+  },
+  BASTION: {
+    displayName: 'TD-220 Bastion MK XVI',
+    category: 'VEHICLE'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>
 

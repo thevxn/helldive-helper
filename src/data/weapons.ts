@@ -1059,6 +1059,27 @@ export const weapons = {
           SHORT_MAGAZINE: { default: true }
         }
       }
+    },
+    TRIDENT: {
+      archetype: 'ENERGY',
+      displayName: 'LAS-16 Trident',
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X1_5: { default: true },
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          IRON_SIGHT: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          ANGLED_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {
@@ -1241,10 +1262,13 @@ export const grenades = {
     archetype: 'SPECIAL',
     displayName: 'TM-1 Lure Mine'
   },
-  //TODO: update icon once available
   SMOKESCREEN: {
     archetype: 'SPECIAL',
     displayName: 'G-89 Smokescreen'
+  },
+  SHIELD: {
+    archetype: 'SPECIAL',
+    displayName: 'G/SH-39 Shield'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>
 
