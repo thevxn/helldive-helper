@@ -53,8 +53,8 @@
 </template>
 
 <script setup lang="ts">
-  defineEmits(['addMember', 'removeMember'])
-  defineProps<{ playerCount: number }>()
+  defineEmits(['addMember', 'removeMember']);
+  defineProps<{ playerCount: number }>();
 </script>
 
 <style scoped></style>

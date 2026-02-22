@@ -1,4 +1,4 @@
-import type { IData, IPlayer, PlayerName } from '@/data/data'
+import type { IData, IPlayer, PlayerName } from '@/data/data';
 
 const defaultPlayerList: IPlayer[] = [
   {
@@ -65,10 +65,10 @@ const defaultPlayerList: IPlayer[] = [
       MAGAZINE: 'DRUM_MAGAZINE'
     }
   }
-]
+];
 
 export const getDefaultData = (existingPlayerListLength: number): IData => {
   return {
     playerList: defaultPlayerList.slice(existingPlayerListLength) as IPlayer[]
-  }
-}
+  };
+};

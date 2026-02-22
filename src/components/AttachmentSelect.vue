@@ -45,24 +45,24 @@
 </template>
 
 <script setup lang="ts">
-  import { nextTick, ref, watch } from 'vue'
+  import { nextTick, ref, watch } from 'vue';
 
   import type {
     AttachmentCategory,
     AttachmentKey,
     AttachmentKeysForWeaponForCategory,
     IAttachment
-  } from '@/data/attachments'
-  import { attachments, getAttachmentImageSource, getAttachmentsForWeaponForCategory } from '@/data/attachments'
-  import type { PrimaryWeaponKey } from '@/data/weapons'
+  } from '@/data/attachments';
+  import { attachments, getAttachmentImageSource, getAttachmentsForWeaponForCategory } from '@/data/attachments';
+  import type { PrimaryWeaponKey } from '@/data/weapons';
 
   interface IProps {
-    primaryWeaponCode: PrimaryWeaponKey | null
-    attachmentCategory: AttachmentCategory | null
-    selectedAttachment: AttachmentKey | null
-    playerIndex: number | null
-    position: number | null
-    display: boolean
+    primaryWeaponCode: PrimaryWeaponKey | null;
+    attachmentCategory: AttachmentCategory | null;
+    selectedAttachment: AttachmentKey | null;
+    playerIndex: number | null;
+    position: number | null;
+    display: boolean;
   }
 
   const props = withDefaults(defineProps<IProps>(), {
@@ -72,12 +72,14 @@
     playerIndex: null,
     position: null,
     display: false
-  })
+  });
 
-  const availableAttachments = ref<AttachmentKeysForWeaponForCategory<PrimaryWeaponKey, AttachmentCategory> | never[]>()
+  const availableAttachments = ref<
+    AttachmentKeysForWeaponForCategory<PrimaryWeaponKey, AttachmentCategory> | never[]
+  >();
 
   if (props.selectedAttachment && props.attachmentCategory && props.primaryWeaponCode) {
-    availableAttachments.value = getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory)
+    availableAttachments.value = getAttachmentsForWeaponForCategory(props.primaryWeaponCode, props.attachmentCategory);
   }
 
   // Update available attachments each time the selected weapon changes
@@ -88,26 +90,26 @@
         availableAttachments.value = getAttachmentsForWeaponForCategory(
           props.primaryWeaponCode,
           props.attachmentCategory
-        )
+        );
       }
     }
-  )
+  );
 
   // Autofocus the modal when opened, so it can be closed with the ESC key immediately
-  const attachmentSelect = ref<HTMLElement | null>(null)
+  const attachmentSelect = ref<HTMLElement | null>(null);
 
   watch(
     () => props.display,
     newVal => {
       if (newVal) {
         nextTick(() => {
-          attachmentSelect.value?.focus()
-        })
+          attachmentSelect.value?.focus();
+        });
       }
     }
-  )
+  );
 
-  defineEmits(['attachment-selected'])
+  defineEmits(['attachment-selected']);
 </script>
 
 <style scoped></style>

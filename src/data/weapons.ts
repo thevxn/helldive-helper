@@ -1,12 +1,12 @@
-import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments'
+import type { AttachmentCategory, AttachmentKeysForCategory } from '@/data/attachments';
 
 /*
  * Primary & Secondary Weapons
  */
 export interface IArchetype {
-  displayName: string
-  code?: string
-  isArchetype?: boolean
+  displayName: string;
+  code?: string;
+  isArchetype?: boolean;
 }
 export const primaryArchetypes = {
   AR: {
@@ -33,11 +33,11 @@ export const primaryArchetypes = {
   SR: {
     displayName: 'Sniper Rifle'
   }
-} as const satisfies Record<string, IArchetype>
+} as const satisfies Record<string, IArchetype>;
 
-export type PrimaryWeaponArchetypeKey = keyof typeof primaryArchetypes
+export type PrimaryWeaponArchetypeKey = keyof typeof primaryArchetypes;
 
-export const primaryWeaponArchetypeCodeList = Object.keys(primaryArchetypes) as PrimaryWeaponArchetypeKey[]
+export const primaryWeaponArchetypeCodeList = Object.keys(primaryArchetypes) as PrimaryWeaponArchetypeKey[];
 
 export const secondaryArchetypes = {
   AMMO: {
@@ -52,40 +52,40 @@ export const secondaryArchetypes = {
   MELEE: {
     displayName: 'Melee'
   }
-} as const satisfies Record<string, IArchetype>
+} as const satisfies Record<string, IArchetype>;
 
-export type SecondaryWeaponArchetypeKey = keyof typeof secondaryArchetypes
+export type SecondaryWeaponArchetypeKey = keyof typeof secondaryArchetypes;
 
-export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as SecondaryWeaponArchetypeKey[]
+export const secondaryWeaponArchetypeCodeList = Object.keys(secondaryArchetypes) as SecondaryWeaponArchetypeKey[];
 
 export interface IWeapon {
-  displayName: string
-  default?: boolean
-  code?: string
-  isArchetype?: boolean
-  archetype?: unknown
+  displayName: string;
+  default?: boolean;
+  code?: string;
+  isArchetype?: boolean;
+  archetype?: unknown;
 }
 
 interface IWeaponAttachment {
-  default?: boolean
+  default?: boolean;
 }
 
 export interface IPrimaryWeapon extends IWeapon {
-  archetype: (typeof primaryWeaponArchetypeCodeList)[number]
+  archetype: (typeof primaryWeaponArchetypeCodeList)[number];
   attachments: {
     [C in AttachmentCategory]?: {
-      [A in AttachmentKeysForCategory<C>[number]]?: IWeaponAttachment
-    }
-  }
+      [A in AttachmentKeysForCategory<C>[number]]?: IWeaponAttachment;
+    };
+  };
 }
 
 export interface ISecondaryWeapon extends IWeapon {
-  archetype: (typeof secondaryWeaponArchetypeCodeList)[number]
+  archetype: (typeof secondaryWeaponArchetypeCodeList)[number];
 }
 
 interface IWeaponMap {
-  primary: Record<string, IPrimaryWeapon>
-  secondary: Record<string, ISecondaryWeapon>
+  primary: Record<string, IPrimaryWeapon>;
+  secondary: Record<string, ISecondaryWeapon>;
 }
 
 export const weapons = {
@@ -1165,13 +1165,13 @@ export const weapons = {
       displayName: 'P-35 Re-Educator'
     }
   }
-} as const satisfies Readonly<IWeaponMap>
+} as const satisfies Readonly<IWeaponMap>;
 
-export type PrimaryWeaponKey = keyof typeof weapons.primary
-export type SecondaryWeaponKey = keyof typeof weapons.secondary
+export type PrimaryWeaponKey = keyof typeof weapons.primary;
+export type SecondaryWeaponKey = keyof typeof weapons.secondary;
 
-export const primaryWeaponCodeList = Object.keys(weapons.primary) as PrimaryWeaponKey[]
-export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as SecondaryWeaponKey[]
+export const primaryWeaponCodeList = Object.keys(weapons.primary) as PrimaryWeaponKey[];
+export const secondaryWeaponCodeList = Object.keys(weapons.secondary) as SecondaryWeaponKey[];
 
 /*
  * Grenades
@@ -1183,13 +1183,13 @@ export const grenadeArchetypes = {
   SPECIAL: {
     displayName: 'Special'
   }
-}
-export type GrenadeArchetypeKey = keyof typeof grenadeArchetypes
+};
+export type GrenadeArchetypeKey = keyof typeof grenadeArchetypes;
 
-export const grenadeArchetypeCodeList = Object.keys(grenadeArchetypes) as GrenadeArchetypeKey[]
+export const grenadeArchetypeCodeList = Object.keys(grenadeArchetypes) as GrenadeArchetypeKey[];
 
 export interface IGrenade extends IWeapon {
-  archetype: (typeof grenadeArchetypeCodeList)[number]
+  archetype: (typeof grenadeArchetypeCodeList)[number];
 }
 
 export const grenades = {
@@ -1270,7 +1270,7 @@ export const grenades = {
     archetype: 'SPECIAL',
     displayName: 'G/SH-39 Shield'
   }
-} as const satisfies Readonly<Record<string, IGrenade>>
+} as const satisfies Readonly<Record<string, IGrenade>>;
 
-export type GrenadeKey = keyof typeof grenades
-export const grenadeCodeList = Object.keys(grenades) as GrenadeKey[]
+export type GrenadeKey = keyof typeof grenades;
+export const grenadeCodeList = Object.keys(grenades) as GrenadeKey[];

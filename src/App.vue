@@ -10,21 +10,21 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref, watch } from 'vue';
 
-  import HomeView from './views/System/HomeView.vue'
+  import HomeView from './views/System/HomeView.vue';
 
-  import Footer from '@/components/partials/PFooter.vue'
-  import Header from '@/components/partials/PHeader.vue'
+  import Footer from '@/components/partials/PFooter.vue';
+  import Header from '@/components/partials/PHeader.vue';
 
-  const home = ref()
+  const home = ref();
 
-  const playerCount = ref(4)
+  const playerCount = ref(4);
 
   // https://github.com/vuejs/core/issues/1990
   watch(home, () => {
-    playerCount.value = home.value.playerCount
-  })
+    playerCount.value = home.value.playerCount;
+  });
 </script>
 
 <style></style>

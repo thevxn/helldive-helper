@@ -296,9 +296,7 @@
     <button
       class="bg-diagonal-hover h-12 w-48 snap-center place-self-center rounded border-2 border-solid border-yellow-300 bg-yellow-300 font-bold text-black hover:text-yellow-300 active:bg-yellow-300 active:bg-none active:text-black"
       @click="
-        // eslint-disable-next-line prettier/prettier
         generateDataString();
-        // eslint-disable-next-line prettier/prettier
         umami.track('Copy link button');
       ">
       Copy Link
@@ -322,38 +320,39 @@
       id="export-button"
       @click="
         // eslint-disable-next-line prettier/prettier
-        exportImage(data.playerList.length, toast)
+        exportImage(data.playerList.length, toast);
         // eslint-disable-next-line prettier/prettier
-        umami.track('Download image button');">
+        umami.track('Download image button');
+      ">
       Download Image
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { type Ref, inject, nextTick, ref, watch } from 'vue'
-  import type { ToastPluginApi } from 'vue-toast-notification'
+  import { type Ref, inject, nextTick, ref, watch } from 'vue';
+  import type { ToastPluginApi } from 'vue-toast-notification';
 
-  import AttachmentSelect from '@/components/AttachmentSelect.vue'
-  import StratagemSelect from '@/components/StratagemSelect.vue'
+  import AttachmentSelect from '@/components/AttachmentSelect.vue';
+  import StratagemSelect from '@/components/StratagemSelect.vue';
   import type {
     AttachmentCategory,
     AttachmentKey,
     AttachmentKeysForCategory,
     IAttachment,
     WeaponAttachments
-  } from '@/data/attachments'
+  } from '@/data/attachments';
   import {
     AttachmentCategoryEnum,
     attachments,
     getAttachmentImageSource,
     getDefaultAttachments
-  } from '@/data/attachments'
-  import { boosterList, boosters } from '@/data/boosters'
-  import { type IData, createBase64DataString, loadData } from '@/data/data'
-  import { getDefaultData } from '@/data/defaults'
-  import { perkList, perks } from '@/data/perks'
-  import { type StratagemKey, stratagems } from '@/data/stratagems'
+  } from '@/data/attachments';
+  import { boosterList, boosters } from '@/data/boosters';
+  import { type IData, createBase64DataString, loadData } from '@/data/data';
+  import { getDefaultData } from '@/data/defaults';
+  import { perkList, perks } from '@/data/perks';
+  import { type StratagemKey, stratagems } from '@/data/stratagems';
   import {
     type IGrenade,
     type IPrimaryWeapon,
@@ -362,87 +361,87 @@
     grenadeArchetypes,
     grenades,
     weapons
-  } from '@/data/weapons'
-  import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons'
-  import router from '@/router'
-  import { config } from '@/utils/config'
-  import { filterOptions, filterSelectedBoosters } from '@/utils/filter'
-  import { copyImageToClipboard, exportImage } from '@/utils/imageExport'
-  import { Logger } from '@/utils/logger'
-  import { createAndSortWeapons } from '@/utils/sort'
-  import { playerBorders } from '@/utils/styles'
-  import { useUmami } from '@/utils/umami'
+  } from '@/data/weapons';
+  import { primaryArchetypes, secondaryArchetypes } from '@/data/weapons';
+  import router from '@/router';
+  import { config } from '@/utils/config';
+  import { filterOptions, filterSelectedBoosters } from '@/utils/filter';
+  import { copyImageToClipboard, exportImage } from '@/utils/imageExport';
+  import { Logger } from '@/utils/logger';
+  import { createAndSortWeapons } from '@/utils/sort';
+  import { playerBorders } from '@/utils/styles';
+  import { useUmami } from '@/utils/umami';
 
-  const logger = Logger()
+  const logger = Logger();
 
-  const toast = inject('toast') as ToastPluginApi
+  const toast = inject('toast') as ToastPluginApi;
 
-  const data = ref() as Ref<IData>
+  const data = ref() as Ref<IData>;
 
-  const umami = useUmami()
+  const umami = useUmami();
 
   // Add/remove squad members
   // Min 1, max 4
-  const playerCount = ref()
+  const playerCount = ref();
 
   const addMember = () => {
     if (data.value.playerList.length < 4) {
-      const playerList = data.value.playerList
+      const playerList = data.value.playerList;
 
-      playerList.push(getDefaultData(playerList.length).playerList[0])
+      playerList.push(getDefaultData(playerList.length).playerList[0]);
 
-      const playerIndex = playerList.length - 1
+      const playerIndex = playerList.length - 1;
 
       // Add a watcher for the newly added player so that when their primary is changed,
       // the default attachments are loaded for the weapon.
       watch(
         () => playerList[playerIndex].primaryWeaponCode,
         newVal => {
-          playerList[playerIndex].primaryWeaponAttachments = getDefaultAttachments(newVal)
+          playerList[playerIndex].primaryWeaponAttachments = getDefaultAttachments(newVal);
         }
-      )
+      );
     }
-  }
+  };
 
   const removeMember = () => {
     if (data.value.playerList.length > 1) {
-      data.value.playerList.pop()
+      data.value.playerList.pop();
     }
-  }
+  };
 
   // Expose the playerCount variable along with functions to modify it in the parent component
   defineExpose({
     addMember,
     removeMember,
     playerCount
-  })
+  });
 
-  await router.isReady()
+  await router.isReady();
 
-  data.value = loadData()
+  data.value = loadData();
 
-  playerCount.value = data.value.playerList.length
+  playerCount.value = data.value.playerList.length;
 
-  localStorage.setItem('data', createBase64DataString(data.value))
+  localStorage.setItem('data', createBase64DataString(data.value));
 
   // Any time the state changes, save the new state to local storage
   watch(data.value.playerList, () => {
-    localStorage.setItem('data', createBase64DataString(data.value))
-  })
+    localStorage.setItem('data', createBase64DataString(data.value));
+  });
 
   const generateDataString = async () => {
-    const link = `${BASE_URL}/?data=${createBase64DataString(data.value)}`
+    const link = `${BASE_URL}/?data=${createBase64DataString(data.value)}`;
 
     try {
-      await navigator.clipboard.writeText(link)
-      toast.success('Link copied!', config.toast)
+      await navigator.clipboard.writeText(link);
+      toast.success('Link copied!', config.toast);
     } catch (err) {
-      logger.error('Failed to copy: ', err)
-      toast.error('Error while copying link.')
+      logger.error('Failed to copy: ', err);
+      toast.error('Error while copying link.');
     }
 
-    return
-  }
+    return;
+  };
 
   /**
    * Stratagem select modal related refs/functions
@@ -464,12 +463,12 @@
     [false, false, false, false],
     // Player 4, Stratagems 1 - 4
     [false, false, false, false]
-  ])
+  ]);
 
   /**
    * Refers to the active stratagem modal window instances
    */
-  const stratagemModalsRef = ref() as Ref<Array<InstanceType<typeof StratagemSelect>>>
+  const stratagemModalsRef = ref() as Ref<Array<InstanceType<typeof StratagemSelect>>>;
 
   /**
    * Toggles the stratagem select modal for a given player and slot.
@@ -485,7 +484,7 @@
    * @param position - Index of the stratagem slot being toggled.
    */
   const toggleStratagemSelect = (playerIndex: number, position: number) => {
-    logger.debug('Stratagem select triggered at position: ', playerIndex, position)
+    logger.debug('Stratagem select triggered at position: ', playerIndex, position);
 
     // Toggle the yellow highlight border, hiding it from stratagems whose select is being closed
     // and displaying it for the stratagem whose select is being opened.
@@ -493,25 +492,25 @@
       // If the current player array does not belong to the player whose stratagem select was triggered,
       // just copy their current array to the new resulting state.
       if (i !== playerIndex) {
-        return player
+        return player;
       } else {
         // Otherwise, iterate through all the stratagem positions (1 - 4, indexes 0 - 3), creating the new state.
         return player.map((_el, j) => {
           // If the position equals to the stratagem which was just selected or opened, toggle its state.
           if (j === position) {
-            return !player[j]
+            return !player[j];
           } else {
             // If the position does not equal to the stratagem which was just selected or opened, set its state to closed,
             // making sure the previous modal's highlight border (if present) gets hidden.
-            return false
+            return false;
           }
-        })
+        });
       }
-    })
+    });
 
     nextTick(() => {
-      document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
-    })
+      document.querySelector(`#stratagem-select-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' });
+    });
 
     // If the playerIndex and position in the ref equal to the playerIndex and position clicked are null,
     // it means the modal should be opened and the playerIndex and position will be set accordingly.
@@ -525,15 +524,15 @@
       stratagemModalsRef.value[playerIndex].playerIndex === playerIndex &&
       stratagemModalsRef.value[playerIndex].position === position
     ) {
-      stratagemModalsRef.value[playerIndex].displayOff()
-      stratagemModalsRef.value[playerIndex].playerIndex = null
-      stratagemModalsRef.value[playerIndex].position = null
+      stratagemModalsRef.value[playerIndex].displayOff();
+      stratagemModalsRef.value[playerIndex].playerIndex = null;
+      stratagemModalsRef.value[playerIndex].position = null;
     } else {
-      stratagemModalsRef.value[playerIndex].playerIndex = playerIndex
-      stratagemModalsRef.value[playerIndex].position = position
-      stratagemModalsRef.value[playerIndex].displayOn()
+      stratagemModalsRef.value[playerIndex].playerIndex = playerIndex;
+      stratagemModalsRef.value[playerIndex].position = position;
+      stratagemModalsRef.value[playerIndex].displayOn();
     }
-  }
+  };
 
   /**
    * Handles the user selecting a stratagem, closing the modal window and updating the state data with the selected stratagem.
@@ -543,14 +542,14 @@
    * @param stratagemCode - Code of the selected stratagem.
    */
   const handleStratagemSelection = (playerIndex: number, stratagemPosition: number, stratagemCode: StratagemKey) => {
-    logger.debug('Stratagem modal select triggered at position: ', stratagemModalsRef.value, playerIndex)
-    data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode
-    stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false
-    stratagemModalsRef.value[playerIndex].displayOff()
-    document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' })
-    stratagemModalsRef.value[playerIndex].playerIndex = null
-    stratagemModalsRef.value[playerIndex].position = null
-  }
+    logger.debug('Stratagem modal select triggered at position: ', stratagemModalsRef.value, playerIndex);
+    data.value.playerList[playerIndex].stratagemCodeList[stratagemPosition] = stratagemCode;
+    stratagemSelectMatrix.value[playerIndex][stratagemPosition] = false;
+    stratagemModalsRef.value[playerIndex].displayOff();
+    document.querySelector(`#primary-${playerIndex}`)?.scrollIntoView({ behavior: 'smooth' });
+    stratagemModalsRef.value[playerIndex].playerIndex = null;
+    stratagemModalsRef.value[playerIndex].position = null;
+  };
 
   /**
    * Attachment select modal related refs/functions
@@ -560,10 +559,10 @@
     watch(
       () => player.primaryWeaponCode,
       newVal => {
-        player.primaryWeaponAttachments = getDefaultAttachments(newVal)
+        player.primaryWeaponAttachments = getDefaultAttachments(newVal);
       }
-    )
-  })
+    );
+  });
 
   /**
    * Holds the state of each attachment select modal (opened/closed).
@@ -573,7 +572,7 @@
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false]
-  ])
+  ]);
 
   /**
    * Handles opening of a new attachment select modal. It is needed to close any previously opened modal for the same player
@@ -587,13 +586,13 @@
     attachmentSelectMatrix.value[playerIndex] = attachmentSelectMatrix.value[playerIndex].map((val, i) => {
       // If the position matches, toggle the value (to enable closing modals by clicking on the attachment slot again)
       if (i === position) {
-        return !val
+        return !val;
       }
 
       // Else, close the given modal to ensure all previous ones are closed
-      return false
-    })
-  }
+      return false;
+    });
+  };
 
   /**
    * Handles attachment selection and attachment select modal closing.
@@ -611,12 +610,12 @@
     if (selectedAttachment) {
       data.value.playerList[playerIndex].primaryWeaponAttachments[
         AttachmentCategoryEnum[position] as keyof WeaponAttachments[AttachmentCategory]
-      ] = selectedAttachment as keyof WeaponAttachments[AttachmentCategory]
+      ] = selectedAttachment as keyof WeaponAttachments[AttachmentCategory];
     }
 
     // Close the modal
-    attachmentSelectMatrix.value[playerIndex][position] = false
-  }
+    attachmentSelectMatrix.value[playerIndex][position] = false;
+  };
 </script>
 
 <style scoped>

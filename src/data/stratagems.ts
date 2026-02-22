@@ -1,9 +1,9 @@
-export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const
-export type StratagemCategory = keyof typeof stratagemCategories
+export const stratagemCategories = ['ORBITAL', 'EAGLE', 'WEAPON', 'BACKPACK', 'STATIONARY', 'VEHICLE'] as const;
+export type StratagemCategory = keyof typeof stratagemCategories;
 
 export interface IStratagem {
-  displayName: string
-  category: (typeof stratagemCategories)[number]
+  displayName: string;
+  category: (typeof stratagemCategories)[number];
 }
 
 // New stratagems must be placed at the bottom to keep the index of the existing keys in order to ensure backwards compatibility with existing generated codes
@@ -340,25 +340,25 @@ export const stratagems = {
     displayName: 'TD-220 Bastion MK XVI',
     category: 'VEHICLE'
   }
-} as const satisfies Readonly<Record<string, IStratagem>>
+} as const satisfies Readonly<Record<string, IStratagem>>;
 
-export type StratagemKey = keyof typeof stratagems
-export const stratagemCodeList = Object.keys(stratagems) as StratagemKey[]
+export type StratagemKey = keyof typeof stratagems;
+export const stratagemCodeList = Object.keys(stratagems) as StratagemKey[];
 
 // Sorts stratagems based on their category so that all stratagems of the same category are next to each other in the select
 export const getStratagemMap = () => {
-  const stratagemMap = {} as Record<StratagemCategory, StratagemKey[]>
+  const stratagemMap = {} as Record<StratagemCategory, StratagemKey[]>;
 
   // Set up the category keys in the ordered as specified by stratagemCategories
   for (const category of stratagemCategories) {
-    stratagemMap[category as StratagemCategory] = [] as StratagemKey[]
+    stratagemMap[category as StratagemCategory] = [] as StratagemKey[];
   }
 
   for (const [stratagemCode, stratagemData] of Object.entries(stratagems)) {
-    const category = stratagemData.category as StratagemCategory
+    const category = stratagemData.category as StratagemCategory;
 
-    stratagemMap[category].push(stratagemCode as StratagemKey)
+    stratagemMap[category].push(stratagemCode as StratagemKey);
   }
 
-  return stratagemMap
-}
+  return stratagemMap;
+};

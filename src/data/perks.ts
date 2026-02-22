@@ -1,6 +1,6 @@
 interface IPerk {
-  displayName: string
-  code?: string
+  displayName: string;
+  code?: string;
 }
 
 export const perks = {
@@ -77,21 +77,21 @@ export const perks = {
   SUPPLEMENTARY_ADRENALINE: {
     displayName: 'Supplementary Adrenaline'
   }
-} as const satisfies Readonly<Record<string, IPerk>>
+} as const satisfies Readonly<Record<string, IPerk>>;
 
-export type PerkKey = keyof typeof perks
-export const perkCodeList = Object.keys(perks) as PerkKey[]
+export type PerkKey = keyof typeof perks;
+export const perkCodeList = Object.keys(perks) as PerkKey[];
 
-export type PerkWithCode = IPerk & { code: keyof typeof perks }
+export type PerkWithCode = IPerk & { code: keyof typeof perks };
 
 // Codes are required due to how inputs work with data, therefore we dynamically create a perkList which contains perks + the additional code property for each of them
-export const perkList: PerkWithCode[] = []
+export const perkList: PerkWithCode[] = [];
 
 for (const perk in perks) {
   const modifiedPerk: PerkWithCode = {
     ...perks[perk as PerkKey],
     code: perk as PerkKey
-  }
+  };
 
-  perkList.push(modifiedPerk)
+  perkList.push(modifiedPerk);
 }

@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-  const version = APP_VERSION
+  const version = APP_VERSION;
 </script>
 
 <style scoped></style>

@@ -1,8 +1,8 @@
-import { type IPrimaryWeapon, type PrimaryWeaponKey, weapons } from '@/data/weapons'
+import { type IPrimaryWeapon, type PrimaryWeaponKey, weapons } from '@/data/weapons';
 
-export const attachmentCategories = ['OPTICS', 'MUZZLE', 'UNDERBARREL', 'MAGAZINE'] as const
+export const attachmentCategories = ['OPTICS', 'MUZZLE', 'UNDERBARREL', 'MAGAZINE'] as const;
 
-export type AttachmentCategory = (typeof attachmentCategories)[number]
+export type AttachmentCategory = (typeof attachmentCategories)[number];
 
 export enum AttachmentCategoryEnum {
   OPTICS,
@@ -12,11 +12,11 @@ export enum AttachmentCategoryEnum {
 }
 
 export type WeaponAttachments = {
-  [C in keyof typeof attachments]?: keyof (typeof attachments)[C]
-}
+  [C in keyof typeof attachments]?: keyof (typeof attachments)[C];
+};
 
 export interface IAttachment {
-  displayName: string
+  displayName: string;
 }
 
 export const attachments = {
@@ -117,63 +117,64 @@ export const attachments = {
       displayName: 'High Dissipation Heatsink'
     }
   }
-} as const satisfies Record<AttachmentCategory, Record<string, IAttachment>>
+} as const satisfies Record<AttachmentCategory, Record<string, IAttachment>>;
 
 export type AttachmentKey = {
-  [C in keyof typeof attachments]: keyof (typeof attachments)[C]
-}[keyof typeof attachments]
+  [C in keyof typeof attachments]: keyof (typeof attachments)[C];
+}[keyof typeof attachments];
 
 export type AttachmentKeysForWeaponForCategory<
   W extends PrimaryWeaponKey,
   C extends AttachmentCategory
 > = C extends keyof (typeof weapons.primary)[W]['attachments']
   ? (keyof (typeof weapons.primary)[W]['attachments'][C])[]
-  : []
+  : [];
 
-export type AttachmentCategoriesForWeapon<W extends PrimaryWeaponKey> = keyof (typeof weapons.primary)[W]['attachments']
+export type AttachmentCategoriesForWeapon<W extends PrimaryWeaponKey> =
+  keyof (typeof weapons.primary)[W]['attachments'];
 
 export const getAttachmentsForWeaponForCategory = <W extends PrimaryWeaponKey, C extends AttachmentCategory>(
   weapon: W,
   category: C
 ) => {
-  const attachmentsObj = weapons.primary[weapon].attachments[category as keyof AttachmentCategoriesForWeapon<W>]
+  const attachmentsObj = weapons.primary[weapon].attachments[category as keyof AttachmentCategoriesForWeapon<W>];
 
   if (attachmentsObj) {
-    return Object.keys(attachmentsObj) as AttachmentKeysForWeaponForCategory<W, C>
+    return Object.keys(attachmentsObj) as AttachmentKeysForWeaponForCategory<W, C>;
   }
 
-  return []
-}
-export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[]
+  return [];
+};
+export type AttachmentKeysForCategory<C extends AttachmentCategory> = (keyof (typeof attachments)[C])[];
 
 export function getDefaultAttachments(weapon: PrimaryWeaponKey) {
-  const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments']
+  const attachmentsPerCategoryForWeapon = weapons.primary[weapon].attachments as IPrimaryWeapon['attachments'];
 
   const defaults: Partial<{
-    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number]
+    [C in AttachmentCategory]: AttachmentKeysForCategory<C>[number];
   }> = {
     OPTICS: undefined,
     MUZZLE: undefined,
     UNDERBARREL: undefined,
     MAGAZINE: undefined
-  }
+  };
 
   for (const category of attachmentCategories) {
-    const attachments = attachmentsPerCategoryForWeapon[category]
+    const attachments = attachmentsPerCategoryForWeapon[category];
 
     if (attachments) {
       for (const attachmentKey of Object.keys(attachments)) {
-        const attachment = attachments[attachmentKey as keyof typeof attachments]
+        const attachment = attachments[attachmentKey as keyof typeof attachments];
 
         if (attachment && 'default' in attachment) {
-          defaults[category] = attachmentKey as AttachmentKeysForCategory<typeof category>[number]
-          break
+          defaults[category] = attachmentKey as AttachmentKeysForCategory<typeof category>[number];
+          break;
         }
       }
     }
   }
 
-  return defaults
+  return defaults;
 }
 
 export const resolveAttachment = <W extends PrimaryWeaponKey, C extends AttachmentCategory>(
@@ -185,23 +186,23 @@ export const resolveAttachment = <W extends PrimaryWeaponKey, C extends Attachme
     if (attachmentIndex !== -1) {
       return getAttachmentsForWeaponForCategory(primaryWeaponCode, attachmentCategory)[
         attachmentIndex
-      ] as AttachmentKeysForWeaponForCategory<W, C>[number]
+      ] as AttachmentKeysForWeaponForCategory<W, C>[number];
     }
 
-    return undefined
+    return undefined;
   }
 
   return getDefaultAttachments(primaryWeaponCode)[attachmentCategory] as AttachmentKeysForWeaponForCategory<
     W,
     C
-  >[number]
-}
+  >[number];
+};
 
 export const getAttachmentImageSource = (attachment: AttachmentKey | undefined, weapon: PrimaryWeaponKey) => {
   // Drums look different depending on the weapon's archetype
   if (attachment === 'DRUM_MAGAZINE') {
-    return `/attachments/primary/DRUM_MAGAZINE_${weapons.primary[weapon].archetype}.webp`
+    return `/attachments/primary/DRUM_MAGAZINE_${weapons.primary[weapon].archetype}.webp`;
   }
 
-  return `/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`
-}
+  return `/attachments/primary/${attachment ? attachment : 'LOCKED_CATEGORY'}.webp`;
+};

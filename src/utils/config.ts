@@ -15,4 +15,4 @@ export const config = {
     autotrack: 'false',
     domain: 'helldivehelper.net'
   }
-} as const
+} as const;

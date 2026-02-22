@@ -1,6 +1,6 @@
 export interface IBooster {
-  displayName: string
-  code?: string
+  displayName: string;
+  code?: string;
 }
 
 export const boosters = {
@@ -55,21 +55,21 @@ export const boosters = {
   CONCEALED_INSERTION: {
     displayName: 'Concealed Insertion'
   }
-} as const satisfies Readonly<Record<string, IBooster>>
+} as const satisfies Readonly<Record<string, IBooster>>;
 
-export type BoosterKey = keyof typeof boosters
-export const boosterCodeList = Object.keys(boosters) as BoosterKey[]
+export type BoosterKey = keyof typeof boosters;
+export const boosterCodeList = Object.keys(boosters) as BoosterKey[];
 
-export type BoosterWithCode = IBooster & { code: keyof typeof boosters }
+export type BoosterWithCode = IBooster & { code: keyof typeof boosters };
 
 // Codes are required due to how inputs work with data, therefore we dynamically create a boosterList which contains boosters + the additional code property for each of them
-export const boosterList: BoosterWithCode[] = []
+export const boosterList: BoosterWithCode[] = [];
 
 for (const booster in boosters) {
   const modifiedBooster = {
     ...boosters[booster as BoosterKey],
     code: booster as BoosterKey
-  }
+  };
 
-  boosterList.push(modifiedBooster)
+  boosterList.push(modifiedBooster);
 }

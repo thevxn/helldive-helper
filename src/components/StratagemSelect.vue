@@ -19,44 +19,44 @@
 </template>
 
 <script setup lang="ts">
-  import { type Ref, ref } from 'vue'
+  import { type Ref, ref } from 'vue';
 
-  import { type StratagemCategory, type StratagemKey, stratagems } from '@/data/stratagems'
-  import { getStratagemMap } from '@/data/stratagems'
+  import { type StratagemCategory, type StratagemKey, stratagems } from '@/data/stratagems';
+  import { getStratagemMap } from '@/data/stratagems';
 
-  const stratagemMap = ref(getStratagemMap())
+  const stratagemMap = ref(getStratagemMap());
 
-  const display = ref(false)
+  const display = ref(false);
 
-  const playerIndex = ref(null) as Ref<number | null>
+  const playerIndex = ref(null) as Ref<number | null>;
 
-  const position = ref(null) as Ref<number | null>
+  const position = ref(null) as Ref<number | null>;
 
   const props = defineProps({
     selectedStratagems: {
       type: Array,
       default: () => ['MECH', 'RAILGUN', 'JUMP_PACK', 'EAGLE_AIRSTRIKE']
     }
-  })
+  });
 
   const displayOn = () => {
-    display.value = true
+    display.value = true;
 
-    stratagemMap.value = getStratagemMap()
+    stratagemMap.value = getStratagemMap();
 
     for (const [category, stratagemList] of Object.entries(stratagemMap.value)) {
       stratagemMap.value[category as StratagemCategory] = stratagemList.filter(
         (stratagem: StratagemKey) => !props.selectedStratagems.includes(stratagem)
-      )
+      );
     }
-  }
+  };
 
   const displayOff = () => {
-    display.value = false
-  }
+    display.value = false;
+  };
 
-  defineEmits(['stratagem-selected'])
-  defineExpose({ position, playerIndex, displayOn, displayOff })
+  defineEmits(['stratagem-selected']);
+  defineExpose({ position, playerIndex, displayOn, displayOff });
 </script>
 
 <style scoped></style>
