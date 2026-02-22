@@ -58,7 +58,7 @@
           <template #option="option">
             <div class="flex flex-col items-center justify-center gap-2 sm:justify-start">
               <img
-                class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px]"
+                class="h-[60px] max-h-[60px] min-h-[60px] w-[115px] min-w-[115px] max-w-[115px] object-contain"
                 :src="`/weapons/${option.code}.webp`"
                 :alt="`${weapons.primary[player.primaryWeaponCode].displayName}`"
                 v-if="!option.isArchetype" />
