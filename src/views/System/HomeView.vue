@@ -126,7 +126,7 @@
         <template #option="option">
           <div class="flex flex-row items-center justify-start gap-2">
             <img
-              class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
+              class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px] object-contain"
               :src="`/weapons/${option.code}.webp`"
               :alt="`${weapons.secondary[player.secondaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
@@ -136,7 +136,7 @@
         <template #selected-option="option">
           <div class="flex flex-row items-center justify-start gap-2">
             <img
-              class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px]"
+              class="h-[70px] max-h-[70px] min-h-[70px] w-[130px] min-w-[130px] max-w-[130px] object-contain"
               :src="`/weapons/${option.code}.webp`"
               :alt="`${weapons.secondary[player.secondaryWeaponCode].displayName}`"
               v-if="!option.isArchetype" />
@@ -167,7 +167,7 @@
             <template #option="option">
               <div class="flex flex-row items-center justify-start gap-2">
                 <img
-                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px]"
+                  class="h-[70px] max-h-[70px] min-h-[70px] w-[70px] min-w-[70px] max-w-[70px] object-contain"
                   :src="`/grenades/${option.code}.webp`"
                   :alt="`${grenades[player.grenadeCode].displayName}`"
                   v-if="!option.isArchetype" />
@@ -177,7 +177,7 @@
             <template #selected-option="option">
               <div class="flex min-h-[162px] flex-col items-center justify-start gap-2 text-center">
                 <img
-                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px]"
+                  class="mt-2 h-[75px] max-h-[75px] min-h-[75px] w-[75px] min-w-[75px] max-w-[75px] object-contain"
                   :src="`/grenades/${option.code}.webp`"
                   v-if="!option.isArchetype"
                   :alt="`${grenades[player.grenadeCode].displayName}`" />
