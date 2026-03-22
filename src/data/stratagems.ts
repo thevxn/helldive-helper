@@ -339,6 +339,14 @@ export const stratagems = {
   BASTION: {
     displayName: 'TD-220 Bastion MK XVI',
     category: 'VEHICLE'
+  },
+  GAS_MORTAR_SENTRY: {
+    displayName: 'A/GM-17 Gas Mortar Sentry',
+    category: 'STATIONARY'
+  },
+  CREMATOR: {
+    displayName: 'B/FLAM-80 Cremator',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 

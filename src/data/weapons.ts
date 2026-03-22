@@ -1080,6 +1080,55 @@ export const weapons = {
         MUZZLE: {},
         MAGAZINE: {}
       }
+    },
+    SWEEPER: {
+      archetype: 'SHOTGUN',
+      displayName: 'SG-97 Sweeper',
+      attachments: {
+        OPTICS: {
+          NO_OPTICS: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          HALF_CHOKE: {},
+          FULL_CHOKE: {},
+          DUCKBILL: {}
+        },
+        MAGAZINE: {}
+      }
+    },
+    STOKER: {
+      archetype: 'SMG',
+      displayName: 'SMG/FLAM-34 Stoker',
+      attachments: {
+        OPTICS: {
+          NO_OPTICS: { default: true },
+          REFLEX_SIGHT: {},
+          HOLOGRAPHIC_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          TUBE_RED_DOT_X1_5: {},
+          TUBE_RED_DOT_X2: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {},
+          DRUM_MAGAZINE: {}
+        }
+      }
     }
   },
   secondary: {
@@ -1163,6 +1212,14 @@ export const weapons = {
     RE_EDUCATOR: {
       archetype: 'SPECIAL',
       displayName: 'P-35 Re-Educator'
+    },
+    ENTRENCHMENT_TOOL: {
+      archetype: 'MELEE',
+      displayName: 'CQC-73 Entrenchment Tool'
+    },
+    VETO: {
+      archetype: 'AMMO',
+      displayName: 'P-69 Veto'
     }
   }
 } as const satisfies Readonly<IWeaponMap>;
@@ -1269,6 +1326,10 @@ export const grenades = {
   SHIELD: {
     archetype: 'SPECIAL',
     displayName: 'G/SH-39 Shield'
+  },
+  GIGA_GRENADE: {
+    archetype: 'SPECIAL',
+    displayName: 'G-48 Giga Grenade'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>;
 
