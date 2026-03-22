@@ -73,9 +73,17 @@ export const perks = {
   REDUCED_SIGNATURE: {
     displayName: 'Reduced Signature'
   },
-  // TODO: update icon once available
   SUPPLEMENTARY_ADRENALINE: {
     displayName: 'Supplementary Adrenaline'
+  },
+  CONCUSSIVE_PADDING_REINFORCED: {
+    displayName: 'Concussive Padding, Reinforced'
+  },
+  CONCUSSIVE_PADDING_HAZMAT: {
+    displayName: 'Concussive Padding, Hazmat'
+  },
+  CONCUSSIVE_PADDING_GRENADIER: {
+    displayName: 'Concussive Padding, Grenadier'
   }
 } as const satisfies Readonly<Record<string, IPerk>>;
 
