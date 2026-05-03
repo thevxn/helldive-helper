@@ -1129,6 +1129,35 @@ export const weapons = {
           DRUM_MAGAZINE: {}
         }
       }
+    },
+    GALLANT: {
+      displayName: 'SMG-203 Gallant',
+      archetype: 'SMG',
+      attachments: {
+        OPTICS: {
+          REFLEX_SIGHT: { default: true },
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: {},
+          LASER_SIGHT_WITH_FLASHLIGHT: { default: true },
+          VERTICAL_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: {},
+          SHORT_MAGAZINE: { default: true }
+        }
+      }
     }
   },
   secondary: {
@@ -1220,6 +1249,10 @@ export const weapons = {
     VETO: {
       archetype: 'AMMO',
       displayName: 'P-69 Veto'
+    },
+    MISSILE_PISTOL: {
+      archetype: 'SPECIAL',
+      displayName: 'P-33 Missile Pistol'
     }
   }
 } as const satisfies Readonly<IWeaponMap>;
