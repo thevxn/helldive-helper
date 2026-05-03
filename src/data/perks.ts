@@ -84,6 +84,9 @@ export const perks = {
   },
   CONCUSSIVE_PADDING_GRENADIER: {
     displayName: 'Concussive Padding, Grenadier'
+  },
+  OXYGENATOR: {
+    displayName: 'Oxygenator'
   }
 } as const satisfies Readonly<Record<string, IPerk>>;
 

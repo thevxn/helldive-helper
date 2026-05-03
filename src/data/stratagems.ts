@@ -347,6 +347,18 @@ export const stratagems = {
   CREMATOR: {
     displayName: 'B/FLAM-80 Cremator',
     category: 'WEAPON'
+  },
+  LUMBERER_MECH: {
+    displayName: 'EXO-51 Lumberer Exosuit',
+    category: 'VEHICLE'
+  },
+  BREAKTHROUGH_MECH: {
+    displayName: 'EXO-55 Breakthrough Exosuit',
+    category: 'VEHICLE'
+  },
+  BULLET_STORM: {
+    displayName: 'MGX-42 Bullet Storm',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 
