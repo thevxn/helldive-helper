@@ -651,7 +651,14 @@ export const weapons = {
           COMBAT_SCOPE_X4: {},
           SNIPER_SCOPE_X10: { default: true }
         },
-        UNDERBARREL: {},
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {},
+          VERTICAL_FOREGRIP: {},
+          ANGLED_FOREGRIP: {},
+          FLASHLIGHT_VERTICAL_FOREGRIP: {},
+          LASER_SIGHT_ANGLED_FOREGRIP: {}
+        },
         MUZZLE: {},
         MAGAZINE: {}
       }
