@@ -359,6 +359,14 @@ export const stratagems = {
   BULLET_STORM: {
     displayName: 'MGX-42 Bullet Storm',
     category: 'WEAPON'
+  },
+  SUPPLY_FRV: {
+    displayName: 'M-103 Supply FRV',
+    category: 'VEHICLE'
+  },
+  INCINERATOR_FRV: {
+    displayName: 'M-104 Incinerator FRV',
+    category: 'VEHICLE'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 
