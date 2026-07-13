@@ -1165,6 +1165,16 @@ export const weapons = {
           SHORT_MAGAZINE: { default: true }
         }
       }
+    },
+    HYENA: {
+      archetype: 'MR',
+      displayName: 'R-4 Hyena',
+      attachments: {
+        OPTICS: {},
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
     }
   },
   secondary: {
