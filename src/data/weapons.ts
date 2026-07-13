@@ -1170,10 +1170,29 @@ export const weapons = {
       archetype: 'MR',
       displayName: 'R-4 Hyena',
       attachments: {
-        OPTICS: {},
-        UNDERBARREL: {},
-        MUZZLE: {},
-        MAGAZINE: {}
+        OPTICS: {
+          SNIPER_SCOPE_X10: { default: true },
+          TUBE_RED_DOT_X1_5: {},
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X2: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {
+          NO_UNDERBARREL: { default: true },
+          LASER_SIGHT_WITH_FLASHLIGHT: {}
+        },
+        MUZZLE: {
+          NO_MUZZLE: {},
+          MUZZLE_BRAKE: { default: true },
+          FLASH_HIDER: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {
+          EXTENDED_MAGAZINE: { default: true },
+          SHORT_MAGAZINE: {}
+        }
       }
     }
   },
