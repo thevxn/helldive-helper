@@ -367,6 +367,11 @@ export const stratagems = {
   INCINERATOR_FRV: {
     displayName: 'M-104 Incinerator FRV',
     category: 'VEHICLE'
+  },
+  MELTAGUN: {
+    // TODO: Update icon when available
+    displayName: '40-K Meltagun',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 

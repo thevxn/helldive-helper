@@ -87,6 +87,9 @@ export const perks = {
   },
   OXYGENATOR: {
     displayName: 'Oxygenator'
+  },
+  TRUE_GRIT: {
+    displayName: 'True Grit'
   }
 } as const satisfies Readonly<Record<string, IPerk>>;
 

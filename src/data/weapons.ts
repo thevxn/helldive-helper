@@ -1194,6 +1194,11 @@ export const weapons = {
           SHORT_MAGAZINE: {}
         }
       }
+    },
+    HOT_SHOT: {
+      archetype: 'MR',
+      displayName: 'R/40-K Hot-Shot',
+      attachments: {}
     }
   },
   secondary: {
@@ -1289,6 +1294,10 @@ export const weapons = {
     MISSILE_PISTOL: {
       archetype: 'SPECIAL',
       displayName: 'P-33 Missile Pistol'
+    },
+    BOLT_PISTOL: {
+      archetype: 'AMMO',
+      displayName: 'P/40-K Bolt Pistol'
     }
   }
 } as const satisfies Readonly<IWeaponMap>;
@@ -1399,6 +1408,10 @@ export const grenades = {
   GIGA_GRENADE: {
     archetype: 'SPECIAL',
     displayName: 'G-48 Giga Grenade'
+  },
+  MELTA_MINE: {
+    archetype: 'SPECIAL',
+    displayName: 'G/40-K Meltamine'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>;
 
