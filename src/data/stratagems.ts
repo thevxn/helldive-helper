@@ -372,6 +372,10 @@ export const stratagems = {
     // TODO: Update icon when available
     displayName: '40-K Meltagun',
     category: 'WEAPON'
+  },
+  EAGLE_GAS: {
+    displayName: 'Eagle Gas Airstrike',
+    category: 'EAGLE'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 
