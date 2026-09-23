@@ -71,6 +71,13 @@ export const attachments = {
     },
     DUCKBILL: {
       displayName: 'Duckbill'
+    },
+    // TODO: Add proper images once available
+    TRIPLE_LENS: {
+      displayName: 'Triple Lens'
+    },
+    FOCUS_LENS: {
+      displayName: 'Focus Lens'
     }
   },
   UNDERBARREL: {

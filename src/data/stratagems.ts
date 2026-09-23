@@ -376,6 +376,10 @@ export const stratagems = {
   EAGLE_GAS: {
     displayName: 'Eagle Gas Airstrike',
     category: 'EAGLE'
+  },
+  MAELSTROM: {
+    displayName: 'TD-110 Maelstrom',
+    category: 'VEHICLE'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 

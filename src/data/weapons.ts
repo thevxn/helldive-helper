@@ -1199,6 +1199,67 @@ export const weapons = {
       archetype: 'MR',
       displayName: 'R/40-K Hot-Shot',
       attachments: {}
+    },
+    ARBITRATOR: {
+      archetype: 'AR',
+      displayName: 'AR-11 Arbitrator',
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          NO_MUZZLE: { default: true },
+          FLASH_HIDER: {},
+          MUZZLE_BRAKE: {},
+          COMPENSATOR: {}
+        },
+        MAGAZINE: {}
+      }
+    },
+    EVICTOR: {
+      archetype: 'EXPLOSIVE',
+      displayName: 'GL-15 Evictor',
+      attachments: {
+        OPTICS: {
+          NO_OPTICS: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X1_5: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {},
+        MAGAZINE: {}
+      }
+    },
+    SAI: {
+      archetype: 'ENERGY',
+      displayName: 'LAS-12 Sai',
+      attachments: {
+        OPTICS: {
+          TUBE_RED_DOT_X2: { default: true },
+          REFLEX_SIGHT: {},
+          REFLEX_SIGHT_MK_2: {},
+          HOLOGRAPHIC_SIGHT: {},
+          TUBE_RED_DOT_X1_5: {},
+          COMBAT_SCOPE_X4: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          TRIPLE_LENS: { default: true },
+          FOCUS_LENS: {}
+        },
+        MAGAZINE: {
+          STANDARD_HEATSINK: { default: true },
+          HIGH_CAPACITY_HEATSINK: {},
+          HIGH_DISSIPATION_HEATSINK: {}
+        }
+      }
     }
   },
   secondary: {
@@ -1298,6 +1359,10 @@ export const weapons = {
     BOLT_PISTOL: {
       archetype: 'AMMO',
       displayName: 'P/40-K Bolt Pistol'
+    },
+    BREACHER: {
+      archetype: 'SPECIAL',
+      displayName: 'P-34 Breacher'
     }
   }
 } as const satisfies Readonly<IWeaponMap>;
@@ -1412,6 +1477,14 @@ export const grenades = {
   MELTA_MINE: {
     archetype: 'SPECIAL',
     displayName: 'G/40-K Meltamine'
+  },
+  IMMOLATION: {
+    archetype: 'SPECIAL',
+    displayName: 'G-8 Immolation'
+  },
+  ANTI_TANK_SEEKER: {
+    archetype: 'SPECIAL',
+    displayName: 'G-60 Anti-Tank Seeker'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>;
 

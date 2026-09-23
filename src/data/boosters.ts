@@ -54,6 +54,12 @@ export const boosters = {
   },
   CONCEALED_INSERTION: {
     displayName: 'Concealed Insertion'
+  },
+  INTEGRATED_EXTINGUISHERS: {
+    displayName: 'Integrated Extinguishers'
+  },
+  SURPLUS_EAT_ALLOCATION: {
+    displayName: 'Surplus EAT Allocation'
   }
 } as const satisfies Readonly<Record<string, IBooster>>;
 

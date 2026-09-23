@@ -90,6 +90,9 @@ export const perks = {
   },
   TRUE_GRIT: {
     displayName: 'True Grit'
+  },
+  BLUNT_FORCE_MITIGATION: {
+    displayName: 'Blunt-Force Mitigation'
   }
 } as const satisfies Readonly<Record<string, IPerk>>;
 
