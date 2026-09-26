@@ -72,7 +72,6 @@ export const attachments = {
     DUCKBILL: {
       displayName: 'Duckbill'
     },
-    // TODO: Add proper images once available
     TRIPLE_LENS: {
       displayName: 'Triple Lens'
     },
