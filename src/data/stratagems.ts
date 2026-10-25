@@ -380,6 +380,14 @@ export const stratagems = {
   MAELSTROM: {
     displayName: 'TD-110 Maelstrom',
     category: 'VEHICLE'
+  },
+  APEX: {
+    displayName: 'AMW-20 Apex',
+    category: 'WEAPON'
+  },
+  NOVA: {
+    displayName: 'LAS-44 Nova',
+    category: 'WEAPON'
   }
 } as const satisfies Readonly<Record<string, IStratagem>>;
 

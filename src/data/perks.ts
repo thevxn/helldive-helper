@@ -93,6 +93,9 @@ export const perks = {
   },
   BLUNT_FORCE_MITIGATION: {
     displayName: 'Blunt-Force Mitigation'
+  },
+  STATIONARY_SHROUD: {
+    displayName: 'Stationary Shroud'
   }
 } as const satisfies Readonly<Record<string, IPerk>>;
 

@@ -1260,6 +1260,27 @@ export const weapons = {
           HIGH_DISSIPATION_HEATSINK: {}
         }
       }
+    },
+    SIGHTLINER: {
+      archetype: 'SR',
+      displayName: 'R-40 Sightliner',
+      attachments: {
+        OPTICS: {
+          SNIPER_SCOPE_X10: { default: true },
+          TUBE_RED_DOT_X1_5: {},
+          IRON_SIGHT: {},
+          COMBAT_SCOPE_X4: {},
+          TUBE_RED_DOT_X2: {}
+        },
+        UNDERBARREL: {},
+        MUZZLE: {
+          MUZZLE_BRAKE: { default: true }
+        },
+        MAGAZINE: {
+          SHORT_MAGAZINE: { default: true },
+          EXTENDED_MAGAZINE: {}
+        }
+      }
     }
   },
   secondary: {
@@ -1363,6 +1384,10 @@ export const weapons = {
     BREACHER: {
       archetype: 'SPECIAL',
       displayName: 'P-34 Breacher'
+    },
+    MIST: {
+      archetype: 'AMMO',
+      displayName: 'P-44 Mist'
     }
   }
 } as const satisfies Readonly<IWeaponMap>;
@@ -1485,6 +1510,10 @@ export const grenades = {
   ANTI_TANK_SEEKER: {
     archetype: 'SPECIAL',
     displayName: 'G-60 Anti-Tank Seeker'
+  },
+  CALTROPS: {
+    archetype: 'SPECIAL',
+    displayName: 'G-11 Caltrops'
   }
 } as const satisfies Readonly<Record<string, IGrenade>>;
 
